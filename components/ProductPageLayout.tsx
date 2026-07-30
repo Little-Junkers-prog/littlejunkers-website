@@ -31,12 +31,12 @@ export type ProductPageLayoutProps = {
 };
 
 function getSupabaseClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error("Public Supabase configuration is missing.");
-  }
+  const supabaseUrl =
+    process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://fobkdakjawryhzkcdbbo.supabase.co";
+  const supabaseAnonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
+    "sb_publishable_Z_3emZFda5FuQWmf7ajhVw_pLtpFiji";
 
   return createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
@@ -59,6 +59,20 @@ function formatFeeUnit(unit: string) {
   return unit
     .replaceAll("_", " ")
     .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function formatFeeAmount(fee: FeeRow, basePrice: number | string) {
+  if (fee.amount === null) {
+    return "Calculated when applicable";
+  }
+
+  if (fee.unit === "percentage") {
+    const percentage = Number(fee.amount);
+    const calculatedAmount = Number(basePrice) * (percentage / 100);
+    return `${percentage}% of base rental price (${asMoney(calculatedAmount)})`;
+  }
+
+  return `${asMoney(fee.amount)} / ${formatFeeUnit(fee.unit)}`;
 }
 
 export default async function ProductPageLayout({
@@ -184,12 +198,7 @@ export default async function ProductPageLayout({
               <div className="col-md-6 col-lg-4" key={fee.id}>
                 <article className="card-standard h-100 p-4">
                   <h3 className="h6 fw-bold mb-2">{fee.label}</h3>
-                  <p className="h5 fw-bold mb-2">
-                    {fee.amount === null ? "Calculated when applicable" : asMoney(fee.amount)}
-                    {fee.amount !== null ? (
-                      <span className="fs-6 fw-normal"> / {formatFeeUnit(fee.unit)}</span>
-                    ) : null}
-                  </p>
+                  <p className="h5 fw-bold mb-2">{formatFeeAmount(fee, basePrice)}</p>
                   {fee.notes ? (
                     <p className="small mb-0" style={{ color: "var(--ink-mid)" }}>
                       {fee.notes}
@@ -200,20 +209,6 @@ export default async function ProductPageLayout({
             ))}
           </div>
 
-          <div
-            className="mt-4 p-4 rounded-3"
-            style={{
-              backgroundColor: "var(--warning-background)",
-              border: "1px solid var(--warning-border)",
-            }}
-          >
-            <h3 className="h6 fw-bold">Fuel surcharge</h3>
-            <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-              When applicable, fuel is a dynamic pass-through cost based on current operating
-              conditions and delivery details. The current charge is shown during booking before
-              payment.
-            </p>
-          </div>
         </div>
       </section>
     </main>
