@@ -133,20 +133,25 @@ export default function Home() {
       <ValueProps />
       <Testimonials />
       <HomeFaq />
+      <FounderNote />
     </>
   );
 }
 
 function Hero() {
+  const trustItems = ["Upfront Pricing", "HOA-Friendly", "Driveway Protection", "Real Local Support"];
+
   return (
     <section className="py-5" style={{ backgroundColor: "var(--dark-hero)", color: "var(--card-background)" }}>
       <div className="container py-lg-5">
         <div className="row align-items-center g-5">
-          <div className="col-lg-6">
-            <p className="text-uppercase fw-bold mb-3" style={{ color: "var(--pink-bar)", letterSpacing: "0.08em" }}>
-              Local dumpster rental
+          <div className="col-lg-6 col-xl-6">
+            <p className="hero-eyebrow text-uppercase fw-bold mb-3">
+              Family-Owned - Peachtree City's Neighborhood Favorite
             </p>
-            <h1 className="display-4 fw-bold mb-4">Driveway-Safe Dumpster Rental in Peachtree City</h1>
+            <h1 className="display-4 fw-bold mb-4">
+              Driveway-Safe <span className="text-pink">Dumpster</span> Rental in Peachtree City
+            </h1>
             <p className="fs-5 mb-4" style={{ color: "var(--ink-faint)" }}>
               Get a clean, driveway-friendly roll-off dumpster delivered by a local team that keeps pricing clear and the process simple.
             </p>
@@ -158,8 +163,15 @@ function Hero() {
                 See Sizes and Pricing
               </Link>
             </div>
+            <div className="row row-cols-2 row-cols-md-4 g-2 mt-4">
+              {trustItems.map((item) => (
+                <div className="col" key={item}>
+                  <span className="hero-trust-pill">✓ {item}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-6 col-xl-6">
             <div className="ratio ratio-4x3 rounded-3 overflow-hidden" style={{ backgroundColor: "var(--surface-background)" }}>
               <div className="d-flex align-items-center justify-content-center text-center p-4" role="img" aria-label="Pink Little Junkers dumpster placed carefully on a residential driveway">
                 <span className="fw-bold fs-4" style={{ color: "var(--ink-primary)" }}>
@@ -194,7 +206,7 @@ function HowItWorks() {
         </div>
         <div className="row g-4">
           {steps.map(([number, title, copy]) => (
-            <div className="col-md-4" key={title}>
+            <div className="col-lg-4" key={title}>
               <article className="card-standard shadow-sm h-100 p-4">
                 <span className="check-badge mb-3">{number}</span>
                 <h3 className="h5 fw-bold">{title}</h3>
@@ -296,7 +308,7 @@ function ValueProps() {
           <div className="col-lg-7">
             <div className="row g-3">
               {values.map(([title, copy]) => (
-                <div className="col-md-4" key={title}>
+                <div className="col-lg-4" key={title}>
                   <div className="card-standard h-100 p-4">
                     <span className="check-badge mb-3">✓</span>
                     <h3 className="h6 fw-bold">{title}</h3>
@@ -356,7 +368,7 @@ function Testimonials() {
 
         <div className="row g-4">
           {reviews.map((review) => (
-            <div className="col-md-4" key={review.reviewer}>
+            <div className="col-lg-4" key={review.reviewer}>
               <article className="testimonial-card h-100 p-4">
                 <StarRating />
                 <p className="mb-4">"{review.review}"</p>
@@ -364,6 +376,42 @@ function Testimonials() {
               </article>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FounderNote() {
+  return (
+    <section className="py-5" style={{ backgroundColor: "var(--surface-background)" }}>
+      <div className="container">
+        <div className="row align-items-center g-4 g-lg-5">
+          <div className="col-lg-5">
+            <div
+              className="founder-photo ratio ratio-4x3"
+              role="img"
+              aria-label="Placeholder portrait for Marcus and Ivy from Little Junkers"
+            >
+              <div className="d-flex align-items-center justify-content-center text-center p-4">
+                <span className="fw-bold">Marcus & Ivy photo placeholder</span>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-7">
+            <p className="text-uppercase fw-bold mb-2" style={{ color: "var(--pink-text)", letterSpacing: "0.08em" }}>
+              A Note From The Founders
+            </p>
+            <h2 className="fw-bold mb-3">
+              Helping you clear the clutter without the commercial 'coldness'.
+            </h2>
+            <p className="fs-5 mb-3" style={{ color: "var(--ink-mid)" }}>
+              We built Little Junkers for neighbors who want a simple rental, a clean driveway, and someone local who actually picks up the phone.
+            </p>
+            <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
+              Whether you are cleaning out a garage, tackling a remodel, or just trying to get your weekend back, we will help you choose the right bin and keep the process straightforward.
+            </p>
+          </div>
         </div>
       </div>
     </section>
