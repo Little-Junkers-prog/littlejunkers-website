@@ -32,6 +32,36 @@ a {
   color: inherit;
 }
 
+.text-pink {
+  color: var(--signature-pink);
+}
+
+.hero-eyebrow {
+  background-color: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 206, 228, 0.22);
+  border-radius: 999px;
+  color: var(--signature-pink);
+  display: inline-flex;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 0.85rem;
+}
+
+.hero-trust-pill {
+  align-items: center;
+  border: 1px solid rgba(255, 206, 228, 0.26);
+  border-radius: 999px;
+  color: var(--card-background);
+  display: flex;
+  font-size: 0.86rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.55rem 0.7rem;
+  text-align: center;
+}
+
 .btn-brand {
   background-color: var(--signature-pink);
   border: 1px solid var(--signature-pink);
@@ -87,6 +117,14 @@ a {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
+.founder-photo {
+  background-color: var(--pink-background);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  color: var(--ink-primary);
+  overflow: hidden;
+}
+
 .check-badge {
   align-items: center;
   background-color: var(--pink-background);
@@ -113,4 +151,12 @@ a {
 .site-footer a:hover,
 .site-footer a:focus {
   color: var(--signature-pink);
+}
+
+.site-footer-muted {
+  color: var(--ink-faint);
+}
+
+.site-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
