@@ -21,6 +21,7 @@ type PricingRow = {
 type SizePricing = {
   size: 11 | 16 | 21;
   title: string;
+  seoSubtext: string;
   bestFor: string;
   included: string;
   featured?: boolean;
@@ -30,20 +31,23 @@ type SizePricing = {
 const sizeCards: Omit<SizePricing, "tiers">[] = [
   {
     size: 11,
-    title: "11-yard dumpster",
+    title: "The Little Junker",
+    seoSubtext: "Perfect for standard 10-yard to 12-yard projects",
     bestFor: "Garage cleanouts, small renovations, and lighter home projects.",
     included: "Compact footprint for tighter driveways.",
   },
   {
     size: 16,
-    title: "16-yard dumpster",
+    title: "The Middle Junker",
+    seoSubtext: "A smart upgrade for standard 15-yard searches",
     bestFor: "Roofing, flooring, remodel debris, and bigger weekend cleanups.",
     included: "The easy middle choice for most household projects.",
     featured: true,
   },
   {
     size: 21,
-    title: "21-yard dumpster",
+    title: "The Big Junker",
+    seoSubtext: "Maximum capacity for 20-yard cleanups",
     bestFor: "Large cleanouts, contractor jobs, and bulky material loads.",
     included: "More room when one trip needs to do the work.",
   },
@@ -191,7 +195,7 @@ function HowItWorks() {
         <div className="row g-4">
           {steps.map(([number, title, copy]) => (
             <div className="col-md-4" key={title}>
-              <article className="card-standard h-100 p-4">
+              <article className="card-standard shadow-sm h-100 p-4">
                 <span className="check-badge mb-3">{number}</span>
                 <h3 className="h5 fw-bold">{title}</h3>
                 <p className="mb-0" style={{ color: "var(--ink-mid)" }}>{copy}</p>
@@ -209,7 +213,7 @@ async function DumpsterLineup() {
   const cards: SizePricing[] = sizeCards.map((card) => ({ ...card, tiers: pricingBySize.get(card.size) ?? [] }));
 
   return (
-    <section id="sizes" className="py-5" style={{ backgroundColor: "var(--surface-background)" }}>
+    <section id="sizes" className="py-5" style={{ backgroundColor: "var(--page-background)" }}>
       <div className="container">
         <div className="row align-items-end mb-4 g-3">
           <div className="col-lg-8">
@@ -218,7 +222,7 @@ async function DumpsterLineup() {
             </p>
             <h2 className="fw-bold mb-3">Three Sizes, Clear Rates</h2>
             <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-              Prices come from our live pricing table so the homepage stays aligned with the booking system.
+              Choose the roll-off size that fits your cleanup, then reserve online in a few minutes.
             </p>
           </div>
           <div className="col-lg-4 text-lg-end">
@@ -231,13 +235,14 @@ async function DumpsterLineup() {
         <div className="row g-4">
           {cards.map((card) => (
             <div className="col-lg-4" key={card.size}>
-              <article className={`${card.featured ? "card-featured" : "card-standard"} h-100 p-4 position-relative`}>
+              <article className={`${card.featured ? "card-featured" : "card-standard shadow-sm"} h-100 p-4 position-relative`}>
                 {card.featured ? (
                   <span className="badge position-absolute top-0 start-50 translate-middle px-3 py-2" style={{ backgroundColor: "var(--pink-bar)", color: "var(--ink-primary)" }}>
                     Most Popular
                   </span>
                 ) : null}
                 <h3 className="h4 fw-bold mt-2">{card.title}</h3>
+                <p className="small mb-3" style={{ color: "var(--ink-muted)" }}>{card.seoSubtext}</p>
                 <p style={{ color: "var(--ink-mid)" }}>{card.bestFor}</p>
                 <p className="small fw-semibold" style={{ color: "var(--pink-text)" }}>{card.included}</p>
                 <div className="border-top pt-3 mt-3" style={{ borderColor: "var(--border-card)" }}>
@@ -250,9 +255,17 @@ async function DumpsterLineup() {
                     ))
                   ) : (
                     <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-                      Live pricing is available in the booking flow.
+                      Reserve online to see current availability.
                     </p>
                   )}
+                </div>
+                <div className="d-grid gap-2 mt-4">
+                  <a href="https://book.littlejunkersllc.com" className="btn btn-brand">
+                    Reserve the {card.size}-Yard
+                  </a>
+                  <Link href={`/${card.size}-yard-${card.title.toLowerCase().replaceAll(" ", "-")}`} className="btn btn-ghost">
+                    Learn More
+                  </Link>
                 </div>
               </article>
             </div>
@@ -271,7 +284,7 @@ function ValueProps() {
   ];
 
   return (
-    <section className="py-5" style={{ backgroundColor: "var(--page-background)" }}>
+    <section className="py-5" style={{ backgroundColor: "var(--surface-background)" }}>
       <div className="container">
         <div className="row g-4 align-items-center">
           <div className="col-lg-5">
@@ -344,7 +357,7 @@ function Testimonials() {
         <div className="row g-4">
           {reviews.map((review) => (
             <div className="col-md-4" key={review.reviewer}>
-              <article className="card-standard h-100 p-4">
+              <article className="testimonial-card h-100 p-4">
                 <StarRating />
                 <p className="mb-4">"{review.review}"</p>
                 <p className="fw-semibold mb-0">{review.reviewer}</p>
@@ -358,21 +371,37 @@ function Testimonials() {
 }
 
 function HomeFaq() {
+  const faqs = [
+    {
+      question: "Do I need to be home for delivery?",
+      answer:
+        "No, as long as the driveway is clear and accessible, we can place it exactly where you need it.",
+    },
+    {
+      question: "Will the dumpster damage my driveway?",
+      answer:
+        "We use lighter trucks and driveway-safe placement techniques to protect your concrete and pavers.",
+    },
+  ];
+
   return (
     <section className="py-5" style={{ backgroundColor: "var(--page-background)" }}>
       <div className="container">
         <div className="card-standard p-4 p-lg-5">
-          <div className="row align-items-center g-4">
-            <div className="col-lg-8">
-              <h2 className="fw-bold mb-3">Have questions about what you can throw away or how delivery works?</h2>
-              <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-                Get clear answers before you book, including delivery basics, accepted materials, and rental rules.
-              </p>
-            </div>
-            <div className="col-lg-4 text-lg-end">
-              <Link href="/dumpster-rental-faq" className="btn btn-outline-dark px-4">
-                View Rental FAQ
-              </Link>
+          <div className="row justify-content-center">
+            <div className="col-lg-9">
+              <h2 className="fw-bold mb-4 text-center">Quick Questions Before You Book</h2>
+              {faqs.map((faq) => (
+                <div className="border-bottom py-3" style={{ borderColor: "var(--border-card)" }} key={faq.question}>
+                  <h3 className="h5 fw-bold mb-2">{faq.question}</h3>
+                  <p className="mb-0" style={{ color: "var(--ink-mid)" }}>{faq.answer}</p>
+                </div>
+              ))}
+              <div className="text-center mt-4">
+                <Link href="/dumpster-rental-faq" className="btn btn-outline-dark px-4">
+                  View Rental FAQ
+                </Link>
+              </div>
             </div>
           </div>
         </div>
