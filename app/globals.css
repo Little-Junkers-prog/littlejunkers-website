@@ -34,7 +34,7 @@ a {
 
 .btn-brand {
   background-color: var(--signature-pink);
-  border: 0;
+  border: 1px solid var(--signature-pink);
   border-radius: 10px;
   color: var(--ink-primary);
   font-weight: 700;
@@ -46,16 +46,45 @@ a {
   color: var(--ink-primary);
 }
 
-.card-standard {
-  background-color: var(--card-background);
+.btn-ghost {
+  background-color: transparent;
   border: 1px solid var(--border-card);
-  border-radius: 8px;
+  border-radius: 10px;
+  color: var(--ink-primary);
+  font-weight: 700;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus {
+  background-color: var(--pink-background);
+  border-color: var(--pink-bar);
+  color: var(--ink-primary);
+}
+
+.card-standard {
+  background-color: var(--surface-background);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.card-standard:hover {
+  background-color: var(--pink-background);
+  transform: translateY(-2px);
 }
 
 .card-featured {
   background-color: var(--pink-background);
   border: 2px solid var(--pink-bar);
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.testimonial-card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .check-badge {
@@ -69,4 +98,19 @@ a {
   height: 32px;
   justify-content: center;
   width: 32px;
+}
+
+.site-footer {
+  background-color: var(--dark-hero);
+  color: var(--card-background);
+}
+
+.site-footer a {
+  color: var(--card-background);
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus {
+  color: var(--signature-pink);
 }
