@@ -33,12 +33,12 @@ export const metadata: Metadata = {
 };
 
 function getSupabaseClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error("Public Supabase configuration is missing.");
-  }
+  const supabaseUrl =
+    process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://fobkdakjawryhzkcdbbo.supabase.co";
+  const supabaseAnonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
+    "sb_publishable_Z_3emZFda5FuQWmf7ajhVw_pLtpFiji";
 
   return createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
@@ -61,6 +61,23 @@ function formatFeeUnit(unit: string) {
   return unit
     .replaceAll("_", " ")
     .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function getPercentageFee(fees: FeeRow[], feeKey: string) {
+  const fee = fees.find((candidate) => candidate.fee_key === feeKey);
+  return fee?.unit === "percentage" && fee.amount !== null ? Number(fee.amount) : null;
+}
+
+function formatFeeAmount(fee: FeeRow) {
+  if (fee.amount === null) {
+    return "Calculated when applicable";
+  }
+
+  if (fee.unit === "percentage") {
+    return `${Number(fee.amount)}% of base rental price`;
+  }
+
+  return `${asMoney(fee.amount)} / ${formatFeeUnit(fee.unit)}`;
 }
 
 export default async function PricingPage() {
@@ -91,6 +108,9 @@ export default async function PricingPage() {
   if (feesResult.error) {
     throw new Error(`Unable to load additional fees: ${feesResult.error.message}`);
   }
+
+  const fees = feesResult.data ?? [];
+  const fuelSurchargePercentage = getPercentageFee(fees, "fuel_surcharge");
 
   return (
     <main>
@@ -151,8 +171,15 @@ export default async function PricingPage() {
                       const price = tier[priceColumn];
 
                       return (
-                        <td className="text-center fw-bold" key={`${tier.id}-${size}`}>
-                          {price === null ? "Contact us" : asMoney(price)}
+                        <td className="text-center" key={`${tier.id}-${size}`}>
+                          <span className="d-block fw-bold">
+                            {price === null ? "Contact us" : asMoney(price)}
+                          </span>
+                          {price !== null && fuelSurchargePercentage !== null ? (
+                            <span className="d-block small" style={{ color: "var(--ink-mid)" }}>
+                              Fuel: {asMoney(Number(price) * (fuelSurchargePercentage / 100))}
+                            </span>
+                          ) : null}
                         </td>
                       );
                     })}
@@ -182,16 +209,11 @@ export default async function PricingPage() {
           </div>
 
           <div className="row g-3">
-            {(feesResult.data ?? []).map((fee) => (
+            {fees.map((fee) => (
               <div className="col-md-6 col-lg-4" key={fee.id}>
                 <article className="card-standard h-100 p-4">
                   <h3 className="h6 fw-bold mb-2">{fee.label}</h3>
-                  <p className="h5 fw-bold mb-2">
-                    {fee.amount === null ? "Calculated when applicable" : asMoney(fee.amount)}
-                    {fee.amount !== null ? (
-                      <span className="fs-6 fw-normal"> / {formatFeeUnit(fee.unit)}</span>
-                    ) : null}
-                  </p>
+                  <p className="h5 fw-bold mb-2">{formatFeeAmount(fee)}</p>
                   {fee.notes ? (
                     <p className="small mb-0" style={{ color: "var(--ink-mid)" }}>
                       {fee.notes}
@@ -209,22 +231,6 @@ export default async function PricingPage() {
                 <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
                   Each dumpster includes a defined weight allowance. If the disposal weight exceeds
                   that allowance, the active per-ton overage rate applies.
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div
-                className="h-100 p-4 rounded-3"
-                style={{
-                  backgroundColor: "var(--warning-background)",
-                  border: "1px solid var(--warning-border)",
-                }}
-              >
-                <h3 className="h5 fw-bold">Fuel surcharge</h3>
-                <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-                  When applicable, fuel is a dynamic pass-through cost based on current operating
-                  conditions and delivery details. The current charge is shown during booking before
-                  payment.
                 </p>
               </div>
             </div>
