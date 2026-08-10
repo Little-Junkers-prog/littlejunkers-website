@@ -42,13 +42,13 @@ export default function Header() {
         >
           <nav className="container py-4 d-flex flex-column gap-3">
             {[
-              ["Dumpster Sizes", "/#sizes"],
+              ["Home", "/"],
+              ["Pricing", "/pricing"],
               ["Service Areas", "/service-areas"],
-              ["Do's & Don'ts", "/what-can-i-put-in-a-dumpster"],
+              ["What Can I Put in a Dumpster", "/what-can-i-put-in-a-dumpster"],
               ["About Us", "/about-us"],
-              ["Contact", "/contactus"],
               ["FAQ", "/dumpster-rental-faq"],
-              ["Blog", "/blog"],
+              ["Contact Us", "/contactus"],
             ].map(([label, href]) => (
               <Link
                 className="text-decoration-none fs-5 fw-bold"
