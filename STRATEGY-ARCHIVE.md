@@ -1211,6 +1211,43 @@ Future Randy artwork must be derived from one master character reference rather 
 
 ---
 
+# 19.2 Human Copy Standard
+
+All V2 customer-facing copy should sound like a real Little Junkers owner/employee talking to a local customer, not like generated marketing prose.
+
+Use:
+- short sentences;
+- concrete words;
+- plain language;
+- real project examples;
+- direct answers;
+- local references only when they are genuinely useful;
+- natural contractions;
+- restrained personality.
+
+Avoid:
+- generic benefit stacking;
+- phrases that sound like ad-agency copy;
+- overexplaining obvious UI;
+- repetitive claims across adjacent sections;
+- abstract language such as “seamless experience,” “tailored solution,” “stress-free journey,” “designed with you in mind,” or similar AI/corporate filler;
+- unnecessary adjectives;
+- writing every section as a headline + subtitle + explanatory paragraph when the visual already communicates the point.
+
+A useful test:
+
+> **Would Marcus or Ivy actually say this to a customer?**
+
+If not, rewrite it.
+
+Another test:
+
+> **Can we remove 20–30% of the words without losing meaning?**
+
+If yes, remove them.
+
+Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
+
 # 20. Blog Strategy
 
 Keep `/blog`, but stop treating it as a generic AI SEO-content factory.
