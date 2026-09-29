@@ -444,7 +444,9 @@ The estimator must not turn into a long questionnaire. Prefer progressive disclo
 - order/price summary is positioned clearly to the right on desktop and stacks appropriately on mobile;
 - no duplicate Compare Sizes section;
 - pricing page uses the persistent Randy chat bubble rather than an in-page Randy promotional panel;
-- footer does not repeat a Choose Your Dumpster CTA.
+- footer does not repeat a Choose Your Dumpster CTA;
+- do not show unsupported popularity badges such as **Most Popular** unless backed by an approved business/data rule;
+- do not use claims such as **No junk fees** that conflict with disclosed weight, extra-day, service-area, or special-item charges.
 
 ---
 
