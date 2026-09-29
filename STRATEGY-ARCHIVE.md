@@ -612,7 +612,10 @@ Rules:
 - never imply that choosing a larger dumpster automatically solves a weight issue;
 - current included tonnage and prepaid-tonnage pricing must come from canonical pricing/business data;
 - do not hard-code tonnage pricing into the estimator;
-- material-weight assumptions must have a documented, reviewable canonical source and version;
+- the estimator should use an AI-guided adaptive interview rather than depend on a customer-facing/static material-weight lookup table;
+- AI should choose the next useful question based on the project and prior answers, then return a conservative estimated weight range, confidence level, and recommended prepaid-tonnage action;
+- AI output must use a structured schema and remain advisory; it must not invent commercial prices, fees, or available tonnage increments;
+- the final prepaid-tonnage options and prices must come from canonical booking/pricing rules;
 - the tool should not create a lead or customer record;
 - estimator results may be carried into the customer-experience session and booking context;
 - if prepaid tonnage is selected, the booking system remains the transaction authority and validates the add-on before payment.
