@@ -348,7 +348,7 @@ The Weight Estimator also depends on:
 - an AI-guided adaptive interview;
 - material/project safety restrictions and special handling rules.
 
-The estimator should **not** depend on a dedicated customer-facing/static weight table. The AI layer chooses follow-up questions based on the project and prior answers, then returns a structured advisory result such as:
+The estimator should **not** depend on a dedicated customer-facing/static weight table or require Little Junkers to maintain an exhaustive catalog of every possible object or debris type. The AI layer chooses follow-up questions based on the project and prior answers, then returns a structured advisory result such as:
 - estimated weight range;
 - confidence level;
 - major weight drivers;
@@ -399,7 +399,7 @@ Example:
 - **Roofing** may branch into roof size, number of layers, and shingle/material type.
 - **Household cleanout** may branch into furniture, appliances, boxed household goods, and amount/room count.
 
-The goal is not to create a miniature chatbot. It should feel like a fast adaptive calculator whose questions change intelligently.
+The goal is not to create a miniature chatbot. It should feel like a fast adaptive calculator whose questions change intelligently. It must also handle uncommon descriptions gracefully—for example, furniture or equipment that would never reasonably appear in a manually maintained weight table—by reasoning to a conservative estimate and asking a small number of clarifying questions only when needed.
 
 Important UX language:
 
