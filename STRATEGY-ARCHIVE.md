@@ -604,6 +604,16 @@ Then allow:
 - **Keep my current rental**
 - **Ask Randy**
 
+Display a short expectation-setting disclaimer near the recommendation:
+
+> **Weight estimates are just that—estimates.** Your actual disposal weight is determined by the scale ticket. Prepaid extra tonnage is optional, and unused prepaid tonnage is not refundable.
+
+If the customer chooses prepaid tonnage, require a concise acknowledgement before adding it:
+
+> **I understand the estimate isn't a guarantee and unused prepaid tonnage is non-refundable.**
+
+The acknowledgement belongs at the paid add-on decision point, not as a blocking step for customers who only use the estimator.
+
 Rules:
 
 - use weight **ranges**, not false precision;
