@@ -345,10 +345,17 @@ All pricing and commercial terms must come from approved canonical pricing/fee s
 The Weight Estimator also depends on:
 - included tonnage for the selected rental;
 - current prepaid additional-tonnage price/rules;
-- reviewed material-weight ranges;
-- material categories and any special handling restrictions.
+- an AI-guided adaptive interview;
+- material/project safety restrictions and special handling rules.
 
-Material-weight assumptions must be versioned/documented and must not live as unexplained constants inside UI components.
+The estimator should **not** depend on a dedicated customer-facing/static weight table. The AI layer chooses follow-up questions based on the project and prior answers, then returns a structured advisory result such as:
+- estimated weight range;
+- confidence level;
+- major weight drivers;
+- whether included tonnage is likely sufficient;
+- suggested prepaid-tonnage action.
+
+Commercial values remain deterministic: the AI must not invent pricing, fee amounts, or available prepaid-tonnage increments. Those come from canonical pricing/booking data.
 
 ## Schema
 Service + Offer where technically appropriate and matching visible current values.
@@ -378,13 +385,21 @@ The default pricing flow remains untouched unless the customer opens the tool.
 
 Suggested interaction:
 
-1. Customer selects one or more material categories.
-2. Customer selects approximate quantity/amount using simple customer-friendly units.
-3. Tool returns an estimated weight **range**.
-4. Compare the range with the included tonnage of the currently selected dumpster.
-5. If risk is low, reassure and return to booking.
-6. If the range may exceed included tonnage, recommend optional prepaid additional tonnage.
-7. Let the customer accept, decline, or ask Randy.
+1. Customer selects a project type or briefly describes the job.
+2. AI renders only the follow-up selections relevant to that project.
+3. Follow-up questions use simple customer language and quantities the customer can reasonably answer.
+4. AI returns an estimated weight **range**, confidence level, and key weight drivers.
+5. Compare the range with the included tonnage of the currently selected dumpster.
+6. If risk is low, reassure and return to booking.
+7. If the range may exceed included tonnage, recommend optional prepaid additional tonnage.
+8. Let the customer accept, decline, refine the estimate, or ask Randy.
+
+Example:
+- **Kitchen renovation** may branch into cabinets, countertops, flooring, drywall, appliances, and approximate room size.
+- **Roofing** may branch into roof size, number of layers, and shingle/material type.
+- **Household cleanout** may branch into furniture, appliances, boxed household goods, and amount/room count.
+
+The goal is not to create a miniature chatbot. It should feel like a fast adaptive calculator whose questions change intelligently.
 
 Important UX language:
 
@@ -405,6 +420,8 @@ The estimator must not turn into a long questionnaire. Prefer progressive disclo
 - Weight Estimator is optional and never blocks the normal conversion path;
 - estimator distinguishes weight from dumpster volume;
 - estimator returns a range/advisory result rather than false precision;
+- AI follow-up questions adapt to the project instead of forcing every customer through the same questionnaire;
+- AI response is structured and bounded; it cannot invent commercial prices or tonnage products;
 - prepaid tonnage suggestion uses current canonical pricing;
 - selected prepaid tonnage carries into booking and is revalidated by the booking transaction layer.
 
