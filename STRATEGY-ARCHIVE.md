@@ -1193,6 +1193,24 @@ Real Little Junkers operations and photography should provide first-party conten
 
 ---
 
+# 19.1 Randy Character Identity
+
+The canonical Randy visual specification is maintained in:
+
+- `docs/RANDY-CHARACTER-SPEC.md`
+
+Locked direction:
+- Randy is a Black adult male cartoon character;
+- black Little Junkers work/polo shirt;
+- black cap using the approved Little Junkers **raccoon logo**, never `LJ` lettering;
+- illustration and surrounding UI must use the exact brand-guide palette and the site's system font stack;
+- homepage may introduce Randy with a larger character treatment;
+- all other public pages use the persistent Randy chat bubble, which opens the dedicated chat modal experience.
+
+Future Randy artwork must be derived from one master character reference rather than independently regenerated with drifting facial features, skin tone, clothing, or logo treatment.
+
+---
+
 # 20. Blog Strategy
 
 Keep `/blog`, but stop treating it as a generic AI SEO-content factory.
