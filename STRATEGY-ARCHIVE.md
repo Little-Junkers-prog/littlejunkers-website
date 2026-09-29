@@ -867,6 +867,103 @@ Session replay must mask sensitive form inputs.
 
 ---
 
+
+# 16.1 Location, Privacy Consent, and Returning Junker Direction
+
+## Opt-in location
+
+Serviceability must never depend on silent device geolocation.
+
+The preferred customer experience is:
+
+```text
+City or ZIP
+[________________]   [ Use My Location ]
+```
+
+Rules:
+
+- City or ZIP entry always remains available.
+- **Use My Location** is an explicit opt-in action.
+- The browser/device permission prompt appears only after the customer chooses that action.
+- Approved location data is used to resolve the customer to a service city/ZIP/zone and current pricing context.
+- For general analytics and demand reporting, retain the **resolved city, ZIP, or service area**, not precise latitude/longitude.
+- Do not persist exact coordinates unless a later feature has a specific operational need, the privacy notice clearly explains it, and the user has given appropriate consent.
+- A returning visitor may optionally have their last approved service area remembered as a preference, subject to consent settings.
+
+Suggested analytics events:
+
+- `location_entry_method_selected` with method = manual or device;
+- `location_permission_granted`;
+- `location_permission_denied`;
+- `serviceability_checked`;
+- `service_area_confirmed`;
+- `service_area_rejected`.
+
+Do not put precise coordinates into general analytics event properties.
+
+## Privacy / cookie consent
+
+The approved brand headline is:
+
+> **We don't trash your privacy.**
+
+The consent interface should remain fun in tone but unambiguous in choices.
+
+Minimum controls:
+
+- **Accept All**
+- **Reject Non-Essential**
+- **Manage Preferences**
+
+Consent categories should distinguish at least:
+
+- Necessary;
+- Analytics;
+- Marketing;
+- Preferences;
+- Session replay, either as its own category or explicitly disclosed under Analytics.
+
+Non-essential analytics/marketing behavior must respect the selected consent state. The implementation must wire the consent choice into Google Consent Mode and any product-analytics/session-replay tooling rather than merely displaying a cosmetic banner.
+
+Privacy Policy and Cookie Policy links must be available directly from the consent interface.
+
+## Parking Lot — returning Junker account concept
+
+**Parking Lot** is the working product name for a future returning-customer / returning **Junker** experience.
+
+This is distinct from the repository file `PROJECT-PARKING-LOT.md`.
+
+Purpose:
+
+- give repeat customers a lightweight login;
+- remember basic customer preferences;
+- reduce repeated data entry;
+- make repeat rentals easier.
+
+Initial concept may include:
+
+- first name;
+- verified phone and/or email login;
+- preferred language;
+- saved service location(s) or city/ZIP;
+- rental history or recent dumpster size where appropriate;
+- saved customer preferences that are safe and useful.
+
+The final authentication method and exact data model are not locked yet.
+
+Guidelines:
+
+- keep the account lightweight;
+- do not require account creation to browse pricing or complete a first rental unless a later approved business rule says otherwise;
+- avoid collecting data merely because it could be collected;
+- marketing consent remains separate from login/account creation;
+- saved location/preferences must follow the privacy-consent rules above.
+
+Parking Lot is a future customer-experience feature and should be considered when designing session/context handoff, but it is not required to block the initial V2 public-site launch unless later promoted into launch scope.
+
+---
+
 # 17. Security Requirements
 
 Bot/spam protection is required **from day one** because Little Junkers previously suffered large-scale garbage lead creation through the Odoo website.
