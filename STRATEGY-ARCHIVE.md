@@ -995,6 +995,133 @@ Prefer first-party operational articles such as:
 
 First-hand operational evidence is more valuable than interchangeable listicles.
 
+## 20.1 Blog publishing architecture — authoring method TBD
+
+The final authoring method is intentionally **not locked yet**. It may ultimately be:
+
+- a lightweight CMS;
+- an Admin OS publishing screen;
+- a Git/MDX workflow;
+- or another controlled content system.
+
+Do not choose an authoring system merely because it is convenient for developers. The publishing workflow must be simple enough for Little Junkers to create and maintain useful content without editing application code for every article.
+
+Regardless of the authoring system selected, every article record must support at least:
+
+- title;
+- slug;
+- language;
+- status: draft / published / archived;
+- publish date;
+- author;
+- summary/excerpt;
+- hero/media;
+- article body;
+- related dumpster size, project type, and/or service area where relevant;
+- canonical URL;
+- SEO title and description;
+- structured-data fields required by the article template;
+- internal-link targets;
+- **indexing decision: INDEX or NOINDEX**.
+
+## 20.2 INDEX vs. NOINDEX is a mandatory publishing decision
+
+Every new blog post must receive an explicit indexing decision before publication.
+
+**Do not silently default every published post to INDEX.**
+
+The publishing workflow must visibly flag and require one of:
+
+### INDEX
+
+Use when the article has durable search/customer value, meaningful original content, and deserves its own Google-search entry point.
+
+Examples:
+
+- how much roofing debris fits in a dumpster;
+- a real Newnan project case study;
+- choosing between 11-, 16-, and 21-yard dumpsters;
+- driveway-placement lessons;
+- real loading/weight guidance.
+
+An INDEX article should:
+
+- be crawlable;
+- use a self-referencing canonical;
+- be eligible for the XML sitemap;
+- have unique metadata;
+- use appropriate Article/BlogPosting structured data;
+- contain useful internal links to relevant commercial pages;
+- have a clear conversion path such as size selection, pricing, serviceability, or booking;
+- have a Spanish counterpart when the content is selected for bilingual publication.
+
+### NOINDEX
+
+Use when the content is useful to customers or distribution channels but does not deserve a permanent search-result page.
+
+Examples:
+
+- short-term promotions;
+- temporary announcements;
+- event notices;
+- thin updates;
+- duplicate/supporting campaign content;
+- content created primarily as a destination for a Google Business Profile or social post when it lacks durable standalone search value.
+
+A NOINDEX article/page should:
+
+- use `noindex,follow` unless a later technical requirement says otherwise;
+- be excluded from the XML sitemap;
+- remain accessible through direct links where useful;
+- not be treated as SEO inventory.
+
+### Drafts
+
+Draft content must never be indexable or included in the sitemap.
+
+## 20.3 Blog-to-distribution workflow
+
+A strong first-party article can become the permanent source asset for multiple channels:
+
+```text
+Real Little Junkers project / customer question
+        ↓
+Permanent website article
+        ↓
+Google Business Profile post
+Facebook / Instagram post
+Email or customer education
+        ↓
+Link back to the article or the most relevant conversion page
+```
+
+Google Business Profile posts and social posts are distribution channels; the website article is the durable content asset when the subject merits one.
+
+Do not create a new indexable blog URL merely because a Google Business Profile post is being published.
+
+## 20.4 Blog performance standard
+
+Blogging is intended to improve website performance through:
+
+- additional relevant search entry points;
+- first-party expertise and local evidence;
+- stronger internal linking to size, city, project, pricing, and booking pages;
+- customer education that removes objections before checkout;
+- content that can be reused in Google Business Profile and social channels;
+- measurable assisted conversions.
+
+Measure articles by more than pageviews. Track:
+
+- organic impressions and clicks;
+- query relevance;
+- engaged visits;
+- clicks to pricing/product/service-area pages;
+- recommendation-tool starts;
+- booking starts;
+- assisted paid rentals.
+
+Do not use publishing frequency or raw article count as a success metric.
+
 ---
 
 # 21. SEO / AIO Principles
