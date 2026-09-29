@@ -470,147 +470,167 @@ The estimator must not turn into a long questionnaire. Prefer progressive disclo
 
 ---
 
-# 5. 11-Yard — The Little Junker
+# 5. Dumpster Product Page Template — Approved
+
+The **11-Yard Little Junker** design is the canonical template for all three dumpster product pages.
+
+Routes:
+- `/11-yard-the-little-junker`
+- `/16-yard-the-mighty-middler`
+- `/21-yard-the-big-junker`
+
+## Shared page structure
+
+1. **Hero**
+   - real size-specific Little Junkers photo;
+   - product name;
+   - one short human fit line;
+   - live location-aware price;
+   - included duration + tonnage;
+   - primary **Check Dates & Book** action;
+   - location/change-location control.
+
+2. **A great fit for**
+   - exactly four concise project-fit tiles;
+   - do not repeat the same list in hero copy.
+
+3. **Adjacent-size guidance**
+   - one card beside the fit tiles;
+   - 11-yard: point up to 16 when more room is likely needed;
+   - 16-yard: point down/up depending on project;
+   - 21-yard: point down to 16 when the larger size is unnecessary;
+   - language should help, not pressure.
+
+4. **What fits**
+   - practical capacity visual/equivalent;
+   - short list of representative materials/projects;
+   - no dimension diagram in this block.
+
+5. **Estimate My Load**
+   - optional AI-guided weight estimator;
+   - compact entry point adjacent to What Fits;
+   - never required for booking.
+
+6. **Dumpster size & footprint**
+   - dedicated dimension diagram;
+   - simple driveway/placement context;
+   - no duplicate lifestyle photo required if the dimension graphic already carries the section.
+
+7. **Price summary**
+   - current location;
+   - selected size;
+   - rental period;
+   - included tonnage;
+   - live price;
+   - **Check Dates & Book**;
+   - optional Weight Estimator link.
+
+8. **Materials guidance**
+   - short common-material guidance;
+   - heavy-load caution;
+   - links to Materials page / Weight Estimator;
+   - do not duplicate the full materials page.
+
+9. **Junker in the wild**
+   - real Little Junkers jobs;
+   - carousel rather than multiple full-width side-by-side galleries;
+   - city + short project label only.
+
+10. **FAQ**
+   - cap at four high-value size-specific questions on-page;
+   - link outward for broader FAQ coverage if needed.
+
+11. **Randy + footer**
+   - persistent Randy bubble only;
+   - standard footer;
+   - no redundant generic booking CTA in footer.
+
+## Shared acceptance rules
+
+- product pages answer **“Is this the right dumpster?”**, not simply repeat the Pricing page;
+- no duplicated three-size comparison table;
+- no unsupported popularity claims;
+- price and commercial terms come from canonical data;
+- copy follows the Human Copy Standard;
+- real first-party Little Junkers imagery replaces placeholders before launch;
+- layout/component system is shared across all three product pages.
+
+---
+
+# 6. 11-Yard — The Little Junker
 
 ## Route
 `/11-yard-the-little-junker`
 
-## Search intent
-Small dumpster rental; compact roll-off; small cleanout/remodel dumpster.
+## Product-specific direction
 
-## Conversion purpose
-Help a customer decide whether 11-yard is enough, then book it.
+Hero fit line:
 
-## Hero
-- real 11-yard image;
-- “11-Yard Little Junker”;
-- concise fit statement;
-- location-aware live price;
-- CTA: **Book the 11-Yard**
-- secondary: **Compare Sizes**
+> **Great for smaller cleanouts, remodels, and tight driveways.**
 
-## Required sections
+Project-fit examples should focus on smaller residential work such as:
+- garage cleanout;
+- small kitchen/bath remodel;
+- decluttering / household junk;
+- allowed yard cleanup.
 
-1. What fits / best use cases.
-2. Dimensions and capacity equivalents.
-3. Live pricing.
-4. Included tonnage/duration.
-5. Good fit for real Little Junkers project examples.
-6. “Choose 16 instead if…” decision guidance.
-7. Loading/material notes.
-8. Local photography.
-9. Mini FAQ.
-10. Booking CTA.
+Adjacent-size card:
+- **Need more room? See the 16-Yard.**
 
-## Data dependencies
-Size dimensions, public capacity metadata, pricing, included tonnage, rental duration.
+Capacity, dimensions, included tonnage, duration, and price must come from current approved sources.
 
-## Schema
-Product and/or Service only if technically valid for the rental presentation; Offer must match visible live price.
-
-## Analytics
-- `dumpster_size_viewed` size=11
-- `pricing_viewed`
-- `dumpster_size_selected` size=11
-- `booking_started`
-
-## Randy context
-Current size = 11.
-
-## Acceptance criteria
-No generic “small dumpster” filler; real project examples; direct comparison with 16-yard; booking receives size 11.
+Weight guidance should make clear that dense material can reach weight limits before the dumpster looks full.
 
 ---
 
-# 6. 16-Yard — The Mighty Middler
+# 7. 16-Yard — The Mighty Middler
 
 ## Route
 `/16-yard-the-mighty-middler`
 
-## Search intent
-“16 yard dumpster” and medium-project dumpster research.
+## Product-specific direction
 
-Search Console shows the exact query `16 yard dumpster` already has meaningful visibility. This page is a priority conversion opportunity.
+Use the approved product template, not a separate layout.
 
-## Conversion purpose
-Convert medium-project customers and clarify why/when 16-yard is the right choice.
+Primary intent:
+- medium remodels;
+- deck work;
+- larger cleanouts;
+- mixed residential/contractor projects.
 
-## Hero
-- real 16-yard imagery;
-- “16-Yard Mighty Middler”;
-- concise medium-project positioning;
-- live location-aware price;
-- **Book the 16-Yard**
-- **Compare Sizes**
+Hero copy should remain short and human.
 
-## Required sections
+Adjacent-size guidance may offer both directions where useful:
+- 11-yard if the job is genuinely small;
+- 21-yard if volume is clearly larger.
 
-1. What fits.
-2. Dimensions.
-3. Live pricing and included commercial terms.
-4. Real remodel/deck/cleanout examples.
-5. 11 vs 16 vs 21 decision block.
-6. Driveway/placement information.
-7. Loading/material guidance.
-8. Real Newnan/Fayette/local imagery where appropriate.
-9. Mini FAQ.
-10. Booking CTA.
+Avoid unsupported **Most Popular** language.
 
-## Analytics
-Same size events with size=16.
-
-## Randy context
-Current size = 16.
-
-## Acceptance criteria
-- page title/snippet direction clearly reflects 16-yard intent;
-- no unsupported “most popular” claim;
-- live price and commercial facts consistent with booking;
-- direct one-click handoff into 16-yard booking.
+Search intent around **16 yard dumpster** remains a priority, so title, H1, metadata, visible copy, and real project evidence should clearly support that topic without keyword stuffing.
 
 ---
 
-# 7. 21-Yard — The Big Junker
+# 8. 21-Yard — The Big Junker
 
 ## Route
 `/21-yard-the-big-junker`
 
-## Search intent
-Large roll-off dumpster; large cleanout/remodel/roofing dumpster.
+## Product-specific direction
 
-## Conversion purpose
-Convert larger-project customers while reducing misuse/overloading.
+Use the approved product template, not a separate layout.
 
-## Hero
-- real 21-yard image;
-- “21-Yard Big Junker”;
-- large-project positioning;
-- live price;
-- **Book the 21-Yard**
-- **Compare Sizes**
+Primary intent:
+- large cleanouts;
+- major remodels;
+- roofing / contractor work where operationally appropriate;
+- higher-volume projects.
 
-## Required sections
+Adjacent-size card should help the customer avoid overbuying:
+- **You may only need the 16-Yard** when the project volume does not justify the largest container.
 
-1. What fits.
-2. Dimensions.
-3. Live pricing.
-4. Included tonnage/duration.
-5. Large cleanout/remodel/roofing use cases.
-6. Weight-heavy material caution.
-7. Fill-line/loading guidance.
-8. Real project imagery.
-9. “16 may be enough if…” comparison.
-10. Mini FAQ.
-11. Booking CTA.
-
-## Analytics
-Size events with size=21.
-
-## Randy context
-Current size = 21.
-
-## Acceptance criteria
-Clear separation between volume and weight capacity; no implication that every heavy-material job belongs in 21-yard.
+Weight guidance is especially important:
+- clearly distinguish volume capacity from disposal weight;
+- do not imply that choosing the largest dumpster makes dense/heavy material limits irrelevant.
 
 ---
 
