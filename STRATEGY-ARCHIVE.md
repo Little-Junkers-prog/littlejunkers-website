@@ -928,11 +928,9 @@ Non-essential analytics/marketing behavior must respect the selected consent sta
 
 Privacy Policy and Cookie Policy links must be available directly from the consent interface.
 
-## Parking Lot — returning Junker account concept
+## Returning customer login
 
-**Parking Lot** is the working product name for a future returning-customer / returning **Junker** experience.
-
-This is distinct from the repository file `PROJECT-PARKING-LOT.md`.
+**Returning customer login** is the working name for the future repeat-customer account experience.
 
 Purpose:
 
@@ -960,7 +958,7 @@ Guidelines:
 - marketing consent remains separate from login/account creation;
 - saved location/preferences must follow the privacy-consent rules above.
 
-Parking Lot is a future customer-experience feature and should be considered when designing session/context handoff, but it is not required to block the initial V2 public-site launch unless later promoted into launch scope.
+Returning customer login is a future customer-experience feature and should be considered when designing session/context handoff, but it is not required to block the initial V2 public-site launch unless later promoted into launch scope.
 
 ---
 
@@ -1035,6 +1033,35 @@ The V2 media plan should:
 - optimize through Next.js;
 - avoid hotlinking production website content to raw GitHub assets;
 - adopt the approved shared media source-of-truth decision during foundation work.
+
+---
+
+# 18.1 Homepage owner story and map guidance
+
+## Marcus and Ivy story
+
+The full founder/owner story belongs on `/about-us`, where it can be told properly without slowing the homepage conversion flow.
+
+The homepage should still retain a compact trust section with:
+- a real Marcus and Ivy photo;
+- a short statement that Little Junkers is locally owned by Marcus and Ivy Griffin;
+- one or two human lines about why they started Little Junkers / how they approach customers;
+- a **Meet Marcus & Ivy** link to `/about-us`.
+
+Do not duplicate the full About page story on the homepage.
+
+## Map guidance
+
+Do not add a Google Maps embed solely as a local-ranking tactic.
+
+Current Google Business Profile guidance identifies local ranking primarily through **relevance, distance, and prominence**. The roadmap should therefore prioritize accurate Business Profile data, service-area relevance, reviews, links/mentions, strong local pages, and consistent entity information.
+
+A map may be used when it improves the customer experience:
+- preferably on `/service-areas`;
+- potentially on Contact if it helps explain coverage;
+- city/service-area visuals may show coverage without implying an office/customer-facing location that is not public.
+
+Do not place a map on the homepage unless later usability testing shows it materially helps customers.
 
 ---
 
