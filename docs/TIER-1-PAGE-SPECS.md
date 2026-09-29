@@ -406,6 +406,15 @@ Important UX language:
 - “Estimated weight” rather than “Your load weighs”.
 - “You may want to prepay…” rather than “You will owe…”.
 - Explain that the final disposal weight is determined by the actual scale ticket.
+- Near any prepaid-tonnage recommendation, display:
+
+  > **Weight estimates are just that—estimates.** Your actual disposal weight is determined by the scale ticket. Prepaid extra tonnage is optional, and unused prepaid tonnage is not refundable.
+
+- If the customer selects prepaid tonnage, require a concise acknowledgement at that point:
+
+  > **I understand the estimate isn't a guarantee and unused prepaid tonnage is non-refundable.**
+
+The acknowledgement must not be shown as a blocking checkbox to customers who only use the estimator or continue without prepaid tonnage.
 
 The estimator must not turn into a long questionnaire. Prefer progressive disclosure and a small number of useful customer-friendly material categories.
 
@@ -423,7 +432,8 @@ The estimator must not turn into a long questionnaire. Prefer progressive disclo
 - AI follow-up questions adapt to the project instead of forcing every customer through the same questionnaire;
 - AI response is structured and bounded; it cannot invent commercial prices or tonnage products;
 - prepaid tonnage suggestion uses current canonical pricing;
-- selected prepaid tonnage carries into booking and is revalidated by the booking transaction layer.
+- selected prepaid tonnage carries into booking and is revalidated by the booking transaction layer;
+- prepaid-tonnage purchase requires acknowledgement that the estimate is not guaranteed and unused prepaid tonnage is non-refundable.
 
 ---
 
