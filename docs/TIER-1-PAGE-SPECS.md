@@ -1,0 +1,1107 @@
+# Little Junkers V2 — Tier 1 Page Specifications
+
+**Status:** Draft for owner review — pre-code  
+**Date:** September 29, 2026  
+**Repository:** `Little-Junkers-prog/littlejunkers-website`  
+**Governing reference:** `STRATEGY-ARCHIVE.md`  
+**Purpose:** Define the page-level build contract for the first V2 implementation wave before application code is written.
+
+---
+
+# 1. Shared Tier 1 Rules
+
+These rules apply to every page in this document unless a page-specific rule overrides them.
+
+## 1.1 Customer experience
+
+- Mobile is the primary conversion-design target. Search Console shows roughly 74.5% of organic clicks are mobile.
+- The public website and booking funnel must feel like one product.
+- Do not ask for information again when the current customer-experience session already knows it.
+- Primary customer journey: location -> price/serviceability -> size/recommendation -> booking.
+- Keep copy short, specific, local, and operational.
+- Do not expose implementation terminology, prompts, placeholders, or AI-generated scaffolding.
+- No emojis in UI copy.
+- Use current public phone: **470-548-4733**.
+- Public owner names: **Marcus and Ivy Griffin**.
+
+## 1.2 Indexing
+
+Every route must be explicitly classified as **INDEX** or **NOINDEX**.
+
+For INDEX pages:
+- server-render meaningful visible content;
+- self-referencing canonical;
+- XML sitemap inclusion;
+- unique title and meta description;
+- valid structured data only where it matches visible content;
+- English/Spanish `hreflang` pairing where applicable;
+- no accidental `noindex`.
+
+For NOINDEX pages:
+- exclude from XML sitemap;
+- use `noindex,follow` unless a later security/privacy requirement calls for stricter handling.
+
+## 1.3 Canonical data
+
+Do not independently hard-code dynamic business facts that already have or should have a canonical data source.
+
+Canonical/public data dependencies may include:
+- pricing;
+- dumpster sizes and dimensions;
+- included tonnage;
+- rental duration;
+- fees;
+- service cities/ZIPs;
+- public phone/company data;
+- allowed/prohibited materials;
+- active service settings.
+
+If live pricing fails, do not silently fall back to stale rates.
+
+## 1.4 Analytics
+
+All pages emit `page_view`.
+
+Do not send phone, email, street address, payment details, or free-form customer text into GA4/PostHog event properties.
+
+Common events:
+- `language_changed`
+- `location_entered`
+- `serviceability_checked`
+- `service_area_confirmed`
+- `service_area_rejected`
+- `pricing_viewed`
+- `dumpster_size_viewed`
+- `dumpster_size_selected`
+- `recommendation_started`
+- `recommendation_completed`
+- `booking_started`
+- `randy_opened`
+- `form_started`
+- `form_validation_error`
+- `form_submitted`
+
+## 1.5 Security
+
+Pages that only read public content do not need human verification.
+
+Any action that can create/update a business record must use the approved protected intake path:
+- server-side validation;
+- origin controls;
+- rate limiting;
+- bot/spam controls;
+- managed human verification where appropriate;
+- server-only privileged database writes;
+- no direct anonymous pollution of canonical customer/lead data.
+
+## 1.6 Spanish
+
+Core Tier 1 customer journeys must have a real Spanish counterpart.
+
+Requirements:
+- natural U.S. Spanish;
+- language persists across website, Randy, recommendation, and booking;
+- no IP-forced redirect;
+- reciprocal `hreflang`;
+- language-correct metadata;
+- Spanish validation/error states;
+- Spanish transactional handoff.
+
+## 1.7 Randy
+
+Randy receives page context where useful:
+- language;
+- current route/page type;
+- city/ZIP if known;
+- dumpster size if known;
+- project type if known;
+- recommendation result if known.
+
+Randy should not re-ask known information.
+
+---
+
+# 2. Tier 1 Page Matrix
+
+| # | Page | Route | Migration | Index |
+|---|---|---|---|---|
+| 1 | Homepage | `/` | Keep + rebuild | INDEX |
+| 2 | Pricing | `/pricing` | New | INDEX |
+| 3 | 11-Yard | `/11-yard-the-little-junker` | Keep + rebuild | INDEX |
+| 4 | 16-Yard | `/16-yard-the-mighty-middler` | Keep + rebuild | INDEX |
+| 5 | 21-Yard | `/21-yard-the-big-junker` | Keep + rebuild | INDEX |
+| 6 | Size Guide / Recommendation | `/dumpster-size-guide` | New | INDEX |
+| 7 | Service Areas Hub | `/service-areas` | Keep + rebuild | INDEX |
+| 8 | Newnan | `/dumpster-rental-newnan-little-junkers` | Keep + rebuild | INDEX |
+| 9 | Sharpsburg | `/dumpster-rental-sharpsburg-little-junkers` | Keep + rebuild | INDEX |
+| 10 | Senoia | `/dumpster-rental-senoia-little-junkers` | Keep + rebuild | INDEX |
+| 11 | Peachtree City | `/dumpster-rental-peachtree-city-little-junkers` | Keep + rebuild | INDEX |
+| 12 | Fayetteville | `/dumpster-rental-fayetteville-little-junkers` | Keep + rebuild | INDEX |
+| 13 | Residential | `/residential-dumpster-rental` | Keep + rebuild | INDEX |
+| 14 | Commercial / Contractors | `/commercial-dumpster-rental` | Keep + rebuild | INDEX |
+| 15 | Materials | `/what-can-i-put-in-a-dumpster` | Keep + rebuild | INDEX |
+| 16 | FAQ | `/faq` | Keep + rebuild | INDEX |
+| 17 | Additional Services | `/additional-services` | Keep + rebuild | INDEX |
+| 18 | About | `/about-us` | Keep + rebuild | INDEX |
+| 19 | Contact | `/contactus` | Keep + rebuild | INDEX |
+| 20 | Spanish Core Experience | `/es/*` | Rebuild/redirect legacy | INDEX by counterpart |
+| 21 | Booking Integration | `/rent-a-dumpster/*` + booking routes | Cross-project integration | Mostly NOINDEX |
+
+---
+
+# 3. Homepage
+
+## Route
+`/`
+
+## Search intent
+- Little Junkers brand;
+- dumpster rental;
+- local dumpster rental;
+- rent a dumpster near me;
+- South Metro Atlanta local intent.
+
+## Conversion purpose
+Move a new visitor from uncertainty to:
+1. serviceability;
+2. live pricing;
+3. size selection/recommendation;
+4. booking.
+
+## Primary visitor
+Homeowners and small contractors who need a dumpster and may not yet know which size.
+
+## Hero
+
+Primary message should answer the job quickly rather than lead with company history.
+
+Concept:
+
+> **Need a dumpster?**  
+> Enter your city or ZIP to see prices and availability.
+
+Primary control:
+- City or ZIP input.
+- CTA: **See Prices & Availability**
+
+Secondary:
+- **Help Me Choose**
+- phone/text access on mobile.
+
+Hero must use approved dark offset-fade visual treatment and real Little Junkers imagery.
+
+## Required sections
+
+1. Location/serviceability hero.
+2. Live 11/16/21 pricing cards after location is known.
+3. Short “Not sure which size?” recommendation entry.
+4. Three-dumpster lineup.
+5. How it works — concise.
+6. Why Little Junkers — driveway/property care, local ownership, online booking, transparent pricing.
+7. Real local project photography.
+8. Reviews/testimonials.
+9. Service-area preview.
+10. Randy entry.
+11. Final booking CTA.
+
+Do not overload the homepage with long SEO copy.
+
+## Data dependencies
+- service areas / ZIP logic;
+- live public pricing;
+- dumpster size metadata;
+- company facts;
+- public reviews if sourced dynamically later.
+
+## Schema
+- Organization / LocalBusiness;
+- WebSite;
+- Service where appropriate;
+- Breadcrumb not needed on root.
+
+## Analytics
+- `location_entered`
+- `serviceability_checked`
+- `service_area_confirmed`
+- `service_area_rejected`
+- `pricing_viewed`
+- `recommendation_started`
+- `dumpster_size_selected`
+- `booking_started`
+- `randy_opened`
+
+## Randy context
+Pass route, language, location if known, and any size selected.
+
+## Internal links
+Pricing, all 3 sizes, size guide, service areas, residential, commercial, materials, FAQ, About, Compare when available.
+
+## Booking handoff
+Location and selected size must carry into booking if already known.
+
+## Mobile requirements
+- location field and CTA above fold;
+- no oversized nav;
+- pricing cards readable without horizontal confusion;
+- sticky Book action may be used if it does not obscure content.
+
+## Acceptance criteria
+- location check works;
+- current prices render server-side or immediately with approved safe fallback behavior;
+- no stale hard-coded price;
+- all key CTAs preserve context;
+- Spanish switch available;
+- mobile layout passes visual review;
+- no page-level form creates canonical CRM data.
+
+---
+
+# 4. Pricing
+
+## Route
+`/pricing`
+
+## Search intent
+- dumpster rental prices;
+- dumpster rental cost;
+- price on dumpster in Fayette/Coweta/local market;
+- commercial research before booking.
+
+## Conversion purpose
+Remove price uncertainty and turn a price shopper into a booking.
+
+## Hero
+> **Dumpster Rental Pricing**  
+> Enter your city or ZIP to see the price for your location.
+
+Primary CTA: **See My Price**
+
+## Required sections
+
+1. City/ZIP serviceability.
+2. Current pricing cards for 11/16/21.
+3. What the displayed rate includes.
+4. Included tonnage.
+5. Rental duration.
+6. Relevant delivery/service-area fee logic.
+7. Extra-day / overage explanation from canonical data.
+8. Common additional charges only if current and customer-safe.
+9. Size comparison CTA.
+10. FAQ focused on pricing.
+11. Booking CTA.
+
+Do not turn this into a dense fee schedule.
+
+## Data dependencies
+All pricing and commercial terms must come from approved canonical pricing/fee sources.
+
+## Schema
+Service + Offer where technically appropriate and matching visible current values.
+
+## Analytics
+- `location_entered`
+- `pricing_viewed`
+- `dumpster_size_selected`
+- `booking_started`
+
+## Internal links
+3 product pages, size guide, materials, service areas.
+
+## Acceptance criteria
+- same commercial inputs produce the same underlying price logic as booking;
+- crawlable current pricing exists in rendered HTML when feasible;
+- stale fallback values are prohibited;
+- location context passes to booking.
+
+---
+
+# 5. 11-Yard — The Little Junker
+
+## Route
+`/11-yard-the-little-junker`
+
+## Search intent
+Small dumpster rental; compact roll-off; small cleanout/remodel dumpster.
+
+## Conversion purpose
+Help a customer decide whether 11-yard is enough, then book it.
+
+## Hero
+- real 11-yard image;
+- “11-Yard Little Junker”;
+- concise fit statement;
+- location-aware live price;
+- CTA: **Book the 11-Yard**
+- secondary: **Compare Sizes**
+
+## Required sections
+
+1. What fits / best use cases.
+2. Dimensions and capacity equivalents.
+3. Live pricing.
+4. Included tonnage/duration.
+5. Good fit for real Little Junkers project examples.
+6. “Choose 16 instead if…” decision guidance.
+7. Loading/material notes.
+8. Local photography.
+9. Mini FAQ.
+10. Booking CTA.
+
+## Data dependencies
+Size dimensions, public capacity metadata, pricing, included tonnage, rental duration.
+
+## Schema
+Product and/or Service only if technically valid for the rental presentation; Offer must match visible live price.
+
+## Analytics
+- `dumpster_size_viewed` size=11
+- `pricing_viewed`
+- `dumpster_size_selected` size=11
+- `booking_started`
+
+## Randy context
+Current size = 11.
+
+## Acceptance criteria
+No generic “small dumpster” filler; real project examples; direct comparison with 16-yard; booking receives size 11.
+
+---
+
+# 6. 16-Yard — The Mighty Middler
+
+## Route
+`/16-yard-the-mighty-middler`
+
+## Search intent
+“16 yard dumpster” and medium-project dumpster research.
+
+Search Console shows the exact query `16 yard dumpster` already has meaningful visibility. This page is a priority conversion opportunity.
+
+## Conversion purpose
+Convert medium-project customers and clarify why/when 16-yard is the right choice.
+
+## Hero
+- real 16-yard imagery;
+- “16-Yard Mighty Middler”;
+- concise medium-project positioning;
+- live location-aware price;
+- **Book the 16-Yard**
+- **Compare Sizes**
+
+## Required sections
+
+1. What fits.
+2. Dimensions.
+3. Live pricing and included commercial terms.
+4. Real remodel/deck/cleanout examples.
+5. 11 vs 16 vs 21 decision block.
+6. Driveway/placement information.
+7. Loading/material guidance.
+8. Real Newnan/Fayette/local imagery where appropriate.
+9. Mini FAQ.
+10. Booking CTA.
+
+## Analytics
+Same size events with size=16.
+
+## Randy context
+Current size = 16.
+
+## Acceptance criteria
+- page title/snippet direction clearly reflects 16-yard intent;
+- no unsupported “most popular” claim;
+- live price and commercial facts consistent with booking;
+- direct one-click handoff into 16-yard booking.
+
+---
+
+# 7. 21-Yard — The Big Junker
+
+## Route
+`/21-yard-the-big-junker`
+
+## Search intent
+Large roll-off dumpster; large cleanout/remodel/roofing dumpster.
+
+## Conversion purpose
+Convert larger-project customers while reducing misuse/overloading.
+
+## Hero
+- real 21-yard image;
+- “21-Yard Big Junker”;
+- large-project positioning;
+- live price;
+- **Book the 21-Yard**
+- **Compare Sizes**
+
+## Required sections
+
+1. What fits.
+2. Dimensions.
+3. Live pricing.
+4. Included tonnage/duration.
+5. Large cleanout/remodel/roofing use cases.
+6. Weight-heavy material caution.
+7. Fill-line/loading guidance.
+8. Real project imagery.
+9. “16 may be enough if…” comparison.
+10. Mini FAQ.
+11. Booking CTA.
+
+## Analytics
+Size events with size=21.
+
+## Randy context
+Current size = 21.
+
+## Acceptance criteria
+Clear separation between volume and weight capacity; no implication that every heavy-material job belongs in 21-yard.
+
+---
+
+# 8. Dumpster Size Guide + Recommendation
+
+## Route
+`/dumpster-size-guide`
+
+## Search intent
+What size dumpster do I need; dumpster size comparison; 11 vs 16 vs 21.
+
+## Conversion purpose
+Turn uncertainty into a confident size selection.
+
+## Page architecture
+
+Two layers on the same page:
+
+### Crawlable guide
+- side-by-side 11/16/21 explanation;
+- dimensions;
+- common projects;
+- capacity comparisons;
+- links to product pages.
+
+### Interactive recommendation
+Ask only useful questions, such as:
+- project type;
+- approximate volume;
+- specific material concerns;
+- location if needed for price/serviceability.
+
+Return:
+- recommended size;
+- why;
+- alternatives when close;
+- live price after location;
+- booking CTA.
+
+## Data dependencies
+Size metadata, recommendation rules, service area, live pricing.
+
+Recommendation rules must have a clear owner and tests; do not hide inconsistent business logic in page components.
+
+## Analytics
+- `recommendation_started`
+- `project_selected`
+- `recommendation_completed`
+- `recommended_size_viewed`
+- `dumpster_size_selected`
+- `booking_started`
+
+## Randy context
+Randy can receive recommendation outcome and explain it further.
+
+## Acceptance criteria
+- usable without JavaScript for the editorial guide;
+- interactive tool does not create a lead;
+- result context carries into booking;
+- recommendation rationale is understandable;
+- no fake precision.
+
+---
+
+# 9. Service Areas Hub
+
+## Route
+`/service-areas`
+
+## Search intent
+Where Little Junkers delivers; dumpster rental near me; local availability.
+
+## Conversion purpose
+Confirm serviceability and route the customer to the strongest local page or booking flow.
+
+## Hero
+> **Do we deliver to you?**  
+> Enter your city or ZIP.
+
+## Required sections
+
+1. City/ZIP checker.
+2. Primary service cities.
+3. ZIP/service-zone information from canonical data.
+4. Links to real city pages.
+5. What happens outside the current service area.
+6. Booking CTA for supported locations.
+7. Bulk-pickup distinction only where current and relevant.
+
+## Data dependencies
+Canonical service area, ZIP, zone/fee data.
+
+## Schema
+Service / areaServed only where accurate.
+
+## Analytics
+Serviceability events and city-page clicks.
+
+## Acceptance criteria
+No manually maintained conflicting city list; out-of-area result is clear; current zone fee data is not duplicated in prose.
+
+---
+
+# 10. Newnan City Page
+
+## Route
+`/dumpster-rental-newnan-little-junkers`
+
+## Why Tier 1
+Strongest named local signal in owner-provided Google data and strongest city landing page in Search Console.
+
+## Search intent
+Dumpster rental Newnan GA; roll-off Newnan; local pricing.
+
+## Conversion purpose
+Turn a Newnan searcher directly into a rental.
+
+## Hero
+> **Dumpster Rental in Newnan, GA**
+
+Use real Newnan imagery.
+
+Primary CTA:
+- **See Newnan Prices & Availability**
+or direct live pricing if serviceability is already certain from the route.
+
+## Required sections
+
+1. Live Newnan pricing for 11/16/21.
+2. Size selection.
+3. Real Newnan project examples/photos.
+4. Local placement/driveway context.
+5. How delivery works.
+6. Materials/weight guidance.
+7. Local FAQ.
+8. Booking CTA.
+
+Avoid generic city-history filler.
+
+## Data dependencies
+Newnan serviceability, zone/fee, live pricing, size metadata.
+
+## Schema
+LocalBusiness/Service with accurate areaServed; BreadcrumbList.
+
+## Analytics
+City page view, pricing view, size selection, booking start.
+
+## Acceptance criteria
+First-party Newnan evidence; no templated city paragraph swaps; current pricing; direct booking context includes Newnan.
+
+---
+
+# 11. Sharpsburg City Page
+
+## Route
+`/dumpster-rental-sharpsburg-little-junkers`
+
+## Why Tier 1
+Search Console shows meaningful existing clicks; stronger current organic performance than originally assumed.
+
+## Required structure
+Use the same functional pattern as Newnan but with Sharpsburg-specific:
+- photos if available;
+- service details;
+- project examples;
+- local FAQ;
+- pricing/zone output.
+
+Do not clone Newnan copy with the city name replaced.
+
+## Acceptance criteria
+At least one meaningful Sharpsburg-specific content element beyond service-area data before publication.
+
+---
+
+# 12. Senoia City Page
+
+## Route
+`/dumpster-rental-senoia-little-junkers`
+
+## Why Tier 1
+Existing query visibility is strong and should be protected.
+
+## Required structure
+Same city-page framework, with real Senoia imagery/project evidence where available.
+
+Remove outdated Odoo claims such as unsupported same-day promises or “best prices.”
+
+## Acceptance criteria
+No legacy dynamic-snippet placeholder; live pricing; route preserved.
+
+---
+
+# 13. Peachtree City City Page
+
+## Route
+`/dumpster-rental-peachtree-city-little-junkers`
+
+## Why Tier 1
+Home market and substantial current impressions, but poor current click/ranking efficiency.
+
+## Search intent
+Dumpster rental Peachtree City GA.
+
+## Special SEO requirement
+Make geographic entity signals unambiguous:
+- Peachtree **City**, GA;
+- Fayette County;
+- 30269 where relevant;
+- South Metro Atlanta context.
+
+Avoid vague use of “Peachtree” that can be confused with Peachtree Corners.
+
+## Content
+- real local photography;
+- locally owned/home-market positioning;
+- live pricing;
+- size selection;
+- local project examples;
+- booking.
+
+## Acceptance criteria
+No confusing Peachtree Corners signals; exact business entity/location consistency.
+
+---
+
+# 14. Fayetteville City Page
+
+## Route
+`/dumpster-rental-fayetteville-little-junkers`
+
+## Search intent
+Dumpster rental Fayetteville GA.
+
+## Content
+Same high-quality city pattern:
+- live pricing;
+- first-party Fayetteville photos/projects;
+- local service information;
+- size guide;
+- booking CTA.
+
+## Acceptance criteria
+Distinct content and media; no city-name template swap.
+
+---
+
+# 15. Residential Dumpster Rental
+
+## Route
+`/residential-dumpster-rental`
+
+## Search intent
+Homeowner dumpster rental; cleanout/remodel/yard-project rental.
+
+## Conversion purpose
+Help a homeowner understand the process and choose a size without jargon.
+
+## Hero
+> **A dumpster for the project at home.**
+
+Primary CTA: **See Prices for My Address/ZIP**
+
+## Required sections
+
+1. Common homeowner projects.
+2. 11/16/21 quick choice.
+3. Driveway/property care.
+4. What can go in the dumpster.
+5. How delivery/pickup works.
+6. Transparent pricing.
+7. Real residential project gallery.
+8. Recommendation CTA.
+9. FAQ.
+10. Booking CTA.
+
+## Analytics
+Project selection, recommendation start, size selection, booking start.
+
+## Acceptance criteria
+Simple homeowner language; no contractor-centric jargon; real photos.
+
+---
+
+# 16. Commercial / Contractor Dumpster Rental
+
+## Route
+`/commercial-dumpster-rental`
+
+## Search intent
+Contractor dumpster; roofing/remodeling dumpster; recurring project rental.
+
+## Primary visitor
+Small contractors, roofers, remodelers, deck builders.
+
+## Conversion purpose
+Demonstrate reliability, clear pricing, easy repeat booking, and suitable sizes.
+
+## Hero
+> **Dumpsters that keep the job moving.**
+
+Primary CTA: **See Contractor Pricing & Availability**
+
+## Required sections
+
+1. Project types.
+2. Size selection.
+3. Roofing/heavy-material considerations.
+4. Delivery/placement workflow.
+5. Online booking.
+6. Repeat-rental convenience without promising unbuilt account features.
+7. Real contractor/project photos.
+8. Comparison/recommendation links.
+9. Booking CTA.
+
+## Acceptance criteria
+No enterprise procurement language; designed for small local contractors; claims must reflect actual operations.
+
+---
+
+# 17. What Can I Put in a Dumpster?
+
+## Route
+`/what-can-i-put-in-a-dumpster`
+
+## Search intent
+Allowed/prohibited dumpster materials.
+
+## Conversion purpose
+Remove uncertainty and prevent prohibited-material problems before booking.
+
+## Page structure
+
+Use clear visual groups:
+
+### YES
+Common approved materials.
+
+### ASK US FIRST
+Materials requiring context, weight review, or special handling.
+
+### NO
+Prohibited materials.
+
+Do not rely on prose paragraphs for the core rules.
+
+## Data dependencies
+Canonical prohibited/allowed-material business rules.
+
+If the operational prohibited list becomes table-driven for Bulk Pickup or dumpster rules, the website should consume the appropriate approved public version rather than maintain an independent list.
+
+## Required content
+- liquid paint rule;
+- lithium battery rule where applicable;
+- oils and other nuanced rules only if current for dumpster rental;
+- heavy materials;
+- mattresses/tires/fees only from current canonical fee data.
+
+## Analytics
+Materials category interaction, booking continuation.
+
+## Acceptance criteria
+No conflicting material guidance across FAQ, booking, and this page.
+
+---
+
+# 18. FAQ
+
+## Route
+`/faq`
+
+## Why Tier 1
+Search Console shows substantial impressions and strong current average position, despite poor click-through.
+
+## Purpose
+Answer real booking objections concisely and create useful search entry points.
+
+## Content model
+Questions should be grouped by customer task:
+- pricing;
+- sizes;
+- delivery;
+- timing;
+- materials;
+- driveway/property;
+- weight;
+- service area;
+- payment/booking.
+
+Answers should be short and link to the authoritative deeper page.
+
+## Schema
+FAQ structured data only if current Google eligibility/usefulness and visible content justify it; do not assume schema guarantees a rich result.
+
+## Analytics
+FAQ expand/click-to-deeper-page where useful; booking CTA.
+
+## Acceptance criteria
+No duplicated/conflicting business rules; no JS-only inaccessible accordion; visible crawlable answer text.
+
+---
+
+# 19. Additional Services
+
+## Route
+`/additional-services`
+
+## Why Tier 1
+Existing Search Console visibility is strong enough that the URL should be preserved and rebuilt intentionally.
+
+## Purpose
+Serve as the durable hub for services beyond standard dumpster rental without becoming a miscellaneous dumping ground.
+
+## Launch content
+- Bulk Pickup / Dumpster Bag when active;
+- links to any other genuinely active additional service;
+- clear distinction from dumpster rental.
+
+## Primary CTA
+Route into the correct service flow.
+
+## Acceptance criteria
+No stale service cards; no old unsupported pricing; active/inactive services controlled by approved data/configuration.
+
+---
+
+# 20. About Us
+
+## Route
+`/about-us`
+
+## Search intent
+Brand trust, owners, local-company verification.
+
+## Purpose
+Help customers verify that Little Junkers is a real local business run by real people.
+
+## Required sections
+
+1. Marcus and Ivy Griffin.
+2. Founded 2024.
+3. Why Little Junkers exists.
+4. Local operating area.
+5. Real owners/truck/dumpster imagery.
+6. Service philosophy: simple booking, transparent pricing, care for property.
+7. CTA to check pricing/book.
+
+Do not over-write the founder story.
+
+## Schema
+Organization / LocalBusiness / Person only where accurate and supported by visible content.
+
+## Acceptance criteria
+Never use retired owner name “Ivette Griffin.”
+
+---
+
+# 21. Contact
+
+## Route
+`/contactus`
+
+## Search intent
+Little Junkers phone/contact/support.
+
+## Purpose
+Provide human escalation without creating another spam vector.
+
+## Required sections
+
+1. Call/text: 470-548-4733.
+2. Response expectation only if current/approved.
+3. Short protected contact form.
+4. Service-area reminder.
+5. Existing customer vs new rental guidance.
+6. Randy entry where helpful.
+7. Booking CTA.
+
+## Security
+Contact form is a protected data-write surface:
+- honeypot;
+- strict field limits;
+- human verification;
+- rate limit;
+- server-side validation;
+- quarantine/risk logic;
+- no direct browser insert into canonical leads.
+
+## Analytics
+- `form_started`
+- `form_validation_error`
+- `form_submitted`
+- call/text click
+- booking click
+
+## Acceptance criteria
+No Odoo placeholder contact data; spam simulation rejected; legitimate test submission flows correctly.
+
+---
+
+# 22. Spanish Core Experience
+
+## Purpose
+Spanish is not a secondary translation project. It is a parallel customer path.
+
+## Tier 1 Spanish counterparts
+
+At minimum:
+- Spanish homepage;
+- pricing;
+- 11/16/21 pages;
+- size guide/recommendation;
+- service-area hub;
+- Newnan;
+- Sharpsburg;
+- Senoia;
+- Peachtree City;
+- Fayetteville;
+- residential;
+- commercial/contractor;
+- materials;
+- FAQ;
+- About;
+- Contact;
+- booking path.
+
+## Content standard
+- natural U.S. Spanish;
+- preserve Little Junkers tone;
+- do not publish raw machine translation without review;
+- public business names remain proper names;
+- prices/business rules come from same canonical sources as English.
+
+## URL strategy
+English root + `/es` hierarchy.
+
+Final Spanish slugs require language review before publication.
+
+## Analytics
+Same event names as English with language property; do not create a separate incompatible event taxonomy.
+
+## Acceptance criteria
+A visitor can enter through a Spanish page and complete the customer journey without being unexpectedly dropped into English.
+
+---
+
+# 23. Booking Integration / Handoff
+
+## Ownership
+Booking funnel remains transaction authority.
+
+## Public-domain goal
+Present booking under the same customer-facing domain/path if Vercel multi-project routing verification supports the approved architecture.
+
+Keep `book.littlejunkersllc.com` functional during transition.
+
+## Context handoff
+
+Website may pass approved non-sensitive context such as:
+- language;
+- city/ZIP;
+- selected size;
+- project type;
+- recommendation result;
+- campaign/referral attribution;
+- Randy session reference.
+
+Avoid uncontrolled query-string proliferation. Prefer a defined session/context contract.
+
+## Indexing
+Generally NOINDEX:
+- customer details;
+- booking continuation;
+- payment;
+- confirmation;
+- tokenized customer routes.
+
+Decision/marketing pages remain indexable.
+
+## Visual requirements
+Shared:
+- brand tokens;
+- typography;
+- buttons;
+- spacing;
+- header behavior;
+- progress style;
+- responsive behavior.
+
+The transition should not look like leaving Little Junkers for a different website.
+
+## Analytics
+Attribution/session continuity must survive the project boundary:
+- `booking_started`
+- `rental_option_selected`
+- `delivery_date_selected`
+- `customer_info_started`
+- `customer_info_completed`
+- `checkout_started`
+- `payment_completed`
+
+## Acceptance criteria
+- selected size/location/language survive handoff;
+- GA4 attribution survives;
+- product-analytics journey survives;
+- no duplicate pageview inflation from routing;
+- no sensitive data in analytics;
+- old `book.` links remain valid during transition.
+
+---
+
+# 24. Cross-Page Internal Linking Rules
+
+Every Tier 1 page should have an intentional next step.
+
+Examples:
+
+- City page -> pricing, sizes, materials, booking.
+- Size page -> compare sizes, service area, booking.
+- Pricing -> size pages, booking.
+- Materials -> product/booking.
+- FAQ -> authoritative detail page, not duplicated long answers.
+- Residential -> size guide/recommendation.
+- Commercial -> roofing guide when available, sizes, booking.
+- About -> booking/pricing, not a dead-end biography.
+
+Avoid giant keyword-heavy footer link farms.
+
+---
+
+# 25. Pre-Code Acceptance Gate
+
+Before page implementation begins, owner review should explicitly approve or revise:
+
+1. homepage conversion sequence;
+2. pricing presentation principles;
+3. product-page structure;
+4. recommendation-tool question/result philosophy;
+5. city-page content standard;
+6. residential vs contractor positioning;
+7. materials information architecture;
+8. FAQ structure;
+9. Additional Services hub role;
+10. Contact-form security posture;
+11. Spanish publication standard;
+12. booking-context handoff requirements.
+
+After approval, these specs become the build contract. Code changes that materially diverge from them require a documented decision/change rather than silent implementation drift.
