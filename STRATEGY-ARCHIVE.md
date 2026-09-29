@@ -560,6 +560,82 @@ Pricing must be usable by:
 
 ---
 
+# 9.1 Weight Estimator Strategy
+
+The pricing and booking experience should include an **optional Weight Estimator** to reduce surprise overage charges.
+
+Purpose:
+
+- help customers understand that dumpster volume and disposal weight are different;
+- identify dense/heavy material before checkout;
+- estimate whether the selected dumpster's included tonnage is likely to be sufficient;
+- offer prepaid additional tonnage when appropriate;
+- reduce avoidable post-rental overage frustration.
+
+The estimator must be **optional** and must not become a mandatory step in the standard booking flow.
+
+Recommended customer interaction:
+
+```text
+Worried about weight?
+[ Estimate My Load ]
+
+What are you throwing away?
+[ Furniture ] [ Household Junk ] [ Roofing ] [ Wood ]
+[ Drywall ] [ Flooring ] [ Concrete/Brick ] [ Yard Debris ] [ Other ]
+
+Approximate amount / quantity
+        ↓
+Estimated weight range
+        ↓
+Included tonnage for selected dumpster
+        ↓
+Recommendation
+```
+
+If the estimated range suggests the load may exceed included tonnage, show a clear optional recommendation such as:
+
+> **You may want to prepay for additional tonnage.**  
+> Based on what you selected, your load could exceed the weight included with this dumpster.
+
+Then allow:
+
+- **Add prepaid tonnage**
+- **Keep my current rental**
+- **Ask Randy**
+
+Rules:
+
+- use weight **ranges**, not false precision;
+- clearly state that the result is an estimate, not a guaranteed scale weight;
+- distinguish dense materials from bulky/light materials;
+- never imply that choosing a larger dumpster automatically solves a weight issue;
+- current included tonnage and prepaid-tonnage pricing must come from canonical pricing/business data;
+- do not hard-code tonnage pricing into the estimator;
+- material-weight assumptions must have a documented, reviewable canonical source and version;
+- the tool should not create a lead or customer record;
+- estimator results may be carried into the customer-experience session and booking context;
+- if prepaid tonnage is selected, the booking system remains the transaction authority and validates the add-on before payment.
+
+Suggested analytics:
+
+- `weight_estimator_opened`
+- `weight_material_selected`
+- `weight_estimate_completed`
+- `weight_risk_detected`
+- `prepaid_tonnage_recommended`
+- `prepaid_tonnage_selected`
+- `prepaid_tonnage_declined`
+
+The Weight Estimator should also be available contextually from:
+- Pricing;
+- product/size pages;
+- Materials page;
+- Randy;
+- booking before checkout.
+
+---
+
 # 10. Size Guide + Recommendation Tool
 
 The crawlable size guide and interactive recommendation tool are complementary, not duplicates.
