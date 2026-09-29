@@ -1248,6 +1248,44 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.3 Dumpster Product Page Template
+
+The approved **11-Yard Little Junker** page structure is the canonical template for all three dumpster product pages.
+
+Apply the same page grammar to:
+- `/11-yard-the-little-junker`
+- `/16-yard-the-mighty-middler`
+- `/21-yard-the-big-junker`
+
+Shared structure:
+1. concise photo-led hero with live location-aware price;
+2. four project-fit examples;
+3. one adjacent size-guidance card (upsell or downsell as appropriate);
+4. **What fits** section with practical capacity examples;
+5. optional **Estimate My Load** entry point;
+6. dedicated **Dumpster size & footprint** dimension block;
+7. clear price summary / booking action;
+8. compact materials guidance;
+9. **Junker in the wild** real-project carousel;
+10. capped size-specific FAQ;
+11. standard footer plus persistent Randy chat bubble.
+
+Do not redesign each size page independently.
+
+What changes by size:
+- hero copy;
+- real dumpster photography;
+- dimensions;
+- live price / included tonnage / duration;
+- project-fit examples;
+- capacity examples;
+- heavy-material cautions;
+- adjacent-size recommendation;
+- real project carousel content;
+- FAQ answers.
+
+Copy must follow the Human Copy Standard and should become **shorter**, not more elaborate, when the same information is already communicated visually.
+
 # 20. Blog Strategy
 
 Keep `/blog`, but stop treating it as a generic AI SEO-content factory.
