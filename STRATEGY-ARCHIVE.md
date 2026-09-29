@@ -1236,27 +1236,19 @@ Dynamic business facts belong in their approved canonical business-data source.
 
 ---
 
-# 24. Current Next Planning Step
+# 24. Current Planning Status
 
-Before application-page coding begins, the next strategic artifact is the **page-by-page migration matrix**.
+The Search Console performance/indexing review and migration-routing analysis are complete enough to support the V2 sitemap and Tier 1 page architecture.
 
-It should map every current Odoo/public URL to its V2 decision and include:
+The active page-level build contract is now:
 
-- Keep / Rebuild / Consolidate / Redirect / Remove;
-- V2 English URL;
-- V2 Spanish URL;
-- search intent;
-- conversion role;
-- canonical data dependencies;
-- schema;
-- analytics events;
-- media needs;
-- internal-link relationships;
-- final CTA;
-- redirect rule;
-- QA status.
+- `docs/TIER-1-PAGE-SPECS.md`
 
-Exact city-page URLs should not be locked until the current Odoo/Search Console URL inventory is reviewed.
+That document defines the pre-code specifications for the homepage, pricing, dumpster-size pages, size guide/recommendation, service-area hub and priority city pages, residential, contractor/commercial, materials, FAQ, Additional Services, About, Contact, Spanish core experience, and booking handoff.
+
+Before application-page coding begins, the owner should review and approve or revise the page-level decisions in that document.
+
+After page-spec approval, the next implementation stage is **Phase 0 / platform foundation and governance**, not ad-hoc page coding.
 
 ---
 
