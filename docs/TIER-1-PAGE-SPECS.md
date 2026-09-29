@@ -125,6 +125,10 @@ Requirements:
 
 ## 1.8 Randy
 
+Randy's visual identity is governed by `docs/RANDY-CHARACTER-SPEC.md`.
+
+Homepage may use a larger Randy introduction. All other public pages use the persistent Randy chat bubble; opening it launches the dedicated chat modal experience.
+
 Randy receives page context where useful:
 - language;
 - current route/page type;
@@ -326,16 +330,18 @@ Primary CTA: **See My Price**
 
 1. City/ZIP serviceability.
 2. Current pricing cards for 11/16/21.
-3. What the displayed rate includes.
-4. Included tonnage.
-5. Rental duration.
-6. **Optional Weight Estimator** entry point.
-7. Relevant delivery/service-area fee logic.
-8. Extra-day / overage explanation from canonical data.
-9. Common additional charges only if current and customer-safe.
-10. Size comparison CTA.
-11. FAQ focused on pricing.
-12. Booking CTA.
+3. **Optional Weight Estimator** entry point.
+4. Two-column pricing-detail area:
+   - left: one cohesive **What's included and what can add to your total** section;
+   - right: clear **Your Price Summary** card with the primary **Check Dates & Book** action.
+5. Included tonnage and rental duration inside the pricing-detail area.
+6. Relevant delivery/service-area fee logic.
+7. Extra-day / overage and special-item explanation from canonical data.
+8. FAQ focused on pricing.
+9. Persistent Randy chat bubble.
+10. Footer without a redundant **Choose Your Dumpster** CTA.
+
+Do not add a separate Compare Sizes table on this page; the three pricing cards already perform that comparison.
 
 Do not turn this into a dense fee schedule.
 
@@ -433,7 +439,12 @@ The estimator must not turn into a long questionnaire. Prefer progressive disclo
 - AI response is structured and bounded; it cannot invent commercial prices or tonnage products;
 - prepaid tonnage suggestion uses current canonical pricing;
 - selected prepaid tonnage carries into booking and is revalidated by the booking transaction layer;
-- prepaid-tonnage purchase requires acknowledgement that the estimate is not guaranteed and unused prepaid tonnage is non-refundable.
+- prepaid-tonnage purchase requires acknowledgement that the estimate is not guaranteed and unused prepaid tonnage is non-refundable;
+- included items and potential additional costs are visually grouped into one coherent section;
+- order/price summary is positioned clearly to the right on desktop and stacks appropriately on mobile;
+- no duplicate Compare Sizes section;
+- pricing page uses the persistent Randy chat bubble rather than an in-page Randy promotional panel;
+- footer does not repeat a Choose Your Dumpster CTA.
 
 ---
 
