@@ -24,6 +24,26 @@ These rules apply to every page in this document unless a page-specific rule ove
 - Use current public phone: **470-548-4733**.
 - Public owner names: **Marcus and Ivy Griffin**.
 
+## 1.1A Human copy standard
+
+Customer-facing copy must feel human, local, and conversational.
+
+Rules:
+- write like a knowledgeable local person, not a marketing department;
+- favor short, concrete sentences;
+- let photos, price, dimensions, and UI do the work;
+- do not restate the same idea in the hero, tiles, cards, and FAQ;
+- avoid generic AI/corporate phrases;
+- use natural contractions when appropriate;
+- remove copy that only explains what the design already makes obvious;
+- prefer specific examples over abstract benefit language.
+
+Review test:
+- **Would Marcus or Ivy actually say this to a customer?**
+- **Can 20–30% of the words be removed without losing meaning?**
+
+If either answer indicates drift, rewrite before approval.
+
 ## 1.2 Indexing
 
 Every route must be explicitly classified as **INDEX** or **NOINDEX**.
