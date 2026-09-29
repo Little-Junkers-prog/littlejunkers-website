@@ -221,13 +221,32 @@ Hero must use approved dark offset-fade visual treatment and real Little Junkers
 4. Three-dumpster lineup.
 5. How it works — concise.
 6. Why Little Junkers — driveway/property care, local ownership, online booking, transparent pricing.
-7. Real local project photography.
-8. Reviews/testimonials.
-9. Service-area preview.
-10. Randy entry.
-11. Final booking CTA.
+7. Compact Marcus & Ivy owner/trust section with real photo and link to About.
+8. Real local project photography.
+9. Reviews/testimonials.
+10. Service-area preview.
+11. Randy entry.
+12. Final booking CTA.
 
 Do not overload the homepage with long SEO copy.
+
+## Homepage owner/trust treatment
+
+Retain the strongest trust element from the current site without repeating the full About page.
+
+Use:
+- real Marcus and Ivy Griffin photo;
+- short local-owner message;
+- no more than one or two short supporting lines;
+- CTA: **Meet Marcus & Ivy** -> `/about-us`.
+
+The complete founder story belongs on the About page.
+
+## Homepage map decision
+
+Do **not** add a Google map to the homepage for SEO/ranking purposes.
+
+Use the homepage service-area checker and local city links instead. If a map improves usability, place the primary coverage map on `/service-areas`, where it has a clear customer purpose.
 
 ## Data dependencies
 - service areas / ZIP logic;
@@ -565,7 +584,8 @@ Confirm serviceability and route the customer to the strongest local page or boo
 ## Required sections
 
 1. City/ZIP checker.
-2. Primary service cities.
+2. Optional visual service-area map **only if it helps customers understand coverage**; do not add it as a claimed ranking tactic and do not expose a non-public/home address.
+3. Primary service cities.
 3. ZIP/service-zone information from canonical data.
 4. Links to real city pages.
 5. What happens outside the current service area.
