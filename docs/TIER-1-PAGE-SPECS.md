@@ -67,6 +67,9 @@ Do not send phone, email, street address, payment details, or free-form customer
 Common events:
 - `language_changed`
 - `location_entered`
+- `location_entry_method_selected`
+- `location_permission_granted`
+- `location_permission_denied`
 - `serviceability_checked`
 - `service_area_confirmed`
 - `service_area_rejected`
@@ -107,7 +110,20 @@ Requirements:
 - Spanish validation/error states;
 - Spanish transactional handoff.
 
-## 1.7 Randy
+## 1.7 Location and privacy controls
+
+- City/ZIP entry is always available.
+- Provide an explicit **Use My Location** option where location materially improves serviceability/pricing.
+- Never request browser geolocation automatically on page load.
+- Browser location permission is requested only after the customer opts in.
+- Resolve an approved device location to city/ZIP/service area for customer experience and demand analytics.
+- Do not send precise latitude/longitude to general analytics.
+- The approved privacy-consent headline is **“We don't trash your privacy.”**
+- Sitewide consent controls must include **Accept All**, **Reject Non-Essential**, and **Manage Preferences**.
+- Non-essential analytics, marketing, preference storage, and session replay must respect the selected consent state.
+- Privacy Policy and Cookie Policy must be accessible from the consent UI.
+
+## 1.8 Randy
 
 Randy receives page context where useful:
 - language;
@@ -180,11 +196,18 @@ Concept:
 > **Need a dumpster?**  
 > Enter your city or ZIP to see prices and availability.
 
-Primary control:
+Primary controls:
 - City or ZIP input.
 - CTA: **See Prices & Availability**
+- Secondary location action: **Use My Location**
 
-Secondary:
+Location behavior:
+- manual City/ZIP remains the default;
+- **Use My Location** is opt-in and triggers the browser permission request only after the customer selects it;
+- approved device location resolves to a service city/ZIP/zone;
+- if permission is denied, the experience falls back cleanly to manual City/ZIP entry.
+
+Secondary conversion actions:
 - **Help Me Choose**
 - phone/text access on mobile.
 
@@ -246,7 +269,11 @@ Location and selected size must carry into booking if already known.
 - sticky Book action may be used if it does not obscure content.
 
 ## Acceptance criteria
-- location check works;
+- manual City/ZIP location check works;
+- optional **Use My Location** works only after customer opt-in;
+- denial of device location permission does not block the flow;
+- general analytics stores resolved city/ZIP/service area rather than precise coordinates;
+- sitewide privacy consent uses the approved **“We don't trash your privacy.”** headline and functional consent controls;
 - current prices render server-side or immediately with approved safe fallback behavior;
 - no stale hard-coded price;
 - all key CTAs preserve context;
