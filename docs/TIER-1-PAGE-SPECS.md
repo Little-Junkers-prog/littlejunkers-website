@@ -329,17 +329,26 @@ Primary CTA: **See My Price**
 3. What the displayed rate includes.
 4. Included tonnage.
 5. Rental duration.
-6. Relevant delivery/service-area fee logic.
-7. Extra-day / overage explanation from canonical data.
-8. Common additional charges only if current and customer-safe.
-9. Size comparison CTA.
-10. FAQ focused on pricing.
-11. Booking CTA.
+6. **Optional Weight Estimator** entry point.
+7. Relevant delivery/service-area fee logic.
+8. Extra-day / overage explanation from canonical data.
+9. Common additional charges only if current and customer-safe.
+10. Size comparison CTA.
+11. FAQ focused on pricing.
+12. Booking CTA.
 
 Do not turn this into a dense fee schedule.
 
 ## Data dependencies
 All pricing and commercial terms must come from approved canonical pricing/fee sources.
+
+The Weight Estimator also depends on:
+- included tonnage for the selected rental;
+- current prepaid additional-tonnage price/rules;
+- reviewed material-weight ranges;
+- material categories and any special handling restrictions.
+
+Material-weight assumptions must be versioned/documented and must not live as unexplained constants inside UI components.
 
 ## Schema
 Service + Offer where technically appropriate and matching visible current values.
@@ -347,8 +356,43 @@ Service + Offer where technically appropriate and matching visible current value
 ## Analytics
 - `location_entered`
 - `pricing_viewed`
+- `weight_estimator_opened`
+- `weight_material_selected`
+- `weight_estimate_completed`
+- `weight_risk_detected`
+- `prepaid_tonnage_recommended`
+- `prepaid_tonnage_selected`
+- `prepaid_tonnage_declined`
 - `dumpster_size_selected`
 - `booking_started`
+
+## Optional Weight Estimator UX
+
+The pricing page should include a low-friction expandable entry point such as:
+
+> **Heavy stuff? Check the weight first.**  
+> Furniture, roofing and debris can weigh more than they look.  
+> **Estimate My Load**
+
+The default pricing flow remains untouched unless the customer opens the tool.
+
+Suggested interaction:
+
+1. Customer selects one or more material categories.
+2. Customer selects approximate quantity/amount using simple customer-friendly units.
+3. Tool returns an estimated weight **range**.
+4. Compare the range with the included tonnage of the currently selected dumpster.
+5. If risk is low, reassure and return to booking.
+6. If the range may exceed included tonnage, recommend optional prepaid additional tonnage.
+7. Let the customer accept, decline, or ask Randy.
+
+Important UX language:
+
+- “Estimated weight” rather than “Your load weighs”.
+- “You may want to prepay…” rather than “You will owe…”.
+- Explain that the final disposal weight is determined by the actual scale ticket.
+
+The estimator must not turn into a long questionnaire. Prefer progressive disclosure and a small number of useful customer-friendly material categories.
 
 ## Internal links
 3 product pages, size guide, materials, service areas.
@@ -357,7 +401,12 @@ Service + Offer where technically appropriate and matching visible current value
 - same commercial inputs produce the same underlying price logic as booking;
 - crawlable current pricing exists in rendered HTML when feasible;
 - stale fallback values are prohibited;
-- location context passes to booking.
+- location context passes to booking;
+- Weight Estimator is optional and never blocks the normal conversion path;
+- estimator distinguishes weight from dumpster volume;
+- estimator returns a range/advisory result rather than false precision;
+- prepaid tonnage suggestion uses current canonical pricing;
+- selected prepaid tonnage carries into booking and is revalidated by the booking transaction layer.
 
 ---
 
