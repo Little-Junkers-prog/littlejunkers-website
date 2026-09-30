@@ -650,11 +650,12 @@ Turn uncertainty into a confident size selection.
 Two layers on the same page:
 
 ### Crawlable guide
-- side-by-side 11/16/21 explanation;
-- dimensions;
-- common projects;
-- capacity comparisons;
-- links to product pages.
+Use a visually distinct **quick size guide**, not another photo-heavy product-card section.
+
+- show 11/16/21 with clean product/diagram-style visuals, silhouettes, or standardized side profiles;
+- keep copy compact: size name, simple job scale, one or two use examples, link to product page;
+- do not repeat the same lifestyle photography used elsewhere on the page;
+- dimensions and deeper detail belong on the individual product pages.
 
 ### Interactive recommendation
 Ask only useful questions, such as:
@@ -686,12 +687,26 @@ Recommendation rules must have a clear owner and tests; do not hide inconsistent
 ## Randy context
 Randy can receive recommendation outcome and explain it further.
 
+## Visual separation
+
+The page must clearly distinguish **product reference** from **real-world proof**:
+
+- **Quick size guide:** clean product/diagram-style visuals with minimal copy.
+- **Real jobs:** actual Little Junkers field photography shown in a carousel, including visible project/location context where available.
+
+Do not stack two sections of nearly identical dumpster photography.
+
+Because this is a helper/recommendation page, Randy may appear larger inside the recommendation area than on ordinary interior pages. Outside that helper panel, the normal persistent Randy chat-bubble rule still applies.
+
 ## Acceptance criteria
 - usable without JavaScript for the editorial guide;
 - interactive tool does not create a lead;
 - result context carries into booking;
 - recommendation rationale is understandable;
-- no fake precision.
+- no fake precision;
+- quick size guide and real-job carousel are visually distinct;
+- real-job imagery uses actual field photos rather than repeated product shots;
+- Randy's larger helper-page treatment remains consistent with the canonical Randy character spec.
 
 ---
 
