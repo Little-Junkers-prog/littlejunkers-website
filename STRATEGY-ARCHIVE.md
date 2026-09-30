@@ -1248,6 +1248,26 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.8 Newnan V2 City-Page Visual Approval
+
+The Newnan V2 mockup is approved as the canonical visual template for priority city pages.
+
+Reuse its page grammar for Sharpsburg, Senoia, Peachtree City, Fayetteville, Tyrone, and Fairburn where those pages are in scope.
+
+Do not reopen the following without an explicit owner change:
+- local hero structure;
+- local grounding line;
+- pricing-card placement;
+- call/text secondary CTA;
+- first-party project proof block;
+- compact service-area graphic;
+- compact materials section;
+- capped FAQ;
+- nearby-city links;
+- persistent Randy bubble only.
+
+Brand-guide design tokens remain authoritative over mockup-generated color values.
+
 # 19.7 City Page Local Authority Standard
 
 City pages must earn local relevance through **first-party evidence**, not keyword expansion.
