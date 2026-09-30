@@ -1248,6 +1248,27 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.11 Dumpster Materials Page Rules
+
+The Materials page uses a visual, real-item-photo approach and must distinguish:
+
+- **Allowed**
+- **Accepted with instructions**
+- **Not accepted**
+
+Locked operational rules:
+- paint is accepted if dried out or securely sealed; wet/open/leaking paint is not accepted;
+- lithium batteries and car batteries may be coordinated for recycling but must **not** be placed inside the dumpster; set them at the front/outside and/or notify Little Junkers;
+- motor oil may be coordinated for recycling up to **10 quarts**, sealed and kept outside the dumpster; over 10 quarts is not accepted through normal dumpster rental;
+- compressed cylinders, including helium tanks and fire extinguishers, are prohibited;
+- dirt and concrete are prohibited;
+- roofing shingles are allowed subject to weight limits;
+- do not present item-specific disposal fees as checkout add-ons unless checkout actually supports and verifies those charges.
+
+The current Supabase schema does not have a dedicated dumpster-material-rules table; `curbside_items` must not be reused as a substitute. A canonical dumpster-material-rule source should be established during implementation so the Materials page, FAQ, Randy, Weight Estimator, and booking remain consistent.
+
+Roofing Weight Estimator logic must ask for **roofing squares** and **number of layers**, with material type as needed, before generating an approximate load-weight recommendation.
+
 # 19.10 Commercial / Contractor Page Visual Approval
 
 The Commercial / Contractor Dumpster Rental page mockup is approved.
