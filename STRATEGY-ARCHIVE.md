@@ -1248,6 +1248,25 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.13 Materials Page Visual Approval
+
+The revised Materials / What Can I Put in a Dumpster page is approved.
+
+Do not reopen these decisions without an explicit owner change:
+- item-search hero;
+- real-item imagery;
+- allowed / accepted-with-instructions / prohibited rule framing;
+- 4 + **See all** pattern for allowed and prohibited lists;
+- infographic-style HTML expansion for full lists;
+- compact Heavy Project callout;
+- larger Accepted with Instructions treatment;
+- removal of Common Projects image carousel;
+- capped FAQ;
+- Randy bubble only;
+- mobile progressive disclosure.
+
+Brand-guide design tokens remain authoritative over mockup-generated colors.
+
 # 19.12 Mobile Design Gate
 
 Mobile is the primary conversion-design target and requires its own review pass after the initial desktop/concept page set is approved.
