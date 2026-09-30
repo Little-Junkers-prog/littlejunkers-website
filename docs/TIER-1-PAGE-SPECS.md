@@ -985,6 +985,26 @@ A city page should answer:
 
 # 10. Newnan City Page
 
+## Visual approval status
+
+**Newnan V2 approved.** This page is the canonical visual template for the remaining priority city pages.
+
+Locked visual decisions:
+- concise local hero with city/county/ZIP/zone grounding;
+- primary price CTA plus call/text secondary CTA;
+- three current pricing cards;
+- no oversized Randy panel;
+- one strong first-party local project block;
+- compact local service-area/zone graphic;
+- compact materials section;
+- four-question local FAQ;
+- nearby-city internal links;
+- persistent Randy bubble only;
+- production colors/typography must come from the Little Junkers Brand Guide rather than mockup approximations.
+
+Remaining city pages should reuse this visual grammar while swapping in genuine city-specific imagery, service data, local proof, and local copy.
+
+
 ## Route
 `/dumpster-rental-newnan-little-junkers`
 
