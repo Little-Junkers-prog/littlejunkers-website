@@ -976,7 +976,10 @@ A city page should answer:
 - city/ZIP/zone facts come from canonical service-area data;
 - price and fee data come from canonical pricing/service-area data;
 - page copy follows the Human Copy Standard;
-- every published city page must contain at least one meaningful local proof element beyond the city name.
+- every published city page must contain at least one meaningful local proof element beyond the city name;
+- local authority should come from first-party operational evidence: verified ZIPs/zones/fees, real project photos, real project types, county/geographic context, and carefully sourced local placement/permit guidance;
+- never invent neighborhoods, testimonials, permits, statistics, or “near me” language solely for SEO;
+- a city page should feel useful to someone who actually lives there, not like a template generated for search engines.
 
 ---
 
@@ -992,41 +995,143 @@ Strongest named local signal in owner-provided Google data and strongest city la
 Dumpster rental Newnan GA; roll-off Newnan; local pricing.
 
 ## Conversion purpose
-Turn a Newnan searcher directly into a rental.
+Turn a Newnan searcher directly into a rental while giving Google/AI systems and customers clear first-party evidence that Little Junkers actually serves Newnan.
+
+## Local authority requirements
+
+The page must include real, useful Newnan facts rather than generic city-name substitutions.
+
+Current Supabase-verified facts:
+- **City:** Newnan, GA
+- **County:** Coweta County
+- **Active Newnan service ZIPs:** **30263, 30265**
+- **Zone:** A / Local Area
+- **Delivery fee:** **$0**
+- current rental history contains completed Newnan jobs across all three dumpster sizes.
+
+Do **not** add ZIP 30271 or any neighborhood/ZIP merely because it appears in generic SEO advice. Publish only verified service-area data or genuinely supported local evidence.
+
+Recommended local-proof treatment near the hero:
+> **Newnan, Coweta County · 30263 & 30265 · Zone A · $0 delivery fee**
+
+Keep this visually compact.
 
 ## Hero
 > **Dumpster Rental in Newnan, GA**
 
-Use real Newnan imagery.
+Use a real Newnan Little Junkers image.
 
 Primary CTA:
-- **See Newnan Prices & Availability**
-or direct live pricing if serviceability is already certain from the route.
+- **See Newnan Prices**
 
-## Required sections
+Secondary:
+- **Call or text 470-548-4733**
+- **Not in Newnan? Change location**
 
-1. Live Newnan pricing for 11/16/21.
-2. Size selection.
-3. Real Newnan project examples/photos.
-4. Local placement/driveway context.
-5. How delivery works.
-6. Materials/weight guidance.
-7. Local FAQ.
-8. Booking CTA.
+Availability language such as **Next-day delivery available** is shown only when current availability data supports it.
 
-Avoid generic city-history filler.
+Do not use a large in-page Randy block. Use the persistent Randy chat bubble only.
 
-## Data dependencies
-Newnan serviceability, zone/fee, live pricing, size metadata.
+## Current Newnan pricing
+
+Use the current canonical pricing contract.
+
+Current verified dumpster facts:
+- **11-yard:** 1.0 ton included
+- **16-yard:** 1.5 tons included
+- **21-yard:** 2.0 tons included
+
+Current active pricing tiers and fees must be rendered dynamically. As of this planning review, Supabase shows:
+- active 3-day base tier: 11=$325, 16=$375, 21=$425;
+- extra days: $30/day;
+- prepaid weight overage: $79/ton;
+- disposal-billed weight overage: $99/ton.
+
+These are evidence for the current design review, **not permission to hard-code them into the page**.
+
+If concise micro-copy is shown beneath pricing, use canonical values and keep it human:
+> Extra days and extra weight only apply if you use them.
+
+Avoid crowding price cards with full dimensions or capacity charts; those belong on the product pages.
+
+## Real Newnan proof
+
+The page should contain at least one strong first-party Newnan project block:
+- actual Newnan job photo;
+- dumpster size;
+- project type;
+- short factual caption.
+
+The page may use multiple real Newnan jobs in a carousel if the imagery is available.
+
+Do not fabricate customer quotes.
+
+Current review-feedback data contains **no approved, shareable Newnan testimonial**, so the sample quote suggested during planning must not be published. Add a testimonial only after a real Newnan review is explicitly approved for marketing use.
+
+## Local placement / permit guidance
+
+Add one genuinely local FAQ or placement note, but keep it carefully sourced.
+
+Approved direction:
+> **Putting the dumpster in the street or public right-of-way?**  
+> The City of Newnan has a right-of-way permitting process through its Engineering Department. Check city requirements before delivery. HOA or private-property rules may also apply.
+
+Do not state that private-property placement categorically requires no permit unless that rule is separately verified.
+
+## Local map / grounding
+
+A small Newnan locator/service graphic may be used if it improves orientation:
+- highlight Newnan within Coweta County / the Little Junkers service area;
+- do not repeat the large Service Areas hub map;
+- do not imply an office/storefront address in Newnan;
+- keep it secondary to real project photography.
+
+A locator graphic is optional; first-party project evidence is more important than adding another map purely for SEO.
+
+## Materials
+
+Keep the material section compact.
+
+A short prohibited-items teaser may be used only if the rules are verified against the canonical dumpster-rental material policy. Do not reuse Bulk Pickup prohibited-item rules automatically.
+
+## FAQ
+
+Cap at four high-value Newnan questions.
+
+Recommended set:
+- Is there a delivery fee in Newnan?
+- How soon can you deliver in Newnan?
+- Do I need to check permits for street/right-of-way placement?
+- What dumpster size should I get?
+
+Broader questions link to the main FAQ/materials pages.
+
+## Nearby city links
+
+Link to relevant nearby dedicated pages, such as:
+- Sharpsburg;
+- Senoia;
+- Peachtree City;
+- Fayetteville;
+- Service Areas hub.
 
 ## Schema
-LocalBusiness/Service with accurate areaServed; BreadcrumbList.
+LocalBusiness/Service only where accurate; BreadcrumbList; visible page facts and schema must agree.
 
 ## Analytics
-City page view, pricing view, size selection, booking start.
+City page view, pricing view, size selection, booking start, call/text click, Size Guide/Weight Estimator entry.
 
 ## Acceptance criteria
-First-party Newnan evidence; no templated city paragraph swaps; current pricing; direct booking context includes Newnan.
+- real Newnan first-party evidence;
+- 30263/30265 and Coweta County grounding are accurate;
+- current Zone A / $0 delivery data is canonical;
+- 16-yard included tonnage is 1.5 tons;
+- no fabricated neighborhood claims or testimonial;
+- no unsupported permit claim;
+- no oversized Randy panel;
+- no generic city-history filler;
+- current pricing/fees come from canonical data;
+- direct booking context includes Newnan.
 
 ---
 
