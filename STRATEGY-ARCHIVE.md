@@ -1248,6 +1248,31 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.7 City Page Local Authority Standard
+
+City pages must earn local relevance through **first-party evidence**, not keyword expansion.
+
+Preferred evidence:
+- canonical city/ZIP/zone/fee data;
+- county/geographic context;
+- real Little Junkers project photos from that market;
+- real project types and dumpster sizes;
+- locally relevant placement or permitting guidance from authoritative local sources;
+- nearby-city internal links;
+- real approved customer comments when available.
+
+Avoid:
+- generic city history;
+- neighborhood-name stuffing;
+- fabricated testimonials;
+- unsupported permit statements;
+- publishing ZIPs that are not in the current service-area source;
+- repeating the full Service Areas map on every city page.
+
+For Newnan specifically, current canonical service ZIPs are **30263 and 30265**, Zone A has a **$0 delivery fee**, and the page should identify **Coweta County** naturally.
+
+A larger Randy promotional panel is not part of the city-page template; use the persistent Randy chat bubble only.
+
 # 19.6 City Page Internal Linking and Template Rule
 
 Service-area city names should link to their dedicated city page whenever a substantial city page exists.
