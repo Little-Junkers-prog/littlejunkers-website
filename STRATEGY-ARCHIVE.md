@@ -1255,9 +1255,14 @@ The Service Areas hub is a serviceability/coverage tool, not another general mar
 Locked rules:
 - delivery fee is a **separate line item** from base dumpster pricing;
 - Zone A displays **Free delivery / $0**;
-- Zone B displays the current **+$49 delivery fee**;
-- Zone C displays the current **+$89 delivery fee**;
+- Zone B displays the current **+$59 delivery fee**;
+- Zone C displays the current **+$99 delivery fee**;
+- current Supabase delivery fees are Zone A **$0.00**, Zone B **$59.00**, Zone C **$99.00**;
 - fees remain canonical-data driven even when these current values are displayed in the UI;
+- map coverage must be driven by active `public.zip_codes` zone assignments, not manually-maintained city assumptions;
+- current active ZIP counts are Zone A **12**, Zone B **30**, Zone C **88**;
+- city labels are only presentation helpers because some city labels span more than one zone (Atlanta currently appears in both Zone B and Zone C);
+- Supabase-verified Zone A city labels are **Brooks, Fairburn, Fayetteville, Newnan, Palmetto, Peachtree City, Senoia, Sharpsburg, Tyrone, and Union City**;
 - Sharpsburg and Union City belong in the free-delivery/core area;
 - the coverage map must visibly represent all three areas, including the extended zone;
 - the map legend carries the zone-fee explanation, so do not add a separate duplicate **Why Location Matters** block;
