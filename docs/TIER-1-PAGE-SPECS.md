@@ -1409,6 +1409,26 @@ No enterprise procurement language; designed for small local contractors; claims
 
 # 17. What Can I Put in a Dumpster?
 
+## Visual approval status
+
+**Materials / What Can I Put in a Dumpster V2 approved.**
+
+Locked visual/content decisions:
+- hero with item search and common-item shortcuts;
+- three-rule framing: **Yes**, **Accepted with instructions**, **Not accepted**;
+- common allowed items show **4 + See all** by default;
+- prohibited items show **4 + See all** by default;
+- expanded lists open as accessible infographic-style HTML UI rather than static images;
+- real-item photography is retained;
+- **Accepted with instructions** remains fully visible and gets more room;
+- Heavy Project / Weight Estimator callout stays compact;
+- Common Projects image section is removed;
+- FAQ remains capped;
+- persistent Randy chat bubble only;
+- mobile version uses progressive disclosure to avoid excessive scroll;
+- production colors and typography must use the Little Junkers Brand Guide rather than mockup approximations.
+
+
 ## Route
 `/what-can-i-put-in-a-dumpster`
 
