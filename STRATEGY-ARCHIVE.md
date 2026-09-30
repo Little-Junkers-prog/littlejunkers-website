@@ -1248,6 +1248,17 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.4 Size Guide Visual Rule
+
+The Dumpster Size Guide / Recommendation page should not stack multiple sections that look like repeated product galleries.
+
+Use two distinct visual languages:
+
+- **Size reference:** clean product/diagram-style visuals with very short labels.
+- **Real-world proof:** actual Little Junkers field photography in a carousel.
+
+The helper page is an approved exception to the ordinary interior-page Randy treatment: Randy may be larger inside the recommendation tool to reinforce the assisted-selection experience. The persistent chat bubble remains available elsewhere on the page.
+
 # 19.3 Dumpster Product Page Template
 
 The approved **11-Yard Little Junker** page structure is the canonical template for all three dumpster product pages.
