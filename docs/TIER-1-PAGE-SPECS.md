@@ -1660,27 +1660,171 @@ No duplicated/conflicting business rules; no JS-only inaccessible accordion; vis
 
 ---
 
-# 19. Additional Services
+# 19. Additional Services / Bulk Pickup
 
 ## Route
 `/additional-services`
 
-## Why Tier 1
-Existing Search Console visibility is strong enough that the URL should be preserved and rebuilt intentionally.
+## Role
+This route becomes the dedicated public landing page for prepaid **Curbside Bulk Pickup** after the production bulk-pickup funnel is verified.
 
-## Purpose
-Serve as the durable hub for services beyond standard dumpster rental without becoming a miscellaneous dumping ground.
+It should not remain a quote-form page for standard instant-bookable work.
 
-## Launch content
-- Bulk Pickup / Dumpster Bag when active;
-- links to any other genuinely active additional service;
-- clear distinction from dumpster rental.
+## Release dependency
+Public website conversion happens **after** the new bulk-pickup pricing engine, route-capacity model, shared checkout shell, Stripe flow, Admin route board, and production verification are live.
 
-## Primary CTA
-Route into the correct service flow.
+Until then:
+- do not publish the new booking CTA as if checkout already exists;
+- do not source the new standard-item pricing from legacy `curbside_items.amount`;
+- current production item-specific pricing is legacy compatibility data.
 
-## Acceptance criteria
-No stale service cards; no old unsupported pricing; active/inactive services controlled by approved data/configuration.
+## Approved customer-facing pricing model
+
+### Standard curbside items
+- first standard item: **$79.99**
+- each additional standard item: **$19.99**
+- each physically separate object counts as one item
+
+Examples:
+- sofa + loveseat = 2 items
+- 3-piece sectional = 3 items
+- mattress + box spring = 2 items
+- table + 6 chairs = 7 items
+- bed frame + headboard + dresser = separate items
+- removable cushions/pillows stay with their furniture item
+- each securely closed household bag counts as one item
+
+### Dumpster bags
+- first bag: **$125.00**
+- each additional bag: **$85.00**
+- included weight: **0.5 ton per bag**
+- attributable excess weight uses the current after-disposal overage rate, initially **$99/ton**, prorated
+- no bag overage is charged unless that individual bag’s weight is supported by an attributable scale record
+
+### Mixed orders
+When at least one dumpster bag is present:
+- first bag supplies the base charge
+- additional bags use the additional-bag rate
+- every loose standard item uses the additional-item rate
+- do **not** add the standard first-item charge
+
+Formula:
+`dumpster_bag_first + ((bag_count - 1) × dumpster_bag_additional) + (standard_item_count × standard_additional_item)`
+
+Current approved examples:
+- 1 bag + 1 loose item = **$144.99**
+- 2 bags + 2 loose items = **$249.98**
+
+## Outside-only service
+Bulk Pickup is curbside/outdoor pickup only:
+- curb
+- driveway
+- other approved outdoor location
+
+No indoor removal from homes, apartments, garages, sheds, basements, offices, or other buildings.
+
+## Pilot service area and schedule
+
+Automatic bulk-pickup scheduling is intentionally narrower than dumpster delivery coverage.
+
+### Sunday
+Peachtree City / Fayetteville
+- 30269
+- 30214
+- 30215
+
+### Tuesday
+Senoia / Sharpsburg
+- 30276
+- 30277
+
+### Thursday
+Newnan
+- 30263
+- 30265
+
+Capacity:
+- **10 pickups per route date**
+- active checkout holds + paid orders consume capacity
+- if full, show the next available date for that same route group
+- do not substitute another city’s route day
+
+Unassigned Zone A ZIPs stay unavailable for automatic bulk-pickup scheduling until explicitly mapped.
+
+## Website page order
+
+1. Hero: **Curbside pickup from $79.99**
+   - outside-only explanation
+   - primary **Check availability & book**
+   - secondary **Rent a dumpster**
+
+2. Two pricing cards
+   - Standard Item Pickup
+   - Dumpster Bag Pickup
+
+3. How it works
+   - check location
+   - choose/count items
+   - pick available route date
+   - pay online
+
+4. What counts as an item
+   - literal counting examples
+
+5. What we can pick up
+   - accepted
+   - quote-only
+   - prohibited
+   - loose construction/debris piles point to dumpster rental
+
+6. Service rules
+   - outside only
+   - 200 lb max standard item
+   - one person + dolly
+   - no onsite additions/substitutions
+   - cancellation / failed-access policy
+
+7. Pilot schedule and ZIP coverage
+
+8. FAQ
+
+9. Final CTA
+   - **Check availability & book**
+   - dumpster alternative
+
+## Important rules
+- no long item-by-item price menu
+- no required-photo gate
+- no callback-form-first experience
+- no broad “South Atlanta” availability claim
+- tires, mattresses/box springs, refrigerators, and normal appliances have **no separate pilot surcharge**
+- pianos, safes, and specialized heavy equipment are not instant-bookable in V1
+- standard item must be <= 200 lb and safely movable by one person with a dolly
+- customer selects only the physical items actually being picked up
+- no onsite additions/substitutions/payments
+
+## Cancellation / no-access
+- cancel >=24h before pickup: full refund
+- cancel <24h: retain **$35**
+- same-day booking allowed until noon local time, with explicit acknowledgement of the active late-cancellation rule
+- inaccessible/not-ready stop: **$35** driver-run fee
+- refunds after no-access remain reviewed, not automatic
+
+## Mobile
+After hero, keep a persistent bottom **Check availability** action that does not obscure legal/rule content.
+
+## Data ownership
+The future public page must consume server-owned bulk-pickup configuration, not hardcoded React values.
+
+Production target sources:
+- `bulk_pickup_prices`
+- `bulk_pickup_settings`
+- `bulk_pickup_route_groups`
+- `bulk_pickup_service_zips`
+- `bulk_pickup_route_dates`
+- canonical material rules
+
+Current `curbside_items.amount` is legacy and must not remain the new pricing engine.
 
 ---
 
