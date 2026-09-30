@@ -1248,6 +1248,23 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.5 Service Areas Page Rules
+
+The Service Areas hub is a serviceability/coverage tool, not another general marketing page.
+
+Locked rules:
+- delivery fee is a **separate line item** from base dumpster pricing;
+- Zone A displays **Free delivery / $0**;
+- Zone B displays the current **+$49 delivery fee**;
+- Zone C displays the current **+$89 delivery fee**;
+- fees remain canonical-data driven even when these current values are displayed in the UI;
+- Sharpsburg and Union City belong in the free-delivery/core area;
+- the coverage map must visibly represent all three areas, including the extended zone;
+- the map legend carries the zone-fee explanation, so do not add a separate duplicate **Why Location Matters** block;
+- place **Don't see your city?** directly with the map/core service-area content;
+- remove large in-page Randy treatment; use the standard persistent chat bubble only;
+- operational availability, including **Next day delivery available**, is shown only when current data supports the claim.
+
 # 19.4 Size Guide Visual Rule
 
 The Dumpster Size Guide / Recommendation page should not stack multiple sections that look like repeated product galleries.
