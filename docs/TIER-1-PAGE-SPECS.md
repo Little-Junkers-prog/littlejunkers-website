@@ -1252,6 +1252,25 @@ Distinct content and media; no city-name template swap.
 
 # 15. Residential Dumpster Rental
 
+## Visual approval status
+
+**Residential V1 approved.**
+
+Locked visual/content decisions:
+- homeowner-first hero with City/ZIP and **See My Prices**;
+- optional **Use My Location**;
+- four homeowner project categories;
+- concise 11/16/21 size-choice strip;
+- strong driveway/property-care section;
+- simple three-step **How it works** timeline;
+- combined **Before you load it** section with Materials + Weight Estimator;
+- real residential-project carousel;
+- pricing reassurance section with primary **See My Price** and secondary **Compare Local Dumpster Prices**;
+- four-question FAQ;
+- persistent Randy chat bubble only;
+- production colors and typography must use the Little Junkers Brand Guide rather than mockup approximations.
+
+
 ## Route
 `/residential-dumpster-rental`
 
