@@ -1248,6 +1248,25 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.10 Commercial / Contractor Page Visual Approval
+
+The Commercial / Contractor Dumpster Rental page mockup is approved.
+
+Do not reopen these decisions without an explicit owner change:
+- contractor-first hero and location entry;
+- project-type choices;
+- simple three-size contractor selection;
+- prominent Weight Estimator placement;
+- jobsite-detail trust section;
+- real contractor-project carousel;
+- three-step booking/fulfillment flow;
+- secondary comparison-tool link;
+- compact helper-tool links;
+- capped FAQ;
+- Randy bubble only.
+
+Brand-guide design tokens remain authoritative over mockup-generated colors.
+
 # 19.9 Residential Page Visual Approval
 
 The Residential Dumpster Rental page mockup is approved.
