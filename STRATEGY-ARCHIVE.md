@@ -1259,7 +1259,12 @@ Important distinction:
 
 The public website must not treat the legacy item-specific catalog as the source for the new customer experience.
 
-The Additional Services route becomes the dedicated Bulk Pickup landing page only after the production bulk-pickup funnel is verified.
+The website uses two distinct routes: `/additional-services` remains the broader services hub, while `/bulk-pickup` is the dedicated Bulk Pickup landing page. The Bulk Pickup page is published/converted only after the production bulk-pickup funnel is verified.
+
+Website route ownership:
+- `/additional-services` = Additional Services hub;
+- `/bulk-pickup` = dedicated Bulk Pickup landing page;
+- every Bulk Pickup booking CTA points to `https://book.littlejunkersllc.com/bulk-pickup` once the verified production funnel exists.
 
 Website-facing locked rules:
 - outside-only pickup;
