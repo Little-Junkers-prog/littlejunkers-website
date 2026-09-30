@@ -719,34 +719,163 @@ Because this is a helper/recommendation page, Randy may appear larger inside the
 Where Little Junkers delivers; dumpster rental near me; local availability.
 
 ## Conversion purpose
-Confirm serviceability and route the customer to the strongest local page or booking flow.
+Answer three questions quickly:
+1. Do we deliver there?
+2. What delivery zone/fee applies?
+3. Is delivery currently available?
 
 ## Hero
 > **Do we deliver to you?**  
 > Enter your city or ZIP.
 
-## Required sections
+Controls:
+- City or ZIP;
+- **Check My Area**;
+- **Use My Location**.
 
-1. City/ZIP checker.
-2. Optional visual service-area map **only if it helps customers understand coverage**; do not add it as a claimed ranking tactic and do not expose a non-public/home address.
-3. Primary service cities.
-3. ZIP/service-zone information from canonical data.
-4. Links to real city pages.
-5. What happens outside the current service area.
-6. Booking CTA for supported locations.
-7. Bulk-pickup distinction only where current and relevant.
+## Serviceability result
+
+When the location is supported, show a compact result panel.
+
+Example fields:
+- **Service area:** Core / Zone A, Zone B, or Zone C;
+- **Delivery fee:** a separate amount from the base dumpster rental price;
+- **Availability:** current operational availability, such as **Next day delivery available**, only when live data supports it;
+- primary CTA: **See Prices & Availability**.
+
+Important:
+- never label the delivery fee as **included in base pricing**;
+- Zone A should display **Free delivery / $0 delivery fee**;
+- Zone B should display the current **+$49 delivery fee**;
+- Zone C should display the current **+$89 delivery fee**;
+- fee values must still come from canonical service-area/fee data rather than being duplicated as independent page constants.
+
+## Coverage map
+
+The map is the primary explanatory visual on this page.
+
+It should:
+- clearly shade all three service zones;
+- visually show the extended/Zone C area rather than listing a gray legend item with no corresponding map coverage;
+- avoid exposing a private/home address;
+- use the Little Junkers approved palette and restrained zone shading;
+- highlight the resolved area when a visitor checks a city/ZIP.
+
+### Map legend
+
+The legend should carry the pricing explanation so a separate **Why Location Matters** section is unnecessary.
+
+Current presentation:
+
+- **Core / Zone A — Free delivery ($0)**
+- **Nearby / Zone B — +$49 delivery**
+- **Extended / Zone C — +$89 delivery**
+
+The legend should make clear that these are **delivery fees added to the dumpster rental price**, not replacement rental prices.
+
+## Core service area
+
+Show the core cities as compact linked text rather than large cards.
+
+Core/free-delivery cities include:
+- Peachtree City;
+- Newnan;
+- Fayetteville;
+- Senoia;
+- Sharpsburg;
+- Union City;
+- Fairburn;
+- other ZIPs/cities where canonical Zone A data applies.
+
+Do not maintain this list separately from canonical service-area data in implementation.
+
+### Don't see your city?
+
+Place this directly below the core-service-area list, beside/under the map rather than later on the page.
+
+Copy should stay brief:
+
+> **Don't see your city?**  
+> We may still deliver there. Enter your ZIP to check.
+
+Provide:
+- ZIP/city checker;
+- optional call/text fallback.
+
+Do not automatically create a lead from an unsupported serviceability lookup.
+
+## Real local jobs
+
+Use a compact **Seen around town** carousel with real Little Junkers field photography.
+
+Each slide needs only:
+- city;
+- short project label;
+- dumpster size if useful.
+
+Do not repeat city/service-area explanation inside the carousel.
+
+## FAQ
+
+Let the FAQ flow directly after the map/core-city/real-jobs content once the duplicate location box and large Randy block are removed.
+
+Cap at four high-value questions:
+- Do you charge more based on location?
+- Do you deliver outside the listed cities?
+- Can you deliver to rural addresses?
+- How do I know if my address is in the service area?
+
+## Randy
+
+Persistent chat bubble only.
+
+Do **not** use a large in-page Randy/personal-assistance block on the Service Areas page.
+
+Randy receives:
+- current route;
+- entered city/ZIP if known;
+- resolved service zone;
+- delivery fee;
+- serviceability result.
 
 ## Data dependencies
-Canonical service area, ZIP, zone/fee data.
+
+Canonical:
+- city/ZIP serviceability;
+- zone assignment;
+- delivery fee;
+- current delivery availability where available.
 
 ## Schema
 Service / areaServed only where accurate.
 
 ## Analytics
-Serviceability events and city-page clicks.
+- `location_entered`
+- `location_entry_method_selected`
+- `serviceability_checked`
+- `service_area_confirmed`
+- `service_area_rejected`
+- resolved service zone/city/ZIP where privacy rules permit;
+- city-page clicks;
+- pricing/booking continuation.
+
+Do not send precise device coordinates to general analytics.
 
 ## Acceptance criteria
-No manually maintained conflicting city list; out-of-area result is clear; current zone fee data is not duplicated in prose.
+
+- delivery fee is shown separately from base rental price;
+- Zone A = $0/free delivery;
+- Zone B current fee = +$49;
+- Zone C current fee = +$89;
+- Sharpsburg and Union City render in the free-delivery/core area when canonical data confirms them;
+- map visibly represents core, nearby, and extended zones;
+- map legend contains the location/fee explanation;
+- no duplicate **Why Location Matters** box;
+- **Don't see your city?** sits with the map/core-service-area content;
+- no large Randy block;
+- current availability language is data-driven and never hard-coded as always-next-day;
+- out-of-area result is clear and does not create a lead by default;
+- city list and fee rules are not independently hard-coded away from canonical data.
 
 ---
 
