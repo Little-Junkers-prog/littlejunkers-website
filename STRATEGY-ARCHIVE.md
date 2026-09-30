@@ -1248,6 +1248,38 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.15 Bulk Pickup V1.9 Website Dependency
+
+Bulk Pickup Version 1.9 is the approved implementation-planning scope.
+
+Important distinction:
+- the **approved future pricing model** is first standard item **$79.99**, each additional standard item **$19.99**, first dumpster bag **$125.00**, additional bag **$85.00**;
+- production Supabase still contains the legacy item-specific `curbside_items` pricing model by design;
+- no production bulk-pickup pricing/schema conversion has been applied yet.
+
+The public website must not treat the legacy item-specific catalog as the source for the new customer experience.
+
+The Additional Services route becomes the dedicated Bulk Pickup landing page only after the production bulk-pickup funnel is verified.
+
+Website-facing locked rules:
+- outside-only pickup;
+- exact prepaid pricing before checkout;
+- pilot ZIP/day schedule only;
+- 10-stop route-date capacity;
+- 200 lb / one-person-with-dolly standard-item rule;
+- literal physical-item counting;
+- mixed-order formula where first bag is the base;
+- no separate pilot surcharge for tires, mattresses/box springs, refrigerators, or ordinary appliances;
+- no indoor removal;
+- no onsite additions/substitutions;
+- $35 late-cancellation fee inside 24 hours;
+- $35 no-access/driver-run fee;
+- persistent mobile Check Availability CTA;
+- primary bulk CTA starts at location eligibility;
+- dumpster alternative remains visible for larger piles, construction debris, or ineligible bulk ZIPs.
+
+Do not publish broad South Atlanta bulk-pickup availability until ZIP coverage is actually enabled.
+
 # 19.14 FAQ Page Visual Approval
 
 The revised FAQ page is approved.
