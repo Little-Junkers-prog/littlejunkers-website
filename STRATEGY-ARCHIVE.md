@@ -1248,6 +1248,24 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.9 Residential Page Visual Approval
+
+The Residential Dumpster Rental page mockup is approved.
+
+Do not reopen these decisions without an explicit owner change:
+- homeowner-first hero and location entry;
+- four project categories;
+- simple three-size selection;
+- driveway/property-care emphasis;
+- three-step delivery flow;
+- combined materials + Weight Estimator help;
+- real residential-project carousel;
+- pricing reassurance with secondary comparison-tool link;
+- capped FAQ;
+- Randy bubble only.
+
+Brand-guide design tokens remain authoritative over mockup-generated colors.
+
 # 19.8 Newnan V2 City-Page Visual Approval
 
 The Newnan V2 mockup is approved as the canonical visual template for priority city pages.
