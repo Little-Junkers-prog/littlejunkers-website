@@ -1608,6 +1608,24 @@ Existing disposal-fee rows in `public.fees` do not mean the current checkout UI 
 
 # 18. FAQ
 
+## Visual approval status
+
+**FAQ V2 approved.**
+
+Locked visual/content decisions:
+- clean, restrained, text-first design;
+- pink used as an accent rather than a dominant field color;
+- hero with FAQ search;
+- category shortcuts;
+- Top 5 Questions;
+- topic-based accordions;
+- mobile uses compact category controls and collapsed accordions;
+- answers remain crawlable and accessible even when visually collapsed;
+- compact **Still stuck?** support section;
+- persistent Randy chat bubble only;
+- production colors and typography must use the exact Little Junkers Brand Guide tokens rather than mockup approximations.
+
+
 ## Route
 `/faq`
 
