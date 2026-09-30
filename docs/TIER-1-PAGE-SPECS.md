@@ -807,6 +807,21 @@ These labels currently represent **12 active Zone A ZIP codes** in `public.zip_c
 
 Do not maintain this list separately from canonical service-area data in implementation. The production map and checker must use active `zip_codes` records as the source of truth, because city names alone are not precise enough for zone assignment.
 
+### City-page linking rule
+
+When a city has a dedicated Little Junkers city page, its name on the Service Areas page must link to that page.
+
+Current planned city-page links:
+- **Peachtree City** -> `/dumpster-rental-peachtree-city-little-junkers`
+- **Newnan** -> `/dumpster-rental-newnan-little-junkers`
+- **Fayetteville** -> `/dumpster-rental-fayetteville-little-junkers`
+- **Sharpsburg** -> `/dumpster-rental-sharpsburg-little-junkers`
+- **Senoia** -> `/dumpster-rental-senoia-little-junkers`
+- **Tyrone** -> `/dumpster-rental-tyrone-little-junkers`
+- **Fairburn** -> `/dumpster-rental-fairburn-little-junkers`
+
+Cities without a dedicated, substantial page remain plain text. Do not create thin/duplicative city pages solely to make every service-area label clickable.
+
 ### Don't see your city?
 
 Place this directly below the core-service-area list, beside/under the map rather than later on the page.
@@ -883,8 +898,8 @@ Do not send precise device coordinates to general analytics.
 
 - delivery fee is shown separately from base rental price;
 - Zone A = $0/free delivery;
-- Zone B current fee = +$49;
-- Zone C current fee = +$89;
+- Zone B current fee = +$59;
+- Zone C current fee = +$99;
 - Sharpsburg and Union City render in the free-delivery/core area when canonical data confirms them;
 - map visibly represents core, nearby, and extended zones;
 - map legend contains the location/fee explanation;
@@ -894,6 +909,74 @@ Do not send precise device coordinates to general analytics.
 - current availability language is data-driven and never hard-coded as always-next-day;
 - out-of-area result is clear and does not create a lead by default;
 - city list and fee rules are not independently hard-coded away from canonical data.
+
+---
+
+# 9A. City Page Template — Approved Direction
+
+Priority city pages should share one functional template, while each page must contain real city-specific evidence and copy.
+
+## Shared purpose
+
+A city page should answer:
+1. **Yes, we deliver here.**
+2. **Here is the delivery fee for this ZIP/city.**
+3. **Here are the current dumpster options/prices.**
+4. **Here is proof we actually work in this area.**
+5. **Here is the fastest path to book.**
+
+## Shared page structure
+
+1. **Local hero**
+   - H1: **Dumpster Rental in {City}, GA**
+   - real Little Junkers image from that city/area where available;
+   - live service-zone/delivery-fee result;
+   - concise CTA to see/book current pricing.
+
+2. **Current dumpster options**
+   - 11 / 16 / 21-yard;
+   - current location-aware price;
+   - included duration/tonnage;
+   - concise fit label;
+   - direct booking handoff.
+
+3. **One city-specific proof section**
+   - real job/project photo(s);
+   - short project label;
+   - no generic city-history filler.
+
+4. **How delivery works here**
+   - driveway/placement context;
+   - any genuinely local operational note;
+   - keep short.
+
+5. **Size / weight help**
+   - link to Size Guide;
+   - optional Weight Estimator entry;
+   - do not reproduce full tools inline.
+
+6. **Local FAQ**
+   - cap at four;
+   - questions should reflect actual customer concerns for the area;
+   - no generic SEO-question padding.
+
+7. **Nearby service-area links**
+   - link to genuinely relevant neighboring city pages;
+   - link back to `/service-areas`.
+
+8. **Randy**
+   - persistent chat bubble only.
+
+## City-page content rules
+
+- no city-name swap templates;
+- no copied “history of {city}” paragraphs;
+- no unsupported claims like same-day delivery, cheapest, best, or most popular;
+- use first-party imagery whenever available;
+- city/ZIP/zone facts come from canonical service-area data;
+- price and fee data come from canonical pricing/service-area data;
+- page copy follows the Human Copy Standard;
+- every published city page must contain at least one meaningful local proof element beyond the city name.
 
 ---
 
