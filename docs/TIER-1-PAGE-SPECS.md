@@ -422,7 +422,7 @@ Suggested interaction:
 
 Example:
 - **Kitchen renovation** may branch into cabinets, countertops, flooring, drywall, appliances, and approximate room size.
-- **Roofing** may branch into roof size, number of layers, and shingle/material type.
+- **Roofing** must ask for **number of roofing squares**, **number of layers**, and shingle/material type. The estimator uses those answers to produce an approximate weight range. For non-contractors, add brief helper text that 1 roofing square = 100 sq. ft.
 - **Household cleanout** may branch into furniture, appliances, boxed household goods, and amount/room count.
 
 The goal is not to create a miniature chatbot. It should feel like a fast adaptive calculator whose questions change intelligently. It must also handle uncommon descriptions gracefully—for example, furniture or equipment that would never reasonably appear in a manually maintained weight table—by reasoning to a conservative estimate and asking a small number of clarifying questions only when needed.
@@ -1354,6 +1354,7 @@ Primary CTA: **See Contractor Pricing & Availability**
 1. Project types.
 2. Size selection.
 3. Roofing/heavy-material considerations.
+   - Roofing Weight Estimator flow must ask for **number of squares** and **number of layers** before estimating load weight; material/shingle type may be a follow-up.
 4. Delivery/placement workflow.
 5. Online booking.
 6. Repeat-rental convenience without promising unbuilt account features.
@@ -1375,40 +1376,151 @@ No enterprise procurement language; designed for small local contractors; claims
 Allowed/prohibited dumpster materials.
 
 ## Conversion purpose
-Remove uncertainty and prevent prohibited-material problems before booking.
+Give customers a fast, visual answer before booking and prevent avoidable loading/disposal problems.
+
+## Visual approval direction
+
+Keep the real-item photography/card treatment from the current mockup. The use of recognizable photos for furniture, appliances, wood, drywall, flooring, shingles, etc. is approved because it makes the page easier to scan and more human.
+
+Do not turn the page into a dense policy table.
 
 ## Page structure
 
-Use clear visual groups:
+### 1. Hero / item lookup
+Headline:
+> **Can I toss this?**
 
-### YES
-Common approved materials.
+Provide a simple item search and common-item shortcuts.
 
-### ASK US FIRST
-Materials requiring context, weight review, or special handling.
+The lookup result should classify the item as one of:
+- **Yes — you can toss it**
+- **Accepted with instructions**
+- **No — not in the dumpster**
 
-### NO
-Prohibited materials.
+The search should use the approved dumpster-material rules, not Bulk Pickup rules.
 
-Do not rely on prose paragraphs for the core rules.
+### 2. Common items you can toss
+Use real-item photo cards.
+
+Representative allowed categories:
+- household furniture/junk;
+- wood/lumber;
+- drywall;
+- flooring;
+- roofing shingles;
+- ordinary remodel debris;
+- yard debris where current operational rules allow it.
+
+This list is illustrative, not exhaustive.
+
+### 3. Accepted with instructions
+
+This section replaces the prior **items with an additional fee** block.
+
+Do **not** tell customers that these items are assessed as checkout add-ons; the current checkout flow does not collect those item-specific charges.
+
+Approved operational rules:
+
+#### Paint
+Accepted when:
+- dried out; **or**
+- in a securely sealed container.
+
+Wet/open/leaking paint is not accepted.
+
+#### Lithium batteries and car batteries
+Little Junkers can coordinate recycling, but:
+- **do not put batteries inside the dumpster**;
+- place them at the front/outside of the container or notify Little Junkers so recycling can be coordinated.
+
+#### Motor oil
+Little Junkers can coordinate recycling for:
+- up to **10 quarts**;
+- in sealed containers;
+- kept outside/at the front of the dumpster rather than mixed into the load.
+
+More than 10 quarts is not accepted through the normal dumpster-rental process.
+
+### 4. Not accepted
+
+Use clear photo/icon cards.
+
+Current owner-approved prohibited items include:
+- **dirt**;
+- **concrete**;
+- **compressed cylinders**, including helium tanks and fire extinguishers;
+- wet/open/leaking paint;
+- motor oil over the 10-quart recycling limit;
+- other hazardous/regulated material that Little Junkers has not explicitly approved.
+
+Do not describe concrete/dirt as merely “heavy”; they are not accepted in the normal dumpster rental.
+
+### 5. Heavy but allowed
+
+Replace the broad statement **Heavy materials are allowed** with a narrower, accurate message:
+
+> **Heavy project? Check the weight first.**
+
+Examples such as:
+- roofing shingles;
+- tile;
+- dense remodel/demo debris
+
+may be accepted but can reach the included weight before the dumpster looks full.
+
+CTA:
+- **Estimate My Load**
+
+Do not include concrete or dirt in this section.
+
+### 6. Common projects
+
+Keep the real-photo project carousel:
+- home cleanout;
+- kitchen/bath remodel;
+- roofing;
+- deck removal;
+- yard cleanup where allowed.
+
+This section should help a customer recognize their job without adding more prose.
+
+### 7. FAQ
+
+Cap at four high-value questions:
+- Can I put furniture in the dumpster?
+- Can I put roofing shingles in the dumpster?
+- What should I do with batteries, oil, or paint?
+- What items are not accepted?
 
 ## Data dependencies
-Canonical prohibited/allowed-material business rules.
 
-If the operational prohibited list becomes table-driven for Bulk Pickup or dumpster rules, the website should consume the appropriate approved public version rather than maintain an independent list.
+At present, Supabase does **not** contain a dedicated dumpster-material-rules table; the only material-like table discovered is for curbside items.
 
-## Required content
-- liquid paint rule;
-- lithium battery rule where applicable;
-- oils and other nuanced rules only if current for dumpster rental;
-- heavy materials;
-- mattresses/tires/fees only from current canonical fee data.
+Therefore:
+- do not consume `curbside_items` as the dumpster-rental rule source;
+- treat these owner-approved dumpster rules as the current content/business contract;
+- when implementation reaches the data-model phase, create or designate a canonical dumpster-material-rule source so FAQ, Randy, Weight Estimator, booking, and this page stay synchronized.
+
+Existing disposal-fee rows in `public.fees` do not mean the current checkout UI automatically assesses item-specific fees. Do not present them as checkout charges unless the transaction flow is later changed and verified.
 
 ## Analytics
-Materials category interaction, booking continuation.
+- material_search_started;
+- material_search_result_viewed;
+- material_category_interaction;
+- material_rule_detail_viewed;
+- weight_estimator_opened;
+- booking continuation.
 
 ## Acceptance criteria
-No conflicting material guidance across FAQ, booking, and this page.
+- no “special fee at checkout” claim unless the checkout actually supports it;
+- paint rule matches approved dried/sealed handling;
+- batteries are kept out of the dumpster and coordinated for recycling;
+- motor oil is limited to 10 quarts, sealed, and kept out of the dumpster;
+- compressed cylinders are prohibited;
+- dirt and concrete are prohibited;
+- roofing shingles remain supported subject to weight limits;
+- real-item imagery is used where practical;
+- no conflicting guidance across this page, FAQ, Randy, Weight Estimator, and booking.
 
 ---
 
