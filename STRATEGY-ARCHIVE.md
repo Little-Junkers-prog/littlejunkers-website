@@ -1248,6 +1248,23 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.14 FAQ Page Visual Approval
+
+The revised FAQ page is approved.
+
+Do not reopen these decisions without an explicit owner change:
+- restrained, professional visual treatment;
+- pink remains an accent color, not a dominant surface color;
+- FAQ search hero;
+- category shortcuts;
+- Top 5 Questions;
+- topic-based accordions;
+- compact support CTA;
+- mobile collapsed/expandable treatment;
+- Randy bubble only.
+
+Brand-guide design tokens remain authoritative over mockup-generated colors.
+
 # 19.13 Materials Page Visual Approval
 
 The revised Materials / What Can I Put in a Dumpster page is approved.
