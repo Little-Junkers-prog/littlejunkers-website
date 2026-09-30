@@ -60,7 +60,7 @@ The current strategic defaults are:
 6. **Use GA4/GTM for marketing attribution and a product-analytics layer such as PostHog for behavioral funnels, paths, friction analysis, and privacy-controlled session replay.**
 7. **Protect public record-creating actions with layered anti-bot controls, including Vercel protections and server-validated human verification such as managed Turnstile where appropriate.**
 8. **Use a shared, canonical media strategy. The booking-funnel repository currently contains the seed media library.**
-9. **The comparison tool and We Recommend marketplace are committed V2 product features, but they must not block a stable core booking launch if they need to remain feature-flagged temporarily.**
+9. **The comparison tool and We Recommend marketplace are committed V2 product features, but they must not block a stable core booking launch if they need to remain feature-flagged temporarily.** The Residential Dumpster Rental page should expose **Compare Local Dumpster Prices** as a secondary link once `/compare` is live; comparison should support consideration, not compete with the primary booking CTA.
 10. **Protect `main` and move to PR-based governance as part of Phase 0. Future implementation should not rely on unreviewed direct production changes.**
 
 ---
