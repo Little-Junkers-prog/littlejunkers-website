@@ -746,8 +746,8 @@ Example fields:
 Important:
 - never label the delivery fee as **included in base pricing**;
 - Zone A should display **Free delivery / $0 delivery fee**;
-- Zone B should display the current **+$49 delivery fee**;
-- Zone C should display the current **+$89 delivery fee**;
+- Zone B should display the current **+$59 delivery fee**;
+- Zone C should display the current **+$99 delivery fee**;
 - fee values must still come from canonical service-area/fee data rather than being duplicated as independent page constants.
 
 ## Coverage map
@@ -759,7 +759,9 @@ It should:
 - visually show the extended/Zone C area rather than listing a gray legend item with no corresponding map coverage;
 - avoid exposing a private/home address;
 - use the Little Junkers approved palette and restrained zone shading;
-- highlight the resolved area when a visitor checks a city/ZIP.
+- highlight the resolved area when a visitor checks a city/ZIP;
+- derive zone coverage from active `public.zip_codes` rows, not a hand-drawn city list;
+- use ZIP-level boundaries/polygons so split-city cases render correctly (for example, **Atlanta has active ZIPs in both Zone B and Zone C**).
 
 ### Map legend
 
@@ -768,26 +770,42 @@ The legend should carry the pricing explanation so a separate **Why Location Mat
 Current presentation:
 
 - **Core / Zone A — Free delivery ($0)**
-- **Nearby / Zone B — +$49 delivery**
-- **Extended / Zone C — +$89 delivery**
+- **Nearby / Zone B — +$59 delivery**
+- **Extended / Zone C — +$99 delivery**
 
 The legend should make clear that these are **delivery fees added to the dumpster rental price**, not replacement rental prices.
+
+Current Supabase source-of-truth:
+- Zone A / **Local Area** — **$0.00**
+- Zone B / **Extended Area** — **$59.00**
+- Zone C / **Outer Area** — **$99.00**
+
+Current active ZIP coverage in `public.zip_codes`:
+- Zone A: **12 active ZIPs**
+- Zone B: **30 active ZIPs**
+- Zone C: **88 active ZIPs**
+
+The map should be generated from those active ZIP assignments rather than from a manually maintained city polygon.
 
 ## Core service area
 
 Show the core cities as compact linked text rather than large cards.
 
-Core/free-delivery cities include:
-- Peachtree City;
-- Newnan;
+Current Supabase-verified Zone A / free-delivery city labels are:
+- Brooks;
+- Fairburn;
 - Fayetteville;
+- Newnan;
+- Palmetto;
+- Peachtree City;
 - Senoia;
 - Sharpsburg;
-- Union City;
-- Fairburn;
-- other ZIPs/cities where canonical Zone A data applies.
+- Tyrone;
+- Union City.
 
-Do not maintain this list separately from canonical service-area data in implementation.
+These labels currently represent **12 active Zone A ZIP codes** in `public.zip_codes`.
+
+Do not maintain this list separately from canonical service-area data in implementation. The production map and checker must use active `zip_codes` records as the source of truth, because city names alone are not precise enough for zone assignment.
 
 ### Don't see your city?
 
