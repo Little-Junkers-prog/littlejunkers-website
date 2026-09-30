@@ -1248,6 +1248,36 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.12 Mobile Design Gate
+
+Mobile is the primary conversion-design target and requires its own review pass after the initial desktop/concept page set is approved.
+
+Before final implementation, every Tier 1 page gets a dedicated mobile scan focused on:
+- scroll depth;
+- stacked-card length;
+- image density;
+- CTA reachability;
+- progressive disclosure;
+- tap-to-expand behavior;
+- carousel vs stacked-gallery choices;
+- full-screen mobile sheets/modals for dense secondary information;
+- Randy, privacy controls, and sticky/fixed UI collision;
+- preservation of required pricing, safety, consent, and transaction information.
+
+Preferred mobile principle:
+
+> **Show the answer first. Let the customer tap for detail.**
+
+Approved reusable patterns include:
+- short preview lists + **See all**;
+- accordions;
+- bottom sheets/full-screen modals;
+- compact carousels;
+- collapsed FAQs;
+- focused helper-tool screens.
+
+Desktop approval alone does not make a page implementation-ready. Mobile decisions must also be recorded.
+
 # 19.11 Dumpster Materials Page Rules
 
 The Materials page uses a visual, real-item-photo approach and must distinguish:
@@ -1268,6 +1298,13 @@ Locked operational rules:
 The current Supabase schema does not have a dedicated dumpster-material-rules table; `curbside_items` must not be reused as a substitute. A canonical dumpster-material-rule source should be established during implementation so the Materials page, FAQ, Randy, Weight Estimator, and booking remain consistent.
 
 Roofing Weight Estimator logic must ask for **roofing squares** and **number of layers**, with material type as needed, before generating an approximate load-weight recommendation.
+
+Materials mobile density rule:
+- remove the Common Projects image section;
+- common allowed items show 4 + **See all**;
+- prohibited items show 4 + **See all**;
+- full allowed/prohibited guides expand into accessible infographic-style HTML UI rather than static images;
+- shrink the Heavy Project callout and give Accepted with Instructions more room.
 
 # 19.10 Commercial / Contractor Page Visual Approval
 
