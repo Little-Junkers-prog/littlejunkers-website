@@ -1248,6 +1248,23 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.6 City Page Internal Linking and Template Rule
+
+Service-area city names should link to their dedicated city page whenever a substantial city page exists.
+
+Planned city pages:
+- Peachtree City;
+- Newnan;
+- Fayetteville;
+- Sharpsburg;
+- Senoia;
+- Tyrone;
+- Fairburn.
+
+Do not create thin doorway pages solely to make every service-area city label clickable. Cities without a dedicated page remain plain text until there is enough real content/evidence to justify a page.
+
+All priority city pages use the shared city-page template in `docs/TIER-1-PAGE-SPECS.md`, but must include city-specific first-party evidence so the pages do not become city-name substitutions.
+
 # 19.5 Service Areas Page Rules
 
 The Service Areas hub is a serviceability/coverage tool, not another general marketing page.
