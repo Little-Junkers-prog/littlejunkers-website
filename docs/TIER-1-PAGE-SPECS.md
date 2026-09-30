@@ -1274,6 +1274,10 @@ Primary CTA: **See Prices for My Address/ZIP**
 4. What can go in the dumpster.
 5. How delivery/pickup works.
 6. Transparent pricing.
+   - Primary action remains **See My Price** / booking-oriented.
+   - Add a secondary text/link CTA: **Compare Local Dumpster Prices** -> `/compare`.
+   - Do not make Compare visually compete with the primary booking CTA.
+   - If the comparison tool is still feature-flagged when the residential page launches, hide the link until the tool is live.
 7. Real residential project gallery.
 8. Recommendation CTA.
 9. FAQ.
@@ -1283,7 +1287,7 @@ Primary CTA: **See Prices for My Address/ZIP**
 Project selection, recommendation start, size selection, booking start.
 
 ## Acceptance criteria
-Simple homeowner language; no contractor-centric jargon; real photos.
+Simple homeowner language; no contractor-centric jargon; real photos; residential pricing section includes a secondary link to the comparison tool when `/compare` is live.
 
 ---
 
