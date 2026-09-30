@@ -15,6 +15,8 @@ These rules apply to every page in this document unless a page-specific rule ove
 ## 1.1 Customer experience
 
 - Mobile is the primary conversion-design target. Search Console shows roughly 74.5% of organic clicks are mobile.
+- Every desktop-approved page must receive a dedicated **mobile scan** before implementation is considered build-ready.
+- Mobile should preserve the same information architecture while using progressive disclosure to reduce scroll length and visual clutter.
 - The public website and booking funnel must feel like one product.
 - Do not ask for information again when the current customer-experience session already knows it.
 - Primary customer journey: location -> price/serviceability -> size/recommendation -> booking.
@@ -43,6 +45,44 @@ Review test:
 - **Can 20–30% of the words be removed without losing meaning?**
 
 If either answer indicates drift, rewrite before approval.
+
+## 1.1B Mobile design scan
+
+After the initial desktop/concept design is approved for all Tier 1 pages, perform a page-by-page mobile review before coding the final production layouts.
+
+The mobile scan should specifically test:
+
+- whether card grids become excessively long when stacked;
+- whether repeated imagery adds value or simply extends scroll depth;
+- whether secondary information should use **tap to expand**;
+- whether long lists should show a short preview plus **See all**;
+- whether expanded lists should open as an accessible accordion, bottom sheet, or full-screen modal;
+- whether carousels are preferable to stacked image galleries;
+- whether tables need to become cards, tabs, or horizontally scrollable comparison controls;
+- whether primary CTA, Call/Text, location controls, and Randy remain reachable without covering content;
+- whether font size, line length, tap targets, and spacing remain comfortable on small screens;
+- whether sticky/fixed elements compete with cookie/privacy controls;
+- whether a desktop two-column section should become a deliberate mobile sequence rather than simply stacking left then right.
+
+Preferred mobile pattern:
+**show the answer first, let the customer tap for detail.**
+
+Examples:
+- Materials page: 4 common items + **See all allowed items**; 4 prohibited items + **See all prohibited items**; expanded guide uses HTML/UI rather than a static image.
+- FAQs: collapsed by default.
+- Real-project galleries: carousel rather than long vertical photo stacks.
+- Dense helper content: expandable or full-screen focused view.
+- Randy: bubble opens the dedicated full-screen mobile chat modal.
+
+Do not hide information required for safety, pricing, consent, or transaction understanding merely to shorten the page.
+
+### Mobile sign-off gate
+
+A page is not implementation-ready until both:
+1. desktop/concept structure is approved; and
+2. mobile scan decisions are recorded.
+
+The mobile scan is a refinement pass, not permission to reopen already-approved page strategy unless a genuine mobile usability problem requires a design change.
 
 ## 1.2 Indexing
 
@@ -1400,9 +1440,17 @@ The lookup result should classify the item as one of:
 The search should use the approved dumpster-material rules, not Bulk Pickup rules.
 
 ### 2. Common items you can toss
-Use real-item photo cards.
+Use real-item photo cards, but keep the initial page compact.
 
-Representative allowed categories:
+Default preview:
+- show **4 high-value common items**;
+- use a fifth **See all allowed items** card/action.
+
+On mobile, do not stack the entire catalog inline.
+
+**See all allowed items** opens an accessible infographic-style HTML guide (accordion, bottom sheet, or full-screen modal depending on viewport). The expanded guide remains searchable/crawlable content; do not implement it as a static image.
+
+Representative allowed categories may include:
 - household furniture/junk;
 - wood/lumber;
 - drywall;
@@ -1443,7 +1491,19 @@ More than 10 quarts is not accepted through the normal dumpster-rental process.
 
 ### 4. Not accepted
 
-Use clear photo/icon cards.
+Use clear photo/icon cards, but keep the default view compact.
+
+Default preview:
+- show **4 high-priority prohibited items**;
+- add **See all prohibited items**.
+
+Recommended preview:
+- dirt;
+- concrete;
+- compressed cylinders;
+- hazardous chemicals.
+
+The expanded prohibited guide uses the same infographic-style HTML interaction as the allowed-items guide rather than stacking the full list on the page.
 
 Current owner-approved prohibited items include:
 - **dirt**;
@@ -1456,6 +1516,8 @@ Current owner-approved prohibited items include:
 Do not describe concrete/dirt as merely “heavy”; they are not accepted in the normal dumpster rental.
 
 ### 5. Heavy but allowed
+
+Keep this as a **compact horizontal callout**, not a large image-heavy feature, so **Accepted with instructions** has more visual room.
 
 Replace the broad statement **Heavy materials are allowed** with a narrower, accurate message:
 
@@ -1473,16 +1535,16 @@ CTA:
 
 Do not include concrete or dirt in this section.
 
-### 6. Common projects
+### 6. Optional next-step links
 
-Keep the real-photo project carousel:
-- home cleanout;
-- kitchen/bath remodel;
-- roofing;
-- deck removal;
-- yard cleanup where allowed.
+Do not use a full **Common Projects** photo carousel on this page.
 
-This section should help a customer recognize their job without adding more prose.
+If useful, include one compact next-step row linking to:
+- Residential Dumpster Rental;
+- Commercial / Contractor Dumpster Rental;
+- Dumpster Size Guide.
+
+Keep it text/button-led rather than another image gallery.
 
 ### 7. FAQ
 
