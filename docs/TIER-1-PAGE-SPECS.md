@@ -1312,6 +1312,26 @@ Simple homeowner language; no contractor-centric jargon; real photos; residentia
 
 # 16. Commercial / Contractor Dumpster Rental
 
+## Visual approval status
+
+**Commercial / Contractor V1 approved.**
+
+Locked visual/content decisions:
+- contractor-first hero with job City/ZIP;
+- primary **See Pricing & Availability** CTA plus Call/Text;
+- four project-type choices;
+- concise 11/16/21 contractor size-selection strip;
+- prominent Heavy Stuff / Weight Estimator treatment;
+- **The details matter on a jobsite** operational trust section;
+- real contractor-project carousel;
+- simple **Book it. Fill it. Keep working.** three-step flow;
+- secondary **Compare Local Dumpster Prices** path;
+- compact Size / Weight / Materials help;
+- four-question contractor FAQ;
+- persistent Randy chat bubble only;
+- production colors and typography must use the Little Junkers Brand Guide rather than mockup approximations.
+
+
 ## Route
 `/commercial-dumpster-rental`
 
