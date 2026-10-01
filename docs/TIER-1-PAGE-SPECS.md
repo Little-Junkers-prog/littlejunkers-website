@@ -1986,7 +1986,7 @@ Never use retired owner name “Ivette Griffin.”
 Little Junkers phone/contact/support.
 
 ## Purpose
-Provide human escalation without creating another spam vector.
+Provide human escalation without creating another spam vector while preserving the same customer/contact identity model used by the rest of Little Junkers.
 
 ## Required sections
 
@@ -1998,15 +1998,65 @@ Provide human escalation without creating another spam vector.
 6. Randy entry where helpful.
 7. Booking CTA.
 
+## Harmonized Supabase intake contract
+
+The Contact page does **not** create a separate website-lead model.
+
+Customer flow:
+
+```text
+/contactus form
+    ->
+server-side public inquiry API
+    ->
+Supabase public.create_public_inquiry(jsonb)
+    ->
+contacts + customer_inquiries + contact_request_details
+    ->
+business_action_items / Admin Inquiries queue
+```
+
+Canonical boundary:
+- use `/api/public-inquiry` as the durable public-form intake endpoint;
+- `/api/contact-form` is the existing compatibility alias and must not become a second implementation;
+- the browser never writes directly to Supabase and never receives service-role credentials.
+
+Shared identity fields submitted by the Contact form:
+- `inquiry_type = contact`;
+- `name` — required, max 80 characters;
+- `phone` — required; server normalizes valid U.S. numbers to E.164;
+- `email` — optional but validated when supplied;
+- `zip_code` — required, exactly five digits;
+- `source_page` — identifies the Contact page.
+
+Contact-specific detail fields:
+- `service_needed` — optional structured reason/service field;
+- `preferred_delivery_date` — optional and only shown/used when relevant;
+- `message` — required, 10–2000 characters.
+
+Identity resolution rules:
+- exact normalized phone and/or exact normalized email may link an inquiry to an existing canonical `contacts` record;
+- each submission is still preserved as its own `customer_inquiries` event;
+- do not auto-merge by name alone;
+- name + ZIP may flag a possible duplicate but does not silently merge;
+- conflicting submitted values must remain visible on the inquiry snapshot and must not overwrite canonical contact values;
+- ambiguous, possible-duplicate, linked-with-conflict, and phone/email-conflict cases remain human-reviewable.
+
+New canonical contacts created through this path use the website/contact-form source metadata defined by the intake function. Every legitimate submission creates a related `business_action_items` entry so it appears for staff follow-up in Admin OS.
+
 ## Security
+
 Contact form is a protected data-write surface:
+- allowed-origin enforcement;
 - honeypot;
+- minimum/maximum form timing controls;
 - strict field limits;
-- human verification;
-- rate limit;
+- Cloudflare Turnstile/server-side verification;
+- route-level rate limiting / abuse controls;
 - server-side validation;
-- quarantine/risk logic;
-- no direct browser insert into canonical leads.
+- server-only privileged Supabase RPC;
+- RLS/no anon or authenticated direct table writes;
+- no direct browser insert into `contacts`, `customer_inquiries`, or `contact_request_details`.
 
 ## Analytics
 - `form_started`
@@ -2015,8 +2065,20 @@ Contact form is a protected data-write surface:
 - call/text click
 - booking click
 
+Do not send name, phone, email, message, street address, or other free-form PII to GA4/PostHog.
+
 ## Acceptance criteria
-No Odoo placeholder contact data; spam simulation rejected; legitimate test submission flows correctly.
+- no Odoo placeholder contact data;
+- legitimate submission reaches `public.create_public_inquiry`;
+- one inquiry event is preserved for every accepted submission;
+- canonical contact linking follows the harmonized resolution rules;
+- contact-specific values land in `contact_request_details`, not generic contact notes;
+- related Admin action item is created and the request appears in the Admin Inquiries workflow;
+- conflicting identity values do not silently overwrite the canonical contact;
+- direct anonymous/authenticated table writes remain blocked;
+- Turnstile, origin, timing, validation, and rate/abuse protections reject invalid/spam submissions;
+- English and Spanish Contact forms use the same intake contract;
+- legitimate test submission flows correctly end-to-end.
 
 ---
 
