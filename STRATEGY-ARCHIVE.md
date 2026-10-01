@@ -1896,6 +1896,112 @@ Locked direction:
 - Spanish Blog/article presentation follows the approved Blog templates and clean URL rules;
 - desktop/mobile layouts are approved as the representative Spanish design pattern for the broader core journey.
 
+# 20.7 Dumpster Checkout Remediation — Approved Architecture
+
+**Approved October 1, 2026. Immediate implementation priority before the V2 website launch.**
+
+The current self-serve/CSR checkout journey is fragmented and must be repaired before the broader V2 website rollout. Preserve the existing transaction authority and operational contracts; replace the customer-facing duplication and hosted-checkout fragmentation.
+
+## Locked customer journey
+
+```text
+Choose dumpster
+    ->
+Choose rental length + drop-off date
+    ->
+Unified Customer Details
+    ->
+Review & Pay (embedded Stripe)
+    ->
+Booking Confirmation
+```
+
+Do not add another customer-information form anywhere in this path.
+
+### 1. Choose dumpster
+Current funnel behavior remains unchanged for the immediate patch.
+
+### 2. Choose rental length + drop-off date
+Current funnel behavior remains unchanged for the immediate patch.
+
+### 3. Unified Customer Details
+This is the **only customer-information entry page**.
+
+Self-serve entry:
+- size/rental/date are already known;
+- customer/contact/address fields begin blank unless valid session/customer context already exists;
+- customer enters the remaining information once.
+
+CSR/manual-link entry:
+- the same page must accept a hold/link with **as little as only the selected size and drop-off/rental date**;
+- any customer fields not supplied by CSR remain blank for the customer to complete;
+- any fields supplied by CSR are prefilled;
+- a rebook flow may prefill name, email, phone, customer type, billing/contact address, service address, business fields, and any other approved reusable booking data;
+- customer may review/correct prefilled information before continuing;
+- no field may be required merely because CSR did not supply it earlier if the customer can complete it on this page.
+
+Customer type:
+- Home / Residential;
+- Business;
+- Contractor.
+
+Contractor/business handling:
+- support billing/contact address separately from service/jobsite address;
+- contractor can use a different service/jobsite address from their own billing/contact address;
+- project type is **not required for the immediate remediation** and should not be added unless there is a defined operational use.
+
+Consent:
+- service/rental update texts and marketing texts remain distinct choices;
+- explain clearly why there are two choices;
+- service/rental-update consent may follow the approved current default behavior;
+- marketing remains optional and separate.
+
+### 4. Review & Pay
+This is the **single payment page**.
+
+Requirements:
+- no customer-information re-entry;
+- show rental, delivery/service, contact/customer-type, and pricing summary;
+- provide obvious **Edit** actions beside editable sections;
+- embedded Stripe Payment Element remains inside the Little Junkers page;
+- support Stripe-eligible methods dynamically, including Card, Link, Apple Pay, Google Pay, Cash App, Klarna, Affirm, and other enabled/eligible methods;
+- selected alternate payment methods may transition/morph into the Stripe-supported flow as required;
+- one final payment action executes the actual payment;
+- no intermediary "Proceed to secure checkout" redirect to a separate hosted Stripe Checkout page;
+- do not show disabled-promotion-engine implementation language; promo UI is shown only when customer-usable promotions are active.
+
+### 5. Booking Confirmation
+After successful payment:
+1. clearly state that the customer is booked;
+2. state that the confirmation text has been sent;
+3. put **What happens next** before the detailed rental recap;
+4. explain delivery-window confirmation, on-the-way/ETA messaging, and Call/Text support;
+5. show compact rental details for reference;
+6. optional post-booking survey is limited to **How did you hear about us?** for the immediate patch;
+7. remove the post-booking project-type question;
+8. remove the immediate "Would you recommend us?" question because recommendation/review belongs to the post-rental review flow;
+9. survey interaction must have an explicit saved/submitted confirmation state.
+
+## Preserve these backend contracts
+Do not redesign or bypass:
+- Supabase pricing authority;
+- availability;
+- canonical booking holds / `unified-checkout-v1`;
+- CSR smart-booking-link creation;
+- service-area validation and repricing;
+- canonical customer/contact resolution;
+- separate service vs marketing consent records;
+- Stripe payment verification/webhook behavior;
+- paid-booking finalizer;
+- rental creation;
+- booking-confirmation messaging.
+
+## Immediate visual scope
+For the remediation release, **do not restyle Steps 1–2 or the pre-existing funnel shell**. The new Unified Customer Details, Review & Pay, and Booking Confirmation pages should visually align with the current production funnel so the patch can ship quickly and safely.
+
+## Deferred V2 visual treatment
+The richer V2 Review & Pay and Booking Confirmation concepts approved in October 2026 are retained as the future visual direction. They are intentionally deferred until after the urgent checkout remediation ships. When the V2 website is ready, apply the shared V2 visual system to the entire booking journey without changing the approved checkout architecture above.
+
 # 21. SEO / AIO Principles
 
 Do not use gimmicky “AI SEO.”
