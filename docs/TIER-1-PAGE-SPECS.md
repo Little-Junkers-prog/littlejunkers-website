@@ -2032,6 +2032,32 @@ Prefer useful context tags such as city, dumpster size, project type, guide type
 
 Do not show Odoo-style view counts, comment counts, or technical blog labels unless there is a genuine customer need.
 
+## Social / community integration
+
+The Blog is the strongest social/community bridge on the public site, but social does not replace the article or conversion path.
+
+Approved profile set:
+- Facebook;
+- Instagram;
+- YouTube;
+- Nextdoor;
+- LinkedIn;
+- Bluesky;
+- Alignable.
+
+Rules:
+- do not add the full social set to the primary desktop navigation;
+- global footer exposes the full approved follow set;
+- Blog may feature Facebook, Instagram, YouTube, and Nextdoor more prominently as community/customer channels;
+- LinkedIn, Alignable, and Bluesky remain available in the full follow set;
+- event posts may emphasize Facebook, Instagram, and Nextdoor when useful for attendance/updates;
+- article sharing should stay selective: Facebook, LinkedIn, Bluesky, and Copy Link are appropriate direct-share controls; Instagram/YouTube are follow destinations rather than article-share actions;
+- all profile URLs come from one canonical company-data source, not hardcoded copies across pages;
+- do not send article/customer PII through social-share URLs or analytics.
+
+Suggested Blog social module:
+**Follow the Junkers** — real jobs, local events, project tips, and behind-the-scenes Little Junkers content.
+
 ## Acceptance criteria
 - clean article URLs;
 - one-to-one redirect mapping for valuable legacy Odoo posts;
