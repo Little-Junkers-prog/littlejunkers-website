@@ -44,6 +44,10 @@ The technology must make the customer experience materially easier:
 
 The site should feel like one coordinated product, not an e-commerce template bolted to a separate booking system.
 
+### V2 visual-foundation clarification
+
+The V2 design direction uses the Brand Guide's exact color tokens but does **not** require every page hero to use the older dark-hero layout pattern. The shared V2 framing is a dark top/header and dark bottom/footer around a warm cream/off-white content field with restrained surface changes between sections. Page-specific dark heroes remain allowed where they serve the page, but a dark hero is no longer the default merely because the older Brand Guide layout pattern used one.
+
 ---
 
 # 2. Approved Strategic Decisions
@@ -62,6 +66,9 @@ The current strategic defaults are:
 8. **Use a shared, canonical media strategy. The booking-funnel repository currently contains the seed media library.**
 9. **The comparison tool and We Recommend marketplace are committed V2 product features, but they must not block a stable core booking launch if they need to remain feature-flagged temporarily.** The Residential Dumpster Rental page should expose **Compare Local Dumpster Prices** as a secondary link once `/compare` is live; comparison should support consideration, not compete with the primary booking CTA.
 10. **Protect `main` and move to PR-based governance as part of Phase 0. Future implementation should not rely on unreviewed direct production changes.**
+11. **Use one shared V2 visual foundation across public pages:** warm cream/off-white page fields using the approved Brand Guide neutrals; subtle tonal separation between sections; dark `#1E1C19` top/header and bottom/footer framing; restrained pink accent usage; and the approved Little Junkers logo assets rather than recreated or AI-generated logos.
+12. **Hero headline brand cue:** when the copy reads naturally, emphasize the final word or short final phrase in the approved pink. On light/cream surfaces, use Pink Text `#C2587A`; on dark surfaces, use Signature Pink `#FFCEE4` when contrast is appropriate. Do not substitute brighter hot-pink/magenta mockup colors.
+13. **Real local imagery is the default proof system.** Prefer first-party Little Junkers project and city photography over generic stock imagery. Priority city pages should use real city-specific photography before launch whenever suitable first-party images are available.
 
 ---
 
