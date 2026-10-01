@@ -69,6 +69,8 @@ The current strategic defaults are:
 11. **Use one shared V2 visual foundation across public pages:** warm cream/off-white page fields using the approved Brand Guide neutrals; subtle tonal separation between sections; dark `#1E1C19` top/header and bottom/footer framing; restrained pink accent usage; and the approved Little Junkers logo assets rather than recreated or AI-generated logos.
 12. **Hero headline brand cue:** when the copy reads naturally, emphasize the final word or short final phrase in the approved pink. On light/cream surfaces, use Pink Text `#C2587A`; on dark surfaces, use Signature Pink `#FFCEE4` when contrast is appropriate. Do not substitute brighter hot-pink/magenta mockup colors.
 13. **Real local imagery is the default proof system.** Prefer first-party Little Junkers project and city photography over generic stock imagery. Priority city pages should use real city-specific photography before launch whenever suitable first-party images are available.
+14. **Social presence is sitewide but conversion-safe.** Keep the primary header focused on navigation, phone, and booking. Put the full social set in the global footer, and give Blog/Events stronger contextual social treatment without turning every page into a social-link panel. Canonical profile URLs must come from one shared company-data source rather than page-level hardcoding.
+15. **Current approved social profiles:** Facebook, Instagram, YouTube, Nextdoor, LinkedIn, Bluesky, and Alignable. Primary community/customer emphasis is Facebook, Instagram, YouTube, and Nextdoor; LinkedIn and Alignable support business/networking; Bluesky remains part of the full follow set.
 
 ---
 
