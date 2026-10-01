@@ -1700,6 +1700,28 @@ Do not turn this hub into a second Bulk Pickup sales page.
 
 # 19A. Bulk Pickup Landing Page
 
+## Visual approval status
+
+**Bulk Pickup landing page V2 approved.**
+
+Locked visual/content direction:
+- this page is the primary customer-facing Bulk Pickup page;
+- Bulk Pickup owns the page hierarchy and visual emphasis;
+- Dumpster Rental remains a secondary alternative for larger projects, construction debris, or customers better served by a dumpster;
+- do not give Dumpster Rental equal visual weight with Bulk Pickup;
+- hero leads with **Curbside pickup from $79.99** and the primary **Check Availability & Book** action;
+- show separate pricing blocks for standard curbside items and dumpster bags;
+- include literal-count examples;
+- include How It Works;
+- include Dumpster Bag rules/readiness;
+- include concise accepted/prohibited guidance;
+- include pilot service-area/day schedule;
+- use progressive disclosure on mobile to control page length;
+- persistent Randy chatbot bubble is required;
+- mobile sticky availability action remains required;
+- pink remains an accent color and production must use exact Brand Guide tokens.
+
+
 ## Route
 `/bulk-pickup`
 
