@@ -1945,6 +1945,17 @@ Customer type:
 - Business;
 - Contractor.
 
+Address and serviceability:
+- use structured address fields: street, city, state, ZIP;
+- state is fixed to Georgia (GA) and displayed read-only/disabled because Little Junkers does not serve outside Georgia;
+- ZIP is a required commercial input, not merely display data;
+- when ZIP is entered or changed, the system must resolve the canonical service area and applicable delivery fee before Review & Pay;
+- if the ZIP is not in an approved service area, the customer must be blocked from continuing to payment and shown a clear out-of-area message;
+- out-of-area attempts should follow the approved lead/alert handling instead of allowing payment and requiring a later refund;
+- Business/Contractor flows may use a separate structured service/jobsite address from billing/contact address, with service ZIP driving serviceability and delivery-fee logic;
+- Review & Pay must display the resolved delivery fee and service address produced by this validation.
+
+
 Contractor/business handling:
 - support billing/contact address separately from service/jobsite address;
 - contractor can use a different service/jobsite address from their own billing/contact address;
