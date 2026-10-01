@@ -1881,6 +1881,21 @@ Do not use publishing frequency or raw article count as a success metric.
 
 ---
 
+# 20.6 Spanish Core Experience Final Visual Approval
+
+**Spanish V2 desktop and mobile experience approved — October 1, 2026.**
+
+Locked direction:
+- Spanish uses the same shared V2 visual foundation as English;
+- natural U.S. Spanish localization, not literal machine translation;
+- English business intent/rules remain the source reference while canonical pricing, service areas, fees, sizes, and operating rules come from the same shared data sources as English;
+- critical transactional copy receives an additional language-quality check before launch;
+- language selection persists across website, Randy, recommendation, and booking;
+- Spanish pages use natural Spanish slugs under `/es`;
+- Randy remains a discreet persistent bottom chat bubble and must not appear as a dedicated mid-page section unless a later page-specific approval explicitly requires it;
+- Spanish Blog/article presentation follows the approved Blog templates and clean URL rules;
+- desktop/mobile layouts are approved as the representative Spanish design pattern for the broader core journey.
+
 # 21. SEO / AIO Principles
 
 Do not use gimmicky “AI SEO.”
