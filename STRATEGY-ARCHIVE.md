@@ -1084,6 +1084,12 @@ Canonical Supabase business records
 
 Rules:
 
+- all public customer/contact intake must follow the production `harmonized_intake_contract`: one canonical `contacts` master, one preserved `customer_inquiries` event per submission, and a typed one-to-one detail table for service-specific fields;
+- the V2 Contact form must submit through the canonical server-side public inquiry boundary (`/api/public-inquiry`, with `/api/contact-form` treated only as the compatibility alias) and must not insert directly from the browser into Supabase;
+- the server-owned intake path calls `public.create_public_inquiry(jsonb)` using privileged server credentials; public/anonymous clients do not receive write access to `contacts`, `customer_inquiries`, or `contact_request_details`;
+- contact submissions preserve the submitted identity snapshot and resolve against the canonical contact by exact normalized phone/email rules; existing contact values are never silently overwritten when submitted values conflict;
+- ambiguous, possible-duplicate, or phone/email-conflict submissions remain reviewable and receive elevated Admin attention rather than being auto-merged;
+- every legitimate Contact submission creates its inquiry record plus `contact_request_details` and a related `business_action_items` entry so the request appears in the Admin Inquiries workflow;
 - no unaudited wildcard CORS on public write endpoints;
 - no public browser access to privileged Supabase credentials;
 - strict request schemas and maximum lengths;
