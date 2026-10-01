@@ -1704,6 +1704,17 @@ Do not turn this hub into a second Bulk Pickup sales page.
 
 **Bulk Pickup landing page V2 approved.**
 
+**Consolidated funnel architecture approved.**
+
+The customer journey previewed on the landing page must mirror the refined four-stage funnel architecture:
+1. **Build Your Pickup** — ZIP/eligibility, item/bag selection, live quote, and route-date selection within one guided builder.
+2. **Add Your Details** — shared customer-details shell for contact, service address, placement instructions, and consent.
+3. **Review Your Order** — items, date, address, exact total, outside-only rules, material acknowledgement, and cancellation/no-access terms.
+4. **Pay Online** — shared embedded Stripe Payment Element and common payment/error behavior.
+
+Confirmation is a post-payment state, not another decision step. The booking UI should not present the customer with a legacy six-step page flow.
+
+
 Locked visual/content direction:
 - this page is the primary customer-facing Bulk Pickup page;
 - Bulk Pickup owns the page hierarchy and visual emphasis;
