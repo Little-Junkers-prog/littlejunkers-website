@@ -1655,7 +1655,20 @@ Prefer first-party operational articles such as:
 - actual loading examples;
 - local project lessons.
 
-First-hand operational evidence is more valuable than interchangeable listicles.
+Also treat **Events** as a first-class blog/content section for genuine Little Junkers community activity, such as:
+- neighborhood or community cleanup events;
+- cleanup events with local real estate agents or other approved partners;
+- Touch a Truck events;
+- local sponsorship/community appearances;
+- post-event recaps with first-party photos.
+
+Event content remains under the same clean article URL system: `/blog/[slug]`. Do not create a separate `/events` silo unless future content volume and navigation needs justify it.
+
+Upcoming event posts should clearly show the event date, location/area, participation details, and any partner attribution that is approved for public use. Past events may remain as recaps when they provide durable local/community value.
+
+Event posts still require the normal INDEX/NOINDEX decision. A one-time announcement does not automatically deserve permanent search indexing; a substantive local recap with original photos, partners, and community value may.
+
+First-hand operational and community evidence is more valuable than interchangeable listicles.
 
 ## 20.1 Blog publishing architecture — authoring method TBD
 
