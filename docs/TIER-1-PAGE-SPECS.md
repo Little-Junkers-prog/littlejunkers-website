@@ -2258,6 +2258,18 @@ Do not send name, phone, email, message, street address, or other free-form PII 
 
 # 22. Spanish Core Experience
 
+## Visual approval status
+
+**Spanish V2 desktop and mobile experience approved — October 1, 2026.**
+
+Locked visual/localization direction:
+- use the same cream/off-white V2 foundation, dark framing, exact Brand Guide pink, official logos, real imagery, and responsive system as English;
+- Randy remains a discreet persistent chat bubble at the bottom, not a dedicated content section;
+- representative Spanish homepage and Blog/article layouts are approved as the pattern for the broader Spanish core journey;
+- Spanish copy follows the localization and quality-control rules below rather than literal translation.
+
+
+
 ## Purpose
 Spanish is not a secondary translation project. It is a parallel customer path.
 
