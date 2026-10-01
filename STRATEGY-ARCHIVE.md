@@ -1255,9 +1255,11 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
-# 19.18 About Us V3 Direction
+# 19.18 About Us V3 Final Visual Approval
 
-About Us V3 direction is approved for the next design pass.
+**About Us V3 is visually approved — October 1, 2026.**
+
+Final approval includes the shared V2 visual foundation, official Little Junkers source-logo usage, real local photography direction, the pink final-word/phrase hero accent where natural, and the locked human Randy assistant.
 
 Locked corrections:
 - Little Junkers is a dumpster rental company, not a junk-removal company;
