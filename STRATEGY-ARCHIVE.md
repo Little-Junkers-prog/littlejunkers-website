@@ -1322,12 +1322,13 @@ Important distinction:
 
 The public website must not treat the legacy item-specific catalog as the source for the new customer experience.
 
-The website uses two distinct routes: `/additional-services` remains the broader services hub, while `/bulk-pickup` is the dedicated Bulk Pickup landing page. The Bulk Pickup page is published/converted only after the production bulk-pickup funnel is verified.
+**Scope update — October 1, 2026:** Little Junkers is dropping the separate Additional Services hub. Outside of dumpster rental, the only approved additional service is the limited **Bulk Pickup curbside pilot**. `/bulk-pickup` is the sole additional-service landing page and is published/converted only after the production bulk-pickup funnel is verified.
 
 Website route ownership:
-- `/additional-services` = Additional Services hub;
-- `/bulk-pickup` = dedicated Bulk Pickup landing page;
-- every Bulk Pickup booking CTA points to `https://book.littlejunkersllc.com/bulk-pickup` once the verified production funnel exists.
+- `/bulk-pickup` = the only approved additional-service landing page;
+- `/additional-services` = retired from V2 scope; if the legacy route remains publicly reachable, redirect it to `/bulk-pickup`;
+- every Bulk Pickup booking CTA points to `https://book.littlejunkersllc.com/bulk-pickup` once the verified production funnel exists;
+- do not create placeholder pages or navigation for speculative future services unless a later approved scope explicitly adds them.
 
 Website-facing locked rules:
 - outside-only pickup;
@@ -1876,7 +1877,7 @@ The active page-level build contract is now:
 
 - `docs/TIER-1-PAGE-SPECS.md`
 
-That document defines the pre-code specifications for the homepage, pricing, dumpster-size pages, size guide/recommendation, service-area hub and priority city pages, residential, contractor/commercial, materials, FAQ, Additional Services, About, Contact, Spanish core experience, and booking handoff.
+That document defines the pre-code specifications for the homepage, pricing, dumpster-size pages, size guide/recommendation, service-area hub and priority city pages, residential, contractor/commercial, materials, FAQ, the limited Bulk Pickup curbside pilot, About, Contact, Spanish core experience, and booking handoff.
 
 Before application-page coding begins, the owner should review and approve or revise the page-level decisions in that document.
 
