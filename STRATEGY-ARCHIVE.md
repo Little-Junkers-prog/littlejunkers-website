@@ -1776,6 +1776,36 @@ Google Business Profile posts and social posts are distribution channels; the we
 
 Do not create a new indexable blog URL merely because a Google Business Profile post is being published.
 
+## 20.4A Blog final design approval
+
+**Blog/Junker Journal index and article templates are visually approved — October 1, 2026.**
+
+The approved system is intentionally data-driven so operational facts can flow into publishing without custom page coding.
+
+Core product principle:
+
+```text
+Confirmed rental/job data from Supabase
++ first-party job-site photos
++ short owner/driver notes or anecdotes
+        ->
+agent-generated draft package
+        ->
+human review/approval
+        ->
+published article + approved distribution derivatives
+```
+
+Architecture boundary:
+- Supabase remains the source of truth for rentals, service location, named dumpster assignment, dates, and other confirmed operational facts;
+- the operator adds only the context the system cannot already know, such as the anecdote, project lesson, partner-safe context, photo selection, or noteworthy detail;
+- GitHub governs website code, templates, schemas, and publishing integration logic;
+- published article records/media should flow through the approved content/data layer and should not require editing application code for each post;
+- Vercel/Next.js renders the approved content into the shared Blog/article templates;
+- an agent may compose from confirmed system data but may not replace or contradict those facts.
+
+This architecture is intended to make the transition from field operation to public content feel like one continuous Little Junkers workflow.
+
 ## 20.4 Agent-assisted field publishing
 
 The Blog architecture must support an owner/driver workflow that begins at the job site, not at a desktop CMS.
