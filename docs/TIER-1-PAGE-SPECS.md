@@ -1977,6 +1977,73 @@ Never use retired owner name “Ivette Griffin.”
 
 ---
 
+# 20A. Blog / Junker Journal
+
+## Route
+`/blog`
+
+## Role
+The Blog is Little Junkers' field journal and practical resource center, not a generic SEO-content archive.
+
+## URL architecture
+- blog index: `/blog`;
+- article: `/blog/[clean-slug]`;
+- no Odoo-style `/our-blog-1/` path segment;
+- no numeric record IDs appended to article slugs;
+- categories/tags do not become required URL folders;
+- legacy Odoo article URLs that are worth preserving receive one-to-one permanent redirects to their V2 destination.
+
+## Blog index structure
+1. Hero / Junker Journal introduction.
+2. Featured or pinned story, beginning with **The Little Junkers Story** once published.
+3. Browse by topic/filter.
+4. **From Real Jobs**.
+5. **Helpful Guides**.
+6. **Events**.
+7. **Around Our Neighborhoods** / local stories.
+8. Conversion CTA into pricing, size help, serviceability, or booking.
+9. Persistent human Randy bubble and standard footer.
+
+## Events
+Events are a dedicated visible section of the Blog experience.
+
+Use it for genuine Little Junkers community activity such as:
+- cleanup events with local real estate agents or other approved partners;
+- neighborhood/community cleanup events;
+- Touch a Truck events;
+- sponsorship/community appearances;
+- post-event recaps with first-party photos.
+
+Event articles remain under `/blog/[slug]`; do not create a separate `/events` route unless later content volume justifies one.
+
+Upcoming event content should show:
+- event date;
+- city/area;
+- participation details;
+- approved partner attribution where relevant;
+- clear event status when registration/attendance is closed or the event has passed.
+
+Past-event recaps may remain published when they provide durable local/community proof.
+
+Every event article still receives an explicit INDEX or NOINDEX decision. Short-lived announcements should not automatically become permanent SEO inventory.
+
+## Content presentation
+Prefer useful context tags such as city, dumpster size, project type, guide type, or event type instead of generic CMS metadata.
+
+Do not show Odoo-style view counts, comment counts, or technical blog labels unless there is a genuine customer need.
+
+## Acceptance criteria
+- clean article URLs;
+- one-to-one redirect mapping for valuable legacy Odoo posts;
+- pinned Little Junkers Story support;
+- visible Events section;
+- event and article content use first-party photos whenever practical;
+- article metadata/indexing decision is explicit;
+- blog content links intentionally into commercial/customer-help pages;
+- no thin content factory behavior.
+
+---
+
 # 21. Contact
 
 ## Visual approval status
