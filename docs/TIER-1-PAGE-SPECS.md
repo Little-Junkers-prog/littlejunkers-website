@@ -1979,6 +1979,30 @@ Never use retired owner name “Ivette Griffin.”
 
 # 20A. Blog / Junker Journal
 
+## Visual approval status
+
+**Blog/Junker Journal index and article templates approved — October 1, 2026.**
+
+Final approval includes:
+- desktop and mobile Blog index;
+- desktop and mobile article template;
+- clean `/blog/[slug]` URL architecture;
+- Featured Story, Real Jobs, Helpful Guides, Events, Around Our Neighborhoods, and conversion modules;
+- full approved footer/social architecture;
+- selective article sharing controls;
+- persistent human Randy;
+- agent-assisted field publishing using confirmed system data plus first-party photos and operator notes.
+
+Publishing architecture must preserve this separation:
+- Supabase = confirmed operational/job facts and canonical business data;
+- content/publishing layer = article record, draft status, media, metadata, and editorial approval;
+- GitHub = version-controlled application code/templates/integration logic;
+- Vercel/Next.js = rendered customer experience.
+
+Individual article publication must not require hand-editing application code.
+
+
+
 ## Route
 `/blog`
 
