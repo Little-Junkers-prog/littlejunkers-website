@@ -221,7 +221,7 @@ Randy should not re-ask known information.
 | 14 | Commercial / Contractors | `/commercial-dumpster-rental` | Keep + rebuild | INDEX |
 | 15 | Materials | `/what-can-i-put-in-a-dumpster` | Keep + rebuild | INDEX |
 | 16 | FAQ | `/faq` | Keep + rebuild | INDEX |
-| 17 | Additional Services | `/additional-services` | Keep + rebuild | INDEX |
+| 17 | Bulk Pickup | `/bulk-pickup` | New dedicated page | INDEX |
 | 18 | About | `/about-us` | Keep + rebuild | INDEX |
 | 19 | Contact | `/contactus` | Keep + rebuild | INDEX |
 | 20 | Spanish Core Experience | `/es/*` | Rebuild/redirect legacy | INDEX by counterpart |
@@ -1660,45 +1660,7 @@ No duplicated/conflicting business rules; no JS-only inaccessible accordion; vis
 
 ---
 
-# 19. Additional Services Hub
-
-## Route
-`/additional-services`
-
-## Role
-This remains the broader **Additional Services** hub.
-
-It should:
-- introduce Bulk Pickup as a separate service;
-- link clearly to `/bulk-pickup`;
-- retain room for future services such as Portable Storage when those services are actually available;
-- avoid pretending planned services are live;
-- avoid duplicating the full Bulk Pickup landing page.
-
-Bulk Pickup pricing, service rules, pilot ZIPs, route schedule, and booking CTA belong primarily on `/bulk-pickup`.
-
-## Current service status
-- Dumpster Rental: active
-- Bulk Pickup: approved for implementation planning; production booking funnel not yet live
-- Portable Storage: planned / booking disabled
-
-## Page direction
-Keep the hub short:
-1. Hero: **More ways to get rid of the junk**
-2. Bulk Pickup card
-   - curbside/outside-only
-   - starting at $79.99 once production pricing/funnel are live
-   - CTA: **Explore Bulk Pickup**
-3. Dumpster Rental alternative
-   - for larger piles, construction debris, or projects better suited to a dumpster
-4. Future services section only when operationally ready
-5. FAQ/support links
-
-Do not turn this hub into a second Bulk Pickup sales page.
-
----
-
-# 19A. Bulk Pickup Landing Page
+# 19. Bulk Pickup Landing Page
 
 ## Visual approval status
 
@@ -2183,7 +2145,7 @@ Before page implementation begins, owner review should explicitly approve or rev
 6. residential vs contractor positioning;
 7. materials information architecture;
 8. FAQ structure;
-9. Additional Services hub role;
+9. Bulk Pickup landing-page role and limited-pilot scope;
 10. Contact-form security posture;
 11. Spanish publication standard;
 12. booking-context handoff requirements.
