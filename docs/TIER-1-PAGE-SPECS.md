@@ -1979,6 +1979,21 @@ Never use retired owner name “Ivette Griffin.”
 
 # 21. Contact
 
+## Visual approval status
+
+**Contact V1 desktop and mobile designs approved — October 1, 2026.**
+
+Locked visual direction:
+- shared V2 cream/off-white canvas with subtle section shading;
+- dark header/footer framing;
+- exact Brand Guide pink accents;
+- official Little Junkers logo assets;
+- human Randy persistent chat bubble;
+- prominent Call, Text, and Book a Dumpster actions;
+- compact protected contact form;
+- service-area checker/supporting local proof;
+- approved mobile composition from the October 1 mockup.
+
 ## Route
 `/contactus`
 
