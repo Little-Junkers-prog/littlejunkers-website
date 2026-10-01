@@ -1915,6 +1915,60 @@ Website Bulk Pickup conversion happens only after:
 
 # 20. About Us
 
+## V3 visual/content direction
+
+**V3 drafted and approved for review direction.**
+
+Core goals:
+- position Little Junkers as a dumpster rental company, not a junk-removal company;
+- mention Bulk Pickup only as a limited pilot;
+- make the page personal and specific to Marcus and Ivy Griffin;
+- trim generic marketing language;
+- use concrete Little Junkers facts instead of vague benefit copy;
+- preserve Randy as a persistent chat bubble;
+- keep the service-area block tight;
+- link product/service references internally;
+- create a strong bridge to the blog and company-story content.
+
+### Hero
+Suggested direction: **Local owners. Real service. Cleaner neighborhoods.**
+
+Supporting copy should identify Marcus and Ivy Griffin, Peachtree City, Georgia, the 2024 founding, driveway-friendly dumpster rental, and the limited curbside pickup pilot.
+
+Primary CTA: **Rent a Dumpster**.
+Secondary CTA: **Learn About Bulk Pickup**.
+
+Avoid junk removal language, generic full-service hauling language, indoor-removal implications, and over-weighting the Bulk Pickup pilot.
+
+### Proof strip
+Keep concise and factual: locally owned in Peachtree City; established 2024; upfront pricing; driveway-friendly dumpsters; real local owners.
+
+### Founder story
+Use a compact owner/story block. The About page should introduce the story, then link to a dedicated pinned blog article: **Read the Little Junkers Story**.
+
+### Service area
+Keep the visible city block intentionally tight:
+- Peachtree City
+- Fayetteville
+- Newnan
+
+Each city name/card must link to its dedicated city page. Add **View All Service Areas** linking to /service-areas. Do not turn the About page into a city keyword cloud.
+
+### Blog section
+Include **The Little Junkers Story** as the lead/pinned article once published, practical project/how-to content, and a **Check Out Our Blog** CTA linking to /blog.
+
+### Internal linking rule
+References to Dumpster Rentals, Bulk Pickup, Pricing, Service Areas, dedicated city pages, dumpster-size pages, and Blog/story content should link internally when a destination exists.
+
+### Randy
+Persistent Randy chat bubble is required.
+
+### Copy standard
+Apply the Human Copy Standard aggressively: remove filler, keep sentences short, prefer concrete facts, use owner voice, avoid junk-removal positioning, and avoid unsupported environmental claims.
+
+---
+# 20. About Us
+
 ## Route
 `/about-us`
 
