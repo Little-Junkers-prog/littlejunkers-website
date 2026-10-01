@@ -1248,6 +1248,22 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.18 About Us V3 Direction
+
+About Us V3 direction is approved for the next design pass.
+
+Locked corrections:
+- Little Junkers is a dumpster rental company, not a junk-removal company;
+- Bulk Pickup is a limited pilot and remains secondary;
+- copy should be shorter, more personal, and more factual;
+- Marcus and Ivy Griffin are the owner story;
+- visible city links remain Peachtree City, Fayetteville, and Newnan, plus View All Service Areas;
+- product/service references link internally;
+- Randy persistent chat bubble is required;
+- the About page introduces the company story but does not try to tell the entire story;
+- the richer founder/origin narrative belongs in a pinned blog article: **The Little Junkers Story**.
+
+Brand-guide colors remain authoritative over mockup colors.
 # 19.17 Bulk Pickup Consolidated Funnel Architecture Approval
 
 The Bulk Pickup V2 landing page and its **How It Works** section are approved against the consolidated four-stage customer journey:
