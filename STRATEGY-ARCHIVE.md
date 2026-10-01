@@ -1776,7 +1776,57 @@ Google Business Profile posts and social posts are distribution channels; the we
 
 Do not create a new indexable blog URL merely because a Google Business Profile post is being published.
 
-## 20.4 Blog performance standard
+## 20.4 Agent-assisted field publishing
+
+The Blog architecture must support an owner/driver workflow that begins at the job site, not at a desktop CMS.
+
+Target workflow:
+
+```text
+Phone from the truck
+    ->
+upload 3-4 real job-site photos
+    ->
+select/confirm structured job facts
+    ->
+agent drafts article package
+    ->
+human review/edit
+    ->
+publish or save draft
+```
+
+Minimum structured inputs should include:
+- city/service area;
+- job/project type;
+- physical dumpster **unit name** as the primary operator-facing identifier;
+- dumpster size/capacity derived from the canonical inventory/unit record rather than guessed by the agent;
+- optional customer-safe project notes;
+- optional partner/contractor attribution when approved;
+- optional before/after or sequence designation for photos;
+- explicit permission/visibility flags where customer/property privacy requires them.
+
+Little Junkers names its individual cans. The publishing UI should preserve that personality: operators select the named unit they actually used. The system may derive the corresponding size/capacity and product-page link from canonical inventory data.
+
+The agent may draft:
+- headline/title options;
+- clean slug;
+- short excerpt;
+- article body;
+- image captions/alt-text suggestions;
+- context tags;
+- internal-link suggestions;
+- social/GBP derivative copy;
+- SEO title/description;
+- INDEX/NOINDEX recommendation with rationale.
+
+The agent must **not** autonomously invent customer facts, job scope, weights, pricing, partner names, dates, locations, or operational outcomes. Structured facts are authoritative; image interpretation may assist drafting but never replace explicit job metadata for business facts.
+
+Initial publishing should remain human-approved. Agent-created content enters `draft` status by default. Fully autonomous publication is a later governance decision and is not implied by agent-assisted drafting.
+
+The article template and Blog index must therefore be data-driven enough that an approved draft can populate the existing Real Jobs, Helpful Guides, Events, and Around Our Neighborhoods presentation without custom page coding.
+
+## 20.5 Blog performance standard
 
 Blogging is intended to improve website performance through:
 
