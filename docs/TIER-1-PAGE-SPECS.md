@@ -84,6 +84,21 @@ A page is not implementation-ready until both:
 
 The mobile scan is a refinement pass, not permission to reopen already-approved page strategy unless a genuine mobile usability problem requires a design change.
 
+## 1.1C Shared V2 visual foundation
+
+This is a sitewide foundation rule, not a page-by-page styling choice.
+
+- Use the exact Brand Guide tokens. Mockup-only hot pink/magenta is not a production color.
+- Default page field: Page Background `#EDEAE4`, with Surface Background `#FAF8F5` and white `#FFFFFF` reserved for elevated cards/content where useful. Avoid a stark-white page field as the dominant canvas.
+- Create gentle separation between sections through the approved neutral backgrounds, borders, and restrained shadows rather than heavy boxes or large pink fields.
+- Use Dark Hero `#1E1C19` as the persistent top/header and bottom/footer framing color across the core public experience unless a page-specific approved exception requires otherwise.
+- The older Brand Guide dark-hero page pattern is not mandatory for V2. Light/cream heroes are allowed and are the preferred default when they fit the approved page design.
+- Hero headline brand cue: when natural for the copy, make the final word or short final phrase pink. Use Pink Text `#C2587A` on light/cream surfaces; use Signature Pink `#FFCEE4` on dark surfaces when contrast is appropriate.
+- Do not force awkward headline wording merely to create a pink final word; the copy remains primary.
+- Use approved Little Junkers source logos, never an AI-generated/recreated approximation. The canonical web asset set includes color and white transparent SVG variants; use the variant appropriate to the background.
+- Real Little Junkers photography is preferred throughout. City pages should use first-party city-specific imagery as local proof whenever available; stock city imagery is temporary placeholder material only.
+- Keep this visual foundation consistent across English and Spanish counterparts and across the booking handoff so the customer does not feel they changed products.
+
 ## 1.2 Indexing
 
 Every route must be explicitly classified as **INDEX** or **NOINDEX**.
