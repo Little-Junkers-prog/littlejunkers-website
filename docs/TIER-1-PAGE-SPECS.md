@@ -2314,6 +2314,59 @@ A visitor can enter through a Spanish page and complete the customer journey wit
 
 ---
 
+# 22A. Dumpster Checkout Remediation
+
+**Approved October 1, 2026. Ship before the broader V2 website rollout.**
+
+## Locked flow
+
+```text
+Choose dumpster
+-> Choose rental length + drop-off date
+-> Unified Customer Details
+-> Review & Pay with embedded Stripe
+-> Booking Confirmation
+```
+
+### Unified Customer Details acceptance rules
+- this is the only customer/contact/address entry page;
+- self-serve customers arrive with selected rental facts but no duplicate customer-data requirement;
+- CSR link may provide only size/date and leave all customer fields blank;
+- CSR link may partially prefill any known fields;
+- rebook may fully prefill all approved reusable customer/business/address fields;
+- customer can edit prefilled values before payment;
+- Home / Business / Contractor segmentation belongs here;
+- contractor/business flows support billing/contact address separately from service/jobsite address;
+- project type is deferred from the immediate remediation unless an operational use is defined;
+- service/rental text consent and marketing consent are distinct and clearly explained.
+
+### Review & Pay acceptance rules
+- no duplicated customer-data form;
+- clear summary with Edit links;
+- embedded Stripe Payment Element in the Little Junkers page;
+- dynamically expose enabled/eligible Stripe payment methods;
+- payment button executes the payment event;
+- no extra hosted Stripe Checkout page in the normal flow;
+- no disabled-engine/promo implementation copy shown to customers.
+
+### Booking Confirmation acceptance rules
+- "You're booked" / successful confirmation state first;
+- confirm that booking confirmation text has already been sent;
+- What Happens Next before rental recap;
+- delivery-window confirmation;
+- on-the-way/ETA text;
+- Call/Text support;
+- compact rental recap;
+- only "How did you hear about us?" retained as the immediate post-booking survey;
+- project-type and recommendation questions removed from post-booking;
+- survey must display an explicit saved/submitted state.
+
+### Immediate visual rule
+Match the current production booking-funnel visual language for this remediation. Do not wait for the V2 website redesign.
+
+### Deferred V2 skin
+The approved richer V2 checkout/confirmation visual concepts are preserved for the later sitewide visual migration. Architecture remains the same; later work is a visual/component-system pass, not another checkout-flow rewrite.
+
 # 23. Booking Integration / Handoff
 
 ## Ownership
