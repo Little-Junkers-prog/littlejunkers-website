@@ -1248,6 +1248,37 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.17 Bulk Pickup Consolidated Funnel Architecture Approval
+
+The Bulk Pickup V2 landing page and its **How It Works** section are approved against the consolidated four-stage customer journey:
+
+1. **Build Your Pickup**
+   - location / ZIP eligibility;
+   - item and dumpster-bag selection;
+   - server-calculated quote;
+   - available route-date selection.
+
+2. **Add Your Details**
+   - shared customer-details shell;
+   - contact information;
+   - service address;
+   - placement instructions;
+   - consent handling.
+
+3. **Review Your Order**
+   - item summary;
+   - pickup date and address;
+   - exact total;
+   - outside-only and material rules;
+   - cancellation / no-access terms.
+
+4. **Pay Online**
+   - shared embedded Stripe Payment Element.
+
+Confirmation follows payment as a state, not a separate funnel decision step.
+
+Do not revert the Bulk Pickup UX to the earlier six-screen Location → Items → Date → Details → Review → Payment model unless the owner explicitly changes direction.
+
 # 19.16 Bulk Pickup Landing Page Visual Approval
 
 The revised Bulk Pickup landing page is approved.
