@@ -1947,12 +1947,13 @@ Customer type:
 
 Address and serviceability:
 - use structured address fields: street, city, state, ZIP;
-- state is fixed to Georgia (GA) and displayed read-only/disabled because Little Junkers does not serve outside Georgia;
-- ZIP is a required commercial input, not merely display data;
-- when ZIP is entered or changed, the system must resolve the canonical service area and applicable delivery fee before Review & Pay;
-- if the ZIP is not in an approved service area, the customer must be blocked from continuing to payment and shown a clear out-of-area message;
+- for a Home/Residential booking where the entered address is the service address, service state is fixed to Georgia (GA) and displayed read-only/disabled;
+- billing/contact addresses for Business/Contractor customers may be located in any state and must not be used to determine serviceability;
+- ZIP on the **service/jobsite address** is the required commercial input;
+- when the service ZIP is entered or changed, the system must resolve the canonical service area and applicable delivery fee before Review & Pay;
+- if the service ZIP is not in an approved service area, the customer must be blocked from continuing to payment and shown a clear out-of-area message;
 - out-of-area attempts should follow the approved lead/alert handling instead of allowing payment and requiring a later refund;
-- Business/Contractor flows may use a separate structured service/jobsite address from billing/contact address, with service ZIP driving serviceability and delivery-fee logic;
+- Business/Contractor flows may use a separate structured service/jobsite address from billing/contact address; service/jobsite state is fixed to GA and service ZIP alone drives serviceability and delivery-fee logic;
 - Review & Pay must display the resolved delivery fee and service address produced by this validation.
 
 
