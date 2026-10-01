@@ -1261,6 +1261,20 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.19 Contact Page Final Visual Approval
+
+**Contact V1 desktop and mobile designs are visually approved — October 1, 2026.**
+
+Locked direction:
+- shared V2 cream/off-white visual foundation with dark header/footer framing;
+- human Randy persistent chat bubble;
+- hero with Call, Text, and Book a Dumpster actions;
+- clear split between new-rental/bulk-pickup questions and existing-customer support;
+- short harmonized Contact form using the canonical public-inquiry/Supabase contract;
+- service-area checker/supporting local proof;
+- mobile layout approved as part of this design pass;
+- exact Brand Guide pink/neutral tokens and official Little Junkers logo assets are required in implementation.
+
 # 19.18 About Us V3 Final Visual Approval
 
 **About Us V3 is visually approved — October 1, 2026.**
