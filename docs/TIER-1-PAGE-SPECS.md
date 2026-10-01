@@ -2330,6 +2330,12 @@ Choose dumpster
 
 ### Unified Customer Details acceptance rules
 - this is the only customer/contact/address entry page;
+- use separate Street, City, State, and ZIP fields rather than one free-form address string;
+- State is fixed to GA and is visible but read-only/disabled;
+- ZIP is required and must be validated against the canonical service-area source before the customer may continue;
+- ZIP validation must calculate the applicable delivery fee before Review & Pay;
+- a ZIP outside the approved service area blocks checkout before payment and routes to the approved out-of-area lead/alert handling;
+- Business/Contractor may use a separate structured service/jobsite address; that service ZIP, not merely billing ZIP, controls serviceability and delivery-fee calculation;
 - self-serve customers arrive with selected rental facts but no duplicate customer-data requirement;
 - CSR link may provide only size/date and leave all customer fields blank;
 - CSR link may partially prefill any known fields;
