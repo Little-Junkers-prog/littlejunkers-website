@@ -1894,7 +1894,9 @@ Website Bulk Pickup conversion happens only after:
 
 ## V3 visual/content direction
 
-**V3 drafted and approved for review direction.**
+**V3 visually approved — October 1, 2026.**
+
+Final approval includes the shared V2 visual foundation, official Little Junkers source-logo usage, real local photography direction, the pink final-word/phrase hero accent where natural, and the locked human Randy assistant.
 
 Core goals:
 - position Little Junkers as a dumpster rental company, not a junk-removal company;
