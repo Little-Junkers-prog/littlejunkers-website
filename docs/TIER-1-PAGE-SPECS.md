@@ -2058,6 +2058,48 @@ Rules:
 Suggested Blog social module:
 **Follow the Junkers** — real jobs, local events, project tips, and behind-the-scenes Little Junkers content.
 
+## Agent-assisted job-story workflow
+
+The approved Blog/article format must support rapid field capture from a phone.
+
+Operator flow:
+1. take/upload 3-4 job-site photos;
+2. select city/service area;
+3. select job/project type;
+4. select the actual named dumpster unit used;
+5. optionally add a short voice/text note and approved partner/customer-safe context;
+6. let the agent generate a complete article draft package;
+7. review/edit;
+8. save as draft or publish through the approved publishing workflow.
+
+Unit handling:
+- use the physical dumpster's **name** as the operator-facing selection;
+- resolve size/capacity/product metadata from the canonical inventory record;
+- never require the operator to remember or type an internal numeric unit ID;
+- never let the agent guess which unit or size appears in a photo.
+
+Agent draft package may include:
+- title/headline;
+- `/blog/[clean-slug]`;
+- excerpt;
+- body copy in the approved human/local Little Junkers voice;
+- photo order, captions, and alt-text suggestions;
+- city/unit/project context tags;
+- related size/service/city links;
+- related-article suggestions;
+- SEO title/description;
+- social and Google Business Profile derivative copy;
+- INDEX/NOINDEX recommendation.
+
+Guardrails:
+- draft status by default;
+- human approval before publication;
+- no invented customer/project/partner facts;
+- no unsupported environmental or performance claims;
+- customer/property identifying information is excluded unless intentionally approved for public use;
+- structured job facts override image interpretation;
+- use first-party photos as the primary evidence.
+
 ## Acceptance criteria
 - clean article URLs;
 - one-to-one redirect mapping for valuable legacy Odoo posts;
