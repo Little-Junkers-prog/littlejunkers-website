@@ -1248,6 +1248,22 @@ If yes, remove them.
 
 Real Little Junkers photos, jobs, customer questions, and operating experience should carry more of the page than explanatory copy.
 
+# 19.16 Bulk Pickup Landing Page Visual Approval
+
+The revised Bulk Pickup landing page is approved.
+
+Locked visual decisions:
+- Bulk Pickup is the dominant page purpose;
+- Dumpster Rental is a smaller alternative path, not an equal sibling card;
+- hero leads with **Curbside pickup from $79.99**;
+- primary CTA is **Check Availability & Book**;
+- standard-item and dumpster-bag pricing are both visible;
+- literal item-count examples are shown;
+- service rules and pilot route schedule are visible but compact;
+- mobile uses collapsed/progressive sections;
+- Randy persistent chat bubble is present;
+- production pink usage stays restrained and uses exact Brand Guide values.
+
 # 19.15 Bulk Pickup V1.9 Website Dependency
 
 Bulk Pickup Version 1.9 is the approved implementation-planning scope.
