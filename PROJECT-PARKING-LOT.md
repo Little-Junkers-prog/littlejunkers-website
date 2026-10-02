@@ -61,3 +61,17 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 - Update each item's **Status** when work starts, is blocked, is completed, or is intentionally deferred.
 - Do not silently remove completed items; mark them **Closed** with the closing date and reference the PR/migration/deployment where applicable.
 
+### [BRAND-001] Reconcile Brand Guide v1.0 with approved V2 and canonical business data
+- **Origin:** Mobile design audit, October 2026.
+- **Status:** Open — review during page-by-page mobile audit; color palette is explicitly excluded from review.
+- **Purpose:** Track non-color Brand Guide content or implementation guidance that is stale or conflicts with the approved V2 website system or live canonical business data.
+- **Known conflicts identified so far:**
+  - public owner name still appears as **Ivette Griffin**; approved public-facing name is **Ivy Griffin**;
+  - pricing table is obsolete relative to canonical Supabase pricing;
+  - Zone B / Zone C delivery-fee amounts are obsolete relative to canonical Supabase service-area fees;
+  - mattress/tire surcharge guidance conflicts with current active canonical fees;
+  - Odoo 18 / inline-style / every-page dark-hero implementation guidance is obsolete for the Next.js V2 architecture; retain brand/layout principles but update implementation-specific language;
+  - Brand Guide uses a **Most Popular** featured-card example, while V2 prohibits unsupported popularity claims. Only use an approved/canonical badge such as the current **Preferred** pricing-tier tag when supported by live data.
+- **Currently aligned / do not change based on this audit:** approved color palette; system font stack; included tonnage values; no active fuel surcharge.
+- **Process:** Add newly discovered non-color conflicts during each page review. Prepare a consolidated Brand Guide v1.1 update after the mobile audit rather than editing the guide piecemeal.
+
