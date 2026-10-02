@@ -1898,7 +1898,7 @@ Locked direction:
 
 # 20.7 Dumpster Checkout Remediation — Approved Architecture
 
-**Approved October 1, 2026. Immediate implementation priority before the V2 website launch.**
+**Approved October 1, 2026. Status updated October 2, 2026: the emergency checkout remediation is complete and closed. Preserve the architecture below as the settled reference; do not reopen it unless a new production defect or explicit new requirement appears. Active website work returns to the Tier 1 public-site migration and full mobile-scan gate.**
 
 The current self-serve/CSR checkout journey is fragmented and must be repaired before the broader V2 website rollout. Preserve the existing transaction authority and operational contracts; replace the customer-facing duplication and hosted-checkout fragmentation.
 
