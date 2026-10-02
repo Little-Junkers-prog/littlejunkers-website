@@ -2316,7 +2316,7 @@ A visitor can enter through a Spanish page and complete the customer journey wit
 
 # 22A. Dumpster Checkout Remediation
 
-**Approved October 1, 2026. Ship before the broader V2 website rollout.**
+**Approved October 1, 2026. Status updated October 2, 2026: the emergency checkout remediation is complete and closed. Preserve the locked flow below as the settled reference; do not reopen it unless a new production defect or explicit new requirement appears. Active work returns to the Tier 1 public-site migration and full mobile-scan gate.**
 
 ## Locked flow
 
