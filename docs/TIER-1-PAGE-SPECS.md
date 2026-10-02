@@ -84,6 +84,21 @@ A page is not implementation-ready until both:
 
 The mobile scan is a refinement pass, not permission to reopen already-approved page strategy unless a genuine mobile usability problem requires a design change.
 
+## 1.1C Shared V2 visual foundation
+
+This is a sitewide foundation rule, not a page-by-page styling choice.
+
+- Use the exact Brand Guide tokens. Mockup-only hot pink/magenta is not a production color.
+- Default page field: Page Background `#EDEAE4`, with Surface Background `#FAF8F5` and white `#FFFFFF` reserved for elevated cards/content where useful. Avoid a stark-white page field as the dominant canvas.
+- Create gentle separation between sections through the approved neutral backgrounds, borders, and restrained shadows rather than heavy boxes or large pink fields.
+- Use Dark Hero `#1E1C19` as the persistent top/header and bottom/footer framing color across the core public experience unless a page-specific approved exception requires otherwise.
+- The older Brand Guide dark-hero page pattern is not mandatory for V2. Light/cream heroes are allowed and are the preferred default when they fit the approved page design.
+- Hero headline brand cue: when natural for the copy, make the final word or short final phrase pink. Use Pink Text `#C2587A` on light/cream surfaces; use Signature Pink `#FFCEE4` on dark surfaces when contrast is appropriate.
+- Do not force awkward headline wording merely to create a pink final word; the copy remains primary.
+- Use approved Little Junkers source logos, never an AI-generated/recreated approximation. The canonical web asset set includes color and white transparent SVG variants; use the variant appropriate to the background.
+- Real Little Junkers photography is preferred throughout. City pages should use first-party city-specific imagery as local proof whenever available; stock city imagery is temporary placeholder material only.
+- Keep this visual foundation consistent across English and Spanish counterparts and across the booking handoff so the customer does not feel they changed products.
+
 ## 1.2 Indexing
 
 Every route must be explicitly classified as **INDEX** or **NOINDEX**.
@@ -221,7 +236,7 @@ Randy should not re-ask known information.
 | 14 | Commercial / Contractors | `/commercial-dumpster-rental` | Keep + rebuild | INDEX |
 | 15 | Materials | `/what-can-i-put-in-a-dumpster` | Keep + rebuild | INDEX |
 | 16 | FAQ | `/faq` | Keep + rebuild | INDEX |
-| 17 | Additional Services | `/additional-services` | Keep + rebuild | INDEX |
+| 17 | Bulk Pickup | `/bulk-pickup` | New dedicated page | INDEX |
 | 18 | About | `/about-us` | Keep + rebuild | INDEX |
 | 19 | Contact | `/contactus` | Keep + rebuild | INDEX |
 | 20 | Spanish Core Experience | `/es/*` | Rebuild/redirect legacy | INDEX by counterpart |
@@ -1660,45 +1675,7 @@ No duplicated/conflicting business rules; no JS-only inaccessible accordion; vis
 
 ---
 
-# 19. Additional Services Hub
-
-## Route
-`/additional-services`
-
-## Role
-This remains the broader **Additional Services** hub.
-
-It should:
-- introduce Bulk Pickup as a separate service;
-- link clearly to `/bulk-pickup`;
-- retain room for future services such as Portable Storage when those services are actually available;
-- avoid pretending planned services are live;
-- avoid duplicating the full Bulk Pickup landing page.
-
-Bulk Pickup pricing, service rules, pilot ZIPs, route schedule, and booking CTA belong primarily on `/bulk-pickup`.
-
-## Current service status
-- Dumpster Rental: active
-- Bulk Pickup: approved for implementation planning; production booking funnel not yet live
-- Portable Storage: planned / booking disabled
-
-## Page direction
-Keep the hub short:
-1. Hero: **More ways to get rid of the junk**
-2. Bulk Pickup card
-   - curbside/outside-only
-   - starting at $79.99 once production pricing/funnel are live
-   - CTA: **Explore Bulk Pickup**
-3. Dumpster Rental alternative
-   - for larger piles, construction debris, or projects better suited to a dumpster
-4. Future services section only when operationally ready
-5. FAQ/support links
-
-Do not turn this hub into a second Bulk Pickup sales page.
-
----
-
-# 19A. Bulk Pickup Landing Page
+# 19. Bulk Pickup Landing Page
 
 ## Visual approval status
 
@@ -1917,7 +1894,9 @@ Website Bulk Pickup conversion happens only after:
 
 ## V3 visual/content direction
 
-**V3 drafted and approved for review direction.**
+**V3 visually approved — October 1, 2026.**
+
+Final approval includes the shared V2 visual foundation, official Little Junkers source-logo usage, real local photography direction, the pink final-word/phrase hero accent where natural, and the locked human Randy assistant.
 
 Core goals:
 - position Little Junkers as a dumpster rental company, not a junk-removal company;
@@ -1998,7 +1977,181 @@ Never use retired owner name “Ivette Griffin.”
 
 ---
 
+# 20A. Blog / Junker Journal
+
+## Visual approval status
+
+**Blog/Junker Journal index and article templates approved — October 1, 2026.**
+
+Final approval includes:
+- desktop and mobile Blog index;
+- desktop and mobile article template;
+- clean `/blog/[slug]` URL architecture;
+- Featured Story, Real Jobs, Helpful Guides, Events, Around Our Neighborhoods, and conversion modules;
+- full approved footer/social architecture;
+- selective article sharing controls;
+- persistent human Randy;
+- agent-assisted field publishing using confirmed system data plus first-party photos and operator notes.
+
+Publishing architecture must preserve this separation:
+- Supabase = confirmed operational/job facts and canonical business data;
+- content/publishing layer = article record, draft status, media, metadata, and editorial approval;
+- GitHub = version-controlled application code/templates/integration logic;
+- Vercel/Next.js = rendered customer experience.
+
+Individual article publication must not require hand-editing application code.
+
+
+
+## Route
+`/blog`
+
+## Role
+The Blog is Little Junkers' field journal and practical resource center, not a generic SEO-content archive.
+
+## URL architecture
+- blog index: `/blog`;
+- article: `/blog/[clean-slug]`;
+- no Odoo-style `/our-blog-1/` path segment;
+- no numeric record IDs appended to article slugs;
+- categories/tags do not become required URL folders;
+- legacy Odoo article URLs that are worth preserving receive one-to-one permanent redirects to their V2 destination.
+
+## Blog index structure
+1. Hero / Junker Journal introduction.
+2. Featured or pinned story, beginning with **The Little Junkers Story** once published.
+3. Browse by topic/filter.
+4. **From Real Jobs**.
+5. **Helpful Guides**.
+6. **Events**.
+7. **Around Our Neighborhoods** / local stories.
+8. Conversion CTA into pricing, size help, serviceability, or booking.
+9. Persistent human Randy bubble and standard footer.
+
+## Events
+Events are a dedicated visible section of the Blog experience.
+
+Use it for genuine Little Junkers community activity such as:
+- cleanup events with local real estate agents or other approved partners;
+- neighborhood/community cleanup events;
+- Touch a Truck events;
+- sponsorship/community appearances;
+- post-event recaps with first-party photos.
+
+Event articles remain under `/blog/[slug]`; do not create a separate `/events` route unless later content volume justifies one.
+
+Upcoming event content should show:
+- event date;
+- city/area;
+- participation details;
+- approved partner attribution where relevant;
+- clear event status when registration/attendance is closed or the event has passed.
+
+Past-event recaps may remain published when they provide durable local/community proof.
+
+Every event article still receives an explicit INDEX or NOINDEX decision. Short-lived announcements should not automatically become permanent SEO inventory.
+
+## Content presentation
+Prefer useful context tags such as city, dumpster size, project type, guide type, or event type instead of generic CMS metadata.
+
+Do not show Odoo-style view counts, comment counts, or technical blog labels unless there is a genuine customer need.
+
+## Social / community integration
+
+The Blog is the strongest social/community bridge on the public site, but social does not replace the article or conversion path.
+
+Approved profile set:
+- Facebook;
+- Instagram;
+- YouTube;
+- Nextdoor;
+- LinkedIn;
+- Bluesky;
+- Alignable.
+
+Rules:
+- do not add the full social set to the primary desktop navigation;
+- global footer exposes the full approved follow set;
+- Blog may feature Facebook, Instagram, YouTube, and Nextdoor more prominently as community/customer channels;
+- LinkedIn, Alignable, and Bluesky remain available in the full follow set;
+- event posts may emphasize Facebook, Instagram, and Nextdoor when useful for attendance/updates;
+- article sharing should stay selective: Facebook, LinkedIn, Bluesky, and Copy Link are appropriate direct-share controls; Instagram/YouTube are follow destinations rather than article-share actions;
+- all profile URLs come from one canonical company-data source, not hardcoded copies across pages;
+- do not send article/customer PII through social-share URLs or analytics.
+
+Suggested Blog social module:
+**Follow the Junkers** — real jobs, local events, project tips, and behind-the-scenes Little Junkers content.
+
+## Agent-assisted job-story workflow
+
+The approved Blog/article format must support rapid field capture from a phone.
+
+Operator flow:
+1. take/upload 3-4 job-site photos;
+2. select city/service area;
+3. select job/project type;
+4. select the actual named dumpster unit used;
+5. optionally add a short voice/text note and approved partner/customer-safe context;
+6. let the agent generate a complete article draft package;
+7. review/edit;
+8. save as draft or publish through the approved publishing workflow.
+
+Unit handling:
+- use the physical dumpster's **name** as the operator-facing selection;
+- resolve size/capacity/product metadata from the canonical inventory record;
+- never require the operator to remember or type an internal numeric unit ID;
+- never let the agent guess which unit or size appears in a photo.
+
+Agent draft package may include:
+- title/headline;
+- `/blog/[clean-slug]`;
+- excerpt;
+- body copy in the approved human/local Little Junkers voice;
+- photo order, captions, and alt-text suggestions;
+- city/unit/project context tags;
+- related size/service/city links;
+- related-article suggestions;
+- SEO title/description;
+- social and Google Business Profile derivative copy;
+- INDEX/NOINDEX recommendation.
+
+Guardrails:
+- draft status by default;
+- human approval before publication;
+- no invented customer/project/partner facts;
+- no unsupported environmental or performance claims;
+- customer/property identifying information is excluded unless intentionally approved for public use;
+- structured job facts override image interpretation;
+- use first-party photos as the primary evidence.
+
+## Acceptance criteria
+- clean article URLs;
+- one-to-one redirect mapping for valuable legacy Odoo posts;
+- pinned Little Junkers Story support;
+- visible Events section;
+- event and article content use first-party photos whenever practical;
+- article metadata/indexing decision is explicit;
+- blog content links intentionally into commercial/customer-help pages;
+- no thin content factory behavior.
+
+---
+
 # 21. Contact
+
+## Visual approval status
+
+**Contact V1 desktop and mobile designs approved — October 1, 2026.**
+
+Locked visual direction:
+- shared V2 cream/off-white canvas with subtle section shading;
+- dark header/footer framing;
+- exact Brand Guide pink accents;
+- official Little Junkers logo assets;
+- human Randy persistent chat bubble;
+- prominent Call, Text, and Book a Dumpster actions;
+- compact protected contact form;
+- service-area checker/supporting local proof;
+- approved mobile composition from the October 1 mockup.
 
 ## Route
 `/contactus`
@@ -2007,7 +2160,7 @@ Never use retired owner name “Ivette Griffin.”
 Little Junkers phone/contact/support.
 
 ## Purpose
-Provide human escalation without creating another spam vector.
+Provide human escalation without creating another spam vector while preserving the same customer/contact identity model used by the rest of Little Junkers.
 
 ## Required sections
 
@@ -2019,15 +2172,65 @@ Provide human escalation without creating another spam vector.
 6. Randy entry where helpful.
 7. Booking CTA.
 
+## Harmonized Supabase intake contract
+
+The Contact page does **not** create a separate website-lead model.
+
+Customer flow:
+
+```text
+/contactus form
+    ->
+server-side public inquiry API
+    ->
+Supabase public.create_public_inquiry(jsonb)
+    ->
+contacts + customer_inquiries + contact_request_details
+    ->
+business_action_items / Admin Inquiries queue
+```
+
+Canonical boundary:
+- use `/api/public-inquiry` as the durable public-form intake endpoint;
+- `/api/contact-form` is the existing compatibility alias and must not become a second implementation;
+- the browser never writes directly to Supabase and never receives service-role credentials.
+
+Shared identity fields submitted by the Contact form:
+- `inquiry_type = contact`;
+- `name` — required, max 80 characters;
+- `phone` — required; server normalizes valid U.S. numbers to E.164;
+- `email` — optional but validated when supplied;
+- `zip_code` — required, exactly five digits;
+- `source_page` — identifies the Contact page.
+
+Contact-specific detail fields:
+- `service_needed` — optional structured reason/service field;
+- `preferred_delivery_date` — optional and only shown/used when relevant;
+- `message` — required, 10–2000 characters.
+
+Identity resolution rules:
+- exact normalized phone and/or exact normalized email may link an inquiry to an existing canonical `contacts` record;
+- each submission is still preserved as its own `customer_inquiries` event;
+- do not auto-merge by name alone;
+- name + ZIP may flag a possible duplicate but does not silently merge;
+- conflicting submitted values must remain visible on the inquiry snapshot and must not overwrite canonical contact values;
+- ambiguous, possible-duplicate, linked-with-conflict, and phone/email-conflict cases remain human-reviewable.
+
+New canonical contacts created through this path use the website/contact-form source metadata defined by the intake function. Every legitimate submission creates a related `business_action_items` entry so it appears for staff follow-up in Admin OS.
+
 ## Security
+
 Contact form is a protected data-write surface:
+- allowed-origin enforcement;
 - honeypot;
+- minimum/maximum form timing controls;
 - strict field limits;
-- human verification;
-- rate limit;
+- Cloudflare Turnstile/server-side verification;
+- route-level rate limiting / abuse controls;
 - server-side validation;
-- quarantine/risk logic;
-- no direct browser insert into canonical leads.
+- server-only privileged Supabase RPC;
+- RLS/no anon or authenticated direct table writes;
+- no direct browser insert into `contacts`, `customer_inquiries`, or `contact_request_details`.
 
 ## Analytics
 - `form_started`
@@ -2036,12 +2239,36 @@ Contact form is a protected data-write surface:
 - call/text click
 - booking click
 
+Do not send name, phone, email, message, street address, or other free-form PII to GA4/PostHog.
+
 ## Acceptance criteria
-No Odoo placeholder contact data; spam simulation rejected; legitimate test submission flows correctly.
+- no Odoo placeholder contact data;
+- legitimate submission reaches `public.create_public_inquiry`;
+- one inquiry event is preserved for every accepted submission;
+- canonical contact linking follows the harmonized resolution rules;
+- contact-specific values land in `contact_request_details`, not generic contact notes;
+- related Admin action item is created and the request appears in the Admin Inquiries workflow;
+- conflicting identity values do not silently overwrite the canonical contact;
+- direct anonymous/authenticated table writes remain blocked;
+- Turnstile, origin, timing, validation, and rate/abuse protections reject invalid/spam submissions;
+- English and Spanish Contact forms use the same intake contract;
+- legitimate test submission flows correctly end-to-end.
 
 ---
 
 # 22. Spanish Core Experience
+
+## Visual approval status
+
+**Spanish V2 desktop and mobile experience approved — October 1, 2026.**
+
+Locked visual/localization direction:
+- use the same cream/off-white V2 foundation, dark framing, exact Brand Guide pink, official logos, real imagery, and responsive system as English;
+- Randy remains a discreet persistent chat bubble at the bottom, not a dedicated content section;
+- representative Spanish homepage and Blog/article layouts are approved as the pattern for the broader Spanish core journey;
+- Spanish copy follows the localization and quality-control rules below rather than literal translation.
+
+
 
 ## Purpose
 Spanish is not a secondary translation project. It is a parallel customer path.
@@ -2086,6 +2313,66 @@ Same event names as English with language property; do not create a separate inc
 A visitor can enter through a Spanish page and complete the customer journey without being unexpectedly dropped into English.
 
 ---
+
+# 22A. Dumpster Checkout Remediation
+
+**Approved October 1, 2026. Status updated October 2, 2026: the emergency checkout remediation is complete and closed. Preserve the locked flow below as the settled reference; do not reopen it unless a new production defect or explicit new requirement appears. Active work returns to the Tier 1 public-site migration and full mobile-scan gate.**
+
+## Locked flow
+
+```text
+Choose dumpster
+-> Choose rental length + drop-off date
+-> Unified Customer Details
+-> Review & Pay with embedded Stripe
+-> Booking Confirmation
+```
+
+### Unified Customer Details acceptance rules
+- this is the only customer/contact/address entry page;
+- use separate Street, City, State, and ZIP fields rather than one free-form address string;
+- service/jobsite State is fixed to GA and is visible but read-only/disabled;
+- Business/Contractor billing/contact address may be in any state and does not control serviceability;
+- service/jobsite ZIP is required and must be validated against the canonical service-area source before the customer may continue;
+- service ZIP validation must calculate the applicable delivery fee before Review & Pay;
+- a service ZIP outside the approved service area blocks checkout before payment and routes to the approved out-of-area lead/alert handling;
+- Business/Contractor may use a separate structured service/jobsite address; only the service/jobsite ZIP controls serviceability and delivery-fee calculation;
+- self-serve customers arrive with selected rental facts but no duplicate customer-data requirement;
+- CSR link may provide only size/date and leave all customer fields blank;
+- CSR link may partially prefill any known fields;
+- rebook may fully prefill all approved reusable customer/business/address fields;
+- customer can edit prefilled values before payment;
+- Home / Business / Contractor segmentation belongs here;
+- contractor/business flows support billing/contact address separately from service/jobsite address;
+- project type is deferred from the immediate remediation unless an operational use is defined;
+- service/rental text consent and marketing consent are distinct and clearly explained.
+
+### Review & Pay acceptance rules
+- no duplicated customer-data form;
+- clear summary with Edit links;
+- embedded Stripe Payment Element in the Little Junkers page;
+- dynamically expose enabled/eligible Stripe payment methods;
+- payment button executes the payment event;
+- no extra hosted Stripe Checkout page in the normal flow;
+- no disabled-engine/promo implementation copy shown to customers.
+
+### Booking Confirmation acceptance rules
+- "You're booked" / successful confirmation state first;
+- confirm that booking confirmation text has already been sent;
+- What Happens Next before rental recap;
+- delivery-window confirmation;
+- on-the-way/ETA text;
+- Call/Text support;
+- compact rental recap;
+- only "How did you hear about us?" retained as the immediate post-booking survey;
+- project-type and recommendation questions removed from post-booking;
+- survey must display an explicit saved/submitted state.
+
+### Immediate visual rule
+Match the current production booking-funnel visual language for this remediation. Do not wait for the V2 website redesign.
+
+### Deferred V2 skin
+The approved richer V2 checkout/confirmation visual concepts are preserved for the later sitewide visual migration. Architecture remains the same; later work is a visual/component-system pass, not another checkout-flow rewrite.
 
 # 23. Booking Integration / Handoff
 
@@ -2183,7 +2470,7 @@ Before page implementation begins, owner review should explicitly approve or rev
 6. residential vs contractor positioning;
 7. materials information architecture;
 8. FAQ structure;
-9. Additional Services hub role;
+9. Bulk Pickup landing-page role and limited-pilot scope;
 10. Contact-form security posture;
 11. Spanish publication standard;
 12. booking-context handoff requirements.
