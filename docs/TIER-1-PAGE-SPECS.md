@@ -557,9 +557,13 @@ Routes:
    - language should help, not pressure.
 
 4. **What fits**
-   - practical capacity visual/equivalent;
+   - use one consistent photorealistic full-size pickup truck visual, loaded with representative household/project debris and shot from a rear 3/4 angle;
+   - use the same pickup model, camera angle, and visual style across all three dumpster-size pages so customers can compare scale consistently;
+   - pair the image with the canonical pickup-load estimate for that size: 11-yard **4–5 pickup loads**, 16-yard **6–7 pickup loads**, 21-yard **8–10 pickup loads**;
+   - keep the load realistic and safely contained; do not visually exaggerate capacity with debris piled far above the bed/cab;
+   - include the clarification **Capacity shown is an approximate volume comparison. Weight limits still apply.**;
    - short list of representative materials/projects;
-   - no dimension diagram in this block.
+   - no dimension diagram in this block; dimensions remain a separate customer question and belong in the dedicated footprint section.
 
 5. **Estimate My Load**
    - optional AI-guided weight estimator;
