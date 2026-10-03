@@ -340,6 +340,53 @@ Date logic requirements:
 
 Do not create additional seasonal variants without updating this specification first.
 
+## Shared seasonal asset system
+
+The seasonal selector is a **sitewide visual-governance mechanism**, not a Randy-only feature.
+
+The same canonical variant key and operating-timezone date logic must be available to other approved illustrated assets so seasonal treatments stay coordinated. Randy remains the character authority, but participating assets should not implement their own independent holiday calendars.
+
+### Little Junkers pickup truck
+
+Approved illustrated pickup-truck assets — especially truck-vs-dumpster size guidance and other educational renderings — participate in the same seasonal variant system as Randy.
+
+Core truck rules:
+- the truck must remain immediately recognizable as the Little Junkers pickup truck;
+- preserve the truck's core silhouette, proportions, branding, wheels, cab/bed relationship, and scale usefulness;
+- seasonal decoration is secondary and restrained;
+- never obscure the Little Junkers logo or make the truck harder to use as a size/scale reference;
+- do not turn the truck into a parade float, costume vehicle, toy-like prop, or novelty illustration;
+- when Randy and the truck appear together, both must use the same active seasonal variant.
+
+Approved truck treatments by existing variant key:
+- `standard`: no seasonal decoration;
+- `valentines`: subtle Signature Pink accent such as a small mirror, grille, or trim detail; no oversized hearts;
+- `memorial_day`: restrained patriotic detail such as a small flag-style accent or muted red/white/blue trim; no camouflage, military insignia, or implied military affiliation;
+- `fourth_of_july`: restrained red/white/blue bunting, pennant, mirror, or grille detail; no oversized flag treatment;
+- `october_awareness`: subtle pink trim/accent only; no ribbon or implied charity/awareness partnership;
+- `halloween`: small tasteful Halloween trim or warm/orange accent; no faces, teeth, horror styling, or costume-truck treatment;
+- `fall_thanksgiving`: restrained autumn leaf/cream/tan accent; no novelty food or character props;
+- `christmas`: small Christmas lights are expressly approved; a restrained wreath or similarly clean festive accent may be used if it does not obscure branding or form;
+- `new_years`: restrained celebratory trim using approved pink and/or metallic-neutral accents; no confetti-heavy or party-prop treatment.
+
+### New visual-asset review requirement
+
+Every new reusable illustrated or decorative website asset must include an explicit seasonal-theming decision during asset development.
+
+The review must record one of:
+1. **Seasonal participant** — the asset uses the centralized variant key and has approved treatments defined before production use; or
+2. **Seasonally neutral** — the asset intentionally remains unchanged year-round.
+
+Do not assume every asset should be seasonal. The decision should consider:
+- whether seasonal treatment adds useful brand personality;
+- whether it would distract from conversion, comprehension, safety, pricing, legal, or transactional content;
+- whether the asset appears near Randy or another seasonal participant and therefore benefits from visual coordination;
+- whether seasonal decoration would reduce professionalism or make the asset feel overly playful.
+
+Transactional, legal, safety-critical, pricing-critical, and data-visualization assets should default to **seasonally neutral** unless an explicit design approval says otherwise.
+
+Seasonal participation is a design-system choice and must not be implemented ad hoc at the page level.
+
 ---
 
 # 10. Website Usage
