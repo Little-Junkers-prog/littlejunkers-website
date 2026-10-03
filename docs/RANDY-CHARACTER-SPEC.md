@@ -202,16 +202,30 @@ Used whenever no seasonal window is active:
 
 ## Valentine's Day
 
-Annual window: **February 10-14**
+Annual window: **February 14 only**
 
 Treatment:
 - standard dark polo;
 - Signature Pink `#FFCEE4` cap or a very small approved pink heart/accent;
 - no oversized hearts, novelty costumes, or romantic copy built into the artwork.
 
+## Memorial Day / Military Family Tribute
+
+Annual window: **Friday before Memorial Day through Memorial Day, inclusive**
+
+Treatment:
+- standard dark Little Junkers polo;
+- dark charcoal or muted olive cap with a small, tasteful U.S. flag side patch or restrained red/white/blue detail;
+- keep the approved Little Junkers raccoon logo as the primary front mark;
+- no camouflage uniform, medals, ribbons, rank insignia, branch insignia, dog tags, tactical gear, or imitation military uniform;
+- no celebratory language that conflicts with Memorial Day's remembrance purpose;
+- no statement or visual implication that Little Junkers is affiliated with, endorsed by, or fundraising for the U.S. military or a veterans organization unless that becomes factually true.
+
+This variant is a restrained family-service tribute, informed by the Griffin family's military service, not a military costume.
+
 ## Fourth of July
 
-Annual window: **July 1-4**
+Annual window: **June 27 through July 11, inclusive**
 
 Treatment:
 - standard dark polo;
@@ -219,33 +233,35 @@ Treatment:
 - do not turn Randy into an Uncle Sam character;
 - no flag costume or oversized patriotic props.
 
-## October / Breast Cancer Awareness Month
+## October / Breast Cancer Awareness
 
-Annual window: **October 1-31**
+Annual window: **October 1-15, inclusive**
 
 Treatment:
 - Signature Pink `#FFCEE4` polo;
 - Dark Hero `#1E1C19` Little Junkers lettering/raccoon logo treatment;
-- standard dark cap unless the Halloween overlay below is active;
+- standard dark cap;
 - no awareness ribbon or third-party awareness logo unless separately approved;
 - no copy or visual treatment implying Little Junkers is an official partner, sponsor, fundraiser, or donor unless that becomes factually true.
 
 This is a subtle brand-color acknowledgment only.
 
-## Halloween overlay
+## Halloween
 
-Annual window: **October 25-31**
-
-This overlays the October awareness treatment rather than replacing it.
+Annual window: **October 16-31, inclusive**
 
 Treatment:
-- retain the October Signature Pink polo;
-- use a restrained Halloween cap/brim accent or similarly small seasonal hat treatment;
+- standard dark Little Junkers polo;
+- restrained Halloween cap/brim accent or similarly small seasonal hat treatment;
 - no face paint, masks, fangs, horror imagery, or full costume.
+
+Halloween is a distinct second-half-of-October variant and does not retain the October Awareness pink polo.
 
 ## Fall / Thanksgiving
 
-Annual window: **November 1-30**
+Annual window: **November 1 through Thanksgiving Day, inclusive**
+
+The owner's intended seasonal handoff is that the broader fall period runs until the day after Thanksgiving, while Christmas also begins the day after Thanksgiving. To avoid two active variants on the same date, the visible Fall/Thanksgiving variant ends at the close of Thanksgiving Day and Christmas takes precedence beginning the following day.
 
 Treatment:
 - standard dark polo;
@@ -254,25 +270,40 @@ Treatment:
 
 ## Christmas
 
-Annual window: **December 1-25**
+Annual window: **day after Thanksgiving through December 26, inclusive**
 
 Treatment:
 - standard dark Little Junkers polo;
 - traditional red-and-white Santa-style hat;
 - no Christmas sweater, elf costume, presents, ornaments, or extra decorative clutter unless separately approved.
 
+## New Year's
+
+Annual window: **December 27 through January 7, inclusive**
+
+Treatment:
+- standard dark Little Junkers polo;
+- restrained black/dark celebratory hat or cap treatment with small Signature Pink `#FFCEE4` or metallic-neutral detailing;
+- no glitter-heavy costume, novelty glasses, champagne imagery, or party props;
+- keep the treatment professional and consistent with the Little Junkers visual system.
+
 ## Variant precedence
 
-When seasonal windows overlap, use this priority:
-1. Halloween overlay;
-2. October Awareness;
-3. Christmas;
-4. Fall / Thanksgiving;
-5. Fourth of July;
-6. Valentine's Day;
-7. Standard/default.
+When a calculated holiday window could overlap another, use this priority:
+1. Christmas;
+2. New Year's;
+3. Halloween;
+4. October Awareness;
+5. Fall / Thanksgiving;
+6. Memorial Day / Military Family Tribute;
+7. Fourth of July;
+8. Valentine's Day;
+9. Standard/default.
 
-The October Halloween overlay intentionally keeps the pink October polo and changes only the seasonal headwear/accent.
+The schedule is intentionally designed to minimize overlap:
+- October Awareness ends October 15; Halloween begins October 16.
+- Fall/Thanksgiving displays through Thanksgiving Day; Christmas begins the day after Thanksgiving.
+- Christmas ends December 26; New Year's begins December 27.
 
 ## Implementation rule
 
@@ -290,12 +321,22 @@ Initial variant keys:
 ```text
 standard
 valentines
+memorial_day
 fourth_of_july
 october_awareness
 halloween
 fall_thanksgiving
 christmas
+new_years
 ```
+
+Date logic requirements:
+- fixed-date windows may be stored as month/day ranges;
+- Thanksgiving-dependent windows must calculate U.S. Thanksgiving dynamically each year as the fourth Thursday in November;
+- Memorial Day-dependent windows must calculate U.S. Memorial Day dynamically each year as the last Monday in May;
+- all start and end dates are inclusive;
+- calculations use the Little Junkers operating timezone, not UTC;
+- preview/testing may force a variant key without changing the production calendar configuration.
 
 Do not create additional seasonal variants without updating this specification first.
 
