@@ -98,6 +98,10 @@ This is a sitewide foundation rule, not a page-by-page styling choice.
 - Use approved Little Junkers source logos, never an AI-generated/recreated approximation. The canonical web asset set includes color and white transparent SVG variants; use the variant appropriate to the background.
 - Real Little Junkers photography is preferred throughout. City pages should use first-party city-specific imagery as local proof whenever available; stock city imagery is temporary placeholder material only.
 - Keep this visual foundation consistent across English and Spanish counterparts and across the booking handoff so the customer does not feel they changed products.
+- Seasonal visual treatment is governed centrally. Randy and approved illustrated Little Junkers truck assets use the same canonical seasonal variant key and date logic.
+- Illustrated pickup-truck assets used for size guidance or educational visuals may receive restrained seasonal accents, but the truck silhouette, proportions, branding, and scale-reading function must remain clear and professional.
+- Every new reusable illustrated/decorative asset must receive an explicit asset-development decision: **Seasonal participant** or **Seasonally neutral**. Do not add page-specific holiday styling without that governance decision.
+- Transactional, legal, safety-critical, pricing-critical, and data-visualization assets default to **Seasonally neutral** unless separately approved.
 
 ## 1.2 Indexing
 
