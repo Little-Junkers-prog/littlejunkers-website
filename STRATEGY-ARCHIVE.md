@@ -2177,6 +2177,8 @@ The current roadmap is built around these principles:
 
 > **Use real Little Junkers photos and real operating experience.**
 
+> **Seasonal visual flair stays coordinated and professional.** Randy and approved illustrated truck assets share one centralized seasonal variant system. Every new reusable visual asset must be deliberately classified as seasonal or seasonally neutral before production use; transactional, legal, safety-critical, pricing-critical, and data-visualization assets default to neutral unless explicitly approved.
+
 > **Do not let future AI agents silently undo approved decisions.**
 
 > **Build Little Junkers like a technology company that rents dumpsters.**

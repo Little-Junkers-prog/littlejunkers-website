@@ -98,6 +98,10 @@ This is a sitewide foundation rule, not a page-by-page styling choice.
 - Use approved Little Junkers source logos, never an AI-generated/recreated approximation. The canonical web asset set includes color and white transparent SVG variants; use the variant appropriate to the background.
 - Real Little Junkers photography is preferred throughout. City pages should use first-party city-specific imagery as local proof whenever available; stock city imagery is temporary placeholder material only.
 - Keep this visual foundation consistent across English and Spanish counterparts and across the booking handoff so the customer does not feel they changed products.
+- Seasonal visual treatment is governed centrally. Randy and approved illustrated Little Junkers truck assets use the same canonical seasonal variant key and date logic.
+- Illustrated pickup-truck assets used for size guidance or educational visuals may receive restrained seasonal accents, but the truck silhouette, proportions, branding, and scale-reading function must remain clear and professional.
+- Every new reusable illustrated/decorative asset must receive an explicit asset-development decision: **Seasonal participant** or **Seasonally neutral**. Do not add page-specific holiday styling without that governance decision.
+- Transactional, legal, safety-critical, pricing-critical, and data-visualization assets default to **Seasonally neutral** unless separately approved.
 
 ## 1.2 Indexing
 
@@ -557,13 +561,9 @@ Routes:
    - language should help, not pressure.
 
 4. **What fits**
-   - use one consistent photorealistic full-size pickup truck visual, loaded with representative household/project debris and shot from a rear 3/4 angle;
-   - use the same pickup model, camera angle, and visual style across all three dumpster-size pages so customers can compare scale consistently;
-   - pair the image with the canonical pickup-load estimate for that size: 11-yard **4–5 pickup loads**, 16-yard **6–7 pickup loads**, 21-yard **8–10 pickup loads**;
-   - keep the load realistic and safely contained; do not visually exaggerate capacity with debris piled far above the bed/cab;
-   - include the clarification **Capacity shown is an approximate volume comparison. Weight limits still apply.**;
+   - practical capacity visual/equivalent;
    - short list of representative materials/projects;
-   - no dimension diagram in this block; dimensions remain a separate customer question and belong in the dedicated footprint section.
+   - no dimension diagram in this block.
 
 5. **Estimate My Load**
    - optional AI-guided weight estimator;
