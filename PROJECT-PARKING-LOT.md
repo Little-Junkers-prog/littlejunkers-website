@@ -75,3 +75,22 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 - **Currently aligned / do not change based on this audit:** approved color palette; system font stack; included tonnage values; no active fuel surcharge.
 - **Process:** Add newly discovered non-color conflicts during each page review. Prepare a consolidated Brand Guide v1.1 update after the mobile audit rather than editing the guide piecemeal.
 
+
+## Status updates — November 16, 2026 (English first-draft PR, branch `v2/english-first-draft`)
+
+- **Media Integration:** In progress. Temporary image folder `public/images/` + manifest `lib/media.ts` (owner decision Nov 16). 35 real photos resized from the booking repo's first-party media. Swap to Supabase `media_library` when the uploader (D-008) ships. Photo slots still needed are listed in the PR.
+- **Global Company Data:** Interim. Public company facts now live in one file, `lib/company.ts`. Supabase table still parked.
+- **Chatbot Integration:** Dummy chatbot script removed with the Sprint 1 scaffold. Randy bubble not yet built.
+- **[WEB-CONTENT] The Little Junkers Story:** Still not drafted. `/about-us` carries a labeled slot for the link.
+
+### [WEB-DATA-001] Canonical dumpster dimensions (AR-8)
+- **Status:** Open. Size pages show length/width read from the existing size diagrams (11: 12 × 7.5 ft, 16: 12 × 7.5 ft, 21: 12 × 8 ft) and height from `dumpster_sizes`. The 16-yard diagram says 5 ft high; `dumpster_sizes.height_ft` says 4.5. Marcus to confirm, then add length/width to `dumpster_sizes`.
+
+### [WEB-DATA-002] Mattress / tire / appliance rule
+- **Status:** Open. `fees` has active per-item rows keyed `prohibited_*`; the spec forbids presenting item fees. Materials page currently says "text us first" and shows no fee. Marcus to confirm the rule.
+
+### [WEB-CONTENT-002] Blog migration (25 EN posts)
+- **Status:** Blocked in this session (live subpages could not be read). Templates, `/blog/[slug]` routing and `legacyPath` 301 support are built; no posts migrated.
+
+### Parked from this PR (not built, by design)
+- Use My Location (needs a reverse-geocoding decision), Weight Estimator, ZIP-boundary coverage map, Randy bubble, consent banner + GTM/Consent Mode, `lj_ft` cookie and call/text tap events, Español switch, Pricing / Size Guide / Residential / Commercial / Contact / legal pages.

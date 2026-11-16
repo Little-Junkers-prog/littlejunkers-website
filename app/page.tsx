@@ -1,459 +1,226 @@
+import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@supabase/supabase-js";
+import JsonLd from "@/components/JsonLd";
+import Photo from "@/components/Photo";
+import PhotoRail from "@/components/PhotoRail";
+import PriceCards from "@/components/PriceCards";
+import ZipCheck from "@/components/ZipCheck";
+import { cities } from "@/lib/cities";
+import { bookingUrl, company, siteUrl, smsHref, telHref } from "@/lib/company";
+import { photos } from "@/lib/media";
+import { getPricing } from "@/lib/pricing";
+import { reviews } from "@/lib/reviews";
 
-type PricingRow = {
-  id?: string | number;
-  dumpster_size?: string | number | null;
-  size?: string | number | null;
-  size_yards?: string | number | null;
-  yards?: string | number | null;
-  tier?: string | null;
-  package?: string | null;
-  package_name?: string | null;
-  rental_tier?: string | null;
-  price?: string | number | null;
-  amount?: string | number | null;
-  base_price?: string | number | null;
-  active?: boolean | null;
-  is_active?: boolean | null;
+export const metadata = {
+  alternates: { canonical: "/" },
 };
 
-type SizePricing = {
-  size: 11 | 16 | 21;
-  title: string;
-  seoSubtext: string;
-  bestFor: string;
-  included: string;
-  featured?: boolean;
-  tiers: Array<{ label: string; price: number }>;
-};
-
-const sizeCards: Omit<SizePricing, "tiers">[] = [
-  {
-    size: 11,
-    title: "The Little Junker",
-    seoSubtext: "Perfect for standard 10-yard to 12-yard projects",
-    bestFor: "Garage cleanouts, small renovations, and lighter home projects.",
-    included: "Compact footprint for tighter driveways.",
-  },
-  {
-    size: 16,
-    title: "The Middle Junker",
-    seoSubtext: "A smart upgrade for standard 15-yard searches",
-    bestFor: "Roofing, flooring, remodel debris, and bigger weekend cleanups.",
-    included: "The easy middle choice for most household projects.",
-    featured: true,
-  },
-  {
-    size: 21,
-    title: "The Big Junker",
-    seoSubtext: "Maximum capacity for 20-yard cleanups",
-    bestFor: "Large cleanouts, contractor jobs, and bulky material loads.",
-    included: "More room when one trip needs to do the work.",
-  },
+const steps = [
+  ["Check your ZIP and pick a size", "See the price for your address before you commit to anything."],
+  ["Choose your dates and pay online", "Booking is open any time. It takes a few minutes."],
+  ["Fill it. We haul it away.", "We set it where you want it and pick it up when your rental ends."],
 ];
 
-function getSupabaseClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://fobkdakjawryhzkcdbbo.supabase.co";
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const reasons = [
+  ["A smaller truck", "We deliver with a hook-lift truck, not a full-size roll-off, and we check the spot before we set the dumpster down."],
+  ["Prices up front", "You see the price for your ZIP before you book. Extra days and extra weight only apply if you use them."],
+  ["Book in minutes", "Pick a size and dates online, any time. Or call or text us."],
+  ["Owned here", "Marcus and Ivy Griffin run Little Junkers from Peachtree City."],
+];
 
-  if (!supabaseAnonKey) {
-    return null;
-  }
+export default async function Home() {
+  const pricing = await getPricing();
 
-  return createClient(supabaseUrl, supabaseAnonKey, {
-    auth: { persistSession: false },
-  });
-}
-
-function normalizeSize(row: PricingRow) {
-  const rawSize = row.size_yards ?? row.dumpster_size ?? row.size ?? row.yards;
-  const match = String(rawSize ?? "").match(/11|16|21/);
-  return match ? Number(match[0]) : null;
-}
-
-function normalizeLabel(row: PricingRow) {
-  return row.package_name ?? row.rental_tier ?? row.tier ?? row.package ?? "Rental rate";
-}
-
-function normalizePrice(row: PricingRow) {
-  const rawPrice = row.price ?? row.base_price ?? row.amount;
-  const numeric = Number(String(rawPrice ?? "").replace(/[^0-9.]/g, ""));
-  return Number.isFinite(numeric) && numeric > 0 ? numeric : null;
-}
-
-async function getPricingBySize() {
-  const supabase = getSupabaseClient();
-  const pricingBySize = new Map<number, Array<{ label: string; price: number }>>();
-
-  if (!supabase) {
-    return pricingBySize;
-  }
-
-  const { data, error } = await supabase.from("pricing").select("*").order("price", { ascending: true });
-
-  if (error || !data) {
-    return pricingBySize;
-  }
-
-  for (const row of data as PricingRow[]) {
-    if (row.active === false || row.is_active === false) {
-      continue;
-    }
-
-    const size = normalizeSize(row);
-    const price = normalizePrice(row);
-
-    if (!size || !price || ![11, 16, 21].includes(size)) {
-      continue;
-    }
-
-    const tiers = pricingBySize.get(size) ?? [];
-    tiers.push({ label: normalizeLabel(row), price });
-    pricingBySize.set(size, tiers);
-  }
-
-  return pricingBySize;
-}
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-US", {
-    currency: "USD",
-    maximumFractionDigits: 0,
-    style: "currency",
-  }).format(price);
-}
-
-export default function Home() {
   return (
     <>
-      <Hero />
-      <HowItWorks />
-      <DumpsterLineup />
-      <ValueProps />
-      <Testimonials />
-      <HomeFaq />
-      <FounderNote />
-    </>
-  );
-}
-
-function Hero() {
-  const trustItems = ["Upfront Pricing", "HOA-Friendly", "Driveway Protection", "Real Local Support"];
-
-  return (
-    <section className="py-5" style={{ backgroundColor: "var(--dark-hero)", color: "var(--card-background)" }}>
-      <div className="container py-lg-5">
-        <div className="row align-items-center g-5">
-          <div className="col-lg-6 col-xl-6">
-            <p className="hero-eyebrow text-uppercase fw-bold mb-3">
-              Family-Owned - Peachtree City's Neighborhood Favorite
-            </p>
-            <h1 className="display-4 fw-bold mb-4">
-              Driveway-Safe <span className="text-pink">Dumpster</span> Rental in Peachtree City
+      <section className="hero on-dark">
+        <div className="hero__media" aria-hidden="true">
+          <Image src={photos.hero.src} alt="" width={photos.hero.width} height={photos.hero.height} priority sizes="(min-width: 900px) 58vw, 100vw" />
+        </div>
+        <div className="container hero__inner">
+          <div className="hero__copy">
+            <h1>
+              Need a <span className="accent">dumpster?</span>
             </h1>
-            <p className="fs-5 mb-4" style={{ color: "var(--ink-faint)" }}>
-              Get a clean, driveway-friendly roll-off dumpster delivered by a local team that keeps pricing clear and the process simple.
+            <p className="lead">Enter your city or ZIP to see prices and availability.</p>
+            <ZipCheck />
+            <p className="hero__meta">
+              <span>11 · 16 · 21-yard dumpsters</span>
+              <span>Locally owned</span>
+              <span>Easy online booking</span>
             </p>
-            <div className="d-flex flex-column flex-sm-row gap-3">
-              <a href="https://book.littlejunkersllc.com" className="btn btn-brand btn-lg px-4">
-                Book Your Dumpster
+            <p className="hero__meta">
+              <Link href="/faq#which-size">Help me choose a size</Link>
+              <a href={telHref}>Call or text {company.phoneDisplay}</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="sizes">
+        <div className="container">
+          <div className="section-head">
+            <h2>
+              Three sizes. Today&apos;s <span className="accent">prices.</span>
+            </h2>
+            <p>Every rental includes drop-off, pickup and disposal up to the included weight.</p>
+          </div>
+          <PriceCards pricing={pricing} />
+          <div className="callout" style={{ marginTop: 24 }}>
+            <div>
+              <h3>Not sure which size?</h3>
+              <p className="muted">Text us what you&apos;re tossing, or a photo of the pile. We&apos;ll point you to the right one.</p>
+            </div>
+            <div className="btn-row">
+              <a className="btn btn--secondary" href={smsHref}>
+                Text {company.phoneDisplay}
               </a>
-              <Link href="#sizes" className="btn btn-outline-light btn-lg px-4">
-                See Sizes and Pricing
+              <Link className="btn btn--secondary" href="/faq#which-size">
+                Size help
               </Link>
             </div>
-            <div className="row row-cols-2 row-cols-md-4 g-2 mt-4">
-              {trustItems.map((item) => (
-                <div className="col" key={item}>
-                  <span className="hero-trust-pill">✓ {item}</span>
-                </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--surface">
+        <div className="container split">
+          <div>
+            <div className="section-head">
+              <h2>How it works</h2>
+            </div>
+            <ol className="steps stack">
+              {steps.map(([title, body]) => (
+                <li key={title}>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <Photo photo={photos.truckDelivering} shape="landscape" sizes="(min-width: 900px) 50vw, 100vw" />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <h2>Why Little Junkers</h2>
+          </div>
+          <div className="grid grid--4">
+            {reasons.map(([title, body]) => (
+              <div className="card" key={title}>
+                <h3>{title}</h3>
+                <p className="muted" style={{ marginTop: 6 }}>
+                  {body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--surface">
+        <div className="container split">
+          <Photo photo={photos.marcusAndIvy} sizes="(min-width: 900px) 50vw, 100vw" />
+          <div className="stack">
+            <p className="eyebrow">Locally owned</p>
+            <h2>We&apos;re Marcus and Ivy Griffin.</h2>
+            <p className="lead">We started Little Junkers in Peachtree City in 2024, and we run it ourselves.</p>
+            <p>
+              <Link className="text-link" href="/about-us">
+                Meet Marcus &amp; Ivy
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <h2>Seen around town</h2>
+            <p>Real Little Junkers jobs. No stock photos.</p>
+          </div>
+          <PhotoRail
+            label="Little Junkers job photos"
+            photos={[photos.y11Fayetteville, photos.y16NewnanYard, photos.y21PeachtreeCity, photos.y11Senoia, photos.y21Fairburn, photos.y11Tyrone]}
+          />
+          {reviews.length > 0 ? (
+            <div className="grid grid--3" style={{ marginTop: 28 }}>
+              {reviews.map((review) => (
+                <figure className="card card--elevated" key={review.name} style={{ margin: 0 }}>
+                  <blockquote style={{ margin: 0 }}>
+                    <p>&ldquo;{review.text}&rdquo;</p>
+                  </blockquote>
+                  <figcaption className="fine" style={{ marginTop: 10 }}>
+                    {review.name}
+                    {review.area ? `, ${review.area}` : ""} · {review.source} review
+                  </figcaption>
+                </figure>
               ))}
             </div>
-          </div>
-          <div className="col-lg-6 col-xl-6">
-            <div className="ratio ratio-4x3 rounded-3 overflow-hidden" style={{ backgroundColor: "var(--surface-background)" }}>
-              <div className="d-flex align-items-center justify-content-center text-center p-4" role="img" aria-label="Pink Little Junkers dumpster placed carefully on a residential driveway">
-                <span className="fw-bold fs-4" style={{ color: "var(--ink-primary)" }}>
-                  Pink Little Junkers dumpster on a driveway
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HowItWorks() {
-  const steps = [
-    ["1", "Pick your size", "Choose the dumpster that fits your cleanup. If you are unsure, start with the 16-yard."],
-    ["2", "Choose your dates", "Book online, see your delivery options, and know what you are paying before checkout."],
-    ["3", "Fill it up", "We place it carefully, you load it, and we come back for pickup when the rental is done."],
-  ];
-
-  return (
-    <section className="py-5" style={{ backgroundColor: "var(--page-background)" }}>
-      <div className="container">
-        <div className="row mb-4">
-          <div className="col-lg-8">
-            <h2 className="fw-bold mb-3">How It Works</h2>
-            <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-              No phone tag required. Book the dumpster, get it delivered, and keep your project moving.
-            </p>
-          </div>
-        </div>
-        <div className="row g-4">
-          {steps.map(([number, title, copy]) => (
-            <div className="col-lg-4" key={title}>
-              <article className="card-standard shadow-sm h-100 p-4">
-                <span className="check-badge mb-3">{number}</span>
-                <h3 className="h5 fw-bold">{title}</h3>
-                <p className="mb-0" style={{ color: "var(--ink-mid)" }}>{copy}</p>
-              </article>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-async function DumpsterLineup() {
-  const pricingBySize = await getPricingBySize();
-  const cards: SizePricing[] = sizeCards.map((card) => ({ ...card, tiers: pricingBySize.get(card.size) ?? [] }));
-
-  return (
-    <section id="sizes" className="py-5" style={{ backgroundColor: "var(--page-background)" }}>
-      <div className="container">
-        <div className="row align-items-end mb-4 g-3">
-          <div className="col-lg-8">
-            <p className="text-uppercase fw-bold mb-2" style={{ color: "var(--pink-text)", letterSpacing: "0.08em" }}>
-              Dumpster lineup
-            </p>
-            <h2 className="fw-bold mb-3">Three Sizes, Clear Rates</h2>
-            <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-              Choose the roll-off size that fits your cleanup, then reserve online in a few minutes.
-            </p>
-          </div>
-          <div className="col-lg-4 text-lg-end">
-            <a href="https://book.littlejunkersllc.com" className="btn btn-brand px-4">
-              Check Availability
+          ) : null}
+          <p style={{ marginTop: 20 }}>
+            <a className="text-link" href={company.googleReviewsUrl} rel="noopener">
+              Read our reviews on Google
             </a>
-          </div>
+          </p>
         </div>
+      </section>
 
-        <div className="row g-4">
-          {cards.map((card) => (
-            <div className="col-lg-4" key={card.size}>
-              <article className={`${card.featured ? "card-featured" : "card-standard shadow-sm"} h-100 p-4 position-relative`}>
-                {card.featured ? (
-                  <span className="badge position-absolute top-0 start-50 translate-middle px-3 py-2" style={{ backgroundColor: "var(--pink-bar)", color: "var(--ink-primary)" }}>
-                    Most Popular
-                  </span>
-                ) : null}
-                <h3 className="h4 fw-bold mt-2">{card.title}</h3>
-                <p className="small mb-3" style={{ color: "var(--ink-muted)" }}>{card.seoSubtext}</p>
-                <p style={{ color: "var(--ink-mid)" }}>{card.bestFor}</p>
-                <p className="small fw-semibold" style={{ color: "var(--pink-text)" }}>{card.included}</p>
-                <div className="border-top pt-3 mt-3" style={{ borderColor: "var(--border-card)" }}>
-                  {card.tiers.length > 0 ? (
-                    card.tiers.map((tier) => (
-                      <div className="d-flex justify-content-between gap-3 py-2" key={`${card.size}-${tier.label}-${tier.price}`}>
-                        <span style={{ color: "var(--ink-mid)" }}>{tier.label}</span>
-                        <strong>{formatPrice(tier.price)}</strong>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-                      Reserve online to see current availability.
-                    </p>
-                  )}
-                </div>
-                <div className="d-grid gap-2 mt-4">
-                  <a href="https://book.littlejunkersllc.com" className="btn btn-brand">
-                    Reserve the {card.size}-Yard
-                  </a>
-                  <Link href={`/${card.size}-yard-${card.title.toLowerCase().replaceAll(" ", "-")}`} className="btn btn-ghost">
-                    Learn More
-                  </Link>
-                </div>
-              </article>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ValueProps() {
-  const values = [
-    ["Locally owned", "You are working with a Peachtree City business, not a national call center."],
-    ["Driveway-safe", "Our smaller roll-off setup is built for residential driveways and careful placement."],
-    ["Transparent pricing", "Rates, delivery zones, and common fees are kept clear before you book."],
-  ];
-
-  return (
-    <section className="py-5" style={{ backgroundColor: "var(--surface-background)" }}>
-      <div className="container">
-        <div className="row g-4 align-items-center">
-          <div className="col-lg-5">
-            <h2 className="fw-bold mb-3">Built for Local Cleanups</h2>
-            <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-              From weekend garage projects to contractor debris, Little Junkers keeps dumpster rental straightforward and neighborly.
-            </p>
+      <section className="section section--surface">
+        <div className="container">
+          <div className="section-head">
+            <h2>Where we deliver</h2>
+            <p>Based in Peachtree City. Delivering across Fayette and Coweta County and nearby South Atlanta communities.</p>
           </div>
-          <div className="col-lg-7">
-            <div className="row g-3">
-              {values.map(([title, copy]) => (
-                <div className="col-lg-4" key={title}>
-                  <div className="card-standard h-100 p-4">
-                    <span className="check-badge mb-3">✓</span>
-                    <h3 className="h6 fw-bold">{title}</h3>
-                    <p className="small mb-0" style={{ color: "var(--ink-mid)" }}>{copy}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function StarRating() {
-  return (
-    <div className="mb-3" aria-label="5 out of 5 stars" style={{ color: "var(--pink-bar)", letterSpacing: "0.08em" }}>
-      ★★★★★
-    </div>
-  );
-}
-
-function Testimonials() {
-  const reviews = [
-    {
-      reviewer: "Nicholas O.",
-      review:
-        "Dumpster was great, no damage to the driveway. I was at work during both drop-off and pickup but my wife said they were very easy to work with and very friendly.",
-    },
-    {
-      reviewer: "john trojanczyk",
-      review:
-        "Everything went smoothly. The dumpster arrived as promised and the truck driver, Marcus, was very professional and helpful.",
-    },
-    {
-      reviewer: "Teddy Gil",
-      review:
-        "Super great service. As advertised and super friendly. Pickup was on time and a breeze. Highly recommended!",
-    },
-  ];
-
-  return (
-    <section className="py-5" style={{ backgroundColor: "var(--page-background)" }}>
-      <div className="container">
-        <div className="row mb-4">
-          <div className="col-lg-8">
-            <p className="text-uppercase fw-bold mb-2" style={{ color: "var(--pink-text)", letterSpacing: "0.08em" }}>
-              Google Reviews
-            </p>
-            <h2 className="fw-bold mb-3">What Local Customers Are Saying</h2>
-            <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-              Friendly service, careful driveway placement, and pickup when promised.
-            </p>
-          </div>
-        </div>
-
-        <div className="row g-4">
-          {reviews.map((review) => (
-            <div className="col-lg-4" key={review.reviewer}>
-              <article className="testimonial-card h-100 p-4">
-                <StarRating />
-                <p className="mb-4">"{review.review}"</p>
-                <p className="fw-semibold mb-0">{review.reviewer}</p>
-              </article>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FounderNote() {
-  return (
-    <section className="py-5" style={{ backgroundColor: "var(--surface-background)" }}>
-      <div className="container">
-        <div className="row align-items-center g-4 g-lg-5">
-          <div className="col-lg-5">
-            <div
-              className="founder-photo ratio ratio-4x3"
-              role="img"
-              aria-label="Placeholder portrait for Marcus and Ivy from Little Junkers"
-            >
-              <div className="d-flex align-items-center justify-content-center text-center p-4">
-                <span className="fw-bold">Marcus & Ivy photo placeholder</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-7">
-            <p className="text-uppercase fw-bold mb-2" style={{ color: "var(--pink-text)", letterSpacing: "0.08em" }}>
-              A Note From The Founders
-            </p>
-            <h2 className="fw-bold mb-3">
-              Helping you clear the clutter without the commercial 'coldness'.
-            </h2>
-            <p className="fs-5 mb-3" style={{ color: "var(--ink-mid)" }}>
-              We built Little Junkers for neighbors who want a simple rental, a clean driveway, and someone local who actually picks up the phone.
-            </p>
-            <p className="mb-0" style={{ color: "var(--ink-mid)" }}>
-              Whether you are cleaning out a garage, tackling a remodel, or just trying to get your weekend back, we will help you choose the right bin and keep the process straightforward.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HomeFaq() {
-  const faqs = [
-    {
-      question: "Do I need to be home for delivery?",
-      answer:
-        "No, as long as the driveway is clear and accessible, we can place it exactly where you need it.",
-    },
-    {
-      question: "Will the dumpster damage my driveway?",
-      answer:
-        "We use lighter trucks and driveway-safe placement techniques to protect your concrete and pavers.",
-    },
-  ];
-
-  return (
-    <section className="py-5" style={{ backgroundColor: "var(--page-background)" }}>
-      <div className="container">
-        <div className="card-standard p-4 p-lg-5">
-          <div className="row justify-content-center">
-            <div className="col-lg-9">
-              <h2 className="fw-bold mb-4 text-center">Quick Questions Before You Book</h2>
-              {faqs.map((faq) => (
-                <div className="border-bottom py-3" style={{ borderColor: "var(--border-card)" }} key={faq.question}>
-                  <h3 className="h5 fw-bold mb-2">{faq.question}</h3>
-                  <p className="mb-0" style={{ color: "var(--ink-mid)" }}>{faq.answer}</p>
-                </div>
-              ))}
-              <div className="text-center mt-4">
-                <Link href="/dumpster-rental-faq" className="btn btn-outline-dark px-4">
-                  View Rental FAQ
+          <ul className="chips">
+            {cities.map((city) => (
+              <li key={city.slug}>
+                <Link className="chip" href={`/${city.slug}`}>
+                  {city.city}
                 </Link>
-              </div>
+              </li>
+            ))}
+            <li>
+              <Link className="chip" href="/service-areas">
+                All service areas
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="callout">
+            <div>
+              <h2>Ready when you are.</h2>
+              <p className="muted" style={{ marginTop: 6 }}>
+                Pick your size and dates online. Calls and texts {company.hoursDisplay}.
+              </p>
+            </div>
+            <div className="btn-row">
+              <a className="btn btn--primary" href={bookingUrl()}>
+                Book a Dumpster
+              </a>
+              <a className="btn btn--secondary" href={telHref}>
+                Call {company.phoneDisplay}
+              </a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: company.name,
+          url: siteUrl,
+        }}
+      />
+    </>
   );
 }

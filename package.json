@@ -1,27 +1,26 @@
 {
   "name": "littlejunkers-website",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "typecheck": "tsc --noEmit",
+    "check:content": "node scripts/check-content.mjs"
   },
   "dependencies": {
-    "@next/third-parties": "latest",
-    "@supabase/supabase-js": "latest",
-    "bootstrap": "latest",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "gray-matter": "4.0.3",
+    "marked": "18.2.0",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest",
-    "typescript": "latest"
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "sharp": "0.35.5",
+    "typescript": "5.9.3"
   }
 }
