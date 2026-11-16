@@ -284,7 +284,7 @@ If Randy's canonical appearance changes:
 - Master file: `scripts/randy/build-randy.mjs` (the portrait) and `scripts/randy/raccoon-path.txt` (the approved raccoon mark, traced from `public/images/brand/little-junkers-logo.png`).
 - Style: realistic adult proportions, soft gradient shading, no heavy outlines, warm open smile with relaxed, arched brows. Professional and approachable, not cartoon-cute and not stern.
 - Every Randy image is generated from this one file (`npm run build:randy`). Never edit the SVGs in `public/images/brand/randy/` by hand.
-- **Status:** draft master, awaiting Marcus's approval. No other poses until approved.
+- **Status:** approved by Marcus as the master reference, November 16, 2026. New poses must be derived from it.
 
 ## Holiday guide
 

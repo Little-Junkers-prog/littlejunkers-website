@@ -103,6 +103,6 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 
 ## Randy and legal (Nov 16, 2026)
 
-- RANDY-ART-001: Randy redrawn Nov 16 (professional style, warm smile) from one master generator (`scripts/randy/`). Holiday hats per spec §14 (owner direction). **Needs Marcus's approval as the master reference** before other poses are made.
+- RANDY-ART-001: Randy redrawn Nov 16 (professional style, warm smile) from one master generator (`scripts/randy/`). Holiday hats per spec §14 (owner direction). Approved by Marcus as the master reference (Nov 16).
 - RANDY-ENV-001: `RANDY_SITE_TOKEN` must be set on the Vercel website project (Preview + Production). Claude was not permitted to set it. Until it is, the live Randy backend rejects website chats and the site shows the call/text fallback.
 - LEGAL-001: Privacy, terms, cookie and texting pages rewritten to current facts. Owner confirmed Nov 16: customer_service@littlejunkersllc.com is the contact address (sitewide), the 24-hour change/cancellation rule stands, free driveway boards on request are accurate. Remaining: attorney review before launch.
