@@ -22,6 +22,8 @@ const files = [];
 const walk = (dir) => {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
+    // Legal copy is owner-approved text copied word for word; it is not marketing copy.
+    if (entry.isDirectory() && full === path.join("content", "legal")) continue;
     if (entry.isDirectory()) walk(full);
     else if (/\.(tsx?|md|css)$/.test(entry.name) && !entry.name.startsWith("_")) files.push(full);
   }

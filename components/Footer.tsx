@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { cities } from "@/lib/cities";
 import { company, smsHref, telHref } from "@/lib/company";
+import { legalLinks } from "@/lib/legal-links";
 import { sizes } from "@/lib/sizes";
+import { PrivacyChoicesLink } from "./ConsentBanner";
 
 export default function Footer() {
   return (
@@ -19,7 +21,7 @@ export default function Footer() {
                 <a href={telHref}>Call {company.phoneDisplay}</a>
               </li>
               <li>
-                <a href={smsHref}>Text {company.phoneDisplay}</a>
+                <a href={smsHref}>Text us</a>
               </li>
               <li>
                 <a href={`mailto:${company.email}`}>{company.email}</a>
@@ -83,9 +85,21 @@ export default function Footer() {
           </nav>
         </div>
 
-        <p className="site-footer__bottom">
-          © {new Date().getFullYear()} {company.legalName}. Dumpster rental in Fayette and Coweta County, Georgia.
-        </p>
+        <div className="site-footer__bottom">
+          <ul className="site-footer__legal">
+            {legalLinks.map((link) => (
+              <li key={link.slug}>
+                <Link href={`/${link.slug}`}>{link.label}</Link>
+              </li>
+            ))}
+            <li>
+              <PrivacyChoicesLink />
+            </li>
+          </ul>
+          <p>
+            © {new Date().getFullYear()} {company.legalName}. Dumpster rental in Fayette and Coweta County, Georgia.
+          </p>
+        </div>
       </div>
     </footer>
   );

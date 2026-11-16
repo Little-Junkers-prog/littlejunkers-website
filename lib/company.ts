@@ -9,11 +9,10 @@ export const company = {
   founded: 2024,
   phoneDisplay: "(470) 548-4733",
   phoneE164: "+14705484733",
-  // Text line. Owner direction (Nov 16): text buttons go to the Twilio number so
-  // messages are logged and can get automated replies; the number above stays the
-  // call number and the only number printed on the page. Set NEXT_PUBLIC_TEXT_NUMBER
-  // (E.164) once the Twilio number is confirmed. Until then texts go to the main line.
-  textE164: process.env.NEXT_PUBLIC_TEXT_NUMBER ?? "+14705484733",
+  // Text line (owner direction, Nov 16): Text buttons open the Twilio number, which
+  // is A2P 10DLC registered, logs messages and can auto-reply. The number above
+  // stays the call number and the only number printed on the page.
+  textE164: "+14707125079",
   email: "info@littlejunkersllc.com",
   // Mailing address only (charter §7.6). Never present it as a storefront.
   locality: "Peachtree City",

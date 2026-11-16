@@ -9,6 +9,7 @@ import type { NextConfig } from "next";
 const legacyAliases: [string, string][] = [
   ["/16-yard-the-middle-junker", "/16-yard-the-mighty-middler"],
   ["/dumpster-rental-faq", "/faq"],
+  ["/legal", "/terms"],
   ["/do-s-don-ts", "/what-can-i-put-in-a-dumpster"],
 ];
 

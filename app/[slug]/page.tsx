@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cities, cityBySlug } from "@/lib/cities";
+import { getLegalDoc, legalLinks } from "@/lib/legal";
+import { indexable } from "@/lib/indexing";
 import { sizeBySlug, sizes } from "@/lib/sizes";
 import CityPage from "./CityPage";
+import LegalPage from "./LegalPage";
 import SizePage from "./SizePage";
 
 // Size and city pages keep their established root-level URLs
@@ -11,7 +14,7 @@ import SizePage from "./SizePage";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [...sizes, ...cities].map((entry) => ({ slug: entry.slug }));
+  return [...sizes, ...cities, ...legalLinks].map((entry) => ({ slug: entry.slug }));
 }
 
 type Props = { params: Promise<{ slug: string }> };
@@ -30,6 +33,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       alternates: { canonical: `/${slug}` },
     };
   }
+  const legal = getLegalDoc(slug);
+  if (legal) {
+    return {
+      title: legal.title,
+      alternates: { canonical: `/${slug}` },
+      robots: indexable && legal.index ? { index: true, follow: true } : { index: false, follow: true },
+    };
+  }
   return {};
 }
 
@@ -39,5 +50,7 @@ export default async function Page({ params }: Props) {
   if (size) return <SizePage size={size} />;
   const city = cityBySlug(slug);
   if (city) return <CityPage city={city} />;
+  const legal = getLegalDoc(slug);
+  if (legal) return <LegalPage doc={legal} />;
   notFound();
 }

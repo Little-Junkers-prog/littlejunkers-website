@@ -101,7 +101,12 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "pickup",
           q: "How does pickup work?",
-          a: "We pick up on the last day of your rental. Have the dumpster loaded level and the area around it clear. Done early? Text us and we'll come get it.",
+          a: "We pick up on the last day of your rental, and we text you the day before as a reminder. Have the dumpster loaded level and the area around it clear.",
+        },
+        {
+          id: "early-pickup",
+          q: "Can you pick it up early if I finish sooner?",
+          a: "Yes. Text us when you're done and we'll schedule the pickup. One thing to know before you ask: the rental ends when we pick up, so days you didn't use can't be saved for a later rental.",
         },
         {
           id: "hours",

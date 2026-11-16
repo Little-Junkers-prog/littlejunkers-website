@@ -6,7 +6,7 @@ import { sizes } from "@/lib/sizes";
 
 // INDEX routes only. Drafts and NOINDEX posts are excluded (TIER-1 spec §1.2).
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/service-areas", "/what-can-i-put-in-a-dumpster", "/faq", "/about-us", "/blog"];
+  const pages = ["", "/service-areas", "/what-can-i-put-in-a-dumpster", "/faq", "/about-us", "/blog", "/privacy", "/terms"];
   const paths = [
     ...pages,
     ...sizes.map((size) => `/${size.slug}`),

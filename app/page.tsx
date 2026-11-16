@@ -52,7 +52,8 @@ export default async function Home() {
             </p>
             <p className="hero__meta">
               <Link href="/faq#which-size">Help me choose a size</Link>
-              <a href={telHref}>Call or text {company.phoneDisplay}</a>
+              <a href={telHref}>Call {company.phoneDisplay}</a>
+              <a href={smsHref}>Text us</a>
             </p>
           </div>
         </div>
@@ -74,7 +75,7 @@ export default async function Home() {
             </div>
             <div className="btn-row">
               <a className="btn btn--secondary" href={smsHref}>
-                Text {company.phoneDisplay}
+                Text us
               </a>
               <Link className="btn btn--secondary" href="/faq#which-size">
                 Size help

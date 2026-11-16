@@ -61,7 +61,7 @@ export const sizes: SizeContent[] = [
       },
       {
         q: "What if I fill it up early?",
-        a: "Call or text us. We can pick it up early, or swap it for an empty one if you have more to haul.",
+        a: "Text us. We can pick it up early, or swap it for an empty one if you have more to haul. An early pickup ends the rental, so unused days don't carry over.",
       },
     ],
   },
