@@ -15,6 +15,7 @@ export type Tier = {
   label: string;
   badge: string | null;
   days: number;
+  extraDay: number | null;
   prices: Record<SizeYards, number>;
 };
 
@@ -27,6 +28,8 @@ export type Pricing = {
   zones: Record<string, Zone>;
   zips: Record<string, ZipEntry>;
   sizes: Record<SizeYards, SizeFacts>;
+  // Per-ton rate for weight over the included tonnage, billed at disposal.
+  overagePerTon: number | null;
 };
 
 const REVALIDATE_SECONDS = 600;
@@ -58,6 +61,7 @@ function parse(payload: any): Pricing | null {
       label: String(row.displayLabel ?? `${days}-Day`),
       badge: row.badgeTag ? String(row.badgeTag) : null,
       days,
+      extraDay: num(row?.dailyOverage),
       prices,
     });
   }
@@ -90,7 +94,12 @@ function parse(payload: any): Pricing | null {
     };
   }
 
-  return { tiers, zones, zips, sizes };
+  const overageRow = Array.isArray(payload.fees)
+    ? payload.fees.find((fee: any) => fee?.fee_key === "weight_overage_disposal" && fee?.active !== false)
+    : null;
+  const overage = overageRow ? num(overageRow.amount) : null;
+
+  return { tiers, zones, zips, sizes, overagePerTon: overage && overage > 0 ? overage : null };
 }
 
 export async function getPricing(): Promise<Pricing | null> {

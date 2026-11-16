@@ -4,7 +4,8 @@ import FaqList from "@/components/FaqList";
 import JsonLd from "@/components/JsonLd";
 import Photo from "@/components/Photo";
 import PhotoRail from "@/components/PhotoRail";
-import { PricingUnavailable } from "@/components/PriceCards";
+import { PricingUnavailable, RateList } from "@/components/PriceCards";
+import { BookLink } from "@/components/ZipContext";
 import ZipCheck from "@/components/ZipCheck";
 import { bookingUrl, company, siteUrl, smsHref } from "@/lib/company";
 import { formatTons, formatUsd, getPricing, startingTier } from "@/lib/pricing";
@@ -33,15 +34,16 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             {pricing && from && facts ? (
               <>
                 <p className="price">
-                  {formatUsd(from.prices[size.yards])} <small>for {from.days} days</small>
+                  <small>Starting at</small> {formatUsd(from.prices[size.yards])}
                 </p>
                 <p className="muted">
-                  {formatTons(facts.includedTons)} of disposal included. A delivery fee may apply outside our core area.
+                  {from.days} days and {formatTons(facts.includedTons)} of disposal included. A delivery fee may apply outside our
+                  core area.
                 </p>
                 <div className="btn-row">
-                  <a className="btn btn--primary" href={book}>
+                  <BookLink className="btn btn--primary" size={size.yards}>
                     Check Dates &amp; Book
-                  </a>
+                  </BookLink>
                   <a className="btn btn--secondary" href="#price">
                     See the price for my ZIP
                   </a>
@@ -140,25 +142,16 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             <h2 style={{ fontSize: "1.4rem" }}>Your price</h2>
             {pricing && facts ? (
               <>
-                <ul className="tiers" style={{ marginTop: 12 }}>
-                  {pricing.tiers.map((tier) => (
-                    <li key={tier.tierKey}>
-                      <span>
-                        {tier.days} days
-                        {tier.badge ? <span className="tag">{tier.badge}</span> : null}
-                      </span>
-                      <strong>{formatUsd(tier.prices[size.yards])}</strong>
-                    </li>
-                  ))}
-                  <li>
-                    <span>Disposal included</span>
-                    <strong>{formatTons(facts.includedTons)}</strong>
-                  </li>
-                </ul>
+                <p className="price" style={{ marginTop: 8 }}>
+                  <small>Starting at</small> {formatUsd(pricing.tiers[0].prices[size.yards])}
+                </p>
+                <div style={{ marginTop: 10 }}>
+                  <RateList pricing={pricing} yards={size.yards} />
+                </div>
                 <ZipCheck cta="Check My ZIP" label="Delivery fee for your city or ZIP" />
-                <a className="btn btn--primary btn--block" href={book} style={{ marginTop: 16 }}>
+                <BookLink className="btn btn--primary btn--block" size={size.yards}>
                   Check Dates &amp; Book
-                </a>
+                </BookLink>
                 <p className="fine" style={{ marginTop: 10 }}>
                   Extra days and extra weight only apply if you use them.
                 </p>
@@ -216,13 +209,14 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             serviceType: "Roll-off dumpster rental",
             provider: { "@id": `${siteUrl}/#business` },
             url: `${siteUrl}/${size.slug}`,
-            offers: pricing.tiers.map((tier) => ({
+            areaServed: ["Fayette County, GA", "Coweta County, GA"],
+            offers: {
               "@type": "Offer",
-              name: `${tier.days}-day rental`,
-              price: tier.prices[size.yards],
+              name: `${pricing.tiers[0].days}-day rental`,
+              price: pricing.tiers[0].prices[size.yards],
               priceCurrency: "USD",
               url: book,
-            })),
+            },
           }}
         />
       ) : null}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { bookingUrl, company, telHref } from "@/lib/company";
 import { logo } from "@/lib/media";
 import { sizes } from "@/lib/sizes";
+import MobileMenu from "./MobileMenu";
 
 // Navigation only lists pages that exist in this build. Pricing, Compare and
 // the Español switch join when those pages ship (STRATEGY-ARCHIVE §4.1).
@@ -39,25 +40,10 @@ export default function Header() {
           <a className="btn btn--primary" href={bookingUrl()}>
             Book a Dumpster
           </a>
-          <details className="menu">
-            <summary aria-label="Menu">
-              <span className="menu__icon" aria-hidden="true" />
-            </summary>
-            <nav className="menu__panel" aria-label="Mobile">
-              <p className="menu__group">Dumpsters</p>
-              {sizes.map((size) => (
-                <Link key={size.slug} href={`/${size.slug}`}>
-                  {size.yards}-Yard · {size.name}
-                </Link>
-              ))}
-              <p className="menu__group">More</p>
-              {links.slice(1).map((link) => (
-                <Link key={link.href} href={link.href}>
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </details>
+          <MobileMenu
+            dumpsters={sizes.map((size) => ({ href: `/${size.slug}`, label: `${size.yards}-Yard · ${size.name}` }))}
+            more={links.slice(1)}
+          />
         </div>
       </div>
     </header>

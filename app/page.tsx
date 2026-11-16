@@ -6,7 +6,8 @@ import PhotoRail from "@/components/PhotoRail";
 import PriceCards from "@/components/PriceCards";
 import ZipCheck from "@/components/ZipCheck";
 import { cities } from "@/lib/cities";
-import { bookingUrl, company, siteUrl, smsHref, telHref } from "@/lib/company";
+import { BookLink } from "@/components/ZipContext";
+import { company, siteUrl, smsHref, telHref } from "@/lib/company";
 import { photos } from "@/lib/media";
 import { getPricing } from "@/lib/pricing";
 import { reviews } from "@/lib/reviews";
@@ -125,7 +126,7 @@ export default async function Home() {
           <Photo photo={photos.marcusAndIvy} sizes="(min-width: 900px) 50vw, 100vw" />
           <div className="stack">
             <p className="eyebrow">Locally owned</p>
-            <h2>We&apos;re Marcus and Ivy Griffin.</h2>
+            <h2>We&apos;re Marcus and Ivy.</h2>
             <p className="lead">We started Little Junkers in Peachtree City in 2024, and we run it ourselves.</p>
             <p>
               <Link className="text-link" href="/about-us">
@@ -194,17 +195,15 @@ export default async function Home() {
 
       <section className="section">
         <div className="container">
-          <div className="callout">
+          <div className="band on-dark">
             <div>
-              <h2>Ready when you are.</h2>
-              <p className="muted" style={{ marginTop: 6 }}>
-                Pick your size and dates online. Calls and texts {company.hoursDisplay}.
-              </p>
+              <h2>
+                Ready when you <span className="accent">are.</span>
+              </h2>
+              <p style={{ marginTop: 6 }}>Pick your size and dates online. Calls and texts {company.hoursDisplay}.</p>
             </div>
             <div className="btn-row">
-              <a className="btn btn--primary" href={bookingUrl()}>
-                Book a Dumpster
-              </a>
+              <BookLink className="btn btn--primary">Book a Dumpster</BookLink>
               <a className="btn btn--secondary" href={telHref}>
                 Call {company.phoneDisplay}
               </a>

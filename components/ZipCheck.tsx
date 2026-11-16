@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { bookingUrl, company, smsHref, telHref } from "@/lib/company";
 import type { AreaResult } from "@/lib/pricing";
+import { saveArea } from "./ZipContext";
 
 type State = { status: "idle" } | { status: "loading" } | { status: "error" } | { status: "done"; result: AreaResult };
 
@@ -23,7 +24,11 @@ export default function ZipCheck({ cta = "See Prices & Availability", label = "C
     try {
       const res = await fetch(`/api/service-area?q=${encodeURIComponent(q)}`);
       if (!res.ok) throw new Error(String(res.status));
-      setState({ status: "done", result: (await res.json()) as AreaResult });
+      const result = (await res.json()) as AreaResult;
+      if (result.status === "served" && result.zips.length === 1) {
+        saveArea({ zip: result.zips[0], label: result.label, deliveryFee: result.zone.deliveryFee });
+      }
+      setState({ status: "done", result });
     } catch {
       setState({ status: "error" });
     }

@@ -21,13 +21,13 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
     pricing && tier
       ? `It depends on the size and how long you keep it. Right now a ${tier.days}-day rental is ${list(
           SIZE_YARDS.map((y) => `${formatUsd(tier.prices[y])} for the ${y}-yard`),
-        )}. Longer rentals cost more. Your exact price shows before you pay.`
+        )}.${tier.extraDay ? ` Extra days are ${formatUsd(tier.extraDay)} each.` : ""} Your exact price shows before you pay.`
       : "It depends on the size, how long you keep it and where you are. Enter your ZIP to see today's price before you book.";
 
   const included = pricing
     ? `Drop-off, pickup, and disposal up to the included weight: ${list(
         SIZE_YARDS.map((y) => `${formatTons(pricing.sizes[y].includedTons)} with the ${y}-yard`),
-      )}. You pick a ${list(pricing.tiers.map((t) => String(t.days)))}-day rental. Outside our core area a delivery fee is added.`
+      )}. The starting price covers ${pricing.tiers[0].days} days. Outside our core area a delivery fee is added.`
     : "Drop-off, pickup, and disposal up to the included weight for your size. The booking page lists the included weight and rental lengths.";
 
   const zones = pricing ? Object.values(pricing.zones).sort((a, b) => a.deliveryFee - b.deliveryFee) : [];
@@ -50,12 +50,14 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "overweight",
           q: "What happens if my load is over the included weight?",
-          a: "Your load is weighed at the disposal site. If it's over the weight included with your dumpster, the extra weight is billed from that scale ticket. The rate is shown at checkout before you pay.",
+          a: `Your load is weighed at the disposal site. If it's over the weight included with your dumpster, the extra weight is billed from that scale ticket${
+            pricing?.overagePerTon ? ` at ${formatUsd(pricing.overagePerTon)} per ton` : ". The rate is shown at checkout before you pay"
+          }.`,
         },
         {
           id: "extra-days",
           q: "Can I keep the dumpster longer?",
-          a: "Yes. Extra days are billed by the day, and the daily rate is shown when you book. Text us before your pickup date so we can move it on the schedule.",
+          a: `Yes. Extra days are ${tier?.extraDay ? `${formatUsd(tier.extraDay)} each` : "billed by the day"}. Text us before your pickup date so we can move it on the schedule.`,
         },
       ],
     },

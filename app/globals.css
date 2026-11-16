@@ -352,22 +352,17 @@ a:hover {
   }
 }
 
-.menu {
-  position: static;
-}
-
-.menu > summary {
-  list-style: none;
+.menu__button {
   width: 44px;
   height: 44px;
   display: grid;
   place-items: center;
-  cursor: pointer;
+  background: none;
+  border: 0;
   border-radius: 8px;
-}
-
-.menu > summary::-webkit-details-marker {
-  display: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 62;
 }
 
 .menu__icon,
@@ -378,6 +373,7 @@ a:hover {
   height: 2px;
   background: #fff;
   content: "";
+  transition: transform 200ms ease, background-color 200ms ease;
 }
 
 .menu__icon {
@@ -394,16 +390,59 @@ a:hover {
   top: 7px;
 }
 
+.menu__icon--open {
+  background: transparent;
+}
+
+.menu__icon--open::before,
+.menu__icon--open::after {
+  background: var(--ink-primary);
+}
+
+.menu__icon--open::before {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu__icon--open::after {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.menu__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(30, 28, 25, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.menu__backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .menu__panel {
-  position: absolute;
-  left: 0;
+  position: fixed;
+  top: 0;
   right: 0;
-  top: 100%;
+  bottom: 0;
+  z-index: 61;
+  width: min(86vw, 360px);
+  overflow-y: auto;
   background: var(--surface-background);
-  border-bottom: 1px solid var(--border-surface);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
-  padding: 8px var(--gutter) 20px;
+  box-shadow: -12px 0 28px rgba(0, 0, 0, 0.18);
+  padding: 72px var(--gutter) calc(var(--mobile-bar-height) + 24px);
   color: var(--ink-primary);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 240ms ease, visibility 0s linear 240ms;
+}
+
+.menu__panel.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 240ms ease;
 }
 
 .menu__panel a {
@@ -657,6 +696,8 @@ a:hover {
 }
 
 .price small {
+  display: block;
+  margin-bottom: 2px;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--ink-mid);
@@ -714,6 +755,20 @@ a:hover {
   background: var(--card-background);
   border: 1px solid var(--border-surface);
   border-left: 6px solid var(--pink-bar);
+}
+
+.band {
+  background: var(--dark-hero);
+  color: #fff;
+  border-radius: var(--radius-panel);
+  padding: 28px 24px;
+  display: grid;
+  gap: 16px;
+  align-items: center;
+}
+
+.band p {
+  color: var(--ink-faint);
 }
 
 .tile {
@@ -1334,8 +1389,13 @@ a:hover {
     grid-template-columns: 1.2fr 0.8fr;
   }
 
-  .callout {
+  .callout,
+  .band {
     grid-template-columns: 1fr auto;
+  }
+
+  .band {
+    padding: 40px 44px;
   }
 
   .zones {
@@ -1360,7 +1420,13 @@ a:hover {
     scroll-behavior: auto;
   }
 
-  .btn {
+  .btn,
+  .menu__panel,
+  .menu__panel.is-open,
+  .menu__backdrop,
+  .menu__icon,
+  .menu__icon::before,
+  .menu__icon::after {
     transition: none;
   }
 }
