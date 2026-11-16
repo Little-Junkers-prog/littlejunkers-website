@@ -5,12 +5,11 @@ import { photos, type Photo } from "./media";
 // file is the interim single source for the Materials page and the FAQ. Do not
 // copy Bulk Pickup rules in here.
 //
-// OPEN QUESTION for Marcus: mattresses, tires and appliances. `fees` has active
-// per-item rows for them (keyed "prohibited_*"), BRAND-001 flags the old surcharge
-// guidance as conflicting, and the spec forbids presenting item fees. Until the
-// rule is confirmed they resolve to "ask" (text us first) and no fee is shown.
+// Mattresses, tires and appliances (owner rule, Nov 16 2026): accepted, with an
+// extra per-item disposal charge. The amounts live in Supabase `fees` and are
+// charged through the booking/admin systems; this page does not print them.
 
-export type MaterialStatus = "yes" | "instructions" | "no" | "ask";
+export type MaterialStatus = "yes" | "instructions" | "no";
 
 export type Material = {
   name: string;
@@ -24,8 +23,9 @@ export const statusLabel: Record<MaterialStatus, string> = {
   yes: "Yes, you can toss it",
   instructions: "Accepted with instructions",
   no: "No, not in the dumpster",
-  ask: "Text us first",
 };
+
+const EXTRA_CHARGE = "Accepted, with an extra disposal charge per item. The landfill handles these separately.";
 
 const HEAVY = "Allowed, but heavy. It can reach the included weight before the dumpster looks full.";
 
@@ -33,7 +33,7 @@ export const materials: Material[] = [
   // Allowed. First four are the page preview.
   { name: "Furniture", aliases: ["couch", "sofa", "chair", "table", "dresser", "desk", "bed frame"], status: "yes", photo: photos.loadFurniture },
   { name: "Household junk", aliases: ["boxes", "bags", "clutter", "toys", "clothes", "garage", "attic", "basement"], status: "yes", photo: photos.loadCleanout },
-  { name: "Wood and lumber", aliases: ["deck", "fence", "pallets", "plywood", "boards", "trim"], status: "yes", photo: photos.loadWood },
+  { name: "Wood and lumber", aliases: ["deck", "fence", "pallets", "plywood", "boards", "trim"], status: "yes", photo: photos.loadDeckLumber },
   { name: "Yard debris", aliases: ["branches", "brush", "limbs", "leaves", "shrubs"], status: "yes", photo: photos.loadYardWaste },
   { name: "Drywall", aliases: ["sheetrock", "plaster board"], status: "yes" },
   { name: "Flooring", aliases: ["carpet", "laminate", "vinyl", "hardwood", "padding"], status: "yes" },
@@ -56,6 +56,7 @@ export const materials: Material[] = [
     aliases: ["lithium", "car battery", "tool battery", "e-bike"],
     status: "instructions",
     note: "Don't put them in the dumpster. Set lithium and car batteries outside, at the front of the dumpster, and tell us. We'll coordinate recycling.",
+    photo: photos.batteriesOutside,
   },
   {
     name: "Motor oil",
@@ -65,8 +66,8 @@ export const materials: Material[] = [
   },
 
   // Not accepted. First four are the page preview.
+  { name: "Concrete", aliases: ["cement", "slab", "pavers"], status: "no", photo: photos.concreteLoads },
   { name: "Dirt", aliases: ["soil", "sod", "fill", "gravel"], status: "no" },
-  { name: "Concrete", aliases: ["cement", "slab", "pavers"], status: "no" },
   {
     name: "Compressed cylinders",
     aliases: ["propane", "helium tank", "fire extinguisher", "gas cylinder", "oxygen tank"],
@@ -82,14 +83,13 @@ export const materials: Material[] = [
   { name: "Wet or leaking paint", aliases: ["open paint"], status: "no", note: "Dry it out or seal the can first." },
   { name: "Motor oil over 10 quarts", status: "no" },
 
-  // Unresolved rule. See the note at the top of this file.
-  { name: "Mattresses and box springs", aliases: ["mattress", "box spring"], status: "ask", note: "These need separate handling. Text us before you load them." },
-  { name: "Tires", aliases: ["tire"], status: "ask", note: "These need separate handling. Text us before you load them." },
+  { name: "Mattresses and box springs", aliases: ["mattress", "box spring"], status: "instructions", note: EXTRA_CHARGE },
+  { name: "Tires", aliases: ["tire"], status: "instructions", note: EXTRA_CHARGE },
   {
     name: "Appliances",
     aliases: ["refrigerator", "fridge", "freezer", "washer", "dryer", "stove", "oven", "water heater", "ac unit", "microwave", "dishwasher"],
-    status: "ask",
-    note: "These need separate handling. Text us before you load them.",
+    status: "instructions",
+    note: EXTRA_CHARGE,
   },
 ];
 

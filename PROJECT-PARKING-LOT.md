@@ -84,10 +84,10 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 - **[WEB-CONTENT] The Little Junkers Story:** Still not drafted. `/about-us` carries a labeled slot for the link.
 
 ### [WEB-DATA-001] Canonical dumpster dimensions (AR-8)
-- **Status:** Open. Size pages show length/width read from the existing size diagrams (11: 12 × 7.5 ft, 16: 12 × 7.5 ft, 21: 12 × 8 ft) and height from `dumpster_sizes`. The 16-yard diagram says 5 ft high; `dumpster_sizes.height_ft` says 4.5. Marcus to confirm, then add length/width to `dumpster_sizes`.
+- **Status:** Resolved on the website Nov 16 from Marcus's E-Pak order specs: all sizes 12 ft × 8 ft; walls 3 / 4.5 / 6 ft. Remaining admin action: `dumpster_sizes.height_ft` says 3.5 for the 11-yard (spec says 36 in), and the table has no length/width columns. The old size diagrams in the booking repo show 7.5 ft widths and a 5 ft 16-yard and should not be reused.
 
 ### [WEB-DATA-002] Mattress / tire / appliance rule
-- **Status:** Open. `fees` has active per-item rows keyed `prohibited_*`; the spec forbids presenting item fees. Materials page currently says "text us first" and shows no fee. Marcus to confirm the rule.
+- **Status:** Resolved Nov 16. Owner rule: accepted, with an extra per-item disposal charge. The page says so and prints no amounts.
 
 ### [WEB-CONTENT-002] Blog migration (25 EN posts)
 - **Status:** Blocked in this session (live subpages could not be read). Templates, `/blog/[slug]` routing and `legacyPath` 301 support are built; no posts migrated.

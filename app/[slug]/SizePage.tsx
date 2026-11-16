@@ -121,15 +121,15 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             <dl className="spec">
               <div>
                 <dt>Length</dt>
-                <dd>{size.draftFootprint.lengthFt} ft</dd>
+                <dd>{size.box.lengthFt} ft</dd>
               </div>
               <div>
                 <dt>Width</dt>
-                <dd>{size.draftFootprint.widthFt} ft</dd>
+                <dd>{size.box.widthFt} ft</dd>
               </div>
               <div>
-                <dt>Height</dt>
-                <dd>{facts?.heightFt ? `${facts.heightFt} ft` : "Ask us"}</dd>
+                <dt>Wall height</dt>
+                <dd>{size.box.wallFt} ft</dd>
               </div>
             </dl>
             <p className="muted">

@@ -57,6 +57,9 @@ export const photos = {
 
   truckDelivering: job("truck-delivering", 1200, 1600, "Little Junkers hook-lift truck setting down a pink dumpster"),
   loadWood: job("load-wood-debris", 1200, 1600, "Dumpster filled with wood and construction debris"),
+  loadDeckLumber: job("load-deck-lumber", 1200, 1600, "Little Junkers dumpster filled with old deck boards and lumber"),
+  concreteLoads: job("no-concrete-two-dumpsters", 1600, 1205, "Two pink Little Junkers dumpsters loaded with broken concrete and stone"),
+  batteriesOutside: job("batteries-set-outside", 1600, 1200, "Three batteries set on the outside ledge of a pink Little Junkers dumpster instead of inside it"),
   loadFurniture: job("load-household-furniture", 1200, 1600, "Dumpster filled with household junk and furniture"),
   loadCleanout: job("load-household-cleanout", 1600, 1200, "Dumpster loaded with household cleanout items"),
   loadYardWaste: job("load-yard-waste", 1200, 1600, "11-yard Little Junkers dumpster loaded with branches and yard waste"),

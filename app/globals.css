@@ -1071,8 +1071,7 @@ a:hover {
   color: #fff;
 }
 
-.status--instructions,
-.status--ask {
+.status--instructions {
   background: var(--warning-background);
   border-color: var(--warning-border);
 }

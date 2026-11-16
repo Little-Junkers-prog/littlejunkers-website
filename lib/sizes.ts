@@ -16,10 +16,11 @@ export type SizeContent = {
   adjacent: { text: string; label: string; slug: string }[];
   fitsList: string[];
   weightNote: string;
-  // DRAFT, needs owner confirmation (AR-8). Length and width are read off the
-  // existing size diagrams in the booking repo; they are not in `dumpster_sizes`.
-  // Height renders from canonical data, not from here.
-  draftFootprint: { lengthFt: number; widthFt: number };
+  // Box dimensions from Marcus's E-Pak order specs (emails of Jul 30 2025 and
+  // Nov 12 2026): every size is 12' long x 96" wide; side walls are 36", 54" and 72".
+  // Note: Supabase `dumpster_sizes.height_ft` says 3.5 for the 11-yard. The build
+  // spec says 36" (3 ft), which also matches 11 cubic yards. Fix the table in admin.
+  box: { lengthFt: number; widthFt: number; wallFt: number };
   hero: Photo;
   gallery: Photo[];
   faqs: { q: string; a: string }[];
@@ -42,7 +43,7 @@ export const sizes: SizeContent[] = [
     adjacent: [{ text: "Need more room?", label: "See the 16-Yard", slug: SLUG_16 }],
     fitsList: ["Boxes, bags and household junk", "A room or two of old furniture", "Cabinets and countertops from a small remodel", "Brush and yard debris"],
     weightNote: "Dense material like shingles or tile can reach the weight limit before the dumpster looks full.",
-    draftFootprint: { lengthFt: 12, widthFt: 7.5 },
+    box: { lengthFt: 12, widthFt: 8, wallFt: 3 },
     hero: photos.y11SmallDriveway,
     gallery: [photos.y11Fayetteville, photos.y11Tyrone, photos.y11Senoia, photos.y11Newnan, photos.y11Wood],
     faqs: [
@@ -79,13 +80,13 @@ export const sizes: SizeContent[] = [
     ],
     fitsList: ["Flooring, drywall and trim from a remodel", "Deck boards and railing", "Several rooms of furniture", "Mixed household and project debris"],
     weightNote: "Roofing, tile and plaster add up fast. Check the weight before you book a heavy job.",
-    draftFootprint: { lengthFt: 12, widthFt: 7.5 },
+    box: { lengthFt: 12, widthFt: 8, wallFt: 4.5 },
     hero: photos.y16NewnanGarage,
     gallery: [photos.y16NewnanYard, photos.y16Fayetteville, photos.loadedBesideGarage, photos.y16Overloaded],
     faqs: [
       {
         q: "How big is a 16-yard dumpster?",
-        a: "It holds about 6 to 7 pickup-truck loads. The length, width and height are listed above.",
+        a: "It holds about 6 to 7 pickup-truck loads. All three sizes share the same 12 by 8 foot footprint. The 16-yard has 4.5-foot walls.",
       },
       {
         q: "Is the 16-yard right for a roofing job?",
@@ -114,7 +115,7 @@ export const sizes: SizeContent[] = [
     fitsList: ["A house full of furniture and boxes", "Cabinets, doors and fixtures from a big remodel", "Carpet and flooring from several rooms", "Bulky items that eat up space"],
     weightNote:
       "More room doesn't mean more weight. Heavy debris hits the weight limit long before a 21-yard is full, so a smaller size is usually the better pick for dense loads.",
-    draftFootprint: { lengthFt: 12, widthFt: 8 },
+    box: { lengthFt: 12, widthFt: 8, wallFt: 6 },
     hero: photos.y21PeachtreeCity,
     gallery: [photos.y21Fayetteville, photos.y21Fairburn, photos.y21Driveway, photos.y21OnTruck],
     faqs: [

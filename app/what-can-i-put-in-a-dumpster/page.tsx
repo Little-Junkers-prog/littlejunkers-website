@@ -48,7 +48,6 @@ export default function Materials() {
   const allowed = byStatus("yes");
   const instructions = byStatus("instructions");
   const prohibited = byStatus("no");
-  const ask = byStatus("ask");
 
   return (
     <>
@@ -95,24 +94,13 @@ export default function Materials() {
         <div className="container">
           <div className="section-head">
             <span className="status status--instructions">Accepted with instructions</span>
-            <h2 style={{ marginTop: 8 }}>Fine, if you set them out right</h2>
+            <h2 style={{ marginTop: 8 }}>Accepted, with a few conditions</h2>
           </div>
           <div className="grid grid--3">
             {instructions.map((item) => (
               <ItemCard item={item} key={item.name} />
             ))}
           </div>
-          {ask.length > 0 ? (
-            <div className="callout" style={{ marginTop: 20 }}>
-              <div>
-                <h3>Mattresses, tires or appliances?</h3>
-                <p className="muted">These need separate handling. Text us before you load them.</p>
-              </div>
-              <a className="btn btn--secondary" href={smsHref}>
-                Text us first
-              </a>
-            </div>
-          ) : null}
         </div>
       </section>
 
