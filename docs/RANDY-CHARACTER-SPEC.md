@@ -272,3 +272,40 @@ If Randy's canonical appearance changes:
 2. update the master reference asset;
 3. regenerate/re-export affected UI assets;
 4. document the change in the project change log/strategy record.
+
+---
+
+# 14. Master Reference and Holiday Guide
+
+**Added:** November 16, 2026 (owner direction: more professional look; seasonal appearance)
+
+## Master reference
+
+- Master file: `scripts/randy/build-randy.mjs` (the portrait) and `scripts/randy/raccoon-path.txt` (the approved raccoon mark, traced from `public/images/brand/little-junkers-logo.png`).
+- Style: realistic adult proportions, soft gradient shading, no heavy outlines, warm open smile with relaxed, arched brows. Professional and approachable, not cartoon-cute and not stern.
+- Every Randy image is generated from this one file (`npm run build:randy`). Never edit the SVGs in `public/images/brand/randy/` by hand.
+- **Status:** approved by Marcus as the master reference, November 16, 2026. New poses must be derived from it.
+
+## Holiday guide
+
+**Owner direction (Nov 16, 2026):** on holidays Randy wears a holiday hat in place of his black cap. This is the one approved exception to §3. His face, skin tone, beard, smile, polo, chest logo and proportions **never change**. A light background touch is allowed.
+
+| Variant | Dates (Eastern Time) | Hat | Background |
+| --- | --- | --- | --- |
+| `new-year` | Dec 31 – Jan 2 | Gold party hat with pink stripes | Confetti |
+| `valentines` | Feb 12 – 14 | Pink cap with a white heart | — |
+| `st-patricks` | Mar 16 – 17 | Green top hat with gold buckle | — |
+| `memorial-day` | Sat – Mon of Memorial Day weekend | Navy cap with a U.S. flag patch (respectful, nothing festive) | — |
+| `independence-day` | Jul 1 – 5 | Stars-and-stripes top hat | Fireworks |
+| `halloween` | Oct 25 – 31 | Friendly witch hat with orange band | — |
+| `veterans-day` | Nov 11 | Navy cap with a U.S. flag patch | — |
+| `thanksgiving` | Mon – Fri of Thanksgiving week | Autumn knit beanie with a leaf | — |
+| `christmas` | Dec 1 – 26 | Santa hat | Snowflakes |
+| `default` | All other days | Black cap with the raccoon logo | — |
+
+Rules:
+- If two windows overlap, the shorter, more specific holiday wins (order in `lib/randy-season.ts`).
+- Hats must read at the 44px chat-button size. Nothing covers the face or the chest logo.
+- No costumes beyond the hat, no religious symbols, no alcohol imagery, nothing scary.
+- Preview any variant on any page with `?randy=<variant>`, for example `?randy=christmas`.
+- To add or change a holiday: edit `scripts/randy/seasons.mjs` (hat art) and `lib/randy-season.ts` (dates), run `npm run build:randy` and `npm run check:randy`, and record the change here.

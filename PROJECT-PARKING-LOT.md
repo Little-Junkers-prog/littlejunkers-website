@@ -75,3 +75,34 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 - **Currently aligned / do not change based on this audit:** approved color palette; system font stack; included tonnage values; no active fuel surcharge.
 - **Process:** Add newly discovered non-color conflicts during each page review. Prepare a consolidated Brand Guide v1.1 update after the mobile audit rather than editing the guide piecemeal.
 
+
+## Status updates — November 16, 2026 (English first-draft PR, branch `v2/english-first-draft`)
+
+- **Media Integration:** In progress. Temporary image folder `public/images/` + manifest `lib/media.ts` (owner decision Nov 16). 35 real photos resized from the booking repo's first-party media. Swap to Supabase `media_library` when the uploader (D-008) ships. Photo slots still needed are listed in the PR.
+- **Global Company Data:** Interim. Public company facts now live in one file, `lib/company.ts`. Supabase table still parked.
+- **Chatbot Integration:** Dummy chatbot script removed with the Sprint 1 scaffold. Randy bubble not yet built.
+- **[WEB-CONTENT] The Little Junkers Story:** Still not drafted. `/about-us` carries a labeled slot for the link.
+
+### [WEB-DATA-001] Canonical dumpster dimensions (AR-8)
+- **Status:** Resolved on the website Nov 16 from Marcus's E-Pak order specs: all sizes 12 ft × 8 ft; walls 3 / 4.5 / 6 ft. Remaining admin action: `dumpster_sizes.height_ft` says 3.5 for the 11-yard (spec says 36 in), and the table has no length/width columns. The old size diagrams in the booking repo show 7.5 ft widths and a 5 ft 16-yard and should not be reused.
+
+### [WEB-DATA-002] Mattress / tire / appliance rule
+- **Status:** Resolved Nov 16. Owner rule: accepted, with an extra per-item disposal charge. The page says so and prints no amounts.
+
+### [WEB-CONTENT-002] Blog migration (25 EN posts)
+- **Status:** Blocked in this session (live subpages could not be read). Templates, `/blog/[slug]` routing and `legacyPath` 301 support are built; no posts migrated.
+
+### Parked from this PR (not built, by design)
+- Use My Location (needs a reverse-geocoding decision), Weight Estimator, ZIP-boundary coverage map, Randy bubble, consent banner + GTM/Consent Mode, `lj_ft` cookie and call/text tap events, Español switch, Pricing / Size Guide / Residential / Commercial / Contact / legal pages.
+
+## Blog migration (Nov 16, 2026)
+
+- WEB-CONTENT-002: **Done in draft.** Owner decision: new clean URLs at `/blog/<slug>`, migrate only posts that perform or add SEO value, drop date-specific posts. 10 of 25 posts migrated with single-hop 301s from the old English and Spanish URLs. 15 retired posts redirect to the closest page (size page, merged guide or `/blog`). Odoo tag, page and archive URLs redirect to `/blog`.
+- Copy in migrated posts was corrected to current facts (no hard-coded prices, no 10/30/40-yard sizes, no dumpster bags or portable storage, no unverified customer quotes, concrete is not accepted, hours). Owner review needed before cutover.
+- Spanish blog: old `/es/blog/viaje-1/*` URLs point at the English posts until the Spanish blog exists (D-004).
+
+## Randy and legal (Nov 16, 2026)
+
+- RANDY-ART-001: Randy redrawn Nov 16 (professional style, warm smile) from one master generator (`scripts/randy/`). Holiday hats per spec §14 (owner direction). Approved by Marcus as the master reference (Nov 16).
+- RANDY-ENV-001: `RANDY_SITE_TOKEN` must be set on the Vercel website project (Preview + Production). Claude was not permitted to set it. Until it is, the live Randy backend rejects website chats and the site shows the call/text fallback.
+- LEGAL-001: Privacy, terms, cookie and texting pages rewritten to current facts. Owner confirmed Nov 16: customer_service@littlejunkersllc.com is the contact address (sitewide), the 24-hour change/cancellation rule stands, free driveway boards on request are accurate. Remaining: attorney review before launch.
