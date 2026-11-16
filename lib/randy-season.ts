@@ -13,7 +13,7 @@ export type RandyVariant =
   | "halloween"
   | "veterans-day"
   | "thanksgiving"
-  | "winter-holidays";
+  | "christmas";
 
 type Day = { y: number; m: number; d: number }; // m is 1-12
 
@@ -42,13 +42,13 @@ export function randyVariantFor(t: Day): RandyVariant {
   if (inRange(t, 10, 25, 31)) return "halloween";
   if (inRange(t, 11, 11, 11)) return "veterans-day";
   if (inRange(t, 11, thanksgiving - 3, thanksgiving + 1)) return "thanksgiving"; // Mon–Fri
-  if (inRange(t, 12, 1, 30)) return "winter-holidays";
+  if (inRange(t, 12, 1, 26)) return "christmas";
   return "default";
 }
 
 export const VARIANTS: RandyVariant[] = [
   "default", "new-year", "valentines", "st-patricks", "memorial-day",
-  "independence-day", "halloween", "veterans-day", "thanksgiving", "winter-holidays",
+  "independence-day", "halloween", "veterans-day", "thanksgiving", "christmas",
 ];
 
 export function todayInEastern(now = new Date()): Day {
