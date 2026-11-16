@@ -18,13 +18,14 @@ export type Post = {
   slug: string;
   title: string;
   date: string;
+  updated?: string;
   author: string;
   excerpt: string;
   category: PostCategory;
   index: boolean;
   featured: boolean;
   hero?: { src: string; alt: string };
-  legacyPath?: string;
+  legacyPaths: string[];
   seoTitle?: string;
   seoDescription?: string;
   html: string;
@@ -51,13 +52,14 @@ function load(): Post[] {
       slug,
       title: String(data.title),
       date: new Date(data.date).toISOString().slice(0, 10),
+      updated: data.updated ? new Date(data.updated).toISOString().slice(0, 10) : undefined,
       author: String(data.author ?? "Little Junkers"),
       excerpt: String(data.excerpt ?? ""),
       category: data.category,
       index: data.index,
       featured: data.featured === true,
       hero: data.hero,
-      legacyPath: data.legacyPath,
+      legacyPaths: legacyPathsOf(data),
       seoTitle: data.seoTitle,
       seoDescription: data.seoDescription,
       html: marked.parse(content, { async: false }) as string,
@@ -65,6 +67,17 @@ function load(): Post[] {
   }
   return posts.sort((a, b) => b.date.localeCompare(a.date));
 }
+
+// `legacyPath` may be one old URL or a list (English post plus its old Spanish mirror).
+export function legacyPathsOf(data: Record<string, unknown>): string[] {
+  const raw = data.legacyPath;
+  if (typeof raw === "string") return [raw];
+  if (Array.isArray(raw)) return raw.filter((item): item is string => typeof item === "string");
+  return [];
+}
+
+// Marker an author puts in a post body to show the live rate table there.
+export const LIVE_PRICES_MARKER = "<!--live-prices-->";
 
 let cache: Post[] | null = null;
 export function getPosts(): Post[] {

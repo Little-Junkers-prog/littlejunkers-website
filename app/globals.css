@@ -1690,3 +1690,40 @@ a:hover {
     transition: none;
   }
 }
+
+/* Article rate table (live canonical prices) */
+.price-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.price-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: var(--card-background);
+}
+
+.price-table th,
+.price-table td {
+  border: 1px solid var(--border-card);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.price-table thead th {
+  background: var(--surface-background);
+}
+
+.price-table .muted {
+  font-weight: 400;
+}
+
+.price-table p {
+  margin-top: 10px;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--pink-bar);
+  padding: 4px 0 4px 16px;
+}

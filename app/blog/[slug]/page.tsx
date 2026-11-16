@@ -4,7 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { formatDate, getPost, getPosts } from "@/lib/blog";
+import PriceTable from "@/components/PriceTable";
+import { LIVE_PRICES_MARKER, formatDate, getPost, getPosts } from "@/lib/blog";
+import { getPricing } from "@/lib/pricing";
 import { bookingUrl, company, siteUrl } from "@/lib/company";
 import { indexable } from "@/lib/indexing";
 
@@ -31,6 +33,9 @@ export default async function BlogPost({ params }: Props) {
   const post = getPost((await params).slug);
   if (!post) notFound();
   const url = `${siteUrl}/blog/${post.slug}`;
+  // A post can place the live rate table with a marker; prices are never typed into posts.
+  const parts = post.html.split(LIVE_PRICES_MARKER);
+  const pricing = parts.length > 1 ? await getPricing() : null;
 
   return (
     <>
@@ -44,7 +49,8 @@ export default async function BlogPost({ params }: Props) {
         <header className="page-hero">
           <div className="container" style={{ maxWidth: 800 }}>
             <p className="post-meta">
-              {formatDate(post.date)} · {post.author}
+              {formatDate(post.date)}
+              {post.updated && post.updated !== post.date ? ` · Updated ${formatDate(post.updated)}` : ""} · {post.author}
             </p>
             <h1 style={{ marginTop: 8 }}>{post.title}</h1>
             {post.excerpt ? <p className="lead">{post.excerpt}</p> : null}
@@ -59,7 +65,16 @@ export default async function BlogPost({ params }: Props) {
               </div>
             ) : null}
             {/* Post bodies are first-party Markdown from this repository. */}
-            <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
+            {parts.map((html, index) => (
+              <div key={index}>
+                {index > 0 ? (
+                  <div className="prose" style={{ margin: "1.1em 0" }}>
+                    <PriceTable pricing={pricing} />
+                  </div>
+                ) : null}
+                <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
+              </div>
+            ))}
 
             <ul className="chips" aria-label="Share this article" style={{ marginTop: 32 }}>
               <li>
@@ -105,7 +120,8 @@ export default async function BlogPost({ params }: Props) {
           "@type": "BlogPosting",
           headline: post.title,
           datePublished: post.date,
-          author: { "@type": "Person", name: post.author },
+          dateModified: post.updated ?? post.date,
+          author: { "@type": "Organization", name: post.author },
           publisher: { "@id": `${siteUrl}/#business` },
           mainEntityOfPage: url,
           ...(post.hero ? { image: `${siteUrl}${post.hero.src}` } : {}),

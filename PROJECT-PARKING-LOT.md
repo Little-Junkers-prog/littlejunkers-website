@@ -94,3 +94,9 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 
 ### Parked from this PR (not built, by design)
 - Use My Location (needs a reverse-geocoding decision), Weight Estimator, ZIP-boundary coverage map, Randy bubble, consent banner + GTM/Consent Mode, `lj_ft` cookie and call/text tap events, Español switch, Pricing / Size Guide / Residential / Commercial / Contact / legal pages.
+
+## Blog migration (Nov 16, 2026)
+
+- WEB-CONTENT-002: **Done in draft.** Owner decision: new clean URLs at `/blog/<slug>`, migrate only posts that perform or add SEO value, drop date-specific posts. 10 of 25 posts migrated with single-hop 301s from the old English and Spanish URLs. 15 retired posts redirect to the closest page (size page, merged guide or `/blog`). Odoo tag, page and archive URLs redirect to `/blog`.
+- Copy in migrated posts was corrected to current facts (no hard-coded prices, no 10/30/40-yard sizes, no dumpster bags or portable storage, no unverified customer quotes, concrete is not accepted, hours). Owner review needed before cutover.
+- Spanish blog: old `/es/blog/viaje-1/*` URLs point at the English posts until the Spanish blog exists (D-004).
