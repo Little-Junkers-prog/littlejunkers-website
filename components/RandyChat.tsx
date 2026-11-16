@@ -1,9 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { VARIANTS, randyAvatarSrc, randyVariantFor, todayInEastern, type RandyVariant } from "@/lib/randy-season";
 import { bookingUrl, company } from "@/lib/company";
 
-const AVATAR = "/images/brand/randy-avatar.svg";
+// Today's Randy (holiday guide). The server renders the default; the browser
+// switches to the seasonal look for today's Eastern date. `?randy=<variant>`
+// previews a variant for review.
+function currentVariant(): RandyVariant {
+  const preview = new URLSearchParams(window.location.search).get("randy") as RandyVariant | null;
+  if (preview && VARIANTS.includes(preview)) return preview;
+  return randyVariantFor(todayInEastern());
+}
+const noop = () => () => {};
+function useRandyAvatar() {
+  return randyAvatarSrc(useSyncExternalStore(noop, currentVariant, () => "default"));
+}
 const FALLBACK = `Sorry, I'm having trouble connecting. Please call or text ${company.phoneDisplay}, or see prices and book here: ${bookingUrl()}`;
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -34,6 +46,7 @@ function withLinks(text: string) {
 // native modal dialog (full screen on phones) so focus is trapped, Escape
 // closes it and focus returns to the bubble.
 export default function RandyChat() {
+  const AVATAR = useRandyAvatar();
   const dialog = useRef<HTMLDialogElement>(null);
   const log = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);

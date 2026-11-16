@@ -9,7 +9,7 @@ index: true
 
 **Website:** www.littlejunkersllc.com, including our booking pages at book.littlejunkersllc.com
 
-**Contact:** (470) 548-4733 | info@littlejunkersllc.com
+**Contact:** (470) 548-4733 | customer_service@littlejunkersllc.com
 
 ## 1) Overview
 
@@ -104,7 +104,7 @@ We take reasonable administrative, technical, and physical steps to protect your
 - Opt out of marketing emails using the unsubscribe link in the email
 - Change your cookie choices with **Privacy Choices** in the website footer
 
-To make a request, email **info@littlejunkersllc.com** or call **(470) 548-4733**.
+To make a request, email **customer_service@littlejunkersllc.com** or call **(470) 548-4733**.
 
 ## 11) Children's privacy
 

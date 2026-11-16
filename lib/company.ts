@@ -13,7 +13,7 @@ export const company = {
   // is A2P 10DLC registered, logs messages and can auto-reply. The number above
   // stays the call number and the only number printed on the page.
   textE164: "+14707125079",
-  email: "info@littlejunkersllc.com",
+  email: "customer_service@littlejunkersllc.com",
   // Mailing address only (charter §7.6). Never present it as a storefront.
   locality: "Peachtree City",
   region: "GA",

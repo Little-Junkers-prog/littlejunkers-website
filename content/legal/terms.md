@@ -13,7 +13,7 @@ Little Junkers LLC Terms and Conditions for Dumpster Rentals
 
 **Delivery Fee:** Delivery is included in some service areas. Other areas carry a delivery fee based on your delivery ZIP code. Any delivery fee is shown before you pay.
 
-**Placement:** You do not need to be home for delivery if the placement spot is clear and you have told us where you want the dumpster. You are responsible for choosing a placement spot and for any permits or HOA approvals needed for it.
+**Placement:** You do not need to be home for delivery if the placement spot is clear and you have told us where you want the dumpster. You are responsible for choosing a placement spot and for any permits or HOA approvals needed for it. Driveway protection boards are available on request at no extra charge.
 
 **Right to Deny Delivery:** Little Junkers may decline or stop a delivery if the site is unsafe or inaccessible, or for any other reason. Rentals canceled by Little Junkers will be fully refunded.
 
@@ -69,4 +69,4 @@ By booking, you agree to receive texts and calls about your rental as described 
 
 **Acceptance:** The customer agrees to these terms and conditions by booking a rental or by accepting delivery of the dumpster.
 
-**Contact:** Little Junkers LLC, (470) 548-4733, info@littlejunkersllc.com
+**Contact:** Little Junkers LLC, (470) 548-4733, customer_service@littlejunkersllc.com

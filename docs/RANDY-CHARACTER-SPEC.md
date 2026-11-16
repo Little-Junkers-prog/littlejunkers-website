@@ -272,3 +272,40 @@ If Randy's canonical appearance changes:
 2. update the master reference asset;
 3. regenerate/re-export affected UI assets;
 4. document the change in the project change log/strategy record.
+
+---
+
+# 14. Master Reference and Holiday Guide
+
+**Added:** November 16, 2026 (owner direction: more professional look; seasonal appearance)
+
+## Master reference
+
+- Master file: `scripts/randy/build-randy.mjs` (the portrait) and `scripts/randy/raccoon-path.txt` (the approved raccoon mark, traced from `public/images/brand/little-junkers-logo.png`).
+- Style: realistic adult proportions, soft gradient shading, no heavy outlines, calm closed-mouth smile. Professional, not cartoon-cute.
+- Every Randy image is generated from this one file (`npm run build:randy`). Never edit the SVGs in `public/images/brand/randy/` by hand.
+- **Status:** draft master, awaiting Marcus's approval. No other poses until approved.
+
+## Holiday guide
+
+Randy's face, skin tone, beard, cap, cap logo, chest logo and proportions **never change**. A holiday adds one accessory and, at most, a light background touch in brand colors.
+
+| Variant | Dates (Eastern Time) | What changes |
+| --- | --- | --- |
+| `new-year` | Dec 31 – Jan 2 | Confetti in the background |
+| `valentines` | Feb 12 – 14 | Pink heart lapel pin |
+| `st-patricks` | Mar 16 – 17 | Shamrock lapel pin |
+| `memorial-day` | Sat – Mon of Memorial Day weekend | U.S. flag lapel pin (no fireworks; it is a day of remembrance) |
+| `independence-day` | Jul 1 – 5 | U.S. flag lapel pin and fireworks in the background |
+| `halloween` | Oct 25 – 31 | Pumpkin lapel pin |
+| `veterans-day` | Nov 11 | U.S. flag lapel pin |
+| `thanksgiving` | Mon – Fri of Thanksgiving week | Autumn leaf lapel pin |
+| `winter-holidays` | Dec 1 – 30 | Pink-and-white knit scarf and snowflakes |
+| `default` | All other days | Standard Randy |
+
+Rules:
+- If two windows overlap, the shorter, more specific holiday wins (order in `lib/randy-season.ts`).
+- Pins sit on the wearer's right chest so the logo on the left chest stays visible. Nothing covers the face, cap or either raccoon mark.
+- No costumes, hats over the cap, religious symbols, or alcohol imagery.
+- Preview any variant on any page with `?randy=<variant>`, for example `?randy=halloween`.
+- To add or change a holiday: edit `scripts/randy/seasons.mjs` (art) and `lib/randy-season.ts` (dates), run `npm run build:randy` and `npm run check:randy`, and record the change here.

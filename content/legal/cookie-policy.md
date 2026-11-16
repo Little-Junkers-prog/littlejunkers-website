@@ -40,6 +40,6 @@ We may update this Cookie Policy from time to time. Updates will be posted on th
 
 **Phone:** (470) 548-4733
 
-**Email:** info@littlejunkersllc.com
+**Email:** customer_service@littlejunkersllc.com
 
 See also our [Privacy Policy](/privacy).

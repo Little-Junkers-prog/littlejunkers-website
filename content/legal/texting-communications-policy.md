@@ -9,7 +9,7 @@ index: false
 
 **Website:** [www.littlejunkersllc.com](https://www.littlejunkersllc.com/)
 
-**Customer Support:** (470) 548-4733 | info@littlejunkersllc.com
+**Customer Support:** (470) 548-4733 | customer_service@littlejunkersllc.com
 
 **Text messages are sent from:** (470) 712-5079
 
@@ -59,7 +59,7 @@ Reply **STOP** to any message to stop texts. You will receive one final message 
 
 ## Help
 
-Reply **HELP** for help, or contact us at **(470) 548-4733** or **info@littlejunkersllc.com**.
+Reply **HELP** for help, or contact us at **(470) 548-4733** or **customer_service@littlejunkersllc.com**.
 
 ## Phone number changes
 
