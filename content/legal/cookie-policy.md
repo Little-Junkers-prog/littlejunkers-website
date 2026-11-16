@@ -3,42 +3,32 @@ title: Cookie Policy
 index: false
 ---
 
-**Effective Date:** December 18, 2025
+**Effective Date:** November 16, 2026
 
-Little Junkers LLC ("Little Junkers," "we," "us," "our") uses cookies and similar technologies to operate our website and improve your experience.
+Little Junkers LLC ("Little Junkers," "we," "us," "our") uses cookies and similar technologies on www.littlejunkersllc.com and our booking pages.
 
 ## What are cookies?
 
-Cookies are small bits of text sent by our servers to your computer or device when you access our services. They are stored in your browser and later sent back to our servers so that we can provide contextual content. Without cookies, using the web would be a much more frustrating experience. We use them to support your activities on our website. For example, your session (so you don't have to login again) or your shopping cart.
+Cookies are small text files a website stores in your browser. Similar technologies, such as browser local storage and session storage, work the same way. We call them all "cookies" in this policy.
 
-Cookies are also used to help us understand your preferences based on previous or current activity on our website (the pages you have visited), your language and country, which enables us to provide you with improved services. We also use cookies to help us compile aggregate data about site traffic and site interaction so that we can offer better site experiences and tools in the future.
+## Your choices
 
-## Why we use cookies
+When you first visit, we ask before using any optional cookies. Analytics and advertising cookies stay off unless you choose **Accept All** or turn them on under **Manage Preferences**. You can change your choice at any time with **Privacy Choices** in the website footer.
 
-We use cookies to:
+You can also block or delete cookies in your browser settings. Blocking essential cookies may stop parts of the site, such as booking, from working.
 
-- Keep the website working properly (security, login/session, shopping cart)
-- Remember preferences (language, region, display behavior)
-- Understand how visitors use our site so we can improve it
-- Measure marketing effectiveness (where allowed and when enabled)
+## Cookies we use
 
-### Types of cookies we use
-
-Here is an overview of the cookies that may be stored on your device when you visit our website:
-
-| Category of Cookie | Purpose | Examples |
+| Category | Purpose | Examples |
 | --- | --- | --- |
-| Session & Security (essential) | Authenticate users, protect user data and allow the website to deliver the services users expects, such as maintaining the content of their cart, or allowing file uploads. The website will not work properly if you reject or discard those cookies. | session_id (Odoo) |
-| Preferences (essential) | Remember information about the preferred look or behavior of the website, such as your preferred language or region. Your experience may be degraded if you discard those cookies, but the website will still work. | frontend_lang (Odoo) |
-| Interaction History (optional) | Used to collect information about your interactions with the website, the pages you've seen, and any specific marketing campaign that brought you to the website. We may not be able to provide the best service to you if you reject those cookies, but the website will work. | im_livechat_previous_operator (Odoo), utm_campaign (Odoo), utm_source (Odoo), utm_medium (Odoo) |
-| Advertising & Marketing (optional) | Used to make advertising more engaging to users and more valuable to publishers and advertisers, such as providing more relevant ads when you visit other websites that display ads or to improve reporting on ad campaign performance. Note that some third-party services may install additional cookies on your browser in order to identify you. You may opt-out of a third-party's use of cookies by visiting the [Network Advertising Initiative opt-out page](https://optout.networkadvertising.org/?c=1). The website will still work if you reject or discard those cookies. | __gads (Google), __gac (Google) |
-| Analytics (optional) | Understand how visitors engage with our website, via Google Analytics. Learn more about [Analytics cookies and privacy information.](https://developers.google.com/analytics/resources/concepts/gaConceptsCookies?hl=en) The website will still work if you reject or discard those cookies. | _ga (Google), _gat (Google), _gid (Google), _gac_* (Google) |
+| Essential | Make the website and booking work: remember your cookie choice, carry your ZIP code from page to page so prices are accurate, keep your Randy chat conversation together, and help prevent payment fraud during checkout. These are always on. | lj_consent (your cookie choice), lj_area (your ZIP code and service area, cleared when you close the tab), rc_sid (Randy chat conversation), Stripe cookies such as __stripe_mid and __stripe_sid (booking checkout only) |
+| Attribution (essential to our records) | Remember which page or campaign first brought you to us, so we can tell which advertising actually leads to rentals. It is not used to show you ads. | lj_ft (first visit source and landing page) |
+| Analytics (optional) | Understand how visitors use the site so we can improve it, using Google Analytics. Off unless you allow it. [How Google uses analytics cookies.](https://support.google.com/analytics/answer/11397207) | _ga, _ga_* (Google) |
+| Advertising (optional) | Measure whether our Google ads lead to bookings and, where allowed, show more relevant ads. Off unless you allow it. You can also opt out of interest-based ads at the [Network Advertising Initiative opt-out page](https://optout.networkadvertising.org/?c=1). | _gcl_au, _gcl_aw (Google) |
 
-### Managing cookies
+## Do Not Track
 
-You can choose to have your computer warn you each time a cookie is being sent, or you can choose to turn off all cookies. Each browser is a little different, so look at your browser's Help menu to learn the correct way to modify your cookies.
-
-We do not currently support Do Not Track signals, as there is no industry standard for compliance.
+We do not currently respond to Do Not Track browser signals, because there is no industry standard for them. Use **Privacy Choices** to turn off optional cookies.
 
 ## Updates to this Cookie Policy
 
@@ -46,10 +36,10 @@ We may update this Cookie Policy from time to time. Updates will be posted on th
 
 ## Contact
 
-If you have questions about this Cookie Policy, contact us at:
-
 **Little Junkers LLC**
 
-**Phone:** 470-548-4733
+**Phone:** (470) 548-4733
 
-**Email:** customer_service@littlejunkersllc.com
+**Email:** info@littlejunkersllc.com
+
+See also our [Privacy Policy](/privacy).

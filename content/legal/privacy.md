@@ -3,102 +3,113 @@ title: Privacy Policy
 index: true
 ---
 
-**Effective Date:** December 18, 2025
+**Effective Date:** November 16, 2026
 
 **Business Name:** Little Junkers LLC ("Little Junkers," "we," "us," "our")
 
-**Website:** www.littlejunkersllc.com
+**Website:** www.littlejunkersllc.com, including our booking pages at book.littlejunkersllc.com
 
-**Contact:** 470-548-4733 | customer_service@littlejunkersllc.com
+**Contact:** (470) 548-4733 | info@littlejunkersllc.com
 
 ## 1) Overview
 
-This Privacy Policy explains how Little Junkers collects, uses, shares, and protects your information when you visit our website, request a quote, book services, rent dumpsters or storage, communicate with us, or otherwise interact with our business.
+This Privacy Policy explains how Little Junkers collects, uses, shares, and protects your information when you visit our website, check pricing for your ZIP code, chat with Randy (our digital rental assistant), book or rent a dumpster, communicate with us, or otherwise interact with our business.
 
 ## 2) Information we collect
-
-We may collect the following categories of information:
 
 ### A) Information you provide
 
 - Name, phone number, email address
-- Service address and/or delivery location
-- Billing address
-- Order details (dumpster size, rental dates, instructions, photos you send us)
-- Communications (emails, texts, chat messages, call notes)
-- Any information you choose to provide in forms or messages
+- Delivery address, placement instructions, and billing address
+- Order details (dumpster size, rental dates, requested delivery time, project type, photos you send us)
+- Communications with us: calls, texts, emails, and chat messages with Randy
+- Your text message and marketing preferences
+- Any other information you choose to give us in forms or messages
 
 ### B) Information collected automatically
 
-When you visit our website, we may automatically collect:
+When you use our website, we may automatically collect:
 
 - Device and browser information
-- IP address (approximate location may be inferred)
-- Pages visited, clicks, and time spent on pages
-- Referral source (how you found us)
+- IP address (from which an approximate location may be inferred)
+- Pages visited, buttons tapped, and time spent on pages
+- How you found us (for example, the website, search term, or ad campaign that sent you)
+
+Some of this is collected with cookies and similar technologies. See our [Cookie Policy](/cookie-policy).
 
 ### C) Payment information
 
-If you make a payment online, payments are processed by third-party payment processors. We do **not** store full credit card numbers on our servers. We may receive payment confirmation and limited billing details needed for accounting and customer support.
+Online payments are processed by Stripe. We do **not** receive or store full card numbers. We receive payment confirmation and limited details (such as card brand and last four digits) for accounting and customer support.
 
 ## 3) How we use your information
 
-- Provide and manage rentals and services (delivery, pickup, scheduling, extensions)
-- Communicate with you by phone, text, or email about your order and support requests
-- Send invoices, payment links, receipts, and service notifications
-- Improve our website, services, and customer experience
-- Prevent fraud, protect safety, and enforce our policies
-- Comply with legal obligations and maintain business records
+- Show pricing and confirm we serve your address
+- Provide and manage your rental: delivery, pickup, scheduling, extensions, and billing
+- Contact you by phone, text, or email about your order and support requests
+- Send receipts, invoices, payment links, and service notifications
+- Answer your questions through Randy, and send you a booking link if you ask for one
+- Understand which pages and campaigns bring customers to us, and improve our website and service
+- Send marketing messages, only if you have opted in
+- Prevent fraud, protect safety, and enforce our [Terms and Conditions](/terms)
+- Comply with legal obligations and keep business records
 
 ## 4) Text messaging and communications
 
-By providing your phone number, you consent to receive text messages (SMS/MMS) from Little Junkers related to your service, including scheduling updates, delivery and pickup notifications, invoices, and customer support.
+When you book with us or give us your mobile number for your rental, you agree to receive text messages (SMS/MMS) about that rental, such as delivery and pickup scheduling, on-the-way notices, invoices, and customer support. Marketing texts are sent only if you separately opt in. Consent to marketing is not a condition of purchase.
 
-**Message and data rates may apply.** Message frequency varies based on your interaction with us.
+Our texts come from **(470) 712-5079**. **Message and data rates may apply.** Message frequency varies. Reply **STOP** to opt out at any time, or **HELP** for help.
 
-You can opt out at any time by replying **STOP**. For help, reply **HELP** or contact us at **470-548-4733**.
+**No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.** Text messaging opt-in data and consent are not shared with any third parties, except the messaging providers that deliver our texts on our behalf.
 
-For additional details, please see our [Texting & Communications Policy](/texting-communications-policy).
+For details, see our [Texting & Communications Policy](/texting-communications-policy).
 
-## 5) How we share information
+## 5) Chatting with Randy
 
-We do **not** sell your personal information or share your personal information for third-party marketing purposes.
+Randy is an automated digital assistant, not a live person. Messages you type to Randy are processed by an AI service provider (OpenAI) to generate replies, and we keep a record of the conversation to follow up on your request, improve our service, and resolve problems. If you give Randy your name, phone number, email, or ZIP code, we may use them to look up your rental, create a booking link, or contact you about your request. Please don't share payment card numbers or other sensitive information in the chat.
 
-We may share limited information with trusted service providers that help us run our business, such as:
+## 6) How we share information
 
-- Website hosting, forms, and analytics providers
-- Customer relationship management (CRM) and business software (including Odoo)
-- Messaging providers (such as Twilio) to send text messages
-- Payment processors to process transactions
-- Email service providers to send invoices and communications
-- Accounting and tax professionals (as needed)
+We do **not** sell your personal information, and we do not share it for third-party marketing.
 
-We may also share information if required by law, to protect rights or safety, or during a business transaction (for example, a merger, acquisition, or sale of assets).
+We share information with service providers that help us run our business, only as needed for them to do that work:
 
-## 6) Cookies and analytics
+- Website and booking hosting (Vercel)
+- Our customer, rental, and scheduling database (Supabase)
+- Payment processing (Stripe)
+- Text messaging (Twilio)
+- AI processing for Randy chat messages (OpenAI)
+- Website analytics and advertising measurement (Google), only with your consent
+- Email providers that deliver receipts and messages
+- Accounting and tax professionals, as needed
 
-We may use cookies and similar technologies to enable website functionality, remember preferences, understand website traffic and performance, and improve website effectiveness.
+We may also share information if required by law, to protect rights or safety, or as part of a business transaction (for example, a merger, acquisition, or sale of assets).
 
-You can control cookies through your browser settings. Note that disabling cookies may affect some site functionality.
+## 7) Cookies and analytics
 
-## 7) Data retention
+We use cookies and similar technologies that the website needs to work, and, only if you agree, analytics and advertising cookies. You can accept, reject, or change your choice at any time using **Privacy Choices** in the website footer. Details are in our [Cookie Policy](/cookie-policy).
 
-We keep personal information only as long as necessary to provide services, maintain business, tax, and legal records, resolve disputes, enforce agreements, and comply with applicable carrier and legal requirements related to messaging and communications.
+## 8) Data retention
 
-## 8) Security
+We keep personal information only as long as needed to provide our services, keep business, tax, and legal records, resolve disputes, enforce agreements, and meet carrier and legal requirements for messaging consent records.
 
-We take reasonable administrative, technical, and physical steps to protect your information. However, no method of transmission or storage is 100% secure, and we cannot guarantee absolute security.
+## 9) Security
 
-## 9) Your choices and rights
+We take reasonable administrative, technical, and physical steps to protect your information. No method of transmission or storage is 100% secure, and we cannot guarantee absolute security.
 
-You may request access to, correction of, or updates to your personal information, and you may opt out of marketing emails where applicable. You can opt out of text messages at any time by replying **STOP**.
+## 10) Your choices and rights
 
-To make a request, contact us at **customer_service@littlejunkersllc.com** or call **470-548-4733**.
+- Ask to see, correct, or update the personal information we hold about you
+- Ask us to delete your information, subject to records we must keep by law
+- Opt out of text messages at any time by replying **STOP**
+- Opt out of marketing emails using the unsubscribe link in the email
+- Change your cookie choices with **Privacy Choices** in the website footer
 
-## 10) Children's privacy
+To make a request, email **info@littlejunkersllc.com** or call **(470) 548-4733**.
+
+## 11) Children's privacy
 
 Our services are not directed to children under 13, and we do not knowingly collect personal information from children.
 
-## 11) Changes to this policy
+## 12) Changes to this policy
 
 We may update this Privacy Policy from time to time. Updates will be posted on this page with a new Effective Date.

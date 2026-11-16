@@ -3,54 +3,70 @@ title: Standard Terms and Conditions of Service
 index: true
 ---
 
-Little Junkers, LLC Terms and Conditions for Dumpster and Storage Rentals
+**Effective Date:** November 16, 2026
 
-## 1. Delivery Terms
+Little Junkers LLC Terms and Conditions for Dumpster Rentals
 
-**Standard Delivery:** We strive to make your rental experience as convenient as possible. Delivery of rented items will be completed within 48 hours of order confirmation. Please note that while we do not offer guaranteed time slots for delivery, we always aim to deliver at a time that suits you best.
+## 1. Booking and Delivery
 
-**Expedited Services:** Expedited and same-day delivery services are available at an additional cost.
+**Delivery Date and Time:** Delivery is scheduled for the date and time block you choose when you book, subject to availability. The time block is your requested drop-off time; the exact delivery time is confirmed on the day of delivery.
 
-**Delivery Fee:** A delivery fee may be applied for customers outside the free delivery area or for deliveries made outside of normal business hours.
+**Delivery Fee:** Delivery is included in some service areas. Other areas carry a delivery fee based on your delivery ZIP code. Any delivery fee is shown before you pay.
 
-**Right to Deny Delivery:** Little Junkers reserves the right to deny delivery for any reason. Rentals canceled by Little Junkers for any reason will be fully refunded.
+**Placement:** You do not need to be home for delivery if the placement spot is clear and you have told us where you want the dumpster. You are responsible for choosing a placement spot and for any permits or HOA approvals needed for it.
 
-## 2. Rental Period and Usage
+**Right to Deny Delivery:** Little Junkers may decline or stop a delivery if the site is unsafe or inaccessible, or for any other reason. Rentals canceled by Little Junkers will be fully refunded.
 
-**Initial Rental Period:** We understand that your needs may change. Each rental period is as agreed upon at the time of booking. If your project extends beyond seven days, we are more than happy to provide you with a separate quote for the extended period.
+## 2. Rental Period and Pickup
 
-**Proper Use:** We trust you to hand-load your dumpsters and storage units. The use of compacting devices or machinery to load these units is strictly prohibited. This rule is in place to prevent any potential damage charges that may occur from such use.
+**Rental Period:** Your rental period is the number of days you choose when you book.
 
-**Unit Relocation Prohibited:** Rental units cannot be moved from the delivery address or the initial placement location. Damage due to improper movement by the renter is the renter's responsibility.
+**Extra Days:** If you need the dumpster longer, text or call us before your scheduled pickup. Additional days are billed at the daily rate shown at booking.
+
+**Pickup:** Pickup is scheduled for the last day of your rental. We send a reminder text the day before.
+
+**Early Pickup:** If you finish early, text or call us and we will schedule an earlier pickup. Your rental ends when the dumpster is picked up. Unused rental days are not refunded and cannot be used for a later rental.
+
+**Proper Use:** Dumpsters must be loaded by hand. Using compacting devices or machinery to load the dumpster is prohibited, and the renter is responsible for any resulting damage.
+
+**Unit Relocation Prohibited:** The dumpster may not be moved from its placement location. The renter is responsible for damage caused by moving it.
 
 ## 3. Weight and Overload
 
-**Included Tonnage:** Each dumpster rental provides for the disposal of up to one ton of material.
+**Included Weight:** Each rental includes disposal of the tonnage listed for your dumpster size at booking.
 
-**Additional Tonnage:** Additional tonnage can be pre-purchased at the time of rental. Overweight charges, assessed at the end of the rental, will be calculated at the current rate charged at the closest disposal facility plus 45%.
+**Overweight Charges:** Weight above the included tonnage is charged per ton at the rate shown at booking, based on the disposal facility's weight ticket. Overweight charges are billed after pickup. Where offered at booking, additional tonnage may be prepaid.
 
-**Excess Material:** To maintain the cleanliness of your service address, please be aware that material loaded above the top of the dumpster will not be transported. It will be left at the service address for your disposal.
+**Load Height:** Material must be loaded no higher than the top of the dumpster. We cannot haul an overloaded dumpster. Material loaded above the top will not be transported. It will be left at the service address for your disposal.
 
 ## 4. Damage and Liability
 
-**Responsibility for Damage:** The customer is responsible for any damage to the dumpster or storage unit during the rental period.
+**Responsibility for Damage:** The customer is responsible for any damage to the dumpster during the rental period.
 
-**Storage Unit Movement:** Storage units will not be moved when loaded with customer materials. Any items left in storage units post-rental will be removed at the owner's expense.
+**Damage Waiver:** Little Junkers does not offer damage waivers.
 
-**Damage Waiver:** Little Junkers does not offer waivers for damage.
+## 5. Accepted and Prohibited Materials
 
-## 5. Prohibited Items and Fines
+**Materials:** Customers must follow the accepted, special-handling, and prohibited materials list at [littlejunkersllc.com/what-can-i-put-in-a-dumpster](/what-can-i-put-in-a-dumpster).
 
-**Prohibited Items:** Your safety and the proper disposal of waste are our top priorities. Customers must adhere to a list of prohibited items detailed at www.littlejunkers.com. Rest assured, the renter assumes all responsibility for items loaded into the dumpsters, including fines for prohibited items discovered post-rental.
+**Items With an Extra Charge:** Mattresses, box springs, tires, and appliances are accepted for an extra disposal charge per item.
 
-## 6. Cancellations and Modifications
+**Prohibited Items:** The renter is responsible for everything loaded into the dumpster, including fines and disposal charges for prohibited items found during or after the rental.
 
-**Changes:** Any changes to the order must be communicated at least 24 hours before the scheduled delivery or pickup.
+## 6. Cancellations and Changes
 
-**Cancellations:** Cancellations must be made 24 hours prior to the scheduled delivery to avoid charges.
+**Changes:** Any change to an order must be made at least 24 hours before the scheduled delivery or pickup.
 
-## 7. Miscellaneous
+**Cancellations:** Cancellations must be made at least 24 hours before the scheduled delivery to avoid charges.
+
+## 7. Communications
+
+By booking, you agree to receive texts and calls about your rental as described in our [Texting & Communications Policy](/texting-communications-policy). Our [Privacy Policy](/privacy) explains how we handle your information.
+
+## 8. Miscellaneous
 
 **Severability:** If any part of these terms is held unenforceable, the remainder of the terms will remain in effect.
 
-**Acceptance:** The customer agrees to these terms and conditions by accepting delivery of the rented items.
+**Acceptance:** The customer agrees to these terms and conditions by booking a rental or by accepting delivery of the dumpster.
+
+**Contact:** Little Junkers LLC, (470) 548-4733, info@littlejunkersllc.com

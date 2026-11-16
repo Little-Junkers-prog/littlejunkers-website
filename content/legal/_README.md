@@ -1,10 +1,14 @@
 # Legal copy
 
-These four files are the text of the live Odoo pages, copied word for word on
-2026-11-16 (only internal links were repointed). Do not edit the wording here
-without Marcus's approval: it is legal and carrier-compliance copy.
+Privacy, terms, cookie and texting policies. Rewritten on 2026-11-16 at Marcus's
+request so they match how the v2 site and booking app actually work (providers,
+cookies, Twilio line, current rental rules). Legal and carrier-compliance text:
+change wording only with Marcus's approval.
 
-Known stale statements Marcus needs to decide on (see the PR notes): the terms
-mention 48-hour and same-day delivery, "one ton" for every size, a "+45%"
-overweight formula, storage rentals and the wrong domain; the privacy and
-cookie policies name Odoo as a provider and list Odoo cookies.
+Rules for this folder:
+- Never type prices, tonnage or fees here. Point to "the rate shown at booking".
+- When a provider, cookie or storage key changes in code, update privacy.md and
+  cookie-policy.md in the same PR.
+- Set every Effective Date to the publish date at cutover.
+- This was a factual update, not a legal review. Have a Georgia attorney review
+  before launch.

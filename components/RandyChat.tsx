@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { bookingUrl, company } from "@/lib/company";
+
+const AVATAR = "/images/brand/randy-avatar.svg";
+const FALLBACK = `Sorry, I'm having trouble connecting. Please call or text ${company.phoneDisplay}, or see prices and book here: ${bookingUrl()}`;
 
 type Message = { role: "user" | "assistant"; content: string };
 type Reply = { reply?: string; options?: string[] };
@@ -41,12 +45,37 @@ export default function RandyChat() {
     log.current?.scrollTo({ top: log.current.scrollHeight });
   }, [messages, busy]);
 
+  // Tell the Randy backend when a conversation ends, as the Odoo widget did,
+  // so the conversation is summarized and logged.
+  const history = useRef<Message[]>([]);
+  history.current = messages;
+  const closedSent = useRef(false);
+  useEffect(() => {
+    const notifyClosed = () => {
+      if (closedSent.current || !history.current.some((m) => m.role === "user")) return;
+      closedSent.current = true;
+      fetch("/api/randy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history.current, event: "chatClosed" }),
+        keepalive: true,
+      }).catch(() => {});
+    };
+    const node = dialog.current;
+    node?.addEventListener("close", notifyClosed);
+    window.addEventListener("pagehide", notifyClosed);
+    return () => {
+      node?.removeEventListener("close", notifyClosed);
+      window.removeEventListener("pagehide", notifyClosed);
+    };
+  }, []);
+
   async function call(body: { messages: Message[]; event?: string }): Promise<Reply> {
     try {
       const res = await fetch("/api/randy", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       return (await res.json()) as Reply;
     } catch {
-      return { reply: "I can't connect right now. Please call or text Little Junkers at 470-548-4733." };
+      return { reply: FALLBACK };
     }
   }
 
@@ -55,14 +84,15 @@ export default function RandyChat() {
     if (messages.length > 0) return;
     setBusy(true);
     const data = await call({ messages: [], event: "chatOpened" });
-    setMessages(data.reply ? [{ role: "assistant", content: data.reply }] : []);
-    setOptions(data.options ?? []);
+    setMessages([{ role: "assistant", content: data.reply ?? "Hi, I'm Randy, Little Junkers' digital rental assistant. What are you working on?" }]);
+    setOptions(data.options?.length ? data.options : ["Help me pick a dumpster", "Check availability", "Existing rental question"]);
     setBusy(false);
   }
 
   async function send(text: string) {
     const content = text.trim();
     if (!content || busy) return;
+    closedSent.current = false;
     const next: Message[] = [...messages, { role: "user", content }];
     setMessages(next);
     setOptions([]);
@@ -77,15 +107,16 @@ export default function RandyChat() {
   return (
     <>
       <button className="randy-bubble" type="button" onClick={open} aria-haspopup="dialog">
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" />
-        </svg>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="randy-bubble__avatar" src={AVATAR} alt="" width={44} height={44} />
         Ask Randy
       </button>
 
       <dialog ref={dialog} className="randy" aria-labelledby="randy-title">
         <header className="randy__head">
-          <div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="randy__avatar" src={AVATAR} alt="" width={52} height={52} />
+          <div style={{ flex: 1 }}>
             <p id="randy-title" className="randy__title">
               Ask Randy
             </p>
@@ -98,9 +129,15 @@ export default function RandyChat() {
 
         <div className="randy__log" ref={log} aria-live="polite">
           {messages.map((message, index) => (
-            <p key={index} className={`randy__msg randy__msg--${message.role}`}>
-              {message.role === "assistant" ? withLinks(message.content) : message.content}
-            </p>
+            <div key={index} className={`randy__row randy__row--${message.role}`}>
+              {message.role === "assistant" ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img className="randy__mini" src={AVATAR} alt="" width={28} height={28} />
+              ) : null}
+              <p className={`randy__msg randy__msg--${message.role}`}>
+                {message.role === "assistant" ? withLinks(message.content) : message.content}
+              </p>
+            </div>
           ))}
           {busy ? <p className="randy__msg randy__msg--assistant randy__msg--typing">Randy is typing…</p> : null}
           {options.length > 0 && !busy ? (
