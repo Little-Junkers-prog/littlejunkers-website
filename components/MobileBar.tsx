@@ -1,5 +1,5 @@
 import { smsHref, telHref } from "@/lib/company";
-import { BookLink } from "./ZipContext";
+import Link from "next/link";
 
 export default function MobileBar() {
   return (
@@ -10,7 +10,7 @@ export default function MobileBar() {
       <a className="btn btn--secondary" href={smsHref}>
         Text
       </a>
-      <BookLink className="btn btn--primary">Book</BookLink>
+      <Link className="btn btn--primary" href="/plan">Plan</Link>
     </div>
   );
 }

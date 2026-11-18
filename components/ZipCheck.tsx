@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { bookingUrl, company, smsHref, telHref } from "@/lib/company";
+import { company, smsHref, telHref } from "@/lib/company";
 import type { AreaResult } from "@/lib/pricing";
 import { saveArea } from "./ZipContext";
 
@@ -12,7 +12,7 @@ const usd = (n: number) => (n === 0 ? "Free" : `$${n}`);
 // City or ZIP serviceability check. Enhances a plain GET form: without script,
 // the form submits to /service-areas, which renders the same answer on the server.
 // Device location is not requested here. Manual entry is the default path.
-export default function ZipCheck({ cta = "See Prices & Availability", label = "City or ZIP" }: { cta?: string; label?: string }) {
+export default function ZipCheck({ cta = "Check Delivery Area", label = "City or ZIP" }: { cta?: string; label?: string }) {
   const id = useId();
   const [state, setState] = useState<State>({ status: "idle" });
 
@@ -114,8 +114,8 @@ export function AreaAnswer({ result }: { result: AreaResult }) {
         <dd>{result.zips.join(", ")}</dd>
       </dl>
       <div className="btn-row">
-        <a className="btn btn--primary" href={bookingUrl({ zip })}>
-          Check Dates &amp; Book
+        <a className="btn btn--primary" href={zip ? "/plan?zip=" + encodeURIComponent(zip) : "/plan"}>
+          Plan a Rental
         </a>
         <a className="btn btn--secondary" href="/#sizes">
           See sizes and prices
