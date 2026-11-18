@@ -1,5 +1,6 @@
 # Little Junkers Website V2 — Strategy Archive
 
+> **ACTIVE OWNER DECISION — NOVEMBER 18, 2026:** Research-to-purchase experience and Days Plus (3-day base, 27 optional extra days, maximum 30 online, 31+ custom quote) are governed by [ADR-CX-001](docs/decisions/ADR-CX-001-days-plus-experience.md). This supersedes legacy rental-package selection UX; retain unified-checkout-v1 payment/consent/finalization safeguards.\n\n
 **Status:** Active strategic reference  
 **Created:** September 29, 2026  
 **Repository:** `Little-Junkers-prog/littlejunkers-website`  
@@ -2180,3 +2181,12 @@ The current roadmap is built around these principles:
 > **Do not let future AI agents silently undo approved decisions.**
 
 > **Build Little Junkers like a technology company that rents dumpsters.**
+
+
+---
+
+# 26. Owner-Approved Customer Experience / Days Plus Supersession — November 18, 2026
+
+**Status: Approved direction; production implementation pending separate review.** Governing decision: [ADR-CX-001](docs/decisions/ADR-CX-001-days-plus-experience.md).
+
+Design research/compare -> contextual Book -> confirm ZIP/size/date/block -> configure **3–30 total days** -> server-price -> unified customer details once -> embedded Stripe -> verified booking confirmation. Three days are included, up to 27 additional days; **31+ days request a custom quote**. The website must preserve already-known context from size, city, comparison, Randy and repeat-customer entries. Supabase pricing, Fleet availability, booking/funnel, Admin, CSR, Randy, content/SEO and analytics all require coordinated redesign; neither the additional-day price nor a new pricing schema is approved by this direction alone. This supersedes fixed tier-selection UI, not the Oct 2 unified-checkout safeguards or the existing V2 brand foundation. No booking activation while operational inventory remains blocked.

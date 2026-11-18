@@ -106,3 +106,22 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 - RANDY-ART-001: Randy redrawn Nov 16 (professional style, warm smile) from one master generator (`scripts/randy/`). Holiday hats per spec §14 (owner direction). Approved by Marcus as the master reference (Nov 16).
 - RANDY-ENV-001: `RANDY_SITE_TOKEN` must be set on the Vercel website project (Preview + Production). Claude was not permitted to set it. Until it is, the live Randy backend rejects website chats and the site shows the call/text fallback.
 - LEGAL-001: Privacy, terms, cookie and texting pages rewritten to current facts. Owner confirmed Nov 16: customer_service@littlejunkersllc.com is the contact address (sitewide), the 24-hour change/cancellation rule stands, free driveway boards on request are accurate. Remaining: attorney review before launch.
+
+
+## Approved V2 Experience Redirection — November 18, 2026
+
+**Status:** Design approved, implementation and release pending. Canonical decision: [ADR-CX-001](docs/decisions/ADR-CX-001-days-plus-experience.md).
+
+- **[CX-001] P0:** Design research-to-booking experience, mobile-first prototype, validated context handoff from homepage/size/city/compare/Randy.
+- **[PRC-001] P0:** Supabase shared Days Plus pricing model: 3-day base, 0–27 prepaid extra days, total 3–30; new quote API and migration/compatibility; obtain additional-day rate approval.
+- **[FLEET-001] P0:** Arbitrary-duration 3–30-day Fleet capacity/return schedule; no double booking; operational blackout and pickup rules.
+- **[BOOK-001] P0:** Booking configurator and >30-day custom-quote route, retain embedded Stripe and unified-checkout-v1 integrity.
+- **[ADM-001] P0:** Admin Days Plus pricing editor and quote rules.
+- **[CSR-001] P0:** CSR/manual booking and payment links support Days Plus and 31+ quoted cases.
+- **[CMP-001] P1:** Competitor offer observation and verification data in Supabase, Admin management, customer /compare UX.
+- **[SITE-001] P1:** Update website /pricing, price cards, city/size pages, callouts, structured offers, FAQs and long-rental branch.
+- **[RANDY-001] P1:** Rework Randy for approved 3–30 calculation and 31+ quote intake; preserve consent.
+- **[MEAS-001] P1:** Journey analytics across comparison, configuration, checkout and verified paid rental.
+- **[QA-001] P0:** Validate 3/4/30/31-day, timezone, date math, zone, hold expiry, inventory and payment scenarios before activation.
+
+Owner decision: no rentals over 30 days may be self-serve purchased. Last reported operational suspension remains a release gate. No schema, prices, production checkout, DNS, or main merge authorized by this documentation alone.
