@@ -2,7 +2,7 @@
 Status: **OWNER APPROVED — DIRECTION** (November 18, 2026)
 Owner: Marcus Griffin, Little Junkers LLC
 Applies to: website V2, booking/funnel, Admin OS/CSR, shared Supabase pricing/Fleet, Randy, marketing analytics and comparison
-Implementation status: **DESIGN / PLANNING ONLY**; no pricing/schema/payment/availability changes approved by this ADR alone.
+Implementation status: **PHASED WEBSITE IMPLEMENTATION AUTHORIZED (Nov 18)**; no pricing/schema/payment/availability changes approved by this ADR alone.
 
 ## Decision and rationale
 Design the full customer decision-to-transaction arc, rather than designing sequential checkout screens in isolation. The website earns intent and trust through local serviceability, transparent pricing, real Little Junkers proof, guidance and an evidence-based competitor comparison. Once the customer chooses Book, move them to configuration and purchase **without re-asking known details or re-selling the product**. Mobile first; desktop also polished.
@@ -55,3 +55,8 @@ This ADR authorizes design and documentation. A preview can demonstrate navigati
 
 ## Supersession statement
 This ADR overrides older V2 sections **only** where they presume selectable 2/3/5/7-day rental packages, imply the customer must traverse a fixed funnel regardless of prior context, or deny the 31+ custom-quote branch. All other decisions remain in effect, including the shared visual language, pricing authority, existing checkout safety contract, legal/consent rules, full English/Spanish journey, privacy, and owner-controlled PR approval.
+
+
+## Owner authorization update — November 18, 2026
+
+Marcus approved implementation of the clarified customer experience topology in [ADR-CX-002](ADR-CX-002-shopping-hub-architecture.md). This authorizes **website-only** implementation in reviewed preview branches, with existing canonical facts and a non-transactional Days Plus demonstration pending pricing/Fleet contracts. It **does not** authorize production pricing or schema changes, real rental holds/payment, restoration of suspended rentals, a main merge, or DNS cutover. Prototype copy is unapproved and must be rewritten with substantive, accurate content during page reviews.

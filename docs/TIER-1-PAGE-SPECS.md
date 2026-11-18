@@ -4,7 +4,7 @@
 **Status:** Draft for owner review — pre-code  
 **Date:** September 29, 2026  
 **Repository:** `Little-Junkers-prog/littlejunkers-website`  
-**Governing reference:** `STRATEGY-ARCHIVE.md`  
+**Governing reference:** `STRATEGY-ARCHIVE.md` and [`PROJECT-CHARTER.md`](../PROJECT-CHARTER.md)  
 **Purpose:** Define the page-level build contract for the first V2 implementation wave before application code is written.
 
 ---
@@ -2496,3 +2496,10 @@ After approval, these specs become the build contract. Code changes that materia
 - All controls that can lead to payment must fail closed when pricing or Fleet inventory is unavailable or operational booking is suspended.
 - Implement coordinated `PRC-001/FLEET-001/BOOK-001/ADM-001/CSR-001/CMP-001/SITE-001/RANDY-001/MEAS-001/QA-001` plan defined in the ADR. Website-only UI completion is not acceptance of Days Plus release.
 - **Preview rule:** interim concept routes may use real website media and verified canonical three-day base, but must explicitly say pricing/availability/checkout are not active in the demo and avoid collecting customer PII or charging cards.
+
+
+# 27. Shopping-Hub Homepage + Intent Pages — Owner-Approved, November 18, 2026
+
+The initial interactive prototype demonstrated a single-page decision-to-planning journey. Owner approval **does not remove** the planned dedicated `/pricing`, `/compare`, size, city, residential, contractor, materials, Blog, About and FAQ pages. See [ADR-CX-002](decisions/ADR-CX-002-shopping-hub-architecture.md). Homepage compact sections offer the same essential shopping decisions without forcing detours. Detailed intent pages explain, convert and carry known context into a shared planner. Retain all existing indexable routes and content until a search-evidence-backed migration approves changes.
+
+**Copy gate:** Marcus says the first prototype's words are weak in information and substance. Treat them as layout scaffolding only, not final marketing, compliance or SEO copy. Use first-party evidence and substantive local detail; require page-by-page editorial sign-off. Phase 1 code should not claim that full Days Plus quotes, actual dates or online payment are enabled until canonical systems are ready.

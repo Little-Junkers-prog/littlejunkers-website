@@ -125,3 +125,15 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 - **[QA-001] P0:** Validate 3/4/30/31-day, timezone, date math, zone, hold expiry, inventory and payment scenarios before activation.
 
 Owner decision: no rentals over 30 days may be self-serve purchased. Last reported operational suspension remains a release gate. No schema, prices, production checkout, DNS, or main merge authorized by this documentation alone.
+
+
+### [CX-IA-001] Approved homepage shopping hub + supporting-page retention (2026-11-18)
+
+- **Status:** Implementation started on review-only website branch; not merged.
+- **Governing docs:** [PROJECT-CHARTER.md](PROJECT-CHARTER.md), [ADR-CX-002](docs/decisions/ADR-CX-002-shopping-hub-architecture.md).
+- **Work:** Integrate homepage ZIP/size/optional compare/Days Plus planning; add `/pricing` and `/compare`, preserve city, size, SEO and all existing routes. Handle known-context handoff from secondary pages. No server pricing, payment, Fleet or CSR edits in website Slice A.
+- **Acceptance:** No false availability or final-price claims; desktop/mobile/keyboard QA; owner reviews copy and experience separately.
+
+### [CX-COPY-001] Substantive editorial pass and page-by-page owner approval
+
+- **Status:** Open. Owner explicitly stated that initial November 18 prototype wording is weak and illustrative only. The final site must use verified operational facts, meaningful decision support, local specificity and first-party proof. No auto-approval of copy because a layout passes.
