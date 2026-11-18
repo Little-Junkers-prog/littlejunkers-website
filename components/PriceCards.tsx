@@ -56,7 +56,8 @@ export default function PriceCards({ pricing, zip, deliveryFee }: { pricing: Pri
 // What the starting price covers, and the two rates that can add to it.
 // Every number is canonical: tier price, daily_overage, included_tons, fees.
 export function RateList({ pricing, yards }: { pricing: Pricing; yards: 11 | 16 | 21 }) {
-  const from = startingTier(pricing);
+  const from = threeDayTier(pricing);
+  if (!from) return null;
   return (
     <ul className="tiers" aria-label={`${yards}-yard pricing details`}>
       <li>
