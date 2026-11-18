@@ -95,7 +95,7 @@
     $('compare-included').textContent = sizes[s].tons;
     $('compare-result-price').textContent = format(sizes[s].base);
     const rowTitle = document.querySelector('.comparison-row.owned h3');
-    if(rowTitle) rowTitle.textContent = s + '-yard ' + sizes[s].name;
+    if (rowTitle && rowTitle.lastChild) rowTitle.lastChild.textContent = '-yard ' + sizes[s].name;
     $('compare-disclaimer').textContent = n === 3
       ? 'This is the current 3-day base snapshot, not a final delivered quote. Competitor observations remain unverified.'
       : 'For ' + n + ' days, the approved additional-day rate is still pending. We will not show a made-up quote or comparison total.';
