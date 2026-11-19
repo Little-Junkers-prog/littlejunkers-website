@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { selectOfferSnapshot } from "../lib/comparison-selection.ts";
+import { selectOfferSnapshot, observationIsCurrent } from "../lib/comparison-selection.ts";
 
 function fact(attribute_name, value_numeric, variant_id = "3day", source_url = "https://example.com/offer", observed_at = "2026-11-19T12:00:00Z") {
   return { attribute_name, value_numeric, variant_id, source_url, observed_at };
@@ -29,4 +29,18 @@ assert.equal(selectOfferSnapshot([
   fact("price", 300, "3day"),
   fact("duration_days", 7, "7day")
 ], 3), null, "different variants cannot combine into an offer");
-console.log("Comparison offer-selection checks passed (11 assertions).");
+const observation = {
+  observed_at: "2026-11-19T10:00:00Z", valid_until: "2026-12-03T10:00:00Z",
+  source_url: "https://www.example.com/price", verification_status: "confirmed_published",
+  publication_status: "publishable", conflict_type: "no_conflict"
+};
+const now = new Date("2026-11-19T12:00:00Z");
+assert.equal(observationIsCurrent(observation, now), true, "valid first-party observation should qualify");
+assert.equal(observationIsCurrent({ ...observation, valid_until: "2026-10-31T00:00:00Z" }, now), false, "expired observations must not qualify");
+assert.equal(observationIsCurrent({ ...observation, publication_status: "internal_only" }, now), false, "internal notes are never publishable");
+assert.equal(observationIsCurrent({ ...observation, verification_status: "conflicting" }, now), false, "conflicts must not qualify");
+assert.equal(observationIsCurrent({ ...observation, conflict_type: "cross_source_conflict" }, now), false, "a conflicting source must not qualify");
+assert.equal(observationIsCurrent({ ...observation, observed_at: "2026-11-20T10:00:00Z" }, now), false, "future verification timestamps must not qualify");
+assert.equal(observationIsCurrent({ ...observation, source_url: "http://www.example.com/price" }, now), false, "insecure source URLs must not qualify");
+assert.equal(observationIsCurrent({ ...observation, source_url: "https://localhost/price" }, now), false, "local source URLs must not qualify");
+console.log("Comparison evidence and term-selection checks passed (19 assertions).");
