@@ -190,7 +190,7 @@ export default function ComparisonTool({
           Visit {offer.name} <span aria-hidden="true">↗</span>
         </a>
         <p className="fine comparison-card__source">
-          Independent provider; not affiliated with Little Junkers.
+          Independent provider; not affiliated with Little Junkers.{" "}
           {offer.verifiedOn
             ? <> Published website information checked {labelDate(offer.verifiedOn)}.</>
             : <> Current pricing has not been verified.</>}
@@ -211,7 +211,7 @@ export default function ComparisonTool({
       <p className="comparison-source-note" role="alert">Competitor data is temporarily unavailable. Please check providers directly or try again.</p>}
     {current?.comparison.source === "review_snapshot" &&
       <p className="comparison-source-note">Competitor examples are from our vetted, dated comparison records (last exported {labelDate(current.comparison.snapshotAsOf)}). Online prices and availability may change.</p>}
-    <p className="comparison-source-note">Competitor information comes from offers publicly posted on each company\'s website. Little Junkers is not affiliated with, endorsed by, or acting as an agent for these providers. Published prices, rental periods, included weight and fees can change or differ by location. Confirm current availability, delivery charges and final terms directly with each company before renting.</p>
+    <p className="comparison-source-note">Competitor information comes from offers publicly posted on each company's website. Little Junkers is not affiliated with, endorsed by, or acting as an agent for these providers. Published prices, rental periods, included weight and fees can change or differ by location. Confirm current availability, delivery charges and final terms directly with each company before renting.</p>
     <p className="fine"><Link href="/pricing">Little Junkers pricing details</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
     <CompetitorExitDialog target={exitTarget} onClose={() => setExitTarget(null)}
       location={current?.location.status === "served"
