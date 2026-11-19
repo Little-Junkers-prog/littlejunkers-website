@@ -139,3 +139,27 @@ Facebook presence is not a disqualifier. Brokerage alone is not illegitimate. Qu
 - Published term-mismatch tests for 3/7/10-day offers; per-pound versus per-ton; correct provider source URLs and price qualifiers.
 - Geographic wording: city advertised by provider does not mean confirmed specific street or checkout eligibility.
 - Approve price/coverage verification ownership and cadence, privacy analytics and opt-in tracking before rollout.
+
+
+## November 19 follow-on QA slice — PR #8
+
+### Code changes (review branch only)
+- Added isolated offer snapshot selection in lib/comparison-selection.ts. Pair price and duration only when the provider product/variant, exact source URL and observed timestamp agree. Prefer an exact term; otherwise the shortest published term that covers the requested duration; only fall back to a shorter published term with a conspicuous warning. Do not invent extended-day totals.
+- Added a pure current-publication gate for HTTPS source, approved publication status, confirmed verification, no conflicts, nonfuture observation, and unexpired valid_until.
+- The actual comparison API passes the selected duration to the matcher. A missing area fee no longer produces a misleading numerical known-subtotal.
+- Provider cards now require independently documented local service-area coverage, not just an active provider record. Unknown coverage yields an honest empty state.
+- The customer form accepts all 3–30-day lengths. It differentiates current offered price from shorter-term *reference* price, spells out unknown delivery fees, displays ton versus pound properly, and converts internal roll_off/dump_trailer codes into customer words.
+- The response echoes requested city/ZIP to prevent stale results during quick location changes, including normalized inputs such as city with ZIP.
+
+### Verification
+- Added scripts/check-comparison.mjs and npm run check:comparison, with 19 assertions for exact and fallback terms, conflicting sources/snapshots/variants, null/zero prices, unexpired versus historical observations, hidden/conflicted facts, future observation and invalid/insecure links.
+- Tested equivalent pure matching/gating logic locally under Node 22 with all 19 assertions passing; Vercel build status READY for commits through ea64856. The locked-down Vercel preview requires authenticated deployment access; the client page and API are **not yet end-to-end verified** in the protected runtime.
+- Independently read canonical booking /api/get-pricing (HTTP 200) on November 19: price contract exposes 3-day base of 11-yard $325, 16-yard $375, 21-yard $425; 5-day and 7-day tiers also exist, but Days Plus prepaid-extra prices remain separately gated by the charter. Current verified zone-A city/ZIP data includes Peachtree City 30269, Newnan 30263/30265, Fayetteville 30214/30215, Sharpsburg 30277, Tyrone 30290. This confirms reference data only; not the preview function environment.
+- Supabase read-only acceptance matrix confirms fresh, publication-eligible, source-coherent offers for Newnan (all 3 size classes) and Peachtree City (16 and 21), including exact 3-day and published 7/10-day examples. No confirmed 16-yard competitor for Tyrone in the refreshed coverage table yet. This is a **data gap**, not proof of no service.
+- Vercel project deploymentProtection is enabled for preview, and env-variable metadata access previously returned 403. Runtime Supabase secret configuration and authenticated API test are outstanding. Keep preview protected; do not disable auth or commit credentials.
+
+### Final gates before owner approval
+1. Authenticated preview /compare and /api/comparison smoke tests with valid server-only secret: Newnan and 30269, 11/16/21, 3/7/30 days, invalid input and expired/suppressed facts.
+2. Accessibility/mobile screenshot QA on protected preview, with normal and reduced-motion settings.
+3. Confirm customer-safe caveats and placement for shorter-term reference prices, starting-plus-delivery prices and city-only delivery coverage.
+4. Approve duration/freshness/city-coverage policy and event attribution/consent contract before any measurement writes or future merge.
