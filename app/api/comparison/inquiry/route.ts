@@ -52,14 +52,18 @@ export async function POST(request:NextRequest) {
       provider.name+" for a "+data.size+"-yard dumpster, "+data.days+
       " rental days, ZIP "+data.zip+". Main question: "+reasonText[data.reason]+
       ". Contact requested about this rental inquiry only.";
-    const result=await comparisonRest<InquiryResult>("rpc/create_public_inquiry","POST",{
+    const result=await comparisonRest<InquiryResult>("rpc/create_comparison_inquiry","POST",{
       p_payload:{
         inquiry_type:"contact",name:data.name,phone:data.phone,
         email:data.email,zip_code:data.zip,
         source_page:"Website V2 Comparison Exit",
         service_needed:"Dumpster rental comparison",
         message
-      }
+      },
+      p_provider_id: data.providerId,
+      p_size_yards: data.size,
+      p_duration_days: data.days,
+      p_interest_reason: data.reason
     });
     if(!result?.inquiry_id) throw new Error("Canonical intake did not return an inquiry ID");
     return NextResponse.json({saved:true,inquiryId:result.inquiry_id},{status:201,headers});
