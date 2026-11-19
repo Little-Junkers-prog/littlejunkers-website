@@ -1820,3 +1820,37 @@ a:hover {
   body:has(.randy[open]) .mobile-bar { display: none; }
   body:has(.consent) .consent { bottom: 0; max-height: 75dvh; overflow-y: auto; }
 }
+
+
+/* Interactive comparison: customer-first, responsive three-card surface. */
+.comparison-heading{max-width:800px;margin-bottom:24px}
+.comparison-heading h1{font-size:clamp(2rem,4.5vw,3.5rem);margin:8px 0 12px}
+.comparison-heading>p:last-child{color:var(--ink-mid);font-size:1.1rem}
+.comparison-tool{display:grid;gap:20px}
+.comparison-filters{display:grid;grid-template-columns:minmax(220px,1.1fr) minmax(245px,1.3fr) minmax(150px,.6fr);gap:16px;align-items:end;padding:22px;background:var(--surface-background);border:1px solid var(--border-card);border-radius:var(--radius-panel)}
+.comparison-filters label,.comparison-filters legend{font-size:.95rem;font-weight:800;display:block;margin-bottom:10px}
+.comparison-filters fieldset{margin:0;padding:0;border:0}
+.comparison-filters input,.comparison-filters select{width:100%;background:#fff;color:var(--ink-primary);border:1px solid var(--border-card);border-radius:var(--radius-control);padding:11px;min-height:48px;font:inherit}
+.comparison-sizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.comparison-sizes button{background:#fff;border:2px solid var(--border-card);border-radius:var(--radius-control);min-height:48px;padding:6px;font:inherit;font-size:.94rem;font-weight:800;cursor:pointer}
+.comparison-sizes button.active{background:var(--pink-background);border-color:var(--pink-text)}
+.comparison-status{color:var(--ink-mid);min-height:24px}
+.comparison-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:16px}
+.comparison-card{display:flex;flex-direction:column;min-width:0;gap:10px;padding:24px;background:var(--surface-background);border:1px solid var(--border-card);border-radius:var(--radius-card)}
+.comparison-card--lj{background:var(--card-background);border:2px solid var(--signature-pink)}
+.comparison-card__eyebrow{font-weight:800;font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-mid)}
+.comparison-card h2{font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.2;min-height:2.4em}
+.comparison-card__price{font-size:clamp(1.4rem,2.4vw,2rem);font-weight:850;line-height:1.15;letter-spacing:-.04em}
+.comparison-card__price-note{font-size:.88rem;color:var(--ink-mid)}
+.comparison-card dl{margin:10px 0 20px;flex:1}
+.comparison-card dl div{border-top:1px solid var(--border-card);padding:9px 0;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.comparison-card dt{font-size:.85rem;color:var(--ink-mid);flex:1}
+.comparison-card dd{margin:0;font-size:.88rem;font-weight:700;text-align:right;flex:1}
+.comparison-card__notice{background:var(--warning-background);border:1px solid var(--warning-border);border-radius:var(--radius-control);padding:11px;font-size:.88rem}
+.comparison-card .btn{margin-top:auto}
+.comparison-card .fine{font-size:.81rem;color:var(--ink-mid);margin-top:4px}
+.comparison-more{justify-self:center}
+.comparison-source-note{font-size:.9rem;color:var(--ink-mid);max-width:850px}
+.comparison-tool input:focus-visible,.comparison-tool select:focus-visible,.comparison-tool button:focus-visible,.comparison-tool a:focus-visible{outline:3px solid var(--pink-text);outline-offset:3px}
+@media(max-width:960px){.comparison-filters{grid-template-columns:1fr 1fr}.comparison-filters__location{grid-column:1/-1}.comparison-results{grid-template-columns:1fr 1fr}.comparison-card--lj{grid-column:1/-1}}
+@media(max-width:650px){.comparison-filters,.comparison-results{grid-template-columns:1fr}.comparison-filters__location,.comparison-card--lj{grid-column:auto}.comparison-filters{padding:16px}.comparison-card{padding:20px}.comparison-card h2{min-height:0}.comparison-card dl{margin-bottom:14px}}
