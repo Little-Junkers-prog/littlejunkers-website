@@ -17,6 +17,7 @@ type Offer = {
   sourceUrl: string | null; verifiedOn: string | null; priceStatus: "verified" | "not_verified";
 };
 type Payload = {
+  request: { location: string; size: number; days: number };
   location: Area; size: number; days: number;
   littleJunkers: {
     base: number | null; baseDays: number; includedTons: number;
@@ -84,7 +85,7 @@ export default function ComparisonTool({
   // Never display a previous city's offers while the next lookup is in flight.
   const current = status === "ready" && payload &&
     payload.size === size && payload.days === days &&
-    payload.location.query.trim().toLowerCase() === location.trim().toLowerCase()
+    payload.request.location.trim().toLowerCase() === location.trim().toLowerCase()
     ? payload : null;
   const local = current?.littleJunkers;
   const results = current?.comparison.candidates ?? [];
