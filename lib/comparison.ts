@@ -65,6 +65,7 @@ type SourceData = {
 };
 
 const COVERAGE_MAX_AGE_DAYS = 30;
+class ComparisonSourceConfigurationError extends Error {}
 
 function httpsUrl(raw: string | null): string | null {
   if (!raw) return null;
@@ -169,7 +170,11 @@ async function readTable<T>(
   const headers: Record<string, string> = { apikey: key, Accept: "application/json" };
   if (!key.startsWith("sb_secret_")) headers.Authorization = "Bearer " + key;
   const res = await fetch(url, { headers, cache: "no-store", signal: AbortSignal.timeout(7000) });
-  if (!res.ok) throw new Error("comparison source returned " + res.status + " (" + table + ")");
+  if (!res.ok) {
+    if (res.status >= 400 && res.status < 429)
+      throw new ComparisonSourceConfigurationError("comparison source authorization or query returned " + res.status + " (" + table + ")");
+    throw new Error("comparison source returned " + res.status + " (" + table + ")");
+  }
   const data: unknown = await res.json();
   if (!Array.isArray(data)) throw new Error("comparison source did not return an array");
   return data as T[];
@@ -219,6 +224,11 @@ export async function getComparisonCandidates(
     if (observations.length >= 1000) throw new Error("comparison observation safety page limit reached");
     return response({ providers, products, coverage, observations }, "live", size, area, days, now);
   } catch (error) {
+    if (error instanceof ComparisonSourceConfigurationError) {
+      console.warn("[comparison] unconnected review data source; using dated Supabase export:",
+        error.message);
+      return response(snapshot as SourceData, "review_snapshot", size, area, days, now);
+    }
     console.error("[comparison] live Supabase source unavailable",
       error instanceof Error ? error.message : "unknown error");
     return {
