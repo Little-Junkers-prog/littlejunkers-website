@@ -209,6 +209,8 @@ export default function ComparisonTool({
     <p className="comparison-source-note">Prices are based on each company's stated terms. Dumpster sizes, included weight, fees and rental days can differ. An external website may show a different price at checkout.</p>
     <p className="fine"><Link href="/pricing">Little Junkers pricing details</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
     <CompetitorExitDialog target={exitTarget} onClose={() => setExitTarget(null)}
-      location={location} size={size} days={days} />
+      location={current?.location.status === "served"
+        ? (/^\d{5}$/.test(location.trim()) ? location.trim() : current.location.label)
+        : ""} size={size} days={days} />
   </div>;
 }
