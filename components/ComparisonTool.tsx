@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSavedArea, useSavedLocationQuery } from "./ZipContext";
 import { formatTons, formatUsd } from "@/lib/pricing";
+import CompetitorExitDialog, { type CompetitorExitTarget } from "./CompetitorExitDialog";
 
 type Area = { status: "served"; query: string; label: string; zips: string[]; zone: { deliveryFee: number } }
   | { status: "split"; query: string; label: string }
@@ -52,6 +53,7 @@ export default function ComparisonTool({
   const [payload, setPayload] = useState<Payload | null>(null);
   const [error, setError] = useState("");
   const [showMore, setShowMore] = useState(false);
+  const [exitTarget, setExitTarget] = useState<CompetitorExitTarget | null>(null);
   useEffect(() => {
     if (!initialLocation && !location) {
       const q = savedLocation || area?.zip;
@@ -177,10 +179,20 @@ export default function ComparisonTool({
         </p> : null}
         {offer.verifiedOn ? <p className="fine">Price source checked {labelDate(offer.verifiedOn)}.</p> :
           <p className="fine">A current price and location-specific offer have not been confirmed.</p>}
-        <a className="btn btn--secondary btn--block" href={offer.website} target="_blank" rel="noopener noreferrer">
+        <a className="btn btn--secondary btn--block" href={offer.website} target="_blank" rel="noopener noreferrer"
+          onClick={(event) => {
+            if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            event.preventDefault();
+            setExitTarget({ providerId: offer.providerId, name: offer.name, website: offer.website, destination: offer.website });
+          }}>
           Visit {offer.name} <span aria-hidden="true">↗</span>
         </a>
-        {offer.sourceUrl ? <p className="fine"><a href={offer.sourceUrl} target="_blank" rel="noopener noreferrer">View published offer</a></p> : null}
+        {offer.sourceUrl ? <p className="fine"><a href={offer.sourceUrl} target="_blank" rel="noopener noreferrer"
+          onClick={(event) => {
+            if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            event.preventDefault();
+            setExitTarget({ providerId: offer.providerId, name: offer.name, website: offer.website, destination: offer.sourceUrl! });
+          }}>View published offer</a></p> : null}
       </article>)}
       {current && results.length < 2 && <article className="comparison-card comparison-card--empty">
         <h2>More local companies</h2>
@@ -196,5 +208,7 @@ export default function ComparisonTool({
       <p className="comparison-source-note">Competitor details are temporarily unavailable; please check the companies directly.</p>}
     <p className="comparison-source-note">Prices are based on each company's stated terms. Dumpster sizes, included weight, fees and rental days can differ. An external website may show a different price at checkout.</p>
     <p className="fine"><Link href="/pricing">Little Junkers pricing details</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
+    <CompetitorExitDialog target={exitTarget} onClose={() => setExitTarget(null)}
+      location={location} size={size} days={days} />
   </div>;
 }
