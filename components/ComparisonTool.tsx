@@ -13,7 +13,7 @@ type Offer = {
   actualYards: number; containerType: string | null;
   coverage: "verified" | "unverified";
   price: number | null; priceDays: number | null; includedTons: number | null;
-  overagePerTon: number | null; extraDayFee: number | null;
+  overagePerTon: number | null; overagePerPound: number | null; priceQualifier: string | null; extraDayFee: number | null;
   sourceUrl: string | null; verifiedOn: string | null; priceStatus: "verified" | "not_verified";
 };
 type Payload = {
@@ -138,13 +138,17 @@ export default function ComparisonTool({
         <p className="comparison-card__eyebrow">{offer.coverage === "verified" ? "Local company" : "Company · delivery area unverified"}</p>
         <h2>{offer.name}</h2>
         <p className="comparison-card__price">{offer.priceStatus === "verified" ? money(offer.price) : "Price not verified"}</p>
-        <p className="comparison-card__price-note">{offer.priceDays ? "Published " + offer.priceDays + "-day offer" : "Check directly for current terms"}</p>
+        <p className="comparison-card__price-note">{offer.priceStatus !== "verified" ? "Check directly for current terms" :
+          offer.priceQualifier === "starting_plus_delivery" ? "Starting price for " + offer.priceDays + " days; delivery extra" :
+          "Published " + offer.priceDays + "-day offer"}</p>
         <dl>
           <div><dt>Actual size</dt><dd>{offer.actualYards}-yard {offer.containerType ?? "container"}</dd></div>
           <div><dt>Rental duration</dt><dd>{offer.priceDays ? offer.priceDays + " days" : "Not verified"}</dd></div>
           <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? offer.includedTons + " tons" : "Not verified"}</dd></div>
           <div><dt>Delivery for your area</dt><dd>{offer.coverage === "verified" ? "Service area verified; fee not confirmed" : "Service area not verified"}</dd></div>
-          <div><dt>Extra weight</dt><dd>{offer.overagePerTon !== null ? money(offer.overagePerTon) + "/ton" : "Not verified"}</dd></div>
+          <div><dt>Extra weight</dt><dd>{offer.overagePerPound !== null ? formatUsd(offer.overagePerPound) + "/lb" :
+            offer.overagePerTon !== null ? money(offer.overagePerTon) + "/ton" : "Not verified"}</dd></div>
+          <div><dt>Extra day</dt><dd>{offer.extraDayFee !== null ? money(offer.extraDayFee) + "/day (provider terms apply)" : "Not verified"}</dd></div>
         </dl>
         {offer.priceStatus === "verified" && offer.priceDays !== days ? <p className="comparison-card__notice">The advertised rental term differs from your {days}-day selection. No adjusted price has been assumed.</p> : null}
         {offer.verifiedOn ? <p className="fine">Price source checked {labelDate(offer.verifiedOn)}.</p> :
