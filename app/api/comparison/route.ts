@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       { status: 503, headers: responseHeaders });
   }
   const area = lookupArea(pricing, location);
-  const comparison = await getComparisonCandidates(size as 11 | 16 | 21, area);
+  const comparison = await getComparisonCandidates(size as 11 | 16 | 21, area, days);
   const tier = pricing.tiers.find((row) => row.days === 3);
   const base = tier?.prices[size as 11 | 16 | 21] ?? null;
   // A zone fee can be estimated only when the input is unambiguous.
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
     littleJunkers: {
       base, baseDays: 3, includedTons: pricing.sizes[size as 11 | 16 | 21].includedTons,
       overagePerTon: pricing.overagePerTon, deliveryFee,
-      knownSubtotal: base !== null ? base + (deliveryFee ?? 0) : null,
+      knownSubtotal: base !== null && deliveryFee !== null ? base + deliveryFee : null,
       additionalDaysPriced: days === 3,
       confirmedQuote: false,
     },
