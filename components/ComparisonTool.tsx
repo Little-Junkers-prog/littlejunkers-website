@@ -168,7 +168,7 @@ export default function ComparisonTool({
                : "Published " + offer.priceDays + "-day offer; delivery fee unconfirmed"}
         </p>
         <dl>
-          <div><dt>Size</dt><dd>{offer.actualYards}-yard dumpster</dd></div>
+          <div><dt>Size</dt><dd>{offer.actualYards}-yard {offer.containerType === "dump_trailer" ? "dump trailer" : "dumpster"}</dd></div>
           <div><dt>Rental duration</dt><dd>{offer.priceDays ? offer.priceDays + " days" : "Not verified"}</dd></div>
           <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? formatTons(offer.includedTons) : "Not verified"}</dd></div>
           <div><dt>Delivery</dt><dd>Fee not confirmed</dd></div>
