@@ -20,14 +20,18 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
   const days = Number.isInteger(rawDays) && rawDays >= 3 && rawDays <= 30 ? rawDays : 3;
   const location = (first(query.location) ?? first(query.zip) ?? "").slice(0, 60);
 
-  return <section className="section">
-    <div className="container">
-      <div className="comparison-heading">
+  return <>
+    <section className="comparison-hero" aria-labelledby="comparison-heading">
+      <div className="container comparison-hero__inner">
         <p className="eyebrow">Local dumpster rental comparison</p>
-        <h1>See how we compare.</h1>
-        <p>Enter a city or ZIP, choose a dumpster size and compare the details that matter before renting.</p>
+        <h1 id="comparison-heading">See how we compare.</h1>
+        <p>Real published prices. Actual dumpster sizes. The details worth knowing before you rent.</p>
       </div>
-      <ComparisonTool initialLocation={location} initialSize={size as 11 | 16 | 21} initialDays={days} />
-    </div>
-  </section>;
+    </section>
+    <section className="section comparison-content">
+      <div className="container">
+        <ComparisonTool initialLocation={location} initialSize={size as 11 | 16 | 21} initialDays={days} />
+      </div>
+    </section>
+  </>;
 }
