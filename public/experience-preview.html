@@ -13,7 +13,7 @@
 </head>
 <body>
   <a class="skip" href="#content">Skip to main content</a>
-  <div class="draft-strip"><span class="draft-tag">DESIGN CONCEPT · V1</span><span>Customer experience preview. No live availability, reservation, or payment.</span><a href="#concept-notes">What is this?</a></div>
+  <div class="draft-strip"><span class="draft-tag">DESIGN REVIEW</span><span>Sample site. Prices are estimates; booking and payment are disabled.</span><a href="#concept-notes">What is this?</a></div>
   <header class="header">
     <div class="wrap header-inner">
       <a class="brand" href="#home" aria-label="Little Junkers prototype home">
@@ -27,7 +27,7 @@
       </nav>
       <div class="header-actions">
         <a class="phone" href="tel:+14705484733">470-548-4733</a>
-        <a class="button button-pink header-book" href="#builder">Build my rental <span aria-hidden="true">↗</span></a>
+        <a class="button button-pink header-book" href="#builder">See my estimate <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </header>
@@ -36,18 +36,18 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-mark"></span> LOCALLY OWNED · SOUTH METRO ATLANTA</div>
-          <h1 id="hero-heading">A better way to <em>rent a dumpster.</em></h1>
-          <p class="hero-lead">Less guesswork. Fair prices you can understand. And just the days you need — from three to thirty.</p>
+          <h1 id="hero-heading">Dumpster rentals, <em>right here at home.</em></h1>
+          <p class="hero-lead">11-, 16- and 21-yard dumpsters for home projects and cleanouts. Check pricing by city or ZIP.</p>
           <div class="hero-entry">
             <form id="hero-zip-form" novalidate>
               <label for="hero-zip">Where should we deliver?</label>
               <div class="hero-entry-row">
                 <span class="input-symbol" aria-hidden="true">⌖</span>
-                <input id="hero-zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" placeholder="Enter your ZIP" aria-describedby="hero-zip-help">
-                <button type="submit" class="button button-dark">Explore my options <span aria-hidden="true">→</span></button>
+                <input id="hero-zip" inputmode="text" autocomplete="address-level2" maxlength="60" placeholder="Newnan or 30269" aria-describedby="hero-zip-help">
+                <button type="submit" class="button button-dark">Check my area <span aria-hidden="true">→</span></button>
               </div>
             </form>
-            <p id="hero-zip-help" class="micro">We'll carry your ZIP into the rental planner. Preview does not verify serviceability.</p>
+            <p id="hero-zip-help" class="micro">Enter a city or ZIP to check the delivery area and fee.</p>
             <p class="zip-message" id="zip-message" aria-live="polite"></p>
           </div>
           <div class="hero-features">
@@ -62,7 +62,7 @@
           </div>
           <div class="hero-photo-badge">
             <span class="badge-icon" aria-hidden="true">✳</span>
-            <span><b>Not one-size-fits-all.</b><small>11, 16 and 21 cubic yards.</small></span>
+            <span><b>11, 16 or 21 yards.</b><small>Choose the size that fits.</small></span>
           </div>
           <div class="hero-doodle" aria-hidden="true">little<br>mess,<br>big relief.</div>
         </div>
@@ -73,13 +73,13 @@
     <section class="section section-sizes" id="sizes">
       <div class="wrap">
         <div class="section-intro">
-          <div><p class="eyebrow dark-eyebrow">01 / FIND YOUR FIT</p><h2>Right size. <em>Right from the start.</em></h2></div>
-          <div class="section-intro-side"><p>Start with the amount of stuff, not a confusing set of packages. Your rental starts with three days — add up to 27 more.</p><p class="source-note">Design references current 3-day database rates checked Nov 18, 2026. Not a live offer or approved new pricing.</p></div>
+          <div><p class="eyebrow dark-eyebrow">01 / FIND YOUR FIT</p><h2>Find your <em>dumpster size.</em></h2></div>
+          <div class="section-intro-side"><p>All three sizes fit in a 12-by-8-foot space. Choose based on what you need to haul.</p><p class="source-note">Three-day starting prices update from our current pricing records.</p></div>
         </div>
         <div class="size-grid" role="group" aria-label="Choose a dumpster for the rental preview">
           <article class="size-card" data-card="11">
             <div class="size-media"><img loading="lazy" src="/images/jobs/11-yard-small-driveway.jpg" alt="11-yard Little Junker dumpster in a residential driveway"><span class="size-chip">SMALL & MIGHTY</span></div>
-            <div class="size-body"><p class="size-meta">11 YARD / THE LITTLE JUNKER</p><div class="size-topline"><h3>Big cleanout. Small footprint.</h3><div class="size-price"><span>3-day base*</span><strong>$325</strong></div></div>
+            <div class="size-body"><p class="size-meta">11 YARD / THE LITTLE JUNKER</p><div class="size-topline"><h3>The Little Junker</h3><div class="size-price"><span>3 days included</span><strong data-base-price="11">Checking…</strong></div></div>
               <p class="size-sub">For garage cleanouts, small remodels, and the tighter spaces.</p>
               <div class="size-specs"><span>1 ton included</span><span>12' × 8' footprint</span></div>
               <button type="button" class="size-select" data-select-size="11" aria-pressed="false">Choose 11-yard <span aria-hidden="true">→</span></button>
@@ -87,7 +87,7 @@
           </article>
           <article class="size-card" data-card="16">
             <div class="size-media"><img loading="lazy" src="/images/jobs/16-yard-newnan-garage.jpg" alt="16-yard Mighty Middler dumpster outside a garage"><span class="size-chip">ROOM TO WORK</span></div>
-            <div class="size-body"><p class="size-meta">16 YARD / THE MIGHTY MIDDLER</p><div class="size-topline"><h3>A little extra breathing room.</h3><div class="size-price"><span>3-day base*</span><strong>$375</strong></div></div>
+            <div class="size-body"><p class="size-meta">16 YARD / THE MIGHTY MIDDLER</p><div class="size-topline"><h3>The Mighty Middler</h3><div class="size-price"><span>3 days included</span><strong data-base-price="16">Checking…</strong></div></div>
               <p class="size-sub">For home projects, remodels, and bigger clear-outs.</p>
               <div class="size-specs"><span>1.5 tons included</span><span>12' × 8' footprint</span></div>
               <button type="button" class="size-select" data-select-size="16" aria-pressed="false">Choose 16-yard <span aria-hidden="true">→</span></button>
@@ -95,14 +95,14 @@
           </article>
           <article class="size-card" data-card="21">
             <div class="size-media"><img loading="lazy" src="/images/jobs/21-yard-peachtree-city.jpg" alt="21-yard Big Junker dumpster at a Peachtree City location"><span class="size-chip">GO BIG</span></div>
-            <div class="size-body"><p class="size-meta">21 YARD / THE BIG JUNKER</p><div class="size-topline"><h3>For the really big plans.</h3><div class="size-price"><span>3-day base*</span><strong>$425</strong></div></div>
+            <div class="size-body"><p class="size-meta">21 YARD / THE BIG JUNKER</p><div class="size-topline"><h3>The Big Junker</h3><div class="size-price"><span>3 days included</span><strong data-base-price="21">Checking…</strong></div></div>
               <p class="size-sub">For whole-house cleanouts and major renovations.</p>
               <div class="size-specs"><span>2 tons included</span><span>12' × 8' footprint</span></div>
               <button type="button" class="size-select" data-select-size="21" aria-pressed="false">Choose 21-yard <span aria-hidden="true">→</span></button>
             </div>
           </article>
         </div>
-        <p class="fine">*Current three-day base-price snapshots used only to visualize the design. Days Plus additional-day prices, real availability, delivery fees and final checkout remain pending. Need help choosing? <a href="tel:+14705484733">Talk to Little Junkers.</a></p>
+        <p class="fine">Prices shown are estimates for three days before location and extra-day charges. Need help choosing? <a href="tel:+14705484733">Talk to Little Junkers.</a></p>
       </div>
     </section>
 
@@ -110,28 +110,28 @@
       <div class="wrap compare-grid">
         <div class="compare-copy">
           <p class="eyebrow dark-eyebrow">02 / SHOP WITH CONFIDENCE</p>
-          <h2>The lowest sticker price <em>isn't always the best deal.</em></h2>
-          <p>We want to help you compare real dumpster offers in your area — rental length, included weight, delivery charges and all. Even when we're not the cheapest.</p>
-          <div class="compare-promise"><span class="promise-symbol" aria-hidden="true">✦</span><p><strong>Our promise: no made-up comparisons.</strong> Every competitor offer needs a source and a verification date. Unknown terms will be marked as unknown.</p></div>
-          <a href="#builder" class="text-link">Already know what you want? Skip straight to your rental <span aria-hidden="true">→</span></a>
+          <h2>See how <em>we compare.</em></h2>
+          <p>Compare dumpster sizes, rental days, included weight and delivery fees. See what is included in each price.</p>
+          <div class="compare-promise"><span class="promise-symbol" aria-hidden="true">✦</span><p><strong>Compare actual terms.</strong> We'll add other local prices as we verify them.</p></div>
+          <a href="#builder" class="text-link">Know what you need? See your estimate <span aria-hidden="true">→</span></a>
         </div>
         <div class="comparison-card">
           <div class="comparison-head">
-            <div><span class="live-dot" aria-hidden="true"></span><strong>Local dumpster cost explorer</strong><small>Feature preview · Market data not yet loaded</small></div>
-            <span class="compare-stamp">TRANSPARENT BY DESIGN</span>
+            <div><span class="live-dot" aria-hidden="true"></span><strong>Dumpster price comparison</strong><small>Three-day starting prices shown</small></div>
+            <span class="compare-stamp">PRICE &amp; TERMS</span>
           </div>
           <div class="comparison-filters"><div><label for="compare-size">Compare a dumpster size</label><select id="compare-size"><option value="11">11 yard</option><option value="16" selected>16 yard</option><option value="21">21 yard</option></select></div><div><label for="compare-days">Rental length</label><select id="compare-days"><option value="3">3 days</option><option value="7">7 days</option><option value="14">14 days</option><option value="30">30 days</option></select></div></div>
           <div class="comparison-list">
             <div class="comparison-row owned">
-              <div><span class="compare-label">LITTLE JUNKERS · DATED BASELINE</span><h3><span id="compare-result-size">16</span>-yard Mighty Middler</h3><p>Included weight: <strong id="compare-included">1.5 tons</strong> · 3-day base</p></div>
-              <div class="comparison-price"><span>3-day snapshot*</span><strong id="compare-result-price">$375</strong></div>
+              <div><span class="compare-label">LITTLE JUNKERS</span><h3><span id="compare-result-size">16</span>-yard Mighty Middler</h3><p>Included weight: <strong id="compare-included">1.5 tons</strong> · 3-day base</p></div>
+              <div class="comparison-price"><span>3-day starting price</span><strong id="compare-result-price">Checking…</strong></div>
             </div>
             <div class="comparison-row placeholder-row">
-              <div><span class="compare-label">OTHER VERIFIED LOCAL OFFERS</span><h3>Sources under review</h3><p>We won't publish a competitor rate without its terms, source and verification date.</p></div>
-              <div class="unverified">Not yet verified</div>
+              <div><span class="compare-label">OTHER LOCAL OFFERS</span><h3>Prices being verified</h3><p>Additional local rates will appear with their source and rental terms.</p></div>
+              <div class="unverified">Not available</div>
             </div>
           </div>
-          <div class="comparison-bottom"><p id="compare-disclaimer">Additional-day pricing for the selected duration is pending approval. No apples-to-apples total is available yet.</p><button type="button" class="button button-dark" id="compare-to-builder">Continue with Little Junkers <span aria-hidden="true">→</span></button></div>
+          <div class="comparison-bottom"><p id="compare-disclaimer">Prices shown are for three days. Extra days and delivery fees may change the estimate.</p><button type="button" class="button button-dark" id="compare-to-builder">See my estimate <span aria-hidden="true">→</span></button></div>
         </div>
       </div>
     </section>
@@ -139,55 +139,55 @@
     <section class="section builder-section" id="builder">
       <div class="wrap">
         <div class="section-intro builder-title">
-          <div><p class="eyebrow dark-eyebrow">03 / MAKE IT YOURS</p><h2>You're ready. <em>Let's make it happen.</em></h2></div>
-          <div class="section-intro-side"><p>Choose your delivery, pick your dumpster, and tell us how long you need it. Nothing extra to learn. Nothing to choose twice.</p></div>
+          <div><p class="eyebrow dark-eyebrow">03 / YOUR ESTIMATE</p><h2>Check your <em>rental price.</em></h2></div>
+          <div class="section-intro-side"><p>Choose a dumpster, enter a city or ZIP, then select your dates.</p></div>
         </div>
         <div class="builder-grid">
           <div class="builder-form">
-            <div class="builder-status"><span class="status-icon" aria-hidden="true">✳</span><span>YOUR RENTAL PLAN</span><strong>DESIGN PREVIEW</strong></div>
-            <div class="field-group"><div class="field-head"><span class="field-num">01</span><div><h3>Where is it going?</h3><p>Your delivery location determines serviceability and any zone fee.</p></div></div>
-              <div class="zip-input-wrap"><label for="builder-zip">Service ZIP</label><input id="builder-zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" placeholder="e.g. 30269"></div>
-              <p class="input-hint" id="builder-zip-status" aria-live="polite">Enter a ZIP above or use one from the homepage.</p>
+            <div class="builder-status"><span class="status-icon" aria-hidden="true">✳</span><span>YOUR RENTAL</span><strong>SAMPLE</strong></div>
+            <div class="field-group"><div class="field-head"><span class="field-num">01</span><div><h3>Delivery location</h3><p>Check delivery in your city or ZIP.</p></div></div>
+              <div class="zip-input-wrap"><label for="builder-zip">City or ZIP</label><input id="builder-zip" inputmode="text" maxlength="60" autocomplete="address-level2" placeholder="e.g. Newnan or 30269"></div>
+              <p class="input-hint" id="builder-zip-status" aria-live="polite">Enter a city or ZIP to check the delivery fee.</p>
             </div>
-            <div class="field-group"><div class="field-head"><span class="field-num">02</span><div><h3>Which Junker?</h3><p>If you chose a size above, we've kept it.</p></div></div>
+            <div class="field-group"><div class="field-head"><span class="field-num">02</span><div><h3>Dumpster size</h3><p>Choose 11, 16 or 21 yards.</p></div></div>
               <div class="size-pills" role="group" aria-label="Select dumpster size">
                 <button class="pill-choice" type="button" data-select-size="11" aria-pressed="false"><b>11</b><small>yard</small></button>
                 <button class="pill-choice" type="button" data-select-size="16" aria-pressed="false"><b>16</b><small>yard</small></button>
                 <button class="pill-choice" type="button" data-select-size="21" aria-pressed="false"><b>21</b><small>yard</small></button>
               </div>
             </div>
-            <div class="field-group"><div class="field-head"><span class="field-num">03</span><div><h3>When do you need it?</h3><p>Final site will show only Fleet-confirmed dates and delivery windows.</p></div></div>
+            <div class="field-group"><div class="field-head"><span class="field-num">03</span><div><h3>Delivery date</h3><p>Select your preferred delivery date.</p></div></div>
               <label for="delivery-date" class="small-label">Desired delivery date</label>
               <input id="delivery-date" class="date-input" type="date">
-              <div class="window-note"><span aria-hidden="true">◷</span> Delivery time choices unlock after live availability is connected. This prototype does not reserve a time.</div>
+              <div class="window-note"><span aria-hidden="true">◷</span> We'll confirm the date and delivery window before booking.</div>
             </div>
-            <div class="field-group days-group"><div class="field-head"><span class="field-num">04</span><div><h3>How long do you need it?</h3><p>Three days included. Add as many as 27 more.</p></div></div>
+            <div class="field-group days-group"><div class="field-head"><span class="field-num">04</span><div><h3>Rental length</h3><p>Three days included. Up to 30 days total.</p></div></div>
               <div class="days-selection">
                 <div><span class="days-overline">TOTAL RENTAL LENGTH</span><div class="days-number"><output id="days-count" for="days-slider">3</output> <span>days</span></div><span class="days-detail" id="days-detail">3 included · 0 added</span></div>
                 <div class="stepper"><button id="days-less" type="button" aria-label="Remove one day">−</button><button id="days-more" type="button" aria-label="Add one day">+</button></div>
               </div>
-              <label for="days-slider" class="small-label">Adjust your rental length</label>
+              <label for="days-slider" class="small-label">Choose your days</label>
               <input type="range" id="days-slider" min="3" max="30" step="1" value="3" aria-label="Total rental days">
               <div class="range-ends"><span>3 days</span><span>30 days max online</span></div>
-              <button type="button" class="quote-link" id="quote-more">Need 31 days or more? <b>Let's plan a custom quote →</b></button>
+              <button type="button" class="quote-link" id="quote-more">Need 31 days or more? <b>Request a custom quote →</b></button>
             </div>
             <p class="builder-validation" id="builder-validation" aria-live="polite"></p>
           </div>
           <aside class="rental-side" aria-label="Rental summary">
             <div class="side-visual"><img src="/images/jobs/truck-delivering.jpg" loading="lazy" alt="Little Junkers truck delivering a roll-off dumpster"><div class="side-visual-label">LITTLE JUNKERS <span>↗</span></div></div>
-            <div class="summary-head"><div><span class="small-eyebrow">YOUR RENTAL AT A GLANCE</span><h3>All the details.<br><em>None of the surprises.</em></h3></div></div>
+            <div class="summary-head"><div><span class="small-eyebrow">YOUR RENTAL AT A GLANCE</span><h3>Your price,<br><em>as you go.</em></h3></div></div>
             <dl class="summary-lines">
               <div><dt>Dumpster</dt><dd id="summary-size">Choose a size</dd></div>
-              <div><dt>Delivery ZIP</dt><dd id="summary-zip">Not entered</dd></div>
+              <div><dt>Delivery area</dt><dd id="summary-zip">Not entered</dd></div>
               <div><dt>Requested date</dt><dd id="summary-date">Not selected</dd></div>
               <div><dt>Rental length</dt><dd><span id="summary-days">3</span> days</dd></div>
-              <div><dt>3-day base*</dt><dd id="summary-base">Choose a size</dd></div>
-              <div><dt>Extra days</dt><dd id="summary-extras">0 · $ rate pending</dd></div>
-              <div><dt>Delivery fee</dt><dd>Pending verified ZIP</dd></div>
+              <div><dt>3-day base</dt><dd id="summary-base">Choose a size</dd></div>
+              <div><dt>Extra days</dt><dd id="summary-extras">0</dd></div>
+              <div><dt>Delivery fee</dt><dd id="summary-delivery">To be checked</dd></div>
             </dl>
-            <div class="summary-total"><span>FINAL AMOUNT DUE</span><strong>Calculated at live checkout</strong><p>Exact amount, confirmed pickup scheduling, and allowed delivery windows will come from the pricing and Fleet systems.</p></div>
-            <button class="button button-dark button-wide" id="preview-checkout" type="button">Preview checkout experience <span aria-hidden="true">→</span></button>
-            <p class="side-disclaimer">Review only · No hold · No charge · No personal information sent</p>
+            <div class="summary-total" aria-live="polite"><span>ESTIMATED PRICE</span><strong id="summary-estimate">Checking prices…</strong><p id="summary-estimate-note">Choose a dumpster size and city or ZIP to update your estimate. Final price and dates are confirmed before payment.</p></div>
+            <button class="button button-dark button-wide" id="preview-checkout" type="button">See checkout example <span aria-hidden="true">→</span></button>
+            <p class="side-disclaimer">Sample only · No booking or payment</p>
           </aside>
         </div>
       </div>
@@ -197,7 +197,7 @@
       <div class="wrap">
         <div class="section-intro how-title"><div><p class="eyebrow dark-eyebrow">04 / SIMPLE FROM HERE</p><h2>We take care <em>of the heavy part.</em></h2></div></div>
         <div class="how-grid">
-          <div class="how-card"><span class="how-num">01</span><div class="how-illustration"><span aria-hidden="true">⌁</span></div><h3>Make your plan</h3><p>Pick your size and the days you need. We'll show exactly what goes into the price.</p></div>
+          <div class="how-card"><span class="how-num">01</span><div class="how-illustration"><span aria-hidden="true">⌁</span></div><h3>Choose your dumpster</h3><p>Pick your size and the days you need. We'll show exactly what goes into the price.</p></div>
           <div class="how-card"><span class="how-num">02</span><div class="how-illustration"><span aria-hidden="true">▤</span></div><h3>We deliver</h3><p>We confirm your delivery window and place your dumpster where your project needs it.</p></div>
           <div class="how-card"><span class="how-num">03</span><div class="how-illustration"><span aria-hidden="true">↗</span></div><h3>You fill. We haul.</h3><p>Get your space back. We arrange pickup at the end of your rental.</p></div>
         </div>
@@ -207,22 +207,22 @@
     <section class="people-section">
       <div class="wrap people-grid">
         <div class="people-photo"><img loading="lazy" src="/images/team/marcus-and-ivy-truck.jpg" alt="Little Junkers owners Marcus and Ivy Griffin with the company truck"></div>
-        <div class="people-copy"><p class="eyebrow">REAL PEOPLE. REAL LOCAL.</p><h2>Neighbors with a truck, <em>and a better idea.</em></h2><p>Little Junkers was started by Marcus and Ivy Griffin in Peachtree City. We believe renting a dumpster should be simple, transparent, and a lot less stressful than the project itself.</p><p class="people-small">We're building a better way to compare, customize, and book — with real people available when you need a hand.</p><a href="#builder" class="button button-pink">Build your rental <span aria-hidden="true">→</span></a></div>
+        <div class="people-copy"><p class="eyebrow">REAL PEOPLE. REAL LOCAL.</p><h2>Neighbors with a truck, <em>and a better idea.</em></h2><p>Little Junkers was started by Marcus and Ivy Griffin in Peachtree City. We believe renting a dumpster should be simple, transparent, and a lot less stressful than the project itself.</p><p class="people-small">Choose your dumpster and rental length online, or call and talk to us.</p><a href="#builder" class="button button-pink">See my estimate <span aria-hidden="true">→</span></a></div>
       </div>
     </section>
-    <section class="notes-section" id="concept-notes"><div class="wrap notes-grid"><div><span class="eyebrow dark-eyebrow">REVIEW NOTE</span><h2>What this first draft proves</h2></div><div><p>It demonstrates a continuous journey from local research to a configured 3–30-day rental and a single details/payment stage. This is not the existing live website and does not submit rental requests.</p><p>Comparison sources, Days Plus additional-day rates, exact quoted totals, delivery blocks, full return-date policies, and Stripe are deliberately not simulated as if verified. They remain project dependencies.</p></div></div></section>
+    <section class="notes-section" id="concept-notes"><div class="wrap notes-grid"><div><span class="eyebrow dark-eyebrow">REVIEW NOTE</span><h2>About this preview</h2></div><div><p>This sample lets you try the shopping experience. It cannot reserve a dumpster or accept payment.</p><p>Only verified three-day base prices and delivery-area fees are used for estimates. Extra-day rates and confirmed quotes are not yet available.</p></div></div></section>
   </main>
   <footer class="footer"><div class="wrap foot-grid"><a class="brand foot-brand" href="#home"><img src="/images/brand/little-junkers-logo.png" alt="" width="38" height="38"><span>Little Junkers<span class="brand-dot">.</span></span></a><p>A little less mess. A lot more room to live.</p><div><a href="tel:+14705484733">Call 470-548-4733</a><span>Peachtree City, Georgia</span></div></div><div class="wrap footer-bottom"><span>Design concept · November 18, 2026 · not a live booking experience</span><a href="#home">Back to top ↑</a></div></footer>
   <div class="mobile-float"><span id="mobile-selection">Find your dumpster</span><a class="button button-pink" href="#builder">Build my rental →</a></div>
-  <dialog class="modal" id="checkout-modal" aria-labelledby="checkout-title"><div class="modal-wrap"><div class="modal-top"><div class="modal-badge">PURCHASE EXPERIENCE CONCEPT</div><button class="modal-close" type="button" data-close-dialog="checkout-modal" aria-label="Close checkout preview">✕</button></div><h2 id="checkout-title">Let's finish <em>your rental.</em></h2><p class="modal-lead">You've already selected your dumpster and dates. The real checkout will securely collect your information once.</p>
+  <dialog class="modal" id="checkout-modal" aria-labelledby="checkout-title"><div class="modal-wrap"><div class="modal-top"><div class="modal-badge">PURCHASE EXPERIENCE CONCEPT</div><button class="modal-close" type="button" data-close-dialog="checkout-modal" aria-label="Close checkout preview">✕</button></div><h2 id="checkout-title">Review your <em>rental.</em></h2><p class="modal-lead">This shows where customer details and payment appear after a confirmed quote.</p>
     <div class="checkout-progress"><span class="active" id="detail-progress">1 · Your details</span><span id="review-progress">2 · Review & pay</span></div>
     <div class="checkout-panel" id="checkout-details">
       <div class="modal-rental" id="modal-rental-details">Your selected rental will appear here.</div>
       <div class="demo-fields"><label>Full name<input type="text" placeholder="Name in actual checkout" disabled></label><div class="demo-two"><label>Email address<input type="email" placeholder="Email in actual checkout" disabled></label><label>Mobile number<input type="tel" placeholder="Number in actual checkout" disabled></label></div><label>Service address<input type="text" placeholder="Full delivery address in actual checkout" disabled></label><label>Customer type<select disabled><option>Home / Residential</option><option>Business</option><option>Contractor</option></select></label></div>
-      <p class="modal-fine">Fields are disabled in this design review. Real checkout will confirm service ZIP, handle contractor-specific information, and keep marketing consent separate from rental-update messaging.</p><button type="button" class="button button-dark button-wide" id="go-review">Continue to Review & Pay →</button>
+      <p class="modal-fine">This is a checkout example. No personal information is collected.</p><button type="button" class="button button-dark button-wide" id="go-review">Continue to Review & Pay →</button>
     </div>
-    <div class="checkout-panel" id="checkout-review" hidden><div class="modal-rental" id="review-rental-details"></div><h3>One clear total before you pay.</h3><div class="fake-stripe"><span>SECURE PAYMENT</span><b>Stripe Payment Element</b><p>Card, wallet and eligible installment methods appear here in production, only after an approved server-calculated quote and availability check.</p></div><button type="button" class="button button-dark button-wide" disabled>Pay &amp; confirm booking — unavailable in prototype</button><button type="button" class="back-link" id="back-details">← Back to details preview</button></div>
+    <div class="checkout-panel" id="checkout-review" hidden><div class="modal-rental" id="review-rental-details"></div><h3>A confirmed price before payment.</h3><div class="fake-stripe"><span>SECURE PAYMENT</span><b>Stripe Payment Element</b><p>Payment will be available after the final price and delivery dates are confirmed.</p></div><button type="button" class="button button-dark button-wide" disabled>Pay &amp; confirm booking — unavailable in prototype</button><button type="button" class="back-link" id="back-details">← Back to details preview</button></div>
   </div></dialog>
-  <dialog class="modal quote-modal" id="quote-modal" aria-labelledby="quote-title"><div class="modal-wrap"><div class="modal-top"><div class="modal-badge">31+ DAYS · PERSONALLY QUOTED</div><button class="modal-close" type="button" data-close-dialog="quote-modal" aria-label="Close custom quote preview">✕</button></div><h2 id="quote-title">Big timeline? <em>Let's talk.</em></h2><p class="modal-lead">For rentals longer than 30 total days, we'll prepare a specific quote instead of showing an automatic checkout price.</p><div class="custom-summary"><strong>Our custom-quote path will capture:</strong><p>Where the dumpster goes, selected size, preferred start date, estimated rental length, and the best way to reach you.</p><p><b>No automated 31+ day price or availability promise.</b></p></div><a href="tel:+14705484733" class="button button-dark button-wide">Call 470-548-4733 for a quote →</a><p class="modal-fine">When the quote-request workflow is ready, this panel will offer a secure form and CSR follow-up.</p></div></dialog>
+  <dialog class="modal quote-modal" id="quote-modal" aria-labelledby="quote-title"><div class="modal-wrap"><div class="modal-top"><div class="modal-badge">31+ DAYS · PERSONALLY QUOTED</div><button class="modal-close" type="button" data-close-dialog="quote-modal" aria-label="Close custom quote preview">✕</button></div><h2 id="quote-title">Big timeline? <em>Let's talk.</em></h2><p class="modal-lead">For rentals longer than 30 total days, we'll prepare a specific quote instead of showing an automatic checkout price.</p><div class="custom-summary"><strong>Tell us about your job:</strong><p>Where the dumpster goes, selected size, preferred start date, estimated rental length, and the best way to reach you.</p><p><b>Longer rentals are quoted individually.</b></p></div><a href="tel:+14705484733" class="button button-dark button-wide">Call 470-548-4733 for a quote →</a><p class="modal-fine">Call or text us to discuss your job and get a custom quote.</p></div></dialog>
 </body>
 </html>
