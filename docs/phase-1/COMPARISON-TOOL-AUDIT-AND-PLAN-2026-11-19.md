@@ -101,3 +101,41 @@ Offer optional "Email me this comparison" or "Get help with my rental" after res
 
 ## Existing blocked connections unrelated to this feature
 Randy site token/Twilio, full Days Plus backend price and Fleet contracts, production checkout, final editorial and cutover were already open in the prior handoff. They remain **out of scope**; do not treat those as comparison blockers except where the tool correctly hides unavailable prices or booking.
+
+
+## November 19 execution addendum — owner-authorized intel refresh and PR governance
+
+- PR #7 was squash-merged into main after Vercel success and confirmation that the Vercel website project serves only littlejunkers-website.vercel.app, not the live Odoo www domain. Merge commit ba41ec3791e4688b03ee2ccc0fa7a4ab51a570c2.
+- PR #8 now targets main and its branch ancestry was rebuilt into one focused comparison commit on the new main. No merge of PR #8 is authorized.
+- The owner clarified voice dictation "Easy Disposal" refers to existing Supabase provider **EZ Disposal Roll Offs**. Provider identity and name derive from the vetted database, not from statements in chat.
+- First-party websites were fetched live using Firecrawl (maxAge 0). Only existing canonical comparison providers were researched; no Facebook sellers were silently added.
+- Owner explicitly authorized competitive-intelligence database refresh. Inserted 98 append-only observations across 20 offers, with prices, rental terms, included tons, optional extra-day charges and weight charges. Each record has a source URL, observed date 2026-11-19, and a conservative 14-day expiration. Earlier 151 observations remain unchanged.
+- Added 23 city-level coverage records for Newnan, Peachtree City, Fayetteville, Sharpsburg and Senoia where each first-party provider site expressly advertises that location. City-level coverage does not verify every street address, delivery fee or live inventory.
+- Added existing-provider Dumpsters 4 Less 15-yard product, and corrected existing BM Dumpster Rentals 20-yard product comparison class from 16 to 21.
+- Confirmed EZ Disposal 15-yard $375/3 days/2 tons and $5/day extra (earlier $15/day was wrong); Kraken 15-yard $325/3 days/1 ton, $20/day extra and $0.05/lb excess weight; Moreira 15-yard $365/10 days/2 tons as starting plus delivery; BM 14-yard $400/7 days/2 tons and 20-yard $500/7 days/3 tons; Haul Away 15-yard $375/3 days/1.5 tons; Frank's 15-yard $375/3 days/2 tons; Dumpsters 4 Less 15-yard $375/3 days/1 ton and $0.06/lb excess weight.
+- Official source URLs:
+  - https://krakendumpsters.com/
+  - https://ezdisposalrolloffs.com/rent-a-dumpster-2/
+  - https://www.bmdumpsterrentals.com/pricing
+  - https://www.moreirasservice.com/items/15_yard_dumpster
+  - https://www.haulawayrolloffs.com/items/15_yard_dumpster_3_day/
+  - https://www.franksrolloffdumpsters.com/items/15-yard-dumpster-3-day-rental
+  - https://www.dumpsters4les.com/items/3_day_15_yard_dumpster-_flat_fee_(no_surprises)
+- Review UI updates disclose starting price plus delivery and per-pound excess weight, without invented equivalency. Corrected same-day city coverage validation date handling.
+- The 14-day expiry and existing 30-day city coverage threshold are conservative provisional review policies; they require business approval as permanent data management rules.
+
+### Trust/source policy proposed for approval
+
+**Tier 1 — public comparison:** vetted existing provider, identifiable first-party website, product and clearly published terms, current documented price and city/ZIP coverage. Show accurate duration, yardage, missing fees and verification date. Do not imply that the published base is an all-in address-specific quote.
+
+**Tier 2 — internal monitoring:** Facebook marketplace/group sellers, brokers, businesses without independently verified websites or incomplete offers. Some may be legitimate. Verify seller identity, service geography, equipment, operational responsibility, price and cancellation/refund policy before promoting to public comparison.
+
+**Tier 3 — exclude from public comparison:** unsubstantiated identity, suspicious listings, untraceable prices, likely impersonation. Keep intelligence evidence without stating fraud is proved.
+
+Facebook presence is not a disqualifier. Brokerage alone is not illegitimate. Quality of corroboration decides whether an offer qualifies.
+
+### Remaining validation gates
+- Live preview API verification after Vercel server-only Supabase secret config. Env metadata read previously returned 403; connection remains unverified.
+- Published term-mismatch tests for 3/7/10-day offers; per-pound versus per-ton; correct provider source URLs and price qualifiers.
+- Geographic wording: city advertised by provider does not mean confirmed specific street or checkout eligibility.
+- Approve price/coverage verification ownership and cadence, privacy analytics and opt-in tracking before rollout.
