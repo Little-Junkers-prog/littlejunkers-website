@@ -143,7 +143,7 @@ export default function CompetitorExitDialog({
                 <input id="comparison-callback-company" name="company_address" tabIndex={-1}
                   autoComplete="off" value={honey} onChange={e=>setHoney(e.target.value)}/>
               </div>
-              <ComparisonTurnstile onToken={setToken}/>
+              {callbackOpen && <ComparisonTurnstile onToken={setToken}/>}
               <p className="fine">By submitting, you ask Little Junkers to contact you about
                 this rental comparison. This is not a marketing subscription.</p>
               {error && <p role="alert" className="comparison-exit__error">{error}</p>}
