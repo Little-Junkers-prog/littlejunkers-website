@@ -44,8 +44,6 @@ export type RawMeasurement = {
   event_name: string;
   session_id: string;
   provider_id?: string | null;
-  market_city?: string | null;
-  market_zip?: string | null;
   size_yards: number;
   duration_days: number;
   result_count?: number | null;
@@ -55,8 +53,6 @@ export type SafeMeasurement = {
   session_id: string;
   provider_id: string | null;
   event_context: {
-    market_city?: string;
-    market_zip?: string;
     size_yards: 11 | 16 | 21;
     duration_days: number;
     result_count?: number;
@@ -64,8 +60,6 @@ export type SafeMeasurement = {
 };
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-const ZIP = /^\d{5}$/;
-const CITY = /^[a-z][a-z .'-]{1,49}$/i;
 const ALLOWED = new Set<string>(COMPARISON_EVENT_NAMES);
 const PROVIDER_EVENTS = new Set<string>([
   "comparison_provider_detail_viewed",
@@ -85,13 +79,11 @@ export function validateComparisonMeasurement(
       (PROVIDER_EVENTS.has(input.event_name) && !provider) ||
       (!PROVIDER_EVENTS.has(input.event_name) && provider)) return null;
 
-  const city = input.market_city?.trim() ?? null;
-  const zip = input.market_zip?.trim() ?? null;
-  if (city && !CITY.test(city)) return null;
-  if (zip && !ZIP.test(zip)) return null;
   if (input.result_count != null &&
       (!Number.isInteger(input.result_count) || input.result_count < 0 || input.result_count > 50)) return null;
 
+  // Only numeric context survives. City and ZIP must be resolved server-side
+  // from the canonical comparison session, never from browser event text.
   // Whitelist known primitives only; do not forward arbitrary input,
   // names, addresses, customer identifiers, free text or attribution claims.
   return {
@@ -99,8 +91,6 @@ export function validateComparisonMeasurement(
     session_id: input.session_id.toLowerCase(),
     provider_id: provider?.toLowerCase() ?? null,
     event_context: {
-      ...(city ? { market_city: city } : {}),
-      ...(zip ? { market_zip: zip } : {}),
       size_yards: input.size_yards as 11 | 16 | 21,
       duration_days: input.duration_days,
       ...(input.result_count != null ? { result_count: input.result_count } : {})
