@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
   // A zone fee can be estimated only when the input is unambiguous.
   const deliveryFee = area.status === "served" ? area.zone.deliveryFee : null;
   return NextResponse.json({
+    request: { location, size, days },
     location: area,
     size, days,
     littleJunkers: {
