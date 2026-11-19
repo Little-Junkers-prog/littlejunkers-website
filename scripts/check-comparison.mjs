@@ -128,4 +128,26 @@ assert.ok(ranked.slice(0,2).some(x => x.coverage === "unverified"), "short local
 const allReference = rankComparisonCards(mock.map(x => ({...x,coverage:"unverified"})), 16, 3);
 assert.equal(allReference.slice(0,2).length, 2, "uncovered city still gets two vetted reference options");
 assert.equal(rankComparisonCards(mock,16,3)[0].price,525,"ranking cannot be engineered by price");
+const comparisonMarkup = readFileSync(new URL("../components/ComparisonTool.tsx", import.meta.url), "utf8");
+const firstCard = comparisonMarkup.slice(
+  comparisonMarkup.indexOf('className="comparison-card comparison-card--lj"'),
+  comparisonMarkup.indexOf('{visible.map((offer)')
+);
+const competitorCard = comparisonMarkup.slice(
+  comparisonMarkup.indexOf('{visible.map((offer)'),
+  comparisonMarkup.indexOf('{current && current.comparison.status === "ready"')
+);
+const expectedRows = ["Size", "Rental duration", "Included weight", "Delivery", "Extra weight", "Extra day"];
+for (const label of expectedRows) {
+  const field = "<dt>" + label + "</dt>";
+  assert.ok(firstCard.includes(field), "Little Junkers is missing row " + label);
+  assert.ok(competitorCard.includes(field), "Competitor is missing row " + label);
+}
+assert.equal(firstCard.includes("<dt>Actual size</dt>"), false, "avoid misleading actual-size labels");
+assert.equal(competitorCard.includes("roll-off dumpster</dd>"), false, "simplify displayed competitor size");
+assert.equal(competitorCard.includes("View published offer"), false, "avoid duplicate outbound offer links");
+assert.ok(firstCard.includes("Rate not yet confirmed"), "unapproved LJ prepaid extra-day fee must remain unpriced");
+assert.ok(competitorCard.includes("Independent provider; not affiliated with Little Junkers"), "source disclosure stays below competitor CTA");
+assert.ok(comparisonMarkup.includes("offers publicly posted on each company's website"), "footer must explain public-source provenance");
+console.log("Comparison card parity and provenance assertions passed.");
 console.log("Comparison evidence, ranking, snapshot, exit and outcome assertions passed.");
