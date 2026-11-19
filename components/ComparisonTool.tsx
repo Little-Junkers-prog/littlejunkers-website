@@ -29,6 +29,11 @@ type Status = "idle" | "loading" | "ready" | "error";
 
 const sizes = [11, 16, 21] as const;
 function money(value: number | null) { return value === null ? "Not published" : formatUsd(value); }
+function containerLabel(value: string | null): string {
+  if (value === "roll_off") return "roll-off dumpster";
+  if (value === "dump_trailer") return "dump trailer";
+  return "container";
+}
 function labelDate(value: string | null) {
   if (!value) return null;
   const date = new Date(value + "T12:00:00Z");
@@ -156,7 +161,7 @@ export default function ComparisonTool({
                : "Published " + offer.priceDays + "-day offer; delivery fee unconfirmed"}
         </p>
         <dl>
-          <div><dt>Actual size</dt><dd>{offer.actualYards}-yard {offer.containerType ?? "container"}</dd></div>
+          <div><dt>Actual size</dt><dd>{offer.actualYards}-yard {containerLabel(offer.containerType)}</dd></div>
           <div><dt>Rental duration</dt><dd>{offer.priceDays ? offer.priceDays + " days" : "Not verified"}</dd></div>
           <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? formatTons(offer.includedTons) : "Not verified"}</dd></div>
           <div><dt>Delivery for your area</dt><dd>{offer.coverage === "verified" ? "City listed; fee not confirmed" : "Service area not verified"}</dd></div>
