@@ -30,6 +30,7 @@ export default function CompetitorExitDialog({
   const [callbackZip,setCallbackZip]=useState("");
   const [callbackEmail,setCallbackEmail]=useState("");
   const [token,setToken]=useState("");
+  const [challengeAttempt,setChallengeAttempt]=useState(0);
   const [formStartedAt,setFormStartedAt]=useState(0);
   const [honey,setHoney]=useState("");
   const [isSubmitting,setSubmitting]=useState(false);
@@ -47,7 +48,7 @@ export default function CompetitorExitDialog({
     if (!target) return;
     setCallbackName("");setCallbackPhone("");setCallbackEmail("");
     setCallbackZip(/^\d{5}$/.test(location)?location:"");
-    setToken("");setHoney("");setSaved(false);setError("");
+    setToken("");setChallengeAttempt(0);setHoney("");setSaved(false);setError("");
     setCallbackOpen(false);setFormStartedAt(Date.now());
   },[target,location]);
 
@@ -82,7 +83,7 @@ export default function CompetitorExitDialog({
       setSaved(true);
     }catch(e){
       setError(e instanceof Error?e.message:"We couldn't save your callback request.");
-      setToken("");
+      setToken("");setChallengeAttempt(a=>a+1);
     }finally{setSubmitting(false)}
   }
 
@@ -143,7 +144,7 @@ export default function CompetitorExitDialog({
                 <input id="comparison-callback-company" name="company_address" tabIndex={-1}
                   autoComplete="off" value={honey} onChange={e=>setHoney(e.target.value)}/>
               </div>
-              {callbackOpen && <ComparisonTurnstile onToken={setToken}/>}
+              {callbackOpen && <ComparisonTurnstile key={challengeAttempt} onToken={setToken}/>}
               <p className="fine">By submitting, you ask Little Junkers to contact you about
                 this rental comparison. This is not a marketing subscription.</p>
               {error && <p role="alert" className="comparison-exit__error">{error}</p>}
