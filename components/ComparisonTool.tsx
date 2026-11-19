@@ -25,7 +25,7 @@ type Payload = {
     overagePerTon: number | null; deliveryFee: number | null;
     knownSubtotal: number | null; additionalDaysPriced: boolean; confirmedQuote: false;
   };
-  comparison: { status: "ready" | "connection_pending" | "source_unavailable"; candidates: Offer[] };
+  comparison: { status: "ready" | "source_unavailable"; source: "live" | "review_snapshot" | "unavailable"; snapshotAsOf: string | null; verifiedLocalCount: number; fallbackUsed: boolean; candidates: Offer[] };
 };
 type Status = "idle" | "loading" | "ready" | "error";
 
@@ -127,9 +127,17 @@ export default function ComparisonTool({
        !current ? "Checking local options…" :
        current.location.status === "served" ? "Published offers for " + current.location.label + ". Confirm delivery and final price directly." :
        current.location.status === "split" ? "Enter your ZIP for a more precise delivery estimate." :
-       "We couldn't confirm the delivery area. Contact each company for service availability."}
+       "We have not verified two competitors serving " + current.request.location + ". Here are regional reference offers."}
     </div>
 
+    {current?.comparison.fallbackUsed && <div className="comparison-fallback" role="note">
+      <strong>Regional reference comparisons</strong>
+      <p>
+        We haven't verified two companies serving {current.request.location}. To help you compare,
+        we've included vetted providers with published offers for similar-sized dumpsters.
+        Their delivery availability and final price in your area are <strong>not verified</strong>.
+      </p>
+    </div>}
     <div className="comparison-results">
       <article className="comparison-card comparison-card--lj">
         <p className="comparison-card__eyebrow">Little Junkers</p>
@@ -148,7 +156,7 @@ export default function ComparisonTool({
         <p className="fine">The final price and delivery availability are confirmed before booking.</p>
       </article>
       {visible.map((offer) => <article className="comparison-card" key={offer.providerId}>
-        <p className="comparison-card__eyebrow">{offer.coverage === "verified" ? "Local company" : "Company · delivery area unverified"}</p>
+        <p className="comparison-card__eyebrow">{offer.coverage === "verified" ? "Listed in your city" : "Regional reference · coverage unverified"}</p>
         <h2>{offer.name}</h2>
         <p className="comparison-card__price">
           {offer.priceStatus !== "verified" ? "Price not verified" :
@@ -194,7 +202,7 @@ export default function ComparisonTool({
             setExitTarget({ providerId: offer.providerId, name: offer.name, website: offer.website, destination: offer.sourceUrl! });
           }}>View published offer</a></p> : null}
       </article>)}
-      {current && results.length < 2 && <article className="comparison-card comparison-card--empty">
+      {current && current.comparison.status === "ready" && results.length < 2 && <article className="comparison-card comparison-card--empty">
         <h2>More local companies</h2>
         <p>We haven't confirmed two comparable offers for this location and size yet. That doesn't mean other companies don't serve your area.</p>
         <p>We only show a price when the source, rental term and local coverage have been verified.</p>
@@ -205,7 +213,9 @@ export default function ComparisonTool({
       {showMore ? "Show fewer companies" : "See more companies (" + (results.length - 2) + ")"}
     </button>}
     {current && current.comparison.status !== "ready" &&
-      <p className="comparison-source-note">Competitor details are temporarily unavailable; please check the companies directly.</p>}
+      <p className="comparison-source-note" role="alert">Competitor data is temporarily unavailable. Please check providers directly or try again.</p>}
+    {current?.comparison.source === "review_snapshot" &&
+      <p className="comparison-source-note">Competitor examples are from our vetted, dated comparison records (last exported {labelDate(current.comparison.snapshotAsOf)}). Online prices and availability may change.</p>}
     <p className="comparison-source-note">Prices are based on each company's stated terms. Dumpster sizes, included weight, fees and rental days can differ. An external website may show a different price at checkout.</p>
     <p className="fine"><Link href="/pricing">Little Junkers pricing details</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
     <CompetitorExitDialog target={exitTarget} onClose={() => setExitTarget(null)}
