@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { selectOfferSnapshot, observationIsCurrent } from "../lib/comparison-selection.ts";
+import { readFileSync } from "node:fs";
+import { selectOfferSnapshot, observationIsCurrent, rankComparisonCards } from "../lib/comparison-selection.ts";
 import { validateComparisonMeasurement, classifyComparisonOutcome } from "../lib/comparison-measurement.ts";
 import { createComparisonText } from "../lib/comparison-exit.ts";
 
@@ -103,4 +104,28 @@ const emptyDraft = createComparisonText("EZ Disposal Roll Offs", "", "", {
 assert.ok(emptyDraft.includes("differences between offers"), "optional reason should have a neutral default");
 assert.equal(emptyDraft.includes("around "), false, "unknown location should not be invented");
 assert.equal(emptyDraft.includes("I'm ."), false, "empty name should not be added");
-console.log("Comparison evidence, consent, exit and outcome assertions passed.");
+const canonicalSnapshot = JSON.parse(readFileSync(new URL("../lib/comparison-snapshot.json", import.meta.url), "utf8"));
+assert.equal(canonicalSnapshot.source, "Supabase canonical comparison tables", "snapshot is database-derived");
+assert.ok(canonicalSnapshot.providers.length >= 2, "reference comparison needs at least two vetted providers");
+assert.ok(canonicalSnapshot.observations.some(x => x.attribute_name === "price"), "snapshot must contain sourced offers");
+assert.equal(canonicalSnapshot.providers.some(x => x.visibility_status !== "public"), false, "internal/suppressed providers never exported");
+for (const selectedSize of [11, 16, 21]) {
+  const providersForClass = new Set(canonicalSnapshot.products
+    .filter(x => x.comparison_class_yards === selectedSize && x.is_active)
+    .map(x => x.provider_id));
+  assert.ok(providersForClass.size >= 2, selectedSize + "-yard needs at least two vetted reference providers");
+}
+const mock = [
+  {providerId:"one",name:"Reference A",coverage:"unverified",priceStatus:"verified",priceDays:3,actualYards:15,price:275},
+  {providerId:"two",name:"Local B",coverage:"verified",priceStatus:"verified",priceDays:3,actualYards:15,price:525},
+  {providerId:"three",name:"Reference C",coverage:"unverified",priceStatus:"verified",priceDays:3,actualYards:15,price:100},
+  {providerId:"one",name:"Reference A (alternate)",coverage:"unverified",priceStatus:"verified",priceDays:7,actualYards:15,price:200}
+];
+const ranked = rankComparisonCards(mock, 16, 3);
+assert.equal(ranked[0].providerId, "two", "verified local provider ranks above regional references");
+assert.equal(ranked.length, 3, "one product per provider");
+assert.ok(ranked.slice(0,2).some(x => x.coverage === "unverified"), "short local coverage fills from regional defaults");
+const allReference = rankComparisonCards(mock.map(x => ({...x,coverage:"unverified"})), 16, 3);
+assert.equal(allReference.slice(0,2).length, 2, "uncovered city still gets two vetted reference options");
+assert.equal(rankComparisonCards(mock,16,3)[0].price,525,"ranking cannot be engineered by price");
+console.log("Comparison evidence, ranking, snapshot, exit and outcome assertions passed.");
