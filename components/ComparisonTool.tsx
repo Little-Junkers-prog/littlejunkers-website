@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSavedArea, useSavedLocationQuery } from "./ZipContext";
-import { formatUsd } from "@/lib/pricing";
+import { formatTons, formatUsd } from "@/lib/pricing";
 
 type Area = { status: "served"; query: string; label: string; zips: string[]; zone: { deliveryFee: number } }
   | { status: "split"; query: string; label: string }
@@ -131,7 +131,7 @@ export default function ComparisonTool({
         <dl>
           <div><dt>Actual size</dt><dd>{size} yards</dd></div>
           <div><dt>Rental duration</dt><dd>{days} days selected</dd></div>
-          <div><dt>Included weight</dt><dd>{local ? local.includedTons + " tons" : "Checking"}</dd></div>
+          <div><dt>Included weight</dt><dd>{local ? formatTons(local.includedTons) : "Checking"}</dd></div>
           <div><dt>Delivery</dt><dd>{local ? (local.deliveryFee === null ? "Not yet priced" : local.deliveryFee === 0 ? "Free for this area" : formatUsd(local.deliveryFee)) : "Check city or ZIP"}</dd></div>
           <div><dt>Extra weight</dt><dd>{local ? money(local.overagePerTon) + (local.overagePerTon !== null ? "/ton" : "") : "Checking"}</dd></div>
         </dl>
@@ -142,14 +142,23 @@ export default function ComparisonTool({
       {visible.map((offer) => <article className="comparison-card" key={offer.providerId}>
         <p className="comparison-card__eyebrow">{offer.coverage === "verified" ? "Local company" : "Company · delivery area unverified"}</p>
         <h2>{offer.name}</h2>
-        <p className="comparison-card__price">{offer.priceStatus === "verified" ? money(offer.price) : "Price not verified"}</p>
-        <p className="comparison-card__price-note">{offer.priceStatus !== "verified" ? "Check directly for current terms" :
-          offer.priceQualifier === "starting_plus_delivery" ? "Starting price for " + offer.priceDays + " days; delivery extra" :
-          "Published " + offer.priceDays + "-day offer; delivery fee unconfirmed"}</p>
+        <p className="comparison-card__price">
+          {offer.priceStatus !== "verified" ? "Price not verified" :
+           offer.priceDays !== null && offer.priceDays < days ? "Request " + days + "-day price" :
+           (offer.priceQualifier === "starting_plus_delivery" ? "From " : "") + money(offer.price)}
+        </p>
+        <p className="comparison-card__price-note">
+          {offer.priceStatus !== "verified" ? "Check directly for current terms" :
+           offer.priceDays !== null && offer.priceDays < days
+             ? "Reference: " + money(offer.price) + " for up to " + offer.priceDays + " days; not a " + days + "-day quote"
+             : offer.priceQualifier === "starting_plus_delivery"
+               ? "Published " + offer.priceDays + "-day starting price; delivery extra"
+               : "Published " + offer.priceDays + "-day offer; delivery fee unconfirmed"}
+        </p>
         <dl>
           <div><dt>Actual size</dt><dd>{offer.actualYards}-yard {offer.containerType ?? "container"}</dd></div>
           <div><dt>Rental duration</dt><dd>{offer.priceDays ? offer.priceDays + " days" : "Not verified"}</dd></div>
-          <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? offer.includedTons + " tons" : "Not verified"}</dd></div>
+          <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? formatTons(offer.includedTons) : "Not verified"}</dd></div>
           <div><dt>Delivery for your area</dt><dd>{offer.coverage === "verified" ? "City listed; fee not confirmed" : "Service area not verified"}</dd></div>
           <div><dt>Extra weight</dt><dd>{offer.overagePerPound !== null ? formatUsd(offer.overagePerPound) + "/lb" :
             offer.overagePerTon !== null ? money(offer.overagePerTon) + "/ton" : "Not verified"}</dd></div>
