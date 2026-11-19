@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { selectOfferSnapshot, observationIsCurrent } from "../lib/comparison-selection.ts";
 import { validateComparisonMeasurement, classifyComparisonOutcome } from "../lib/comparison-measurement.ts";
+import { createComparisonText } from "../lib/comparison-exit.ts";
 
 function fact(attribute_name, value_numeric, variant_id = "3day", source_url = "https://example.com/offer", observed_at = "2026-11-19T12:00:00Z") {
   return { attribute_name, value_numeric, variant_id, source_url, observed_at };
@@ -89,4 +90,17 @@ assert.equal(classifyComparisonOutcome({ ...emptyEvidence, paidRentalConfirmed: 
 assert.equal(classifyComparisonOutcome({ ...emptyEvidence, paidRentalConfirmed: true, attributionProven: true }), "verified_lj_paid", "paid and attributed booking is a verified LJ win");
 assert.equal(classifyComparisonOutcome({ ...emptyEvidence, competitorChoiceSelfReported: true }), "competitor_self_reported", "competitor win requires voluntary report");
 assert.equal(classifyComparisonOutcome({ ...emptyEvidence, competitorOutboundClicked: true, consentedReturnAfterOutbound: true }), "returned_considering", "return requires consented identity linkage");
-console.log("Comparison evidence, measurement and outcome assertions passed.");
+const draft = createComparisonText("Kraken Dumpsters", "Marcus", "price", {
+  size: 16, days: 7, location: "Newnan"
+});
+assert.ok(draft.includes("Kraken Dumpsters"), "text draft should refer to selected company");
+assert.ok(draft.includes("16-yard dumpster for 7 days around Newnan"), "text draft should carry the shopping context");
+assert.ok(draft.includes("compare price"), "text draft should carry the chosen question");
+assert.ok(draft.includes("I'm Marcus"), "text draft should include voluntary first name");
+const emptyDraft = createComparisonText("EZ Disposal Roll Offs", "", "", {
+  size: 11, days: 3, location: ""
+});
+assert.ok(emptyDraft.includes("differences between offers"), "optional reason should have a neutral default");
+assert.equal(emptyDraft.includes("around "), false, "unknown location should not be invented");
+assert.equal(emptyDraft.includes("I'm ."), false, "empty name should not be added");
+console.log("Comparison evidence, consent, exit and outcome assertions passed.");
