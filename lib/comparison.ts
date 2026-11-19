@@ -4,7 +4,7 @@
 import "server-only";
 import snapshot from "./comparison-snapshot.json";
 import { cityKey, type AreaResult } from "./pricing";
-import { selectOfferSnapshot, observationIsCurrent } from "./comparison-selection";
+import { selectOfferSnapshot, observationIsCurrent, rankComparisonCards } from "./comparison-selection";
 
 export type CompetitorCard = {
   providerId: string;
@@ -106,11 +106,6 @@ function amount(o: Observation | null): number | null {
 function fact(rows: Observation[], attribute: string): Observation | null {
   return rows.find((row) => row.attribute_name === attribute) ?? null;
 }
-function termDistance(days: number | null, requestedDays: number): number {
-  if (days === null) return 99999;
-  return days >= requestedDays ? days - requestedDays : 1000 + requestedDays - days;
-}
-
 export function buildComparisonCards(
   data: SourceData, size: 11 | 16 | 21, area: AreaResult, days: number, now: Date
 ): CompetitorCard[] {
@@ -147,25 +142,7 @@ export function buildComparisonCards(
       priceStatus: selected ? "verified" : "not_verified",
     });
   }
-  // Evidence and relevance first; NEVER order by favorable or cheapest price.
-  // Only one product per provider occupies the three-card default.
-  cards.sort((a, b) => {
-    const priority = (c: CompetitorCard) =>
-      c.coverage === "verified"
-        ? (c.priceStatus === "verified" ? 0 : 1)
-        : (c.priceStatus === "verified" ? 2 : 3);
-    return priority(a) - priority(b) ||
-      termDistance(a.priceDays, days) - termDistance(b.priceDays, days) ||
-      Math.abs(a.actualYards - size) - Math.abs(b.actualYards - size) ||
-      (providers.get(a.providerId)?.sort_order ?? 999) - (providers.get(b.providerId)?.sort_order ?? 999) ||
-      a.name.localeCompare(b.name);
-  });
-  const seen = new Set<string>();
-  return cards.filter((card) => {
-    if (seen.has(card.providerId)) return false;
-    seen.add(card.providerId);
-    return true;
-  });
+  return rankComparisonCards(cards, size, days);
 }
 
 function response(
