@@ -42,12 +42,17 @@ export function selectOfferSnapshot<T extends OfferFact>(
       observation.source_url === price.source_url &&
       observation.observed_at === price.observed_at
     );
-    const duration = facts.find((fact) =>
+    const prices = facts.filter((fact) => fact.attribute_name === "price");
+    const durations = facts.filter((fact) =>
       fact.attribute_name === "duration_days" &&
       positiveNumber(fact.value_numeric) !== null &&
       Number.isInteger(Number(fact.value_numeric))
     );
-    if (!duration) continue;
+    // Multiple durations or prices for the same product/variant/source/time
+    // are ambiguous. Require separate variants or separately timestamped
+    // evidence rather than pairing arbitrary amounts with arbitrary terms.
+    if (prices.length !== 1 || durations.length !== 1) continue;
+    const duration = durations[0];
     snapshots.push({ price, duration, facts, days: Number(duration.value_numeric) });
   }
   snapshots.sort((a, b) =>
