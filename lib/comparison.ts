@@ -117,7 +117,10 @@ export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResu
   const secret = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!origin || !secret) return { status: "connection_pending", candidates: [] };
   try {
-    const [providers, products, observations, coverage] = await Promise.all([
+    // Unknown / split city data is not evidence of competitor serviceability.
+    if (area.status !== "served") return { status: "ready", candidates: [] };
+    const now = new Date();
+    const [providers, products, coverage] = await Promise.all([
       readTable<Provider>("comparison_providers", {
         select: "id,name,website_url,is_active,visibility_status,sort_order",
         is_active: "eq.true", visibility_status: "eq.public", limit: "100"
@@ -126,20 +129,38 @@ export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResu
         select: "id,provider_id,product_name,actual_size_yards,container_type,comparison_class_yards,is_active",
         is_active: "eq.true", comparison_class_yards: "eq." + size, limit: "200"
       }, origin, secret),
-      readTable<Observation>("comparison_observations", {
-        select: "provider_id,product_id,variant_id,attribute_name,value_numeric,unit,price_qualifier,source_url,observed_at,valid_until,verification_status,publication_status,conflict_type,location_scope_type,location_scope_value,market_city,market_zip",
-        attribute_name: "in.(price,duration_days,included_tons,overage_per_ton,overage_per_pound,extra_day_fee)", limit: "1000"
-      }, origin, secret),
       readTable<Coverage>("comparison_provider_coverage", {
         select: "provider_id,coverage_type,location_key,zip_code,state,coverage_status,last_verified,is_active",
         is_active: "eq.true", coverage_status: "eq.confirmed", limit: "1000"
       }, origin, secret)
     ]);
 
-    const now = new Date();
-    const cards: CompetitorCard[] = [];
     const publicProviders = new Map(providers.filter((p) => p.is_active && p.visibility_status === "public").map((p) => [p.id, p]));
-    for (const product of products) {
+    const candidates = products.filter((product) => {
+      const provider = publicProviders.get(product.provider_id);
+      const yards = Number(product.actual_size_yards);
+      return !!provider && !!httpUrl(provider.website_url) && product.is_active &&
+        Number.isFinite(yards) && yards > 0 && Math.abs(yards - size) <= 4 &&
+        coverage.some((row) => row.provider_id === product.provider_id && coversLocation(row, area, now));
+    });
+    if (!candidates.length) return { status: "ready", candidates: [] };
+
+    // Query only fresh, independently publishable evidence for eligible products.
+    // Earlier code silently truncated after 1,000 historical observations.
+    // If we ever reach the cap, fail closed instead of showing a partial ranking.
+    const observations = await readTable<Observation>("comparison_observations", {
+      select: "provider_id,product_id,variant_id,attribute_name,value_numeric,unit,price_qualifier,source_url,observed_at,valid_until,verification_status,publication_status,conflict_type,location_scope_type,location_scope_value,market_city,market_zip",
+      product_id: "in.(" + candidates.map((product) => product.id).join(",") + ")",
+      valid_until: "gt." + now.toISOString(),
+      verification_status: "eq.confirmed_published",
+      publication_status: "eq.publishable",
+      conflict_type: "eq.no_conflict",
+      attribute_name: "in.(price,duration_days,included_tons,overage_per_ton,overage_per_pound,extra_day_fee)",
+      limit: "1000"
+    }, origin, secret);
+    if (observations.length >= 1000) throw new Error("comparison observation page limit reached");
+    const cards: CompetitorCard[] = [];
+    for (const product of candidates) {
       const provider = publicProviders.get(product.provider_id);
       const website = httpUrl(provider?.website_url ?? null);
       const yards = Number(product.actual_size_yards);
