@@ -87,3 +87,42 @@ export function observationIsCurrent(observation: PublishedObservation, now: Dat
   return Number.isFinite(observed) && Number.isFinite(expires) &&
     observed <= now.getTime() && expires > now.getTime();
 }
+
+
+export type RankedComparisonCard = {
+  providerId: string;
+  name: string;
+  actualYards: number;
+  coverage: "verified" | "unverified";
+  priceStatus: "verified" | "not_verified";
+  priceDays: number | null;
+};
+
+function termDifference(term: number | null, selected: number): number {
+  if (term === null) return 99999;
+  return term >= selected ? term - selected : 1000 + selected - term;
+}
+
+/**
+ * One vetted product per provider. Verified local coverage outranks regional
+ * reference providers, and current prices outrank unverified ones within a
+ * coverage tier. Price amount never affects ranking.
+ */
+export function rankComparisonCards<T extends RankedComparisonCard>(
+  cards: T[], size: number, requestedDays: number
+): T[] {
+  const priority = (card: T) => card.coverage === "verified"
+    ? (card.priceStatus === "verified" ? 0 : 1)
+    : (card.priceStatus === "verified" ? 2 : 3);
+  const sorted = [...cards].sort((a, b) =>
+    priority(a) - priority(b) ||
+    termDifference(a.priceDays, requestedDays) - termDifference(b.priceDays, requestedDays) ||
+    Math.abs(a.actualYards - size) - Math.abs(b.actualYards - size) ||
+    a.name.localeCompare(b.name));
+  const seen = new Set<string>();
+  return sorted.filter(card => {
+    if (seen.has(card.providerId)) return false;
+    seen.add(card.providerId);
+    return true;
+  });
+}
