@@ -32,7 +32,7 @@ export default function PriceCards({ pricing, zip, deliveryFee }: { pricing: Pri
               <p className="muted">{size.fitLine}</p>
               <RateList pricing={pricing} yards={size.yards} />
               <div className="price-card__actions">
-                <PlanLink className="btn btn--primary btn--block" size={size.yards} zip={zip}>Plan this rental</PlanLink>
+                <PlanLink className="btn btn--primary btn--block" size={size.yards} zip={zip}>See my estimate</PlanLink>
                 <Link className="btn btn--secondary btn--block" href={"/" + size.slug}>Is the {size.yards}-yard right for me?</Link>
               </div>
             </div>
@@ -47,7 +47,7 @@ export default function PriceCards({ pricing, zip, deliveryFee }: { pricing: Pri
         ) : (
           `A ${formatUsd(deliveryFee)} delivery fee is added for this area.`
         )}{" "}
-        Days Plus prepaid extra-day rates are not yet approved. Disposal weight charges may apply.
+        Delivery and extra-day charges will be shown when available. Excess disposal weight may cost extra.
       </p>
     </>
   );

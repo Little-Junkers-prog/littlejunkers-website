@@ -39,7 +39,7 @@ export default function Header() {
             {company.phoneDisplay}
           </a>
           <a className="btn btn--primary" href="/plan">
-            Plan a Rental
+            Check Prices
           </a>
           <MobileMenu
             dumpsters={sizes.map((size) => ({ href: `/${size.slug}`, label: `${size.yards}-Yard · ${size.name}` }))}

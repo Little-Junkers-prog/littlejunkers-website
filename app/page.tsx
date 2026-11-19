@@ -5,6 +5,7 @@ import Photo from "@/components/Photo";
 import PhotoRail from "@/components/PhotoRail";
 import PriceCards from "@/components/PriceCards";
 import DaysPlusPlanner from "@/components/DaysPlusPlanner";
+import { basePriceSnapshot } from "@/lib/days-plus";
 import ZipCheck from "@/components/ZipCheck";
 import { cities } from "@/lib/cities";
 import { BookLink } from "@/components/ZipContext";
@@ -49,7 +50,7 @@ export default async function Home() {
             <p className="hero__meta">
               <span>11 · 16 · 21-yard dumpsters</span>
               <span>Locally owned</span>
-              <span>Rental planning</span>
+              <span>City or ZIP pricing</span>
             </p>
             <p className="hero__meta">
               <Link href="/faq#which-size">Help me choose a size</Link>
@@ -89,14 +90,14 @@ export default async function Home() {
 
       <section className="section section--surface" id="compare">
         <div className="container cx-overview">
-          <div><p className="eyebrow">Know what you're paying for</p><h2>Compare more than a starting price.</h2><p>Rental length, included tonnage, delivery charges and weight overages can matter as much as the dumpster size. Compare the terms before you commit to a project budget.</p><div className="btn-row"><Link className="btn btn--primary" href="/compare">How to compare rentals</Link><Link className="btn btn--secondary" href="/pricing">See our pricing details</Link></div></div>
+          <div><p className="eyebrow">Know what you're paying for</p><h2>See how rental prices compare.</h2><p>Rental length, included tonnage, delivery charges and weight overages can matter as much as the dumpster size. Check the details before you choose.</p><div className="btn-row"><Link className="btn btn--primary" href="/compare">See how we compare</Link><Link className="btn btn--secondary" href="/pricing">See our pricing details</Link></div></div>
           <div className="cx-note"><h3>Four questions worth asking</h3><ol><li>How many rental days are included?</li><li>How much disposal weight is covered?</li><li>What delivery fee applies to my ZIP?</li><li>Is the dumpster available for my full rental?</li></ol><p className="fine">Local competitor prices will only appear when the source and date have been verified.</p></div>
         </div>
       </section>
       <section className="section" id="plan">
         <div className="container">
-          <div className="section-head"><p className="eyebrow">Days Plus planner</p><h2>Your project doesn't have to fit a fixed package.</h2><p>Start with three days. Add up to 27 more, or ask for a personal quote on longer projects. This preview doesn't reserve inventory or take payment.</p></div>
-          <DaysPlusPlanner />
+          <div className="section-head"><p className="eyebrow">Days Plus planner</p><h2>Your project doesn't have to fit a fixed package.</h2><p>Start with three days. Add up to 27 more, or ask for a personal quote on longer projects. Select a size, city or ZIP, and dates to see an estimated price.</p></div>
+          <DaysPlusPlanner basePrices={basePriceSnapshot(pricing)} />
         </div>
       </section>
 
