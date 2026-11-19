@@ -151,4 +151,38 @@ assert.ok(firstCard.includes("Rate not yet confirmed"), "unapproved LJ prepaid e
 assert.ok(competitorCard.includes("Independent provider; not affiliated with Little Junkers"), "source disclosure stays below competitor CTA");
 assert.ok(comparisonMarkup.includes("offers publicly posted on each company's website"), "footer must explain public-source provenance");
 console.log("Comparison card parity and provenance assertions passed.");
+// Anonymous competitor intelligence and customer-initiated callback validation.
+const { parseClickPayload, parseInquiryPayload, normalizeUsPhone, isSameOriginPost } =
+  await import("../lib/comparison-intake.ts");
+const uuid="a23d1639-bfbe-42be-8359-2eb0324dd906";
+assert.deepEqual(parseClickPayload({providerId:uuid,size:16,days:3}),
+  {providerId:uuid,size:16,days:3},"anonymous click has provider/size/duration only");
+assert.equal(parseClickPayload({providerId:uuid,size:30,days:3}),null,"reject irrelevant size");
+assert.equal(parseClickPayload({providerId:"not-a-uuid",size:16,days:3}),null,"reject invalid provider");
+assert.equal(parseClickPayload({providerId:uuid,size:16,days:31}),null,"reject invalid duration");
+assert.equal(normalizeUsPhone("470-555-0123"),"+14705550123","normalize phone only for voluntarily submitted inquiry");
+assert.equal(normalizeUsPhone("555"),null,"reject short phone");
+assert.equal(isSameOriginPost("https://example.com","https://example.com/api/comparison/click","same-origin"),true);
+assert.equal(isSameOriginPost("https://evil.test","https://example.com/api/comparison/click","cross-site"),false);
+const stamp=Date.UTC(2026,10,19,20,0,0);
+const cb={providerId:uuid,size:16,days:7,name:"Example Customer",
+  phone:"470-555-0123",zip:"30269",email:"",reason:"price",
+  turnstileToken:"test-token-not-accepted-online",formStartedAt:stamp-10000,
+  callbackRequested:true,_honey:""};
+assert.equal(parseInquiryPayload(cb,stamp)?.zip,"30269","valid callback preserves submitted ZIP");
+assert.equal(parseInquiryPayload({...cb,callbackRequested:false},stamp),null,"callback requires explicit request");
+assert.equal(parseInquiryPayload({...cb,_honey:"bot"},stamp),null,"honeypot trips");
+assert.equal(parseInquiryPayload({...cb,turnstileToken:""},stamp),null,"captcha token required");
+assert.equal(parseInquiryPayload({...cb,formStartedAt:stamp-500},stamp),null,"fast bot form rejected");
+assert.equal(parseInquiryPayload({...cb,phone:"1234"},stamp),null,"invalid phone rejected");
+assert.equal(parseInquiryPayload({...cb,reason:"other"},stamp),null,"unknown interest category rejected");
+const exitComponent = readFileSync(new URL("../components/CompetitorExitDialog.tsx", import.meta.url),"utf8");
+assert.ok(exitComponent.includes("Request my callback"),"callback CTA present");
+assert.ok(exitComponent.includes("onOutboundClick(target.providerId)"),"only real competitor continuation records outbound");
+assert.ok(exitComponent.includes("ComparisonTurnstile"),"callback demands verification");
+const compareUi = readFileSync(new URL("../components/ComparisonTool.tsx", import.meta.url),"utf8");
+assert.ok(compareUi.includes('recordCompetitorClick(offer.providerId, "detail")'),"initial competitor selection is counted");
+assert.ok(compareUi.includes('recordCompetitorClick(providerId, "outbound")'),"competitor departure is counted");
+assert.ok(compareUi.includes("keepalive:true"),"best-effort outbound telemetry does not block navigation");
+console.log("Comparison anonymous interest and callback validation assertions passed.");
 console.log("Comparison evidence, ranking, snapshot, exit and outcome assertions passed.");
