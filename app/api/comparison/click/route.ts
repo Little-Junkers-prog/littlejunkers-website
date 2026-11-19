@@ -18,12 +18,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({error:"Payload too large"},{status:413,headers});
   const raw: unknown = await request.json().catch(()=>null);
   const click = parseClickPayload(raw);
-  if (!click) return NextResponse.json({error:"Invalid selection"},{status:400,headers});
+  const action = raw && typeof raw === "object" && !Array.isArray(raw) &&
+    "action" in raw ? (raw as {action:unknown}).action : null;
+  if (!click || (action !== "detail" && action !== "outbound")) return NextResponse.json({error:"Invalid selection"},{status:400,headers});
   if (!comparisonWriteConfigured())
     return NextResponse.json({error:"Measurement connection pending"},{status:503,headers});
   try {
-    await comparisonRest<number>("rpc/record_comparison_outbound_click","POST",{
-      p_provider_id:click.providerId, p_size_yards:click.size,p_duration_days:click.days
+    await comparisonRest<number>("rpc/record_comparison_provider_action","POST",{
+      p_provider_id:click.providerId, p_size_yards:click.size,p_duration_days:click.days,p_action:action
     });
     return NextResponse.json({recorded:true},{headers});
   } catch (error) {
