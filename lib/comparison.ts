@@ -3,7 +3,7 @@
 // imported by a client component. No production writes or second price table.
 import "server-only";
 import { cityKey, type AreaResult } from "./pricing";
-import { selectOfferSnapshot } from "./comparison-selection";
+import { selectOfferSnapshot, observationIsCurrent } from "./comparison-selection";
 
 export type CompetitorCard = {
   providerId: string;
@@ -91,14 +91,6 @@ function coversLocation(record: Coverage, area: AreaResult, now: Date): boolean 
   return false;
 }
 
-function sourceIsCurrent(o: Observation, now: Date): boolean {
-  if (o.verification_status !== "confirmed_published" ||
-      o.publication_status !== "publishable" || o.conflict_type !== "no_conflict" ||
-      !httpUrl(o.source_url) || !o.valid_until) return false;
-  const observed = Date.parse(o.observed_at), expiry = Date.parse(o.valid_until);
-  return Number.isFinite(observed) && Number.isFinite(expiry) && observed <= now.getTime() && expiry > now.getTime();
-}
-
 function observationMatchesArea(o: Observation, area: AreaResult): boolean {
   if (!o.location_scope_type || o.location_scope_type === "provider_wide") return true;
   if (area.status !== "served") return false;
@@ -153,7 +145,9 @@ export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResu
       const yards = Number(product.actual_size_yards);
       if (!provider || !website || !product.is_active || !Number.isFinite(yards) || yards <= 0 || Math.abs(yards - size) > 4) continue;
       const coverageValid = coverage.some((c) => c.provider_id === provider.id && coversLocation(c, area, now));
-      const fresh = observations.filter((o) => o.product_id === product.id && sourceIsCurrent(o, now) && observationMatchesArea(o, area));
+      // Never present a company as eligible when we lack documented location coverage.
+      if (!coverageValid) continue;
+      const fresh = observations.filter((o) => o.product_id === product.id && observationIsCurrent(o, now) && observationMatchesArea(o, area));
       const selection = selectOfferSnapshot(fresh, requestedDays);
       const hasOffer = coverageValid && !!selection;
       const facts = hasOffer && selection ? selection.facts : [];
