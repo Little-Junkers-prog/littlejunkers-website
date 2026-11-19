@@ -30,6 +30,16 @@ assert.equal(selectOfferSnapshot([
   fact("price", 300, "3day"),
   fact("duration_days", 7, "7day")
 ], 3), null, "different variants cannot combine into an offer");
+assert.equal(selectOfferSnapshot([
+  fact("price", 325),
+  fact("duration_days", 3),
+  fact("duration_days", 7)
+], 3), null, "ambiguous same-source rental durations must be rejected");
+assert.equal(selectOfferSnapshot([
+  fact("price", 325),
+  fact("price", 400),
+  fact("duration_days", 3)
+], 3), null, "ambiguous same-source prices must be rejected");
 const observation = {
   observed_at: "2026-11-19T10:00:00Z", valid_until: "2026-12-03T10:00:00Z",
   source_url: "https://www.example.com/price", verification_status: "confirmed_published",
