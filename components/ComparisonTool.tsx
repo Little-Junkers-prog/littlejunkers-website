@@ -89,11 +89,11 @@ export default function ComparisonTool({
   const visible = showMore ? results : results.slice(0, 2);
   // Anonymous first-party click count. Navigation always wins if reporting fails.
   // No cookies, visitor ID, name, phone or address are sent in this payload.
-  function recordOutboundClick(providerId: string) {
+  function recordCompetitorClick(providerId: string, action: "detail" | "outbound") {
     void fetch("/api/comparison/click", {
       method:"POST",headers:{"Content-Type":"application/json"},
       credentials:"same-origin",cache:"no-store",keepalive:true,
-      body:JSON.stringify({providerId,size,days})
+      body:JSON.stringify({providerId,size,days,action})
     }).catch(()=>undefined);
   }
   const path = new URLSearchParams({ size: String(size), days: String(days) });
@@ -191,13 +191,14 @@ export default function ComparisonTool({
             : "This published price covers " + offer.priceDays + " days, shorter than your " + days + "-day selection. Extra days are not included."}
         </p> : null}
         <a className="btn btn--secondary btn--block" href={offer.sourceUrl ?? offer.website} target="_blank" rel="noopener noreferrer"
-          onAuxClick={() => recordOutboundClick(offer.providerId)}
+          onAuxClick={() => recordCompetitorClick(offer.providerId, "outbound")}
           onClick={(event) => {
             if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-              recordOutboundClick(offer.providerId);
+              recordCompetitorClick(offer.providerId, "outbound");
               return;
             }
             event.preventDefault();
+            recordCompetitorClick(offer.providerId, "detail");
             setExitTarget({ providerId: offer.providerId, name: offer.name, website: offer.website, destination: offer.sourceUrl ?? offer.website });
           }}>
           Visit {offer.name} <span aria-hidden="true">↗</span>
@@ -227,7 +228,7 @@ export default function ComparisonTool({
     <p className="comparison-source-note">Competitor information comes from offers publicly posted on each company's website. Little Junkers is not affiliated with, endorsed by, or acting as an agent for these providers. Published prices, rental periods, included weight and fees can change or differ by location. Confirm current availability, delivery charges and final terms directly with each company before renting.</p>
     <p className="fine"><Link href="/pricing">Little Junkers pricing details</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
     <CompetitorExitDialog target={exitTarget} onClose={() => setExitTarget(null)}
-      onOutboundClick={recordOutboundClick}
+      onOutboundClick={(providerId) => recordCompetitorClick(providerId, "outbound")}
       location={current?.location.status === "served"
         ? (/^\d{5}$/.test(location.trim()) ? location.trim() : current.location.label)
         : ""} size={size} days={days} />
