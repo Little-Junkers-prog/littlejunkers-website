@@ -8,7 +8,6 @@ import DaysPlusPlanner from "@/components/DaysPlusPlanner";
 import { basePriceSnapshot } from "@/lib/days-plus";
 import ZipCheck from "@/components/ZipCheck";
 import { cities } from "@/lib/cities";
-import { BookLink } from "@/components/ZipContext";
 import { company, siteUrl, smsHref, telHref } from "@/lib/company";
 import { photos } from "@/lib/media";
 import { getPricing } from "@/lib/pricing";
@@ -19,8 +18,8 @@ export const metadata = {
 };
 
 const steps = [
-  ["Check your ZIP and pick a size", "See the price for your address before you commit to anything."],
-  ["Choose your rental length", "Start with three days and add up to 27. Final price and dates are confirmed before payment."],
+  ["Check your city or ZIP", "See delivery-area fees, then choose your dumpster size."],
+  ["Choose your dates", "See your estimate for a 3–30-day rental."],
   ["Fill it. We haul it away.", "We set it where you want it and pick it up when your rental ends."],
 ];
 
@@ -45,12 +44,12 @@ export default async function Home() {
             <h1>
               Need a <span className="accent">dumpster?</span>
             </h1>
-            <p className="lead">Enter your city or ZIP to check the delivery area and fee. Available dates are confirmed separately.</p>
+            <p className="lead">Check your delivery area and see dumpster prices. Enter a city or ZIP.</p>
             <ZipCheck />
             <p className="hero__meta">
               <span>11 · 16 · 21-yard dumpsters</span>
               <span>Locally owned</span>
-              <span>City or ZIP pricing</span>
+              <span>11, 16 and 21 yards</span>
             </p>
             <p className="hero__meta">
               <Link href="/faq#which-size">Help me choose a size</Link>
@@ -215,12 +214,12 @@ export default async function Home() {
           <div className="band on-dark">
             <div>
               <h2>
-                Ready when you <span className="accent">are.</span>
+                Find the right <span className="accent">dumpster.</span>
               </h2>
-              <p style={{ marginTop: 6 }}>Pick your size and dates online. Calls and texts {company.hoursDisplay}.</p>
+              <p style={{ marginTop: 6 }}>Enter your city or ZIP to see an estimate. Call or text us {company.hoursDisplay}.</p>
             </div>
             <div className="btn-row">
-              <BookLink className="btn btn--primary">Book a Dumpster</BookLink>
+              <Link className="btn btn--primary" href="/plan">See my estimate</Link>
               <a className="btn btn--secondary" href={telHref}>
                 Call {company.phoneDisplay}
               </a>

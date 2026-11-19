@@ -1800,3 +1800,23 @@ a:hover {
 .cx-planner__summary .fine{margin-top:18px}
 @media(max-width:850px){.cx-overview,.cx-planner__grid{grid-template-columns:1fr}.cx-planner__summary{border-left:0;border-top:1px solid var(--border-card)}.cx-price-list{grid-template-columns:1fr}}
 @media(max-width:620px){.cx-compare-list{grid-template-columns:1fr}.cx-planner__intro{padding:20px;flex-direction:column}.cx-planner__form{padding:0 18px}.cx-planner__summary{padding:20px}}
+
+/* Compact shopping estimate and prevent competing mobile overlays. */
+.cx-estimate-price { display: block; font-size: clamp(1.8rem, 4vw, 2.65rem); font-weight: 850; letter-spacing: -0.035em; line-height: 1.14; }
+@media (max-width: 899px) {
+  .randy-bubble {
+    width: 52px;
+    height: 52px;
+    min-height: 52px;
+    right: 12px;
+    bottom: calc(var(--mobile-bar-height) + 10px);
+    padding: 7px;
+    font-size: 0;
+    justify-content: center;
+  }
+  .randy-bubble__avatar { width: 34px; height: 34px; }
+  body:has(.consent) .randy-bubble,
+  body:has(.consent) .mobile-bar,
+  body:has(.randy[open]) .mobile-bar { display: none; }
+  body:has(.consent) .consent { bottom: 0; max-height: 75dvh; overflow-y: auto; }
+}
