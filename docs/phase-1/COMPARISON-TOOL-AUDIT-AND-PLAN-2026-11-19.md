@@ -163,3 +163,21 @@ Facebook presence is not a disqualifier. Brokerage alone is not illegitimate. Qu
 2. Accessibility/mobile screenshot QA on protected preview, with normal and reduced-motion settings.
 3. Confirm customer-safe caveats and placement for shorter-term reference prices, starting-plus-delivery prices and city-only delivery coverage.
 4. Approve duration/freshness/city-coverage policy and event attribution/consent contract before any measurement writes or future merge.
+
+## November 19 customer-preview repair — two default reference providers and branded hero
+
+Owner direction: when a city lacks two documented local providers, show two vetted competitors as clearly labeled regional references. Preserve the exit-dialog opportunity, and place a real Little Junkers hero photograph above the tool. Do not suggest an out-of-area provider delivers locally.
+
+**Diagnosis:** The screenshot showed canonical Little Junkers pricing but a competitor data-source error. Read-only SQL confirms 20 current publishable competitor price offers, 23 confirmed coverage rows, and six or more vetted providers in each 11/16/21-yard size class. The database is not empty. Vercel's environment variable listing returns 403, so its server-only Supabase credentials are still not verified. A missing or inaccessible competitor connection is the likely root cause.
+
+**Review-branch implementation:**
+- Exported a read-only and redacted November 19 snapshot from the canonical Supabase comparison tables into lib/comparison-snapshot.json: 11 vetted public providers, 30 active products, 23 confirmed coverage records, and 98 current public evidence facts. No internal notes, suppressed providers, customer information, or credentials included.
+- The website prefers live Supabase when server-side credentials are available. If absent or if the Data API returns a configuration/permission (4xx) error, the review preview uses the dated vetted snapshot. Actual source outages, network failures, and 5xx errors keep the honest unavailable state.
+- Each snapshot observation is checked against its original validity and publication rules at runtime. On expiration (current offers expire December 3, 2026), amounts stop appearing as verified prices; provider/reference cards can still show without prices. Snapshot refresh or authenticated live source is required for current amounts after expiration.
+- New candidate logic selects city-verified providers first, then fills any missing top-two slots using different vetted regional providers from the same size class. Never rank by lowest price or fabricate a delivery quote.
+- Douglasville has no documented comparison city coverage: show two labeled regional reference providers, without claims they deliver there. Newnan has seven providers with recorded coverage; Peachtree City has six. Product class provider totals: 11-yard six, 16-yard seven, 21-yard seven.
+- The page hero now uses real Little Junkers photography from /images/jobs/hero-driveway.jpg with a dark accessible overlay.
+- Existing outbound second-opinion exit modal remains in place. No actual leads, marketing messages, or analytics writes are triggered by this repair.
+- Tests cover eligible product class counts, snapshot hygiene, unique provider selection, regional fallback ranking, and non-price-biased display. Vercel and GitHub Actions builds are release checks.
+
+**Remaining before cutover:** Set up and verify the server-only Vercel Supabase credentials through an authorized account connection, then run a fully authenticated preview API/UI smoke test. The deployment remains protected. This snapshot bridge must not be mistaken for a verified live Supabase connection. No production data/permissions, checkout, DNS, or main merge were changed.
