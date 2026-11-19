@@ -137,3 +137,11 @@ Owner decision: no rentals over 30 days may be self-serve purchased. Last report
 ### [CX-COPY-001] Substantive editorial pass and page-by-page owner approval
 
 - **Status:** Open. Owner explicitly stated that initial November 18 prototype wording is weak and illustrative only. The final site must use verified operational facts, meaningful decision support, local specificity and first-party proof. No auto-approval of copy because a layout passes.
+
+
+### [CX-EST-001] Progressive customer price estimate and city/ZIP experience (November 19, 2026)
+
+- **Owner-approved UX contract:** [ADR-CX-003](docs/decisions/ADR-CX-003-progressive-estimates-city-zip-copy.md). Visible canonical three-day starting estimate; update by size and known delivery zone; days 4–30 display pending extras without making up totals. City or ZIP input throughout, with multi-zone city uncertainty disclosed. No frontend "confirmed" price.
+- **Phase 1:** Implement read-only estimate and truthful location response in Next site + isolated visual preview; remove model/developer speak; consistent action labels.
+- **Phase 2 release gate:** create server-authoritative quote/expiry/hold and Fleet/date coordination; Admin approves extra-day rates, CSR/Randy consume the same API; QA on all estimate-to-lock transitions.
+- **Editorial:** User says preview has AI drift and weak substance; final page copy requires separate content/SEO review, not only word swaps.

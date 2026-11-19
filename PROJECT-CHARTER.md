@@ -68,3 +68,8 @@ A completed Slice A is **not** a functioning public booking release. Features th
 - Duration and integration: [ADR-CX-001](docs/decisions/ADR-CX-001-days-plus-experience.md).
 - Open work: [PROJECT-PARKING-LOT.md](PROJECT-PARKING-LOT.md).
 - This charter supersedes any *interpretation* of the first interactive demo that suggests removing most dedicated pages or approving its sample copy.
+
+
+## 10. Customer Copy and Progressive Price Estimates — Owner Feedback, November 19, 2026
+
+The owner requires conversational, factual customer copy without defensive comparison framing or internal model/development notes. Replace "Build my rental" with a customer goal such as "See my estimate"; "See how we compare" is preferred to price-defensive slogans. All location-entry points must accept **city or ZIP**, not ZIP alone. Display the known, canonically priced three-day base *as an estimate* from the beginning, then refine when size and service area are chosen; keep unpriced Days Plus extras, fees and date-specific charges plainly excluded until authoritative data is available. A **confirmed price** requires server-issued all-in calculation plus availability verification, never merely completion of form fields. See [ADR-CX-003](docs/decisions/ADR-CX-003-progressive-estimates-city-zip-copy.md).
