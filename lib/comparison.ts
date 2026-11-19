@@ -3,6 +3,7 @@
 // imported by a client component. No production writes or second price table.
 import "server-only";
 import { cityKey, type AreaResult } from "./pricing";
+import { selectOfferSnapshot } from "./comparison-selection";
 
 export type CompetitorCard = {
   providerId: string;
@@ -114,12 +115,12 @@ function observationFor(rows: Observation[], attribute: string, variant: string 
 }
 
 function numeric(o: Observation | null): number | null {
-  if (!o) return null;
+  if (!o || o.value_numeric === null || o.value_numeric === "") return null;
   const value = Number(o.value_numeric);
   return Number.isFinite(value) && value >= 0 ? value : null;
 }
 
-export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResult): Promise<ComparisonRead> {
+export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResult, requestedDays: number): Promise<ComparisonRead> {
   const origin = httpUrl(process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? null);
   const secret = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!origin || !secret) return { status: "connection_pending", candidates: [] };
@@ -153,30 +154,25 @@ export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResu
       if (!provider || !website || !product.is_active || !Number.isFinite(yards) || yards <= 0 || Math.abs(yards - size) > 4) continue;
       const coverageValid = coverage.some((c) => c.provider_id === provider.id && coversLocation(c, area, now));
       const fresh = observations.filter((o) => o.product_id === product.id && sourceIsCurrent(o, now) && observationMatchesArea(o, area));
-      const priceChoices = fresh.filter((o) => o.attribute_name === "price" && numeric(o) !== null);
-      // Do not mix a price from one named offer variant with the rental duration
-      // from a different offer. Older data with ambiguous variants is omitted.
-      const matched = priceChoices
-        .map((o) => ({ price: o, days: observationFor(fresh, "duration_days", o.variant_id) }))
-        .filter((x) => x.days && Number.isInteger(numeric(x.days)) && Number(numeric(x.days)) > 0)
-        .sort((a, b) => b.price.observed_at.localeCompare(a.price.observed_at))[0];
-      const hasOffer = coverageValid && !!matched;
-      const variant = matched?.price.variant_id ?? null;
-      const included = hasOffer ? observationFor(fresh, "included_tons", variant) : null;
-      const overage = hasOffer ? observationFor(fresh, "overage_per_ton", variant) : null;
-      const overagePound = hasOffer ? observationFor(fresh, "overage_per_pound", variant) : null;
-      const extraDay = hasOffer ? observationFor(fresh, "extra_day_fee", variant) : null;
+      const selection = selectOfferSnapshot(fresh, requestedDays);
+      const hasOffer = coverageValid && !!selection;
+      const facts = hasOffer && selection ? selection.facts : [];
+      const variant = hasOffer && selection ? selection.price.variant_id : null;
+      const included = observationFor(facts, "included_tons", variant);
+      const overage = observationFor(facts, "overage_per_ton", variant);
+      const overagePound = observationFor(facts, "overage_per_pound", variant);
+      const extraDay = observationFor(facts, "extra_day_fee", variant);
       cards.push({
         providerId: provider.id, name: provider.name, website,
         product: product.product_name, actualYards: yards, containerType: product.container_type,
         coverage: coverageValid ? "verified" : "unverified",
-        price: hasOffer && matched ? numeric(matched.price) : null,
-        priceDays: hasOffer && matched ? numeric(matched.days) : null,
+        price: hasOffer && selection ? numeric(selection.price) : null,
+        priceDays: hasOffer && selection ? selection.days : null,
         includedTons: numeric(included), overagePerTon: numeric(overage), overagePerPound: numeric(overagePound),
-        priceQualifier: hasOffer && matched ? matched.price.price_qualifier : null,
+        priceQualifier: hasOffer && selection ? selection.price.price_qualifier : null,
         extraDayFee: numeric(extraDay),
-        sourceUrl: hasOffer && matched ? httpUrl(matched.price.source_url) : null,
-        verifiedOn: hasOffer && matched ? matched.price.observed_at.slice(0, 10) : null,
+        sourceUrl: hasOffer && selection ? httpUrl(selection.price.source_url) : null,
+        verifiedOn: hasOffer && selection ? selection.price.observed_at.slice(0, 10) : null,
         priceStatus: hasOffer ? "verified" : "not_verified"
       });
     }
@@ -185,6 +181,11 @@ export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResu
     cards.sort((a, b) =>
       Number(b.priceStatus === "verified") - Number(a.priceStatus === "verified") ||
       Number(b.coverage === "verified") - Number(a.coverage === "verified") ||
+      // Prefer an offer whose advertised term covers the customer request.
+      (a.priceDays !== null && b.priceDays !== null
+        ? (a.priceDays >= requestedDays ? a.priceDays - requestedDays : 1000 + requestedDays - a.priceDays)
+        - (b.priceDays >= requestedDays ? b.priceDays - requestedDays : 1000 + requestedDays - b.priceDays)
+        : 0) ||
       Math.abs(a.actualYards - size) - Math.abs(b.actualYards - size) ||
       a.name.localeCompare(b.name) || a.product.localeCompare(b.product));
     const seen = new Set<string>();
