@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { selectOfferSnapshot, observationIsCurrent } from "../lib/comparison-selection.ts";
+import { validateComparisonMeasurement, classifyComparisonOutcome } from "../lib/comparison-measurement.ts";
 
 function fact(attribute_name, value_numeric, variant_id = "3day", source_url = "https://example.com/offer", observed_at = "2026-11-19T12:00:00Z") {
   return { attribute_name, value_numeric, variant_id, source_url, observed_at };
@@ -43,4 +44,39 @@ assert.equal(observationIsCurrent({ ...observation, conflict_type: "cross_source
 assert.equal(observationIsCurrent({ ...observation, observed_at: "2026-11-20T10:00:00Z" }, now), false, "future verification timestamps must not qualify");
 assert.equal(observationIsCurrent({ ...observation, source_url: "http://www.example.com/price" }, now), false, "insecure source URLs must not qualify");
 assert.equal(observationIsCurrent({ ...observation, source_url: "https://localhost/price" }, now), false, "local source URLs must not qualify");
-console.log("Comparison evidence and term-selection checks passed (19 assertions).");
+// Measurement stays inert. Validate the shape and evidence classification
+// without writing to comparison_events or creating visitor identifiers.
+const sessionId = "11111111-1111-4111-8111-111111111111";
+const providerId = "22222222-2222-4222-8222-222222222222";
+const measurement = {
+  event_name: "comparison_provider_outbound_clicked",
+  session_id: sessionId, provider_id: providerId,
+  market_city: "Peachtree City", market_zip: "30269",
+  size_yards: 16, duration_days: 7, result_count: 2,
+  email: "never-export@example.com", free_text: "not-for-analytics"
+};
+assert.equal(validateComparisonMeasurement(measurement, false), null, "deny when analytics consent is absent");
+const safe = validateComparisonMeasurement(measurement, true);
+assert.equal(safe?.event_name, "comparison_provider_outbound_clicked", "outbound event must use existing database name");
+assert.equal(safe?.event_context.market_zip, "30269", "permitted ZIP is allowed");
+assert.equal(JSON.stringify(safe).includes("example.com"), false, "unlisted email must not survive sanitization");
+assert.equal(validateComparisonMeasurement({ ...measurement, event_name: "paid_rental_verified" }, true), null, "paid rental cannot be reported by a client event");
+assert.equal(validateComparisonMeasurement({ ...measurement, provider_id: null }, true), null, "outbound must name the provider");
+assert.equal(validateComparisonMeasurement({ ...measurement, market_zip: "30269-1234" }, true), null, "invalid ZIP must be rejected");
+assert.equal(validateComparisonMeasurement({ ...measurement, market_city: "foo@bar.com" }, true), null, "arbitrary city free text must be rejected");
+assert.equal(validateComparisonMeasurement({ ...measurement, size_yards: 30 }, true), null, "unrelated container class rejected");
+assert.equal(validateComparisonMeasurement({ ...measurement, duration_days: 31 }, true), null, "duration outside online rules rejected");
+const emptyEvidence = {
+  paidRentalConfirmed: false,
+  attributionProven: false,
+  competitorChoiceSelfReported: false,
+  consentedReturnAfterOutbound: false,
+  competitorOutboundClicked: false
+};
+assert.equal(classifyComparisonOutcome(emptyEvidence), "unknown", "unobserved outcome must stay unknown");
+assert.equal(classifyComparisonOutcome({ ...emptyEvidence, competitorOutboundClicked: true }), "competitor_outbound_unknown", "a competitor click does not establish a booking");
+assert.equal(classifyComparisonOutcome({ ...emptyEvidence, paidRentalConfirmed: true }), "unknown", "payment without proven comparison attribution is not a comparison win");
+assert.equal(classifyComparisonOutcome({ ...emptyEvidence, paidRentalConfirmed: true, attributionProven: true }), "verified_lj_paid", "paid and attributed booking is a verified LJ win");
+assert.equal(classifyComparisonOutcome({ ...emptyEvidence, competitorChoiceSelfReported: true }), "competitor_self_reported", "competitor win requires voluntary report");
+assert.equal(classifyComparisonOutcome({ ...emptyEvidence, competitorOutboundClicked: true, consentedReturnAfterOutbound: true }), "returned_considering", "return requires consented identity linkage");
+console.log("Comparison evidence, measurement and outcome checks passed (34 assertions).");
