@@ -31,11 +31,6 @@ type Status = "idle" | "loading" | "ready" | "error";
 
 const sizes = [11, 16, 21] as const;
 function money(value: number | null) { return value === null ? "Not published" : formatUsd(value); }
-function containerLabel(value: string | null): string {
-  if (value === "roll_off") return "roll-off dumpster";
-  if (value === "dump_trailer") return "dump trailer";
-  return "container";
-}
 function labelDate(value: string | null) {
   if (!value) return null;
   const date = new Date(value + "T12:00:00Z");
@@ -145,11 +140,12 @@ export default function ComparisonTool({
         <p className="comparison-card__price">{local?.base !== null && local?.base !== undefined ? formatUsd(local.base) : "Check current price"}</p>
         <p className="comparison-card__price-note">3-day base {local?.base !== null && local?.base !== undefined ? "estimate" : "price"}</p>
         <dl>
-          <div><dt>Actual size</dt><dd>{size} yards</dd></div>
-          <div><dt>Rental duration</dt><dd>{days} days selected</dd></div>
+          <div><dt>Size</dt><dd>{size}-yard dumpster</dd></div>
+          <div><dt>Rental duration</dt><dd>{days} days</dd></div>
           <div><dt>Included weight</dt><dd>{local ? formatTons(local.includedTons) : "Checking"}</dd></div>
           <div><dt>Delivery</dt><dd>{local ? (local.deliveryFee === null ? "Not yet priced" : local.deliveryFee === 0 ? "Free for this area" : formatUsd(local.deliveryFee)) : "Check city or ZIP"}</dd></div>
           <div><dt>Extra weight</dt><dd>{local ? money(local.overagePerTon) + (local.overagePerTon !== null ? "/ton" : "") : "Checking"}</dd></div>
+          <div><dt>Extra day</dt><dd>Rate not yet confirmed</dd></div>
         </dl>
         {days > 3 ? <p className="comparison-card__notice">{days - 3} additional days are not yet included in this estimate.</p> : null}
         <Link className="btn btn--primary btn--block" href={planHref}>See my estimate</Link>
@@ -172,21 +168,19 @@ export default function ComparisonTool({
                : "Published " + offer.priceDays + "-day offer; delivery fee unconfirmed"}
         </p>
         <dl>
-          <div><dt>Actual size</dt><dd>{offer.actualYards}-yard {containerLabel(offer.containerType)}</dd></div>
+          <div><dt>Size</dt><dd>{offer.actualYards}-yard dumpster</dd></div>
           <div><dt>Rental duration</dt><dd>{offer.priceDays ? offer.priceDays + " days" : "Not verified"}</dd></div>
           <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? formatTons(offer.includedTons) : "Not verified"}</dd></div>
-          <div><dt>Delivery for your area</dt><dd>{offer.coverage === "verified" ? "City listed; fee not confirmed" : "Service area not verified"}</dd></div>
+          <div><dt>Delivery</dt><dd>Fee not confirmed</dd></div>
           <div><dt>Extra weight</dt><dd>{offer.overagePerPound !== null ? formatUsd(offer.overagePerPound) + "/lb" :
             offer.overagePerTon !== null ? money(offer.overagePerTon) + "/ton" : "Not verified"}</dd></div>
-          <div><dt>Extra day</dt><dd>{offer.extraDayFee !== null ? money(offer.extraDayFee) + "/day (provider terms apply)" : "Not verified"}</dd></div>
+          <div><dt>Extra day</dt><dd>{offer.extraDayFee !== null ? money(offer.extraDayFee) + "/day" : "Not verified"}</dd></div>
         </dl>
         {offer.priceStatus === "verified" && offer.priceDays !== days ? <p className="comparison-card__notice">
           {offer.priceDays !== null && offer.priceDays > days
             ? "This offer includes up to " + offer.priceDays + " days; you selected " + days + ". The published price is shown without adjustment."
             : "This published price covers " + offer.priceDays + " days, shorter than your " + days + "-day selection. Extra days are not included."}
         </p> : null}
-        {offer.verifiedOn ? <p className="fine">Price source checked {labelDate(offer.verifiedOn)}.</p> :
-          <p className="fine">A current price and location-specific offer have not been confirmed.</p>}
         <a className="btn btn--secondary btn--block" href={offer.website} target="_blank" rel="noopener noreferrer"
           onClick={(event) => {
             if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -195,12 +189,13 @@ export default function ComparisonTool({
           }}>
           Visit {offer.name} <span aria-hidden="true">↗</span>
         </a>
-        {offer.sourceUrl ? <p className="fine"><a href={offer.sourceUrl} target="_blank" rel="noopener noreferrer"
-          onClick={(event) => {
-            if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-            event.preventDefault();
-            setExitTarget({ providerId: offer.providerId, name: offer.name, website: offer.website, destination: offer.sourceUrl! });
-          }}>View published offer</a></p> : null}
+        <p className="fine comparison-card__source">
+          Independent provider; not affiliated with Little Junkers.
+          {offer.verifiedOn
+            ? <> Published website information checked {labelDate(offer.verifiedOn)}.</>
+            : <> Current pricing has not been verified.</>}
+          {" "}Confirm prices and terms directly with the company.
+        </p>
       </article>)}
       {current && current.comparison.status === "ready" && results.length < 2 && <article className="comparison-card comparison-card--empty">
         <h2>More local companies</h2>
@@ -216,7 +211,7 @@ export default function ComparisonTool({
       <p className="comparison-source-note" role="alert">Competitor data is temporarily unavailable. Please check providers directly or try again.</p>}
     {current?.comparison.source === "review_snapshot" &&
       <p className="comparison-source-note">Competitor examples are from our vetted, dated comparison records (last exported {labelDate(current.comparison.snapshotAsOf)}). Online prices and availability may change.</p>}
-    <p className="comparison-source-note">Prices are based on each company's stated terms. Dumpster sizes, included weight, fees and rental days can differ. An external website may show a different price at checkout.</p>
+    <p className="comparison-source-note">Competitor information comes from offers publicly posted on each company\'s website. Little Junkers is not affiliated with, endorsed by, or acting as an agent for these providers. Published prices, rental periods, included weight and fees can change or differ by location. Confirm current availability, delivery charges and final terms directly with each company before renting.</p>
     <p className="fine"><Link href="/pricing">Little Junkers pricing details</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
     <CompetitorExitDialog target={exitTarget} onClose={() => setExitTarget(null)}
       location={current?.location.status === "served"
