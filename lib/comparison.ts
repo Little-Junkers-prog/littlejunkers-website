@@ -16,6 +16,8 @@ export type CompetitorCard = {
   priceDays: number | null;
   includedTons: number | null;
   overagePerTon: number | null;
+  overagePerPound: number | null;
+  priceQualifier: string | null;
   extraDayFee: number | null;
   sourceUrl: string | null;
   verifiedOn: string | null;
@@ -42,6 +44,7 @@ type Coverage = {
 type Observation = {
   provider_id: string; product_id: string | null; variant_id: string | null;
   attribute_name: string; value_numeric: number | string | null; unit: string | null;
+  price_qualifier: string | null;
   source_url: string; observed_at: string; valid_until: string | null;
   verification_status: string; publication_status: string; conflict_type: string;
   location_scope_type: string | null; location_scope_value: string | null;
@@ -72,7 +75,7 @@ const COVERAGE_MAX_AGE_DAYS = 30;
 function coversLocation(record: Coverage, area: AreaResult, now: Date): boolean {
   if (!record.is_active || record.coverage_status !== "confirmed" || record.state.toUpperCase() !== "GA") return false;
   if (!record.last_verified) return false;
-  const verified = new Date(record.last_verified + "T23:59:59Z");
+  const verified = new Date(record.last_verified + "T00:00:00Z");
   if (!Number.isFinite(verified.getTime()) || verified.getTime() > now.getTime() ||
       now.getTime() - verified.getTime() > COVERAGE_MAX_AGE_DAYS * 86400000) return false;
   if (area.status !== "served") return false;
@@ -131,8 +134,8 @@ export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResu
         is_active: "eq.true", comparison_class_yards: "eq." + size, limit: "200"
       }, origin, secret),
       readTable<Observation>("comparison_observations", {
-        select: "provider_id,product_id,variant_id,attribute_name,value_numeric,unit,source_url,observed_at,valid_until,verification_status,publication_status,conflict_type,location_scope_type,location_scope_value,market_city,market_zip",
-        attribute_name: "in.(price,duration_days,included_tons,overage_per_ton,extra_day_fee)", limit: "1000"
+        select: "provider_id,product_id,variant_id,attribute_name,value_numeric,unit,price_qualifier,source_url,observed_at,valid_until,verification_status,publication_status,conflict_type,location_scope_type,location_scope_value,market_city,market_zip",
+        attribute_name: "in.(price,duration_days,included_tons,overage_per_ton,overage_per_pound,extra_day_fee)", limit: "1000"
       }, origin, secret),
       readTable<Coverage>("comparison_provider_coverage", {
         select: "provider_id,coverage_type,location_key,zip_code,state,coverage_status,last_verified,is_active",
@@ -161,6 +164,7 @@ export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResu
       const variant = matched?.price.variant_id ?? null;
       const included = hasOffer ? observationFor(fresh, "included_tons", variant) : null;
       const overage = hasOffer ? observationFor(fresh, "overage_per_ton", variant) : null;
+      const overagePound = hasOffer ? observationFor(fresh, "overage_per_pound", variant) : null;
       const extraDay = hasOffer ? observationFor(fresh, "extra_day_fee", variant) : null;
       cards.push({
         providerId: provider.id, name: provider.name, website,
@@ -168,7 +172,9 @@ export async function getComparisonCandidates(size: 11 | 16 | 21, area: AreaResu
         coverage: coverageValid ? "verified" : "unverified",
         price: hasOffer && matched ? numeric(matched.price) : null,
         priceDays: hasOffer && matched ? numeric(matched.days) : null,
-        includedTons: numeric(included), overagePerTon: numeric(overage), extraDayFee: numeric(extraDay),
+        includedTons: numeric(included), overagePerTon: numeric(overage), overagePerPound: numeric(overagePound),
+        priceQualifier: hasOffer && matched ? matched.price.price_qualifier : null,
+        extraDayFee: numeric(extraDay),
         sourceUrl: hasOffer && matched ? httpUrl(matched.price.source_url) : null,
         verifiedOn: hasOffer && matched ? matched.price.observed_at.slice(0, 10) : null,
         priceStatus: hasOffer ? "verified" : "not_verified"
