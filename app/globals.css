@@ -1908,3 +1908,16 @@ a:hover {
   .comparison-hero__inner h1{font-size:2.1rem}
   .comparison-content{padding-top:16px}
 }
+
+/* Approved comparison exit: optional verified callback and nonintrusive fallback. */
+.comparison-exit__callback{border:1px solid var(--border-card);border-radius:var(--radius-card);background:#fff;padding:12px 16px}
+.comparison-exit__callback summary{font-weight:800;cursor:pointer;line-height:1.5;min-height:35px}
+.comparison-exit__callback-form{display:grid;gap:9px;margin-top:12px}
+.comparison-exit__callback-form label{font-weight:700;font-size:.9rem}
+.comparison-exit__callback-form label span{font-weight:400;color:var(--ink-mid)}
+.comparison-exit__callback-form input{width:100%;min-height:45px;border:1px solid var(--border-card);border-radius:var(--radius-control);padding:10px;font:inherit}
+.comparison-exit__callback-form button:disabled{opacity:.55;cursor:not-allowed}
+.comparison-exit__honeypot{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.comparison-exit__error{color:#aa113b;font-weight:700;font-size:.9rem}
+.comparison-exit__callback-form .fine{color:var(--ink-mid);font-size:.83rem}
+.comparison-exit__callback:focus-visible,.comparison-exit__callback input:focus-visible{outline:3px solid var(--pink-text);outline-offset:2px}
