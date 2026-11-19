@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useSavedArea, useSavedLocationQuery } from "./ZipContext";
 import { formatUsd } from "@/lib/pricing";
 
-type Area = { status: "served"; label: string; zips: string[]; zone: { deliveryFee: number } }
-  | { status: "split"; label: string }
+type Area = { status: "served"; query: string; label: string; zips: string[]; zone: { deliveryFee: number } }
+  | { status: "split"; query: string; label: string }
   | { status: "unknown"; query: string };
 type Offer = {
   providerId: string; name: string; website: string; product: string;
@@ -76,8 +76,13 @@ export default function ComparisonTool({
     return () => { window.clearTimeout(timer); controller.abort(); };
   }, [location, size, days]);
 
-  const local = status === "ready" ? payload?.littleJunkers : null;
-  const results = status === "ready" ? payload?.comparison.candidates ?? [] : [];
+  // Never display a previous city's offers while the next lookup is in flight.
+  const current = status === "ready" && payload &&
+    payload.size === size && payload.days === days &&
+    payload.location.query.trim().toLowerCase() === location.trim().toLowerCase()
+    ? payload : null;
+  const local = current?.littleJunkers;
+  const results = current?.comparison.candidates ?? [];
   const visible = showMore ? results : results.slice(0, 2);
   const path = new URLSearchParams({ size: String(size), days: String(days) });
   if (/^\d{5}$/.test(location.trim())) path.set("zip", location.trim());
@@ -102,7 +107,7 @@ export default function ComparisonTool({
       </fieldset>
       <div className="comparison-filters__days">
         <label htmlFor="comparison-days">Rental length</label>
-        <select id="comparison-days" value={days} onChange={(event) => setDays(Number(event.target.value))}>
+        <select id="comparison-days" value={days} onChange={(event) => { setDays(Number(event.target.value)); setShowMore(false); }}>
           {[3, 4, 5, 7, 10, 14, 21, 30].map((value) => <option key={value} value={value}>{value} days</option>)}
         </select>
       </div>
@@ -110,10 +115,10 @@ export default function ComparisonTool({
 
     <div role="status" aria-live="polite" className="comparison-status">
       {status === "idle" ? "Enter your city or ZIP to check local options." :
-       status === "loading" ? "Checking local options…" :
        status === "error" ? error :
-       payload?.location.status === "served" ? "Results for " + payload.location.label + ". Delivery prices and eligibility are checked separately." :
-       payload?.location.status === "split" ? "Enter your ZIP for a more precise delivery estimate." :
+       !current ? "Checking local options…" :
+       current.location.status === "served" ? "Published offers for " + current.location.label + ". Confirm delivery and final price directly." :
+       current.location.status === "split" ? "Enter your ZIP for a more precise delivery estimate." :
        "We couldn't confirm the delivery area. Contact each company for service availability."}
     </div>
 
@@ -140,17 +145,21 @@ export default function ComparisonTool({
         <p className="comparison-card__price">{offer.priceStatus === "verified" ? money(offer.price) : "Price not verified"}</p>
         <p className="comparison-card__price-note">{offer.priceStatus !== "verified" ? "Check directly for current terms" :
           offer.priceQualifier === "starting_plus_delivery" ? "Starting price for " + offer.priceDays + " days; delivery extra" :
-          "Published " + offer.priceDays + "-day offer"}</p>
+          "Published " + offer.priceDays + "-day offer; delivery fee unconfirmed"}</p>
         <dl>
           <div><dt>Actual size</dt><dd>{offer.actualYards}-yard {offer.containerType ?? "container"}</dd></div>
           <div><dt>Rental duration</dt><dd>{offer.priceDays ? offer.priceDays + " days" : "Not verified"}</dd></div>
           <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? offer.includedTons + " tons" : "Not verified"}</dd></div>
-          <div><dt>Delivery for your area</dt><dd>{offer.coverage === "verified" ? "Service area verified; fee not confirmed" : "Service area not verified"}</dd></div>
+          <div><dt>Delivery for your area</dt><dd>{offer.coverage === "verified" ? "City listed; fee not confirmed" : "Service area not verified"}</dd></div>
           <div><dt>Extra weight</dt><dd>{offer.overagePerPound !== null ? formatUsd(offer.overagePerPound) + "/lb" :
             offer.overagePerTon !== null ? money(offer.overagePerTon) + "/ton" : "Not verified"}</dd></div>
           <div><dt>Extra day</dt><dd>{offer.extraDayFee !== null ? money(offer.extraDayFee) + "/day (provider terms apply)" : "Not verified"}</dd></div>
         </dl>
-        {offer.priceStatus === "verified" && offer.priceDays !== days ? <p className="comparison-card__notice">The advertised rental term differs from your {days}-day selection. No adjusted price has been assumed.</p> : null}
+        {offer.priceStatus === "verified" && offer.priceDays !== days ? <p className="comparison-card__notice">
+          {offer.priceDays !== null && offer.priceDays > days
+            ? "This offer includes up to " + offer.priceDays + " days; you selected " + days + ". The published price is shown without adjustment."
+            : "This published price covers " + offer.priceDays + " days, shorter than your " + days + "-day selection. Extra days are not included."}
+        </p> : null}
         {offer.verifiedOn ? <p className="fine">Price source checked {labelDate(offer.verifiedOn)}.</p> :
           <p className="fine">A current price and location-specific offer have not been confirmed.</p>}
         <a className="btn btn--secondary btn--block" href={offer.website} target="_blank" rel="noopener noreferrer">
@@ -158,7 +167,7 @@ export default function ComparisonTool({
         </a>
         {offer.sourceUrl ? <p className="fine"><a href={offer.sourceUrl} target="_blank" rel="noopener noreferrer">View published offer</a></p> : null}
       </article>)}
-      {!visible.length && <article className="comparison-card comparison-card--empty">
+      {current && results.length < 2 && <article className="comparison-card comparison-card--empty">
         <h2>More local companies</h2>
         <p>We haven't confirmed two comparable offers for this location and size yet. That doesn't mean other companies don't serve your area.</p>
         <p>We only show a price when the source, rental term and local coverage have been verified.</p>
@@ -168,7 +177,7 @@ export default function ComparisonTool({
       aria-expanded={showMore} onClick={() => setShowMore((value) => !value)}>
       {showMore ? "Show fewer companies" : "See more companies (" + (results.length - 2) + ")"}
     </button>}
-    {status === "ready" && payload?.comparison.status !== "ready" &&
+    {current && current.comparison.status !== "ready" &&
       <p className="comparison-source-note">Competitor details are temporarily unavailable; please check the companies directly.</p>}
     <p className="comparison-source-note">Prices are based on each company's stated terms. Dumpster sizes, included weight, fees and rental days can differ. An external website may show a different price at checkout.</p>
     <p className="fine"><Link href="/pricing">Little Junkers pricing details</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
