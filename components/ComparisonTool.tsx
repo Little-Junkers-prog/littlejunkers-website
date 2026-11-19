@@ -108,7 +108,7 @@ export default function ComparisonTool({
       <div className="comparison-filters__days">
         <label htmlFor="comparison-days">Rental length</label>
         <select id="comparison-days" value={days} onChange={(event) => { setDays(Number(event.target.value)); setShowMore(false); }}>
-          {[3, 4, 5, 7, 10, 14, 21, 30].map((value) => <option key={value} value={value}>{value} days</option>)}
+          {Array.from({ length: 28 }, (_, i) => i + 3).map((value) => <option key={value} value={value}>{value} days</option>)}
         </select>
       </div>
     </form>
