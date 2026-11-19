@@ -79,4 +79,4 @@ assert.equal(classifyComparisonOutcome({ ...emptyEvidence, paidRentalConfirmed: 
 assert.equal(classifyComparisonOutcome({ ...emptyEvidence, paidRentalConfirmed: true, attributionProven: true }), "verified_lj_paid", "paid and attributed booking is a verified LJ win");
 assert.equal(classifyComparisonOutcome({ ...emptyEvidence, competitorChoiceSelfReported: true }), "competitor_self_reported", "competitor win requires voluntary report");
 assert.equal(classifyComparisonOutcome({ ...emptyEvidence, competitorOutboundClicked: true, consentedReturnAfterOutbound: true }), "returned_considering", "return requires consented identity linkage");
-console.log("Comparison evidence, measurement and outcome checks passed (34 assertions).");
+console.log("Comparison evidence, measurement and outcome assertions passed.");
