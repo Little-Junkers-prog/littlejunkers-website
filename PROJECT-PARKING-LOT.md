@@ -106,3 +106,42 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 - RANDY-ART-001: Randy redrawn Nov 16 (professional style, warm smile) from one master generator (`scripts/randy/`). Holiday hats per spec §14 (owner direction). Approved by Marcus as the master reference (Nov 16).
 - RANDY-ENV-001: `RANDY_SITE_TOKEN` must be set on the Vercel website project (Preview + Production). Claude was not permitted to set it. Until it is, the live Randy backend rejects website chats and the site shows the call/text fallback.
 - LEGAL-001: Privacy, terms, cookie and texting pages rewritten to current facts. Owner confirmed Nov 16: customer_service@littlejunkersllc.com is the contact address (sitewide), the 24-hour change/cancellation rule stands, free driveway boards on request are accurate. Remaining: attorney review before launch.
+
+
+## Approved V2 Experience Redirection — November 18, 2026
+
+**Status:** Design approved, implementation and release pending. Canonical decision: [ADR-CX-001](docs/decisions/ADR-CX-001-days-plus-experience.md).
+
+- **[CX-001] P0:** Design research-to-booking experience, mobile-first prototype, validated context handoff from homepage/size/city/compare/Randy.
+- **[PRC-001] P0:** Supabase shared Days Plus pricing model: 3-day base, 0–27 prepaid extra days, total 3–30; new quote API and migration/compatibility; obtain additional-day rate approval.
+- **[FLEET-001] P0:** Arbitrary-duration 3–30-day Fleet capacity/return schedule; no double booking; operational blackout and pickup rules.
+- **[BOOK-001] P0:** Booking configurator and >30-day custom-quote route, retain embedded Stripe and unified-checkout-v1 integrity.
+- **[ADM-001] P0:** Admin Days Plus pricing editor and quote rules.
+- **[CSR-001] P0:** CSR/manual booking and payment links support Days Plus and 31+ quoted cases.
+- **[CMP-001] P1:** Competitor offer observation and verification data in Supabase, Admin management, customer /compare UX.
+- **[SITE-001] P1:** Update website /pricing, price cards, city/size pages, callouts, structured offers, FAQs and long-rental branch.
+- **[RANDY-001] P1:** Rework Randy for approved 3–30 calculation and 31+ quote intake; preserve consent.
+- **[MEAS-001] P1:** Journey analytics across comparison, configuration, checkout and verified paid rental.
+- **[QA-001] P0:** Validate 3/4/30/31-day, timezone, date math, zone, hold expiry, inventory and payment scenarios before activation.
+
+Owner decision: no rentals over 30 days may be self-serve purchased. Last reported operational suspension remains a release gate. No schema, prices, production checkout, DNS, or main merge authorized by this documentation alone.
+
+
+### [CX-IA-001] Approved homepage shopping hub + supporting-page retention (2026-11-18)
+
+- **Status:** Implementation started on review-only website branch; not merged.
+- **Governing docs:** [PROJECT-CHARTER.md](PROJECT-CHARTER.md), [ADR-CX-002](docs/decisions/ADR-CX-002-shopping-hub-architecture.md).
+- **Work:** Integrate homepage ZIP/size/optional compare/Days Plus planning; add `/pricing` and `/compare`, preserve city, size, SEO and all existing routes. Handle known-context handoff from secondary pages. No server pricing, payment, Fleet or CSR edits in website Slice A.
+- **Acceptance:** No false availability or final-price claims; desktop/mobile/keyboard QA; owner reviews copy and experience separately.
+
+### [CX-COPY-001] Substantive editorial pass and page-by-page owner approval
+
+- **Status:** Open. Owner explicitly stated that initial November 18 prototype wording is weak and illustrative only. The final site must use verified operational facts, meaningful decision support, local specificity and first-party proof. No auto-approval of copy because a layout passes.
+
+
+### [CX-EST-001] Progressive customer price estimate and city/ZIP experience (November 19, 2026)
+
+- **Owner-approved UX contract:** [ADR-CX-003](docs/decisions/ADR-CX-003-progressive-estimates-city-zip-copy.md). Visible canonical three-day starting estimate; update by size and known delivery zone; days 4–30 display pending extras without making up totals. City or ZIP input throughout, with multi-zone city uncertainty disclosed. No frontend "confirmed" price.
+- **Phase 1:** Implement read-only estimate and truthful location response in Next site + isolated visual preview; remove model/developer speak; consistent action labels.
+- **Phase 2 release gate:** create server-authoritative quote/expiry/hold and Fleet/date coordination; Admin approves extra-day rates, CSR/Randy consume the same API; QA on all estimate-to-lock transitions.
+- **Editorial:** User says preview has AI drift and weak substance; final page copy requires separate content/SEO review, not only word swaps.

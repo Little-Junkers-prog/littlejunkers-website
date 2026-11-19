@@ -1,9 +1,11 @@
 # Little Junkers Website V2 — Strategy Archive
 
+> **ACTIVE OWNER DECISION — NOVEMBER 18, 2026:** Research-to-purchase experience and Days Plus (3-day base, 27 optional extra days, maximum 30 online, 31+ custom quote) are governed by [ADR-CX-001](docs/decisions/ADR-CX-001-days-plus-experience.md). This supersedes legacy rental-package selection UX; retain unified-checkout-v1 payment/consent/finalization safeguards.\n\n
 **Status:** Active strategic reference  
 **Created:** September 29, 2026  
 **Repository:** `Little-Junkers-prog/littlejunkers-website`  
 **Purpose:** Preserve the approved V2 website/customer-experience roadmap across chats, agents, sprints, and implementation sessions.
+**Current charter:** [PROJECT-CHARTER.md](PROJECT-CHARTER.md); [ADR-CX-002](docs/decisions/ADR-CX-002-shopping-hub-architecture.md) clarifies the shopping-homepage + retained dedicated-page strategy.
 
 ---
 
@@ -2180,3 +2182,22 @@ The current roadmap is built around these principles:
 > **Do not let future AI agents silently undo approved decisions.**
 
 > **Build Little Junkers like a technology company that rents dumpsters.**
+
+
+---
+
+# 26. Owner-Approved Customer Experience / Days Plus Supersession — November 18, 2026
+
+**Status: Approved direction; production implementation pending separate review.** Governing decision: [ADR-CX-001](docs/decisions/ADR-CX-001-days-plus-experience.md).
+
+Design research/compare -> contextual Book -> confirm ZIP/size/date/block -> configure **3–30 total days** -> server-price -> unified customer details once -> embedded Stripe -> verified booking confirmation. Three days are included, up to 27 additional days; **31+ days request a custom quote**. The website must preserve already-known context from size, city, comparison, Randy and repeat-customer entries. Supabase pricing, Fleet availability, booking/funnel, Admin, CSR, Randy, content/SEO and analytics all require coordinated redesign; neither the additional-day price nor a new pricing schema is approved by this direction alone. This supersedes fixed tier-selection UI, not the Oct 2 unified-checkout safeguards or the existing V2 brand foundation. No booking activation while operational inventory remains blocked.
+
+
+# 27. Approved Shopping-Hub and Dedicated-Page Architecture — November 18, 2026
+
+See [PROJECT-CHARTER.md](PROJECT-CHARTER.md) and [ADR-CX-002](docs/decisions/ADR-CX-002-shopping-hub-architecture.md). **Owner-approved interpretation:** build a homepage from which the visitor can research, choose and proceed directly into rental planning, **but retain** independently valuable size, city, pricing, compare, residential/contractor, materials, FAQ, Blog, About and legal pages. The goal is **fewer steps to purchase, not fewer SEO pages**. Dedicate each page to a clear intent and link every buying CTA into the same context-aware experience. Initial interactive-prototype copy is not approved for launch. Phase 1 implementation may proceed on a protected review branch with a safe non-transactional Days Plus planner; production pricing, Fleet, checkout, Admin, CSR, DNS and legal/content activation remain separately gated.
+
+
+# 28. Progressive Estimates and Plainspoken Copy — November 19, 2026
+
+**Owner-approved correction:** Customer-facing pages must not contain planning, model or implementation comments. Use direct copy ("See how we compare", "Check prices", "See my estimate") and remove generic/defensive statements and the "Build my rental" CTA. Every location lookup supports **city or ZIP** through the existing service-area/zone tables; never assume a city has a single ZIP or a single delivery fee. Show a canonical three-day **starting estimate early**, refine it with chosen size and unambiguous service zone, explain pending charges for days 4–30, and show an authoritative **confirmed quote only after server pricing, full date interval and Fleet availability**. Do not hardcode financial amounts in the integrated website. The first concept is not approved final copy. Full decision: [ADR-CX-003](docs/decisions/ADR-CX-003-progressive-estimates-city-zip-copy.md).

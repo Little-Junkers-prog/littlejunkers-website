@@ -10,7 +10,7 @@ const UPSTREAM = `${process.env.RANDY_API_ORIGIN ?? bookingOrigin}/api/randy-cha
 const CONVERSATION_COOKIE = "rc_sid";
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const FALLBACK = {
-  reply: "I can't connect right now. Please call or text Little Junkers at 470-548-4733, or use the Book button.",
+  reply: "Randy is unavailable right now. Call Little Junkers at (470) 548-4733 or use the Text button.",
   degraded: true,
 };
 

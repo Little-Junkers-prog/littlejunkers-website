@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { VARIANTS, randyAvatarSrc, randyVariantFor, todayInEastern, type RandyVariant } from "@/lib/randy-season";
-import { bookingUrl, company } from "@/lib/company";
+import { company } from "@/lib/company";
 
 // Today's Randy (holiday guide). The server renders the default; the browser
 // switches to the seasonal look for today's Eastern date. `?randy=<variant>`
@@ -16,10 +16,10 @@ const noop = () => () => {};
 function useRandyAvatar() {
   return randyAvatarSrc(useSyncExternalStore(noop, currentVariant, () => "default"));
 }
-const FALLBACK = `Sorry, I'm having trouble connecting. Please call or text ${company.phoneDisplay}, or see prices and book here: ${bookingUrl()}`;
+const FALLBACK = `Randy is unavailable right now. Call ${company.phoneDisplay} or use the Text button.`;
 
 type Message = { role: "user" | "assistant"; content: string };
-type Reply = { reply?: string; options?: string[] };
+type Reply = { reply?: string; options?: string[]; degraded?: boolean };
 
 // Randy turns URLs into <https://...> tokens. Render those as links, and
 // nothing else as markup.
@@ -88,7 +88,7 @@ export default function RandyChat() {
       const res = await fetch("/api/randy", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       return (await res.json()) as Reply;
     } catch {
-      return { reply: FALLBACK };
+      return { reply: FALLBACK, degraded: true };
     }
   }
 
@@ -98,7 +98,7 @@ export default function RandyChat() {
     setBusy(true);
     const data = await call({ messages: [], event: "chatOpened" });
     setMessages([{ role: "assistant", content: data.reply ?? "Hi, I'm Randy, Little Junkers' digital rental assistant. What are you working on?" }]);
-    setOptions(data.options?.length ? data.options : ["Help me pick a dumpster", "Check availability", "Existing rental question"]);
+    setOptions(data.degraded ? [] : (data.options?.length ? data.options : ["Help me pick a dumpster", "Check availability", "Existing rental question"]));
     setBusy(false);
   }
 
@@ -113,7 +113,7 @@ export default function RandyChat() {
     setBusy(true);
     const data = await call({ messages: next });
     setMessages([...next, { role: "assistant", content: data.reply ?? "Sorry, I didn't catch that. Could you rephrase it?" }]);
-    setOptions(data.options ?? []);
+    setOptions(data.degraded ? [] : (data.options ?? []));
     setBusy(false);
   }
 

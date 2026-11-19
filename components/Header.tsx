@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { bookingUrl, company, telHref } from "@/lib/company";
+import { company, telHref } from "@/lib/company";
 import { logo } from "@/lib/media";
 import { sizes } from "@/lib/sizes";
 import MobileMenu from "./MobileMenu";
 
-// Navigation only lists pages that exist in this build. Pricing, Compare and
-// the Español switch join when those pages ship (STRATEGY-ARCHIVE §4.1).
+// Shopping hub and dedicated intent pages. Spanish navigation joins when localized routes ship.
 const links = [
   { href: "/#sizes", label: "Dumpsters" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/compare", label: "Compare" },
   { href: "/service-areas", label: "Service Areas" },
   { href: "/what-can-i-put-in-a-dumpster", label: "What Goes In" },
   { href: "/faq", label: "FAQ" },
@@ -37,8 +38,8 @@ export default function Header() {
           <a className="site-header__phone" href={telHref}>
             {company.phoneDisplay}
           </a>
-          <a className="btn btn--primary" href={bookingUrl()}>
-            Book a Dumpster
+          <a className="btn btn--primary" href="/plan">
+            Check Prices
           </a>
           <MobileMenu
             dumpsters={sizes.map((size) => ({ href: `/${size.slug}`, label: `${size.yards}-Yard · ${size.name}` }))}

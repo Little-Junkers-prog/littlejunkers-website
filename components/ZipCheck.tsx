@@ -1,18 +1,16 @@
 "use client";
 
 import { useId, useState } from "react";
-import { bookingUrl, company, smsHref, telHref } from "@/lib/company";
+import { company, smsHref, telHref } from "@/lib/company";
 import type { AreaResult } from "@/lib/pricing";
-import { saveArea } from "./ZipContext";
+import { saveArea, saveLocationQuery } from "./ZipContext";
 
 type State = { status: "idle" } | { status: "loading" } | { status: "error" } | { status: "done"; result: AreaResult };
-
-const usd = (n: number) => (n === 0 ? "Free" : `$${n}`);
 
 // City or ZIP serviceability check. Enhances a plain GET form: without script,
 // the form submits to /service-areas, which renders the same answer on the server.
 // Device location is not requested here. Manual entry is the default path.
-export default function ZipCheck({ cta = "See Prices & Availability", label = "City or ZIP" }: { cta?: string; label?: string }) {
+export default function ZipCheck({ cta = "Check my area", label = "City or ZIP" }: { cta?: string; label?: string }) {
   const id = useId();
   const [state, setState] = useState<State>({ status: "idle" });
 
@@ -25,8 +23,11 @@ export default function ZipCheck({ cta = "See Prices & Availability", label = "C
       const res = await fetch(`/api/service-area?q=${encodeURIComponent(q)}`);
       if (!res.ok) throw new Error(String(res.status));
       const result = (await res.json()) as AreaResult;
+      saveLocationQuery(result.status === "served" || result.status === "split" ? q : null);
       if (result.status === "served" && result.zips.length === 1) {
         saveArea({ zip: result.zips[0], label: result.label, deliveryFee: result.zone.deliveryFee });
+      } else {
+        saveArea(null);
       }
       setState({ status: "done", result });
     } catch {
@@ -98,7 +99,8 @@ export function AreaAnswer({ result }: { result: AreaResult }) {
     return (
       <div className="zip__result">
         <h3>We deliver in {result.label}</h3>
-        <p>The delivery fee there depends on your ZIP ({result.zones.map((z) => usd(z.deliveryFee).toLowerCase()).join(" or ")}). Enter your ZIP for the exact fee.</p>
+        <p>Delivery fees vary by ZIP here. We can confirm the fee using your full address before booking.</p>
+        <div className="btn-row" style={{ marginTop: 12 }}><a className="btn btn--primary" href={"/plan?location=" + encodeURIComponent(result.query)}>See my estimate</a></div>
       </div>
     );
   }
@@ -114,8 +116,8 @@ export function AreaAnswer({ result }: { result: AreaResult }) {
         <dd>{result.zips.join(", ")}</dd>
       </dl>
       <div className="btn-row">
-        <a className="btn btn--primary" href={bookingUrl({ zip })}>
-          Check Dates &amp; Book
+        <a className="btn btn--primary" href={zip ? "/plan?zip=" + encodeURIComponent(zip) : "/plan?location=" + encodeURIComponent(result.query)}>
+          See my estimate
         </a>
         <a className="btn btn--secondary" href="/#sizes">
           See sizes and prices

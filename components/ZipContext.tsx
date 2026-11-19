@@ -92,3 +92,31 @@ export function DeliveryLine({ fallback }: { fallback: string }) {
     </>
   );
 }
+
+/* Retain the entered city/ZIP across pages without inventing a postal ZIP. */
+const LOCATION_KEY = "lj_location_query";
+let lastLocationRaw: string | null = null;
+let lastLocationSnapshot: string | null = null;
+
+function getLocationSnapshot(): string | null {
+  let raw: string | null = null;
+  try { raw = window.sessionStorage.getItem(LOCATION_KEY); } catch { /* optional */ }
+  if (raw !== lastLocationRaw) {
+    lastLocationRaw = raw;
+    lastLocationSnapshot = raw && raw.trim().length > 0 && raw.length <= 60 ? raw.trim() : null;
+  }
+  return lastLocationSnapshot;
+}
+export function saveLocationQuery(query: string | null) {
+  try {
+    if (query && query.trim().length <= 60) window.sessionStorage.setItem(LOCATION_KEY, query.trim());
+    else window.sessionStorage.removeItem(LOCATION_KEY);
+  } catch { /* optional */ }
+  window.dispatchEvent(new Event(EVENT));
+}
+export function useSavedLocationQuery(): string | null {
+  const query = useSyncExternalStore(subscribe, getLocationSnapshot, () => null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted ? query : null;
+}

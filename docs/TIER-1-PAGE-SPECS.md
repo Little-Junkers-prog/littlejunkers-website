@@ -1,9 +1,10 @@
 # Little Junkers V2 — Tier 1 Page Specifications
 
+> **NOV 18 OWNER-APPROVED SUPERSESSION:** The customer experience now uses a 3-day base + 0–27 additional days (3–30 total) with a custom-quote path for 31+ days. Start from the full research-to-payment journey, not an isolated funnel. See [ADR-CX-001](decisions/ADR-CX-001-days-plus-experience.md) and §26 below. Older multiple-duration pricing-card and checkout-step examples are historical until updated.\n\n
 **Status:** Draft for owner review — pre-code  
 **Date:** September 29, 2026  
 **Repository:** `Little-Junkers-prog/littlejunkers-website`  
-**Governing reference:** `STRATEGY-ARCHIVE.md`  
+**Governing reference:** `STRATEGY-ARCHIVE.md` and [`PROJECT-CHARTER.md`](../PROJECT-CHARTER.md)  
 **Purpose:** Define the page-level build contract for the first V2 implementation wave before application code is written.
 
 ---
@@ -2480,3 +2481,25 @@ Before page implementation begins, owner review should explicitly approve or rev
 12. booking-context handoff requirements.
 
 After approval, these specs become the build contract. Code changes that materially diverge from them require a documented decision/change rather than silent implementation drift.
+
+
+---
+
+# 26. Days Plus Experience — Owner-Approved Supersession (2026-11-18)
+
+- The primary website experience is **research/compare/choose/Book/configure/pay/confirm**, not a mandatory multi-step marketing funnel. Offer `/compare` as secondary research; do not interrupt a customer who has chosen Book.
+- The homepage, pricing page, size cards, ZIP-check, city pages, Randy and comparison all preserve resolved service ZIP, selected size and other verified intent across the booking handoff. Do not re-ask known information.
+- `/pricing` displays canonical three-day base and **approved prepaid Days Plus** rate and explains included tonnage and delivery fees. It no longer teaches multiple fixed package tiers. `/compare` uses cited, dated market observations. No invented prices or fake availability.
+- Configuration requires serviceable ZIP/jobsite, chosen 11/16/21-yard size, actual Fleet-offered delivery date/block, **3–30 total days**, return/pickup date and live price. For 31+ days, offer a dedicated custom quote and contact path, not automatic payment.
+- Keep exactly one unified customer-details entry, editable review, embedded Stripe Payment Element and verified server-side finalization. The public website does not invent another pricing engine or bypass the checkout contract.
+- On mobile, show the price and next action without burying trust details; suppress competing marketing controls during payment, maintain accessibility, and test sticky controls with Randy and consent.
+- All controls that can lead to payment must fail closed when pricing or Fleet inventory is unavailable or operational booking is suspended.
+- Implement coordinated `PRC-001/FLEET-001/BOOK-001/ADM-001/CSR-001/CMP-001/SITE-001/RANDY-001/MEAS-001/QA-001` plan defined in the ADR. Website-only UI completion is not acceptance of Days Plus release.
+- **Preview rule:** interim concept routes may use real website media and verified canonical three-day base, but must explicitly say pricing/availability/checkout are not active in the demo and avoid collecting customer PII or charging cards.
+
+
+# 27. Shopping-Hub Homepage + Intent Pages — Owner-Approved, November 18, 2026
+
+The initial interactive prototype demonstrated a single-page decision-to-planning journey. Owner approval **does not remove** the planned dedicated `/pricing`, `/compare`, size, city, residential, contractor, materials, Blog, About and FAQ pages. See [ADR-CX-002](decisions/ADR-CX-002-shopping-hub-architecture.md). Homepage compact sections offer the same essential shopping decisions without forcing detours. Detailed intent pages explain, convert and carry known context into a shared planner. Retain all existing indexable routes and content until a search-evidence-backed migration approves changes.
+
+**Copy gate:** Marcus says the first prototype's words are weak in information and substance. Treat them as layout scaffolding only, not final marketing, compliance or SEO copy. Use first-party evidence and substantive local detail; require page-by-page editorial sign-off. Phase 1 code should not claim that full Days Plus quotes, actual dates or online payment are enabled until canonical systems are ready.
