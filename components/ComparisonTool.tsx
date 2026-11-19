@@ -181,11 +181,11 @@ export default function ComparisonTool({
             ? "This offer includes up to " + offer.priceDays + " days; you selected " + days + ". The published price is shown without adjustment."
             : "This published price covers " + offer.priceDays + " days, shorter than your " + days + "-day selection. Extra days are not included."}
         </p> : null}
-        <a className="btn btn--secondary btn--block" href={offer.website} target="_blank" rel="noopener noreferrer"
+        <a className="btn btn--secondary btn--block" href={offer.sourceUrl ?? offer.website} target="_blank" rel="noopener noreferrer"
           onClick={(event) => {
             if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
             event.preventDefault();
-            setExitTarget({ providerId: offer.providerId, name: offer.name, website: offer.website, destination: offer.website });
+            setExitTarget({ providerId: offer.providerId, name: offer.name, website: offer.website, destination: offer.sourceUrl ?? offer.website });
           }}>
           Visit {offer.name} <span aria-hidden="true">↗</span>
         </a>
