@@ -15,9 +15,8 @@ function isObject(x: unknown): x is Record<string, unknown> {
 export function parseClickPayload(raw: unknown): ClickPayload | null {
   if (!isObject(raw) || typeof raw.providerId !== "string" ||
       !uuid.test(raw.providerId) ||
-      ![11, 16, 21].includes(Number(raw.size)) ||
-      !Number.isInteger(raw.size) ||
-      !Number.isInteger(raw.days) || Number(raw.days) < 3 || Number(raw.days) > 30)
+      typeof raw.size !== "number" || ![11, 16, 21].includes(raw.size) ||
+      typeof raw.days !== "number" || !Number.isInteger(raw.days) || Number(raw.days) < 3 || Number(raw.days) > 30)
     return null;
   return { providerId: raw.providerId, size: raw.size as 11 | 16 | 21, days: raw.days as number };
 }
