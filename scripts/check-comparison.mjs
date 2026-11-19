@@ -58,12 +58,12 @@ const measurement = {
 assert.equal(validateComparisonMeasurement(measurement, false), null, "deny when analytics consent is absent");
 const safe = validateComparisonMeasurement(measurement, true);
 assert.equal(safe?.event_name, "comparison_provider_outbound_clicked", "outbound event must use existing database name");
-assert.equal(safe?.event_context.market_zip, "30269", "permitted ZIP is allowed");
+assert.equal("market_zip" in (safe?.event_context ?? {}), false, "browser ZIP must not be trusted as canonical location");
 assert.equal(JSON.stringify(safe).includes("example.com"), false, "unlisted email must not survive sanitization");
 assert.equal(validateComparisonMeasurement({ ...measurement, event_name: "paid_rental_verified" }, true), null, "paid rental cannot be reported by a client event");
 assert.equal(validateComparisonMeasurement({ ...measurement, provider_id: null }, true), null, "outbound must name the provider");
-assert.equal(validateComparisonMeasurement({ ...measurement, market_zip: "30269-1234" }, true), null, "invalid ZIP must be rejected");
-assert.equal(validateComparisonMeasurement({ ...measurement, market_city: "foo@bar.com" }, true), null, "arbitrary city free text must be rejected");
+assert.equal("market_zip" in (validateComparisonMeasurement({ ...measurement, market_zip: "30269-1234" }, true)?.event_context ?? {}), false, "unverified location must be dropped");
+assert.equal("market_city" in (validateComparisonMeasurement({ ...measurement, market_city: "foo@bar.com" }, true)?.event_context ?? {}), false, "arbitrary city text must not be included");
 assert.equal(validateComparisonMeasurement({ ...measurement, size_yards: 30 }, true), null, "unrelated container class rejected");
 assert.equal(validateComparisonMeasurement({ ...measurement, duration_days: 31 }, true), null, "duration outside online rules rejected");
 const emptyEvidence = {
