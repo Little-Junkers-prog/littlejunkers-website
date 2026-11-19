@@ -146,6 +146,7 @@ for (const label of expectedRows) {
 assert.equal(firstCard.includes("<dt>Actual size</dt>"), false, "avoid misleading actual-size labels");
 assert.equal(competitorCard.includes("roll-off dumpster</dd>"), false, "simplify displayed competitor size");
 assert.equal(competitorCard.includes("View published offer"), false, "avoid duplicate outbound offer links");
+assert.ok(competitorCard.includes('href={offer.sourceUrl ?? offer.website}'), "single Visit link should open the published first-party offer when available");
 assert.ok(firstCard.includes("Rate not yet confirmed"), "unapproved LJ prepaid extra-day fee must remain unpriced");
 assert.ok(competitorCard.includes("Independent provider; not affiliated with Little Junkers"), "source disclosure stays below competitor CTA");
 assert.ok(comparisonMarkup.includes("offers publicly posted on each company's website"), "footer must explain public-source provenance");
