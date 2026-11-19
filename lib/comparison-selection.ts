@@ -57,3 +57,28 @@ export function selectOfferSnapshot<T extends OfferFact>(
   );
   return snapshots[0] ?? null;
 }
+
+export type PublishedObservation = {
+  observed_at: string;
+  valid_until: string | null;
+  verification_status: string;
+  publication_status: string;
+  conflict_type: string;
+  source_url: string;
+};
+
+export function observationIsCurrent(observation: PublishedObservation, now: Date): boolean {
+  if (observation.verification_status !== "confirmed_published" ||
+      observation.publication_status !== "publishable" ||
+      observation.conflict_type !== "no_conflict" ||
+      !observation.valid_until) return false;
+  try {
+    const url = new URL(observation.source_url);
+    if (url.protocol !== "https:" || !url.hostname.includes(".") ||
+        ["localhost", "127.0.0.1"].includes(url.hostname)) return false;
+  } catch { return false; }
+  const observed = Date.parse(observation.observed_at);
+  const expires = Date.parse(observation.valid_until);
+  return Number.isFinite(observed) && Number.isFinite(expires) &&
+    observed <= now.getTime() && expires > now.getTime();
+}
