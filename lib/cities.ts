@@ -13,6 +13,7 @@ export type CityContent = {
   city: string;
   slug: string;
   county: string;
+  metaTitle: string;
   metaDescription: string;
   intro: string;
   proofHeading: string;
@@ -30,12 +31,12 @@ const slugFor = (city: string) => `dumpster-rental-${city.toLowerCase().replace(
 
 const sizeFaq = {
   q: "What size dumpster should I get?",
-  a: "For a garage or one-room job, the 11-yard. For a remodel or a bigger cleanout, the 16. For a whole house, the 21. If you're stuck between two, text us what you're tossing.",
+  a: "An 11-yard is a good place to start for a smaller cleanout. The 16- and 21-yard bins give you more room for bigger projects. Heavy material can hit the weight limit before the bin is full, so tell us what you're loading if you're unsure.",
 };
 
 const deliveryFaq = (city: string) => ({
   q: `How soon can you deliver in ${city}?`,
-  a: "The booking calendar shows the delivery days that are open right now. Pick the one that works and you're set.",
+  a: "Tell us your ZIP and the date you'd prefer. We'll confirm the available delivery options before you reserve anything.",
 });
 
 export const cities: CityContent[] = [
@@ -43,27 +44,28 @@ export const cities: CityContent[] = [
     city: "Newnan",
     slug: slugFor("Newnan"),
     county: "Coweta County",
+    metaTitle: "Newnan, GA Dumpster Rental | Little Junkers",
     metaDescription:
-      "Pink dumpsters delivered in Newnan, GA. See current prices for 11, 16 and 21-yard dumpsters, check your ZIP and book online with Little Junkers.",
-    intro: "We deliver all three sizes in Newnan, from garage cleanouts to full remodels.",
-    proofHeading: "Little Junkers jobs in Newnan",
-    proofCopy: "Our Newnan photos show a full 11-yard dumpster and two 16-yard placements, one by a garage and one in a yard. Completed rentals here also include the 21-yard. These are our containers on real jobs, not stock photos.",
+      "Dumpster rental in Newnan, GA. See 11-, 16- and 21-yard Pink Bins, included disposal weight and delivery fees for ZIPs 30263 and 30265.",
+    intro: "Cleaning out a garage, replacing flooring or clearing out a house in Newnan? We offer 11-, 16- and 21-yard Pink Bins. Check the price for your address below.",
+    proofHeading: "Pink Bins at Newnan homes",
+    proofCopy: "Here are a few of our Newnan dumpsters. The photos show an 11-yard bin filled for pickup and 16-yard bins beside a garage and in a yard. They can help you picture how much space you'll need.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y16NewnanGarage,
     proof: [photos.y16NewnanYard, photos.y11Newnan, photos.y16NewnanGarage],
     placement: {
-      heading: "Putting it in the street?",
-      body: "The City of Newnan has a right-of-way permitting process through its Engineering Department. Check the city's requirements before delivery. HOA or private-property rules may also apply.",
+      heading: "Thinking about putting it on the street?",
+      body: "For a Newnan driveway delivery, make sure there's room for the truck to back in and set down the dumpster. If the bin needs to go in the street or public right-of-way, check with the City of Newnan Engineering Department about permits first.",
     },
     faqs: [
       {
         q: "Is there a delivery fee in Newnan?",
-        a: "Your delivery fee depends on your ZIP. The current fee for Newnan ZIPs is shown at the top of this page and again before you pay.",
+        a: "Newnan ZIPs 30263 and 30265 are in our core delivery area. Check your exact ZIP on this page to see the current fee before you plan the rental.",
       },
       deliveryFaq("Newnan"),
       {
         q: "Do I need a permit for street placement in Newnan?",
-        a: "If the dumpster will sit in the street or the public right-of-way, check with the City of Newnan Engineering Department first. A driveway on your own property is the simplest spot.",
+        a: "Check with the City of Newnan Engineering Department before putting a dumpster in the street or right-of-way. For a driveway delivery, we'll still need to confirm there's room for the truck.",
       },
       sizeFaq,
     ],
@@ -73,27 +75,28 @@ export const cities: CityContent[] = [
     city: "Peachtree City",
     slug: slugFor("Peachtree City"),
     county: "Fayette County",
+    metaTitle: "Peachtree City Dumpster Rental | Little Junkers",
     metaDescription:
-      "Dumpster rental in Peachtree City, GA from the pink-dumpster company based here. See current 11, 16 and 21-yard prices and book online.",
-    intro: "Peachtree City is home. Little Junkers is owned and run here by Marcus and Ivy.",
-    proofHeading: "A Peachtree City driveway, photographed by our team",
-    proofCopy: "The 21-yard pictured here is a Little Junkers dumpster placed in Peachtree City. Our completed rental records also include the 11- and 16-yard sizes in this city.",
+      "Little Junkers is based in Peachtree City, GA. Compare 11-, 16- and 21-yard Pink Bins, check delivery to 30269 and see current rental prices.",
+    intro: "We're based right here in Peachtree City. Whether you're cleaning out the garage or working on a bigger remodel, we'll help you choose a Pink Bin that fits the job.",
+    proofHeading: "A Big Junker in Peachtree City",
+    proofCopy: "That's our 21-yard Big Junker in a Peachtree City driveway. If your project is smaller, take a look at the 11- and 16-yard options in the price cards above.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y21PeachtreeCity,
     proof: [photos.y21PeachtreeCity],
     placement: {
-      heading: "Driveways and golf cart paths",
-      body: "If reaching the drop spot would involve crossing or using a public cart path or right-of-way, check with Peachtree City before scheduling. The city publishes a cart-path encroachment permit application. For a driveway placement, show us any tight access or overhead branches so we can plan the drop spot.",
+      heading: "Driveway and cart-path access",
+      body: "A cart path or a tight driveway can affect where we can put a dumpster. If delivery would mean using or crossing a public cart path, check with the city first. Peachtree City has a cart-path encroachment permit process.",
     },
     faqs: [
       {
-        q: "Are you actually based in Peachtree City?",
-        a: "Yes. Little Junkers is a Peachtree City, Georgia business in Fayette County, not Peachtree Corners. Marcus and Ivy own and run it.",
+        q: "Is Little Junkers based in Peachtree City?",
+        a: "Yes. We're Marcus and Ivy, and we run Little Junkers from Peachtree City in Fayette County. We're in Peachtree City, not Peachtree Corners.",
       },
       deliveryFaq("Peachtree City"),
       {
         q: "Is there a delivery fee in Peachtree City?",
-        a: "Your delivery fee depends on your ZIP. The current fee for Peachtree City is shown at the top of this page and again before you pay.",
+        a: "Enter 30269 in the area checker to see the current delivery fee. Your rental estimate will show it as a separate line.",
       },
       sizeFaq,
     ],
@@ -103,22 +106,23 @@ export const cities: CityContent[] = [
     city: "Fayetteville",
     slug: slugFor("Fayetteville"),
     county: "Fayette County",
+    metaTitle: "Fayetteville, GA Dumpster Rental | Little Junkers",
     metaDescription:
-      "Dumpster rental in Fayetteville, GA. Little Junkers delivers 11, 16 and 21-yard pink dumpsters across Fayette County. See prices for your ZIP and book online.",
-    intro: "Our Fayetteville photos show an 11-yard driveway placement, a 16-yard delivery and a 21-yard dumpster on site. See the real equipment before you decide.",
-    proofHeading: "Three sizes at Fayetteville jobs",
-    proofCopy: "Our team photographed an 11-yard dumpster in a Fayetteville driveway, a 16-yard being delivered and a 21-yard on site. Completed rentals in Fayetteville include all three sizes.",
+      "Rent a Pink Bin in Fayetteville, GA. Compare 11-, 16- and 21-yard dumpsters, included disposal weight and delivery fees for 30214 and 30215.",
+    intro: "Cleaning out a room, replacing flooring or taking on a remodel in Fayetteville? Our Pink Bins come in three sizes, so you can pick the space you need without guessing.",
+    proofHeading: "We've delivered all three sizes in Fayetteville",
+    proofCopy: "These are our dumpsters on Fayetteville jobs: an 11-yard in a driveway, a 16-yard being delivered and a 21-yard on site. Have a look at the photos, then compare sizes above.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y11Fayetteville,
     proof: [photos.y16Fayetteville, photos.y21Fayetteville, photos.y11Fayetteville],
     placement: {
-      heading: "Planning a Fayetteville delivery",
-      body: "Our truck needs a clear route into the placement spot, not just enough room for the dumpster. Check for low tree limbs, wires and tight turns; send us a driveway photo if access looks close.",
+      heading: "Make room for the delivery truck",
+      body: "The dumpster may fit in your driveway, but the truck needs room to set it down. Check for low branches, overhead wires and tight turns. If you aren't sure about access, text us a photo of the spot.",
     },
     faqs: [
       {
         q: "Is there a delivery fee in Fayetteville?",
-        a: "Your delivery fee depends on your ZIP. The current fee for Fayetteville ZIPs is shown at the top of this page and again before you pay.",
+        a: "We check Fayetteville delivery by ZIP. Enter 30214 or 30215 to see the fee for your area with the rental estimate.",
       },
       deliveryFaq("Fayetteville"),
       {
@@ -133,27 +137,28 @@ export const cities: CityContent[] = [
     city: "Senoia",
     slug: slugFor("Senoia"),
     county: "Coweta County",
+    metaTitle: "Senoia, GA Dumpster Rental | Little Junkers",
     metaDescription:
-      "Dumpster rental in Senoia, GA. Little Junkers delivers 11, 16 and 21-yard pink dumpsters in Coweta County. See current prices and book online.",
-    intro: "Our Senoia photo shows an 11-yard dumpster loaded level with the top. Completed rentals here also include the 16- and 21-yard sizes.",
-    proofHeading: "An 11-yard Little Junkers in Senoia",
-    proofCopy: "This is a real Senoia job photo, not a generic local illustration. The container is loaded level with the top rail, a useful example of the safe loading limit.",
+      "Dumpster rental in Senoia, GA. See Little Junkers' 11-, 16- and 21-yard Pink Bins, check ZIP 30276 for delivery and compare current starting rates.",
+    intro: "Got a cleanout or renovation underway in Senoia? Choose from our 11-, 16- and 21-yard Pink Bins. If your driveway is long or unpaved, tell us before delivery.",
+    proofHeading: "Here's an 11-yard Pink Bin in Senoia",
+    proofCopy: "This Senoia dumpster is loaded right to the top rail. That's where to stop. Debris piled above the sides can't travel safely, even if there's still room to squeeze more in.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y11Senoia,
     proof: [photos.y11Senoia],
     placement: {
-      heading: "Getting to the placement spot",
-      body: "For a Senoia property with a long drive or gravel surface, check the route and the ground where the container would sit. The truck needs a safe, accessible approach; text us a driveway photo if the turn or slope is uncertain.",
+      heading: "Long drives and gravel surfaces",
+      body: "Have a long gravel drive or a narrow turn? Send us a photo of the way in and the spot where you want the bin. We need to check that the truck can get through and the ground can support a loaded dumpster.",
     },
     faqs: [
       {
         q: "Is there a delivery fee in Senoia?",
-        a: "Your delivery fee depends on your ZIP. The current fee for Senoia is shown at the top of this page and again before you pay.",
+        a: "Check ZIP 30276 in the rental estimate to see the current delivery charge. It is shown separately from the dumpster price.",
       },
       deliveryFaq("Senoia"),
       {
         q: "Can you deliver to a rural address or a long gravel drive?",
-        a: "Usually. Tell us about the drive when you book, or text us a photo, so we can check that the truck can get in and out.",
+        a: "We need to check the access and the ground before saying yes to a long or unpaved driveway. Text us a photo of the route and where you'd like the bin.",
       },
       sizeFaq,
     ],
@@ -163,23 +168,24 @@ export const cities: CityContent[] = [
     city: "Sharpsburg",
     slug: slugFor("Sharpsburg"),
     county: "Coweta County",
+    metaTitle: "Sharpsburg, GA Dumpster Rental | Little Junkers",
     metaDescription:
-      "Dumpster rental in Sharpsburg, GA. Little Junkers delivers 11, 16 and 21-yard pink dumpsters in Coweta County. See current prices and book online.",
-    intro: "We've completed rentals in Sharpsburg with 11-, 16- and 21-yard dumpsters. The right size depends on what you are clearing out and how heavy it is.",
-    proofHeading: "Our completed rental history in Sharpsburg",
-    proofCopy: "Our records include completed Sharpsburg rentals in all three dumpster sizes. We don't yet have an approved Sharpsburg job photograph on this site, so we won't present a nearby job as if it happened here.",
-    heroDisclosure: "Little Junkers equipment photo from our service area, not a Sharpsburg-specific job.",
+      "Looking for dumpster rental in Sharpsburg, GA? Compare Little Junkers' 11-, 16- and 21-yard Pink Bins and check delivery and pricing for ZIP 30277.",
+    intro: "Working on a cleanout or renovation in Sharpsburg? We've rented 11-, 16- and 21-yard dumpsters in the area. Take a look at the sizes and tell us what you're throwing away.",
+    proofHeading: "Dumpster rental for Sharpsburg cleanouts",
+    proofCopy: "We've had all three dumpster sizes on rental in Sharpsburg. The 11-yard is our smallest bin, while the 16- and 21-yard give you more room for larger cleanouts. We'll help you choose if you're between sizes.",
+    heroDisclosure: "Little Junkers equipment photographed elsewhere in our service area.",
     sizesDelivered: [11, 16, 21],
     hero: photos.hero,
     proof: [],
     placement: {
-      heading: "Have a gate, gravel drive or tight turn?",
-      body: "If you're arranging a Sharpsburg rental, tell us about gates, low branches, uneven ground or a long approach before delivery. A photo of the proposed drop spot helps us check truck access.",
+      heading: "Is the driveway easy to reach?",
+      body: "If your Sharpsburg property has a gate, a long gravel drive or a tight turn, send us a photo before scheduling. We'll need to check access for the hook-lift truck, not just the bin itself.",
     },
     faqs: [
       {
         q: "Is there a delivery fee in Sharpsburg?",
-        a: "Your delivery fee depends on your ZIP. The current fee for Sharpsburg is shown at the top of this page and again before you pay.",
+        a: "ZIP 30277 is in our core area. Check the fee in the price section, then enter your address when arranging delivery.",
       },
       deliveryFaq("Sharpsburg"),
       {
@@ -194,22 +200,23 @@ export const cities: CityContent[] = [
     city: "Tyrone",
     slug: slugFor("Tyrone"),
     county: "Fayette County",
+    metaTitle: "Tyrone, GA Dumpster Rental | Little Junkers",
     metaDescription:
-      "Dumpster rental in Tyrone, GA. Little Junkers delivers pink roll-off dumpsters in Fayette County. See current prices and book online.",
-    intro: "We've photographed our compact 11-yard dumpster at a Tyrone property. Check the delivery area for ZIP 30290 and tell us about the driveway before you choose a date.",
-    proofHeading: "An 11-yard dumpster photographed in Tyrone",
-    proofCopy: "This first-party photo shows our 11-yard dumpster in a Tyrone driveway. We can help you decide whether a smaller footprint or a larger container is right for your project.",
+      "Compare Pink Bin dumpster sizes for Tyrone, GA. Little Junkers offers 11-, 16- and 21-yard rentals with delivery details for ZIP 30290.",
+    intro: "Need a dumpster for a garage cleanout, flooring job or renovation in Tyrone? Start by choosing the right size. You can check delivery pricing for ZIP 30290 below.",
+    proofHeading: "Our 11-yard Little Junker in Tyrone",
+    proofCopy: "This is one of our 11-yard Pink Bins in a Tyrone driveway. It's a good starting point for smaller jobs; if you've got more debris, compare it with our 16- and 21-yard bins.",
     sizesDelivered: [],
     hero: photos.y11Tyrone,
     proof: [photos.y11Tyrone],
     placement: {
-      heading: "Room for the truck matters",
-      body: "A small dumpster still arrives on a hook-lift truck. For a Tyrone driveway, leave a clear backing path and tell us about low branches, wires or a tight approach. Not sure about clearance? Send us a photo.",
+      heading: "Even a small dumpster needs truck access",
+      body: "Our hook-lift truck has to back into the delivery area. If the driveway has a sharp turn or low branches, text us a picture so we can talk through where the dumpster could go.",
     },
     faqs: [
       {
         q: "Is there a delivery fee in Tyrone?",
-        a: "Your delivery fee depends on your ZIP. The current fee for Tyrone is shown at the top of this page and again before you pay.",
+        a: "Enter ZIP 30290 to see the current delivery fee in the price estimate.",
       },
       deliveryFaq("Tyrone"),
       {
@@ -224,22 +231,23 @@ export const cities: CityContent[] = [
     city: "Fairburn",
     slug: slugFor("Fairburn"),
     county: "Fulton County",
+    metaTitle: "Fairburn, GA Dumpster Rental | Little Junkers",
     metaDescription:
-      "Dumpster rental in Fairburn, GA. Little Junkers delivers pink roll-off dumpsters in south Fulton County. See current prices and book online.",
-    intro: "The 21-yard Little Junkers shown here is photographed in a Fairburn driveway. Our completed rental records also include 11-yard dumpsters in this market.",
-    proofHeading: "Real Little Junkers equipment in Fairburn",
-    proofCopy: "Our Fairburn image shows the 21-yard in a driveway, and completed rental records include both 11- and 21-yard jobs. Match the container to your debris and check access before delivery.",
+      "Dumpster rental in Fairburn, GA. Check delivery for ZIP 30213 and compare Little Junkers' 11-, 16- and 21-yard Pink Bins and included disposal weight.",
+    intro: "Clearing out a house or working on a renovation in Fairburn? We offer three Pink Bin sizes and can check the delivery fee for ZIP 30213 before you settle on a rental.",
+    proofHeading: "A 21-yard Big Junker in Fairburn",
+    proofCopy: "This is our 21-yard dumpster at a Fairburn home. We've also rented our smaller 11-yard bins in the area. If you're unsure how much space you need, compare the sizes above or text us about the job.",
     sizesDelivered: [11, 21],
     hero: photos.y21Fairburn,
     proof: [photos.y21Fairburn],
     placement: {
-      heading: "Pick a safe, reachable drop spot",
-      body: "For a Fairburn delivery, check the access route as well as the place where the container will sit. A steep slope, narrow turn or overhead obstruction can change where we can set it. Text us a photo if you're unsure.",
+      heading: "Choosing a spot for the bin",
+      body: "Take a look at the route into your driveway as well as the drop spot itself. Slopes, branches and narrow turns can affect delivery. A quick photo helps us check the options with you.",
     },
     faqs: [
       {
         q: "Is there a delivery fee in Fairburn?",
-        a: "Your delivery fee depends on your ZIP. The current fee for Fairburn is shown at the top of this page and again before you pay.",
+        a: "Enter ZIP 30213 to check the current delivery fee before choosing your rental.",
       },
       deliveryFaq("Fairburn"),
       {
