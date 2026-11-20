@@ -3,14 +3,15 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqList from "@/components/FaqList";
 import FaqSearch from "@/components/FaqSearch";
 import JsonLd from "@/components/JsonLd";
-import { bookingUrl, company, smsHref, telHref } from "@/lib/company";
+import { company, smsHref, telHref } from "@/lib/company";
+import Link from "next/link";
 import { buildFaqs } from "@/lib/faqs";
 import { getPricing } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Dumpster Rental FAQ",
+  title: "Dumpster Rental FAQs: Sizes, Prices and Delivery",
   description:
-    "Straight answers about renting a Little Junkers dumpster: cost, sizes, delivery, weight, what can go in, driveways and service area.",
+    "Answers to common dumpster rental questions about pricing, delivery, weight limits, materials and choosing a Pink Bin in Fayette and Coweta County.",
   alternates: { canonical: "/faq" },
 };
 
@@ -26,7 +27,7 @@ export default async function FaqPage() {
       <section className="page-hero">
         <div className="container">
           <h1>
-            Questions, <span className="accent">answered.</span>
+            Dumpster rental <span className="accent">questions.</span>
           </h1>
           <FaqSearch />
           <ul className="chips" aria-label="Topics" style={{ marginTop: 8 }}>
@@ -44,7 +45,7 @@ export default async function FaqPage() {
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <h2>Top 5 questions</h2>
+            <h2>Start with these questions</h2>
           </div>
           <FaqList items={top.map((item) => ({ ...item, id: `top-${item.id}` }))} />
         </div>
@@ -65,7 +66,7 @@ export default async function FaqPage() {
         <div className="container">
           <div className="callout">
             <div>
-              <h2>Still stuck?</h2>
+              <h2>Still have a question?</h2>
               <p className="muted" style={{ marginTop: 6 }}>
                 Call or text {company.phoneDisplay}, {company.hoursDisplay}.
               </p>
@@ -77,9 +78,9 @@ export default async function FaqPage() {
               <a className="btn btn--secondary" href={smsHref}>
                 Text
               </a>
-              <a className="btn btn--primary" href={bookingUrl()}>
-                Book a Dumpster
-              </a>
+              <Link className="btn btn--primary" href="/plan">
+                See my estimate
+              </Link>
             </div>
           </div>
         </div>
