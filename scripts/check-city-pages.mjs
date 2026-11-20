@@ -75,6 +75,23 @@ assert.ok(!topHero.includes("<Photo"), "the city hero should not repeat a large 
 assert.ok(page.includes("How renting a Pink Bin works"), "retain a concise rental process for new shoppers");
 const sizePage = source("app/[slug]/SizePage.tsx");
 assert.ok(sizePage.includes('/compare?size='), "size pages should link to size-matched published comparisons");
+assert.ok(sizePage.includes('import { PlanLink }'), "size CTAs must share the V2 planner until verified checkout");
+assert.ok(!sizePage.includes("<BookLink"), "size pages may not bypass the planner into suspended checkout");
+assert.ok(!sizePage.includes('"@type": "Offer"'), "don't publish checkout Offer structured data while unavailable");
+assert.ok(page.includes("const faqs = city.faqs.map"), "local fee FAQs should draw from canonical pricing");
+assert.ok(page.includes("zone.deliveryFee === 0"), "no hard-coded delivery fee in city FAQ");
+const layout = source("app/layout.tsx");
+assert.ok(layout.includes('template: "%s | Little Junkers"'), "brand suffix should come from one layout template");
+for (const path of [
+  "app/about-us/page.tsx", "app/blog/page.tsx", "app/long-term-rental/page.tsx",
+  "app/compare/page.tsx", "app/plan/page.tsx"
+]) {
+  const pageText=source(path);
+  const title=pageText.match(/\btitle:\s*"([^"]+)"/)?.[1];
+  assert.ok(title, path + " must have a title");
+  assert.ok(!title.includes("| Little Junkers"), path + " must not double-append brand");
+}
+
 assert.ok(page.includes("zips.length > 0 ? ("), "schema must require canonical active service ZIP evidence");
 assert.ok(page.includes("JsonLd"), "city Service structured data must link to canonical business");
 assert.ok(page.includes('href="/what-can-i-put-in-a-dumpster"'), "material guidance must be discoverable");
