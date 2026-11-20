@@ -16,11 +16,11 @@ seoTitle: "Spring Garage Clean-Out Guide: Declutter & Rent a Dumpster"
 seoDescription: "A step-by-step spring garage clean-out: plan, sort, deep clean, organize and dispose of junk with a dumpster rental."
 ---
 
-Spring is the perfect season to breathe new life into your garage. With warmer weather and renewed energy, now's the time to clear out the clutter, organize your space, and dispose of unwanted items responsibly. Follow this step-by-step guide for a smooth clean-out.
+If your garage is full of boxes you haven't opened in years, a spring cleanout is a good excuse to sort them. Set aside a day, decide what stays, and make a plan for the bulky items your curbside trash service won't take.
 
 ## Step 1: Plan Your Garage Clean-Out
 
-A successful clean-out starts with a plan.
+Start by deciding where everything will go before you pull it off the shelves.
 
 ### Set a Date & Gather Supplies
 
@@ -33,7 +33,7 @@ A successful clean-out starts with a plan.
 
 ### Consider a Dumpster Rental
 
-A major clean-out often creates more waste than your regular trash service will take. A dumpster in the driveway lets you get rid of bulky items like broken furniture and old tools in one go. A single garage usually fits the [11-yard Little Junker](/11-yard-the-little-junker).
+A major clean-out often creates more waste than your regular trash service will take. A dumpster in the driveway lets you get rid of bulky items like broken furniture and old tools in one go. For one garage, compare the [11-yard Little Junker](/11-yard-the-little-junker) first. The right size depends on how much furniture or other bulky debris you have.
 
 ## Step 2: Sort Items into Categories
 
@@ -76,14 +76,14 @@ For items that can't be saved or repurposed. When your household service can't h
 ### What You Can Put in the Dumpster
 
 - Old furniture
-- Broken tools
+- Broken tools with batteries and fluids removed
 - Yard waste
 - General household junk
 
 ### Items with Special Rules
 
 - **Appliances, tires and mattresses:** accepted, with an extra disposal charge per item.
-- **Paint, batteries and motor oil:** accepted only when prepared a certain way.
+- **Paint, batteries and motor oil:** special rules apply. Batteries and motor oil must stay out of the dumpster; check how to set them aside.
 - **Hazardous chemicals:** not accepted. Check your county's household hazardous waste options.
 - **Electronics:** consider a program like [Best Buy's recycling service](https://www.bestbuy.com/site/services/recycling).
 
@@ -95,6 +95,6 @@ The full list is on [what you can put in a dumpster](/what-can-i-put-in-a-dumpst
 - **Donation bin:** Keep a bin for items you no longer need.
 - **Labeling:** Keep labeling storage so everything has a place.
 
-## Final Thoughts
+## Ready to clear out the garage?
 
-A well-run garage clean-out turns a cluttered space into a functional one. When you're ready, [see sizes and today's prices](/#sizes) or [book online](https://book.littlejunkersllc.com/rent-a-dumpster).
+Compare our [Pink Bin sizes](/#sizes) and [start your rental online](/plan). Keep batteries, liquids and hazardous materials out of the dumpster, and [check our accepted-items list](/what-can-i-put-in-a-dumpster) before you load.
