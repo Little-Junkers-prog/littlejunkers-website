@@ -3,23 +3,23 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Photo from "@/components/Photo";
 import { cityByName } from "@/lib/cities";
-import { bookingUrl, company, telHref } from "@/lib/company";
+import { company, telHref, smsHref } from "@/lib/company";
 import { photos } from "@/lib/media";
 import { sizes } from "@/lib/sizes";
 
 export const metadata: Metadata = {
-  title: "Meet Marcus and Ivy | Peachtree City",
+  title: "Meet Marcus and Ivy in Peachtree City",
   description:
-    "Little Junkers is a dumpster rental company in Peachtree City, Georgia, owned and run by Marcus and Ivy since 2024.",
+    "Meet Marcus and Ivy, the owners of Little Junkers in Peachtree City, GA. Learn why the dumpsters are pink and how to find the right size.",
   alternates: { canonical: "/about-us" },
 };
 
-const proof = ["Locally owned in Peachtree City", "Established 2024", "Upfront pricing", "Driveway-friendly dumpsters", "Real local owners"];
+const proof = ["Peachtree City, GA", "In business since 2024", "11-, 16- and 21-yard Pink Bins"];
 
 const approach = [
   ["Simple booking", "Pick a size and dates online, any time. No phone tag unless you'd rather talk."],
-  ["Prices you can see", "The price for your ZIP shows before you book. Extra days and extra weight only apply if you use them."],
-  ["Care for your property", "We deliver with a hook-lift truck, not a full-size roll-off, and we check the spot before we set the dumpster down."],
+  ["Understand what’s included", "Each size has an included disposal-weight allowance. If you need extra days or have heavy debris, ask us about the charges."],
+  ["We check the delivery spot", "Our dumpsters come on a hook-lift truck. Tell us about low branches, a steep driveway or a tight turn before delivery."],
 ];
 
 export default function About() {
@@ -33,18 +33,17 @@ export default function About() {
         <div className="container split">
           <div className="stack">
             <h1>
-              Local owners. Real service. Cleaner <span className="accent">neighborhoods.</span>
+              Meet the people behind the <span className="accent">Pink Bins.</span>
             </h1>
             <p className="lead">
-              Little Junkers is a dumpster rental company in Peachtree City, Georgia. Marcus and Ivy started it in 2024 and
-              run it today.
+              We’re Marcus and Ivy. We started Little Junkers in Peachtree City in 2024 to make renting a dumpster a little less complicated.
             </p>
             <div className="btn-row">
-              <a className="btn btn--primary" href={bookingUrl()}>
-                Rent a Dumpster
-              </a>
+              <Link className="btn btn--primary" href="/plan">
+                See my estimate
+              </Link>
               <a className="btn btn--secondary" href={telHref}>
-                Call or text {company.phoneDisplay}
+                Call {company.phoneDisplay}
               </a>
             </div>
           </div>
@@ -79,11 +78,8 @@ export default function About() {
               ))}
               . We deliver them to homes and job sites across Fayette and Coweta County.
             </p>
-            <p>We&apos;re a dumpster rental company. We drop it off, you fill it, and we haul it away.</p>
-            <p className="fine">
-              Slot for the fuller story: how the name came about, why the dumpsters are pink, and the first blue one. It links here
-              once &ldquo;The Little Junkers Story&rdquo; is written and published on the blog.
-            </p>
+            <p>For us, pink was part of the idea from the start. The bins are easy to spot, and they look a little different from the usual dumpster. We wanted the service to feel just as approachable.</p>
+            <p>Marcus handles the day-to-day equipment and delivery work. Ivy helps customers with questions and scheduling. If you’re not sure which size you need, talk to us. You don’t need to know anything about dumpsters to get started.</p>
           </div>
           <div className="grid grid--2">
             <Photo photo={photos.ivyTruck} sizes="(min-width: 900px) 25vw, 100vw" />
@@ -95,7 +91,7 @@ export default function About() {
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <h2>How we do it</h2>
+            <h2>What you can expect</h2>
           </div>
           <div className="grid grid--3">
             {approach.map(([title, body]) => (
@@ -114,7 +110,7 @@ export default function About() {
         <div className="container split">
           <div className="stack">
             <h2>Where we work</h2>
-            <p className="muted">Based in Peachtree City. Delivering across Fayette and Coweta County and nearby South Atlanta communities.</p>
+            <p className="muted">We work out of Peachtree City and serve nearby communities in Fayette and Coweta County. Enter your ZIP on our service-area page to see the delivery fee.</p>
             <ul className="chips">
               {featured.map((city) => (
                 <li key={city.slug}>
@@ -140,12 +136,12 @@ export default function About() {
             <div>
               <h2>From the job site</h2>
               <p className="muted" style={{ marginTop: 6 }}>
-                Real jobs, loading tips and what we&apos;re up to around town.
+                Loading tips, answers to common rental questions and photos from local jobs.
               </p>
             </div>
             <div className="btn-row">
               <Link className="btn btn--secondary" href="/blog">
-                Check Out Our Blog
+                Read our guides
               </Link>
               <Link className="btn btn--primary" href="/#sizes">
                 See Sizes &amp; Prices
