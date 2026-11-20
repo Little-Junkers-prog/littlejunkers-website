@@ -1,0 +1,44 @@
+name: V2 experience prototype checks
+
+on:
+  pull_request:
+    paths:
+      - "app/page.tsx"
+      - "app/[slug]/SizePage.tsx"
+      - "app/globals.css"
+      - "components/RevealOnScroll.tsx"
+      - "components/PriceCards.tsx"
+      - "DESIGN.md"
+      - "scripts/check-experience.mjs"
+      - "package.json"
+      - ".github/workflows/experience-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual-contract:
+    name: Experience / accessibility / TypeScript
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Experience design contract checks
+        run: npm run check:experience
+      - name: Seven city route preservation checks
+        run: npm run check:city-pages
+      - name: Public owner-name privacy check
+        run: npm run check:owner-names
+      - name: Comparison regression
+        run: npm run check:comparison
+      - name: TypeScript
+        run: npm run typecheck
