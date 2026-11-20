@@ -23,10 +23,15 @@ const cases = [
 const matches = [...cities.matchAll(/\n  \{\n    city: "([^"]+)",\n    slug: slugFor\("([^"]+)"\)/g)];
 assert.equal(matches.length, 7, "preserve exactly seven priority city pages in the registry");
 const desc = new Set();
+const expected = new Map(cases);
+const seen = new Set();
 for (let i = 0; i < matches.length; i++) {
-  const [name, expectedSlug] = cases[i];
   const found = matches[i];
-  assert.equal(found[1], name, "city order and target city must match preservation audit");
+  const name = found[1];
+  const expectedSlug = expected.get(name);
+  assert.ok(expectedSlug, "unexpected city in the preserved route registry: " + name);
+  assert.ok(!seen.has(name), "duplicate city registry entry: " + name);
+  seen.add(name);
   assert.equal(found[2], name, name + " slug source must match its city");
   const slug = "dumpster-rental-" + name.toLowerCase().replace(/\s+/g, "-") + "-little-junkers";
   assert.equal(slug, expectedSlug, "original city slug must remain unchanged");
@@ -51,6 +56,7 @@ for (let i = 0; i < matches.length; i++) {
   assert.ok(!desc.has(description), "duplicate city metadata");
   desc.add(description);
 }
+assert.deepEqual([...seen].sort(), cases.map(([name]) => name).sort(), "seven preserved cities must all be present");
 assert.equal(cities.includes("needed:"), false, "do not publicly render unfinished city photo slots");
 assert.equal(cities.includes("genericPlacement("), false, "do not reintroduce city-name-swap placement copy");
 assert.ok(page.includes("documentedPhotos.length > 0"), "empty photo galleries must not render");
