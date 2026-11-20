@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const proof = ["Peachtree City, GA", "In business since 2024", "11-, 16- and 21-yard Pink Bins"];
 
 const approach = [
-  ["Simple booking", "Pick a size and dates online, any time. No phone tag unless you'd rather talk."],
+  ["Book online", "Choose your size and rental dates online. We'll show your price before you pay."],
   ["Understand what’s included", "Each size has an included disposal-weight allowance. If you need extra days or have heavy debris, ask us about the charges."],
   ["We check the delivery spot", "Our dumpsters come on a hook-lift truck. Tell us about low branches, a steep driveway or a tight turn before delivery."],
 ];
