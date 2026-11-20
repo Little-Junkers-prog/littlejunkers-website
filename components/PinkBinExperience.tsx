@@ -100,6 +100,14 @@ export default function PinkBinExperience({ pricing }: { pricing: Pricing }) {
             </div>
             <span>Price before any ZIP-based delivery fee or extra charges</span>
           </div>
+          <div className="bin-shop__fits">
+            <h4>A good fit for</h4>
+            <ul>
+              {size.fitTiles.slice(0, 3).map((use) => (
+                <li key={use}>{use}</li>
+              ))}
+            </ul>
+          </div>
           <dl className="bin-shop__facts">
             <div><dt>Dumpster size</dt><dd>{selected} cubic yards</dd></div>
             <div><dt>Included disposal weight</dt><dd>{typeof included === "number" ? formatTons(included) : "Confirm with us"}</dd></div>
