@@ -3,17 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { formatDate, getPosts, type Post, type PostCategory } from "@/lib/blog";
-import { bookingUrl, company } from "@/lib/company";
+import { company } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: "Junker Journal | Dumpster Tips and Jobs",
-  description: "Real jobs, loading tips and local news from Little Junkers, the pink-dumpster company in Peachtree City, Georgia.",
+  description: "Practical dumpster rental and cleanup guides from Little Junkers in Peachtree City. Learn how to choose a size, load safely and plan a cleanout.",
   alternates: { canonical: "/blog" },
 };
 
 const sections: { category: PostCategory; title: string }[] = [
   { category: "real-jobs", title: "From Real Jobs" },
-  { category: "guides", title: "Helpful Guides" },
+  { category: "guides", title: "Dumpster and cleanup guides" },
   { category: "events", title: "Events" },
   { category: "neighborhoods", title: "Around Our Neighborhoods" },
 ];
@@ -46,9 +46,9 @@ export default function BlogIndex() {
         <div className="container">
           <p className="eyebrow">Junker Journal</p>
           <h1>
-            Notes from the <span className="accent">job site.</span>
+            Dumpster tips from the <span className="accent">Junkers.</span>
           </h1>
-          <p className="lead">Real jobs, loading tips and what we&apos;re up to around town.</p>
+          <p className="lead">Planning a cleanout or renovation? Here are the questions we hear most about bins, weight limits and getting rid of debris.</p>
         </div>
       </section>
 
@@ -58,8 +58,7 @@ export default function BlogIndex() {
             <div className="notice">
               <h2 style={{ fontSize: "1.3rem" }}>Posts are being moved over</h2>
               <p style={{ marginTop: 6 }}>
-                Draft note: the existing blog articles have not been migrated into this build yet. The templates and URL
-                redirects are ready for them.
+                We’re updating our cleanup guides. In the meantime, you can compare dumpster sizes and check what can go in a bin.
               </p>
             </div>
           </div>
@@ -102,9 +101,9 @@ export default function BlogIndex() {
         <div className="container">
           <div className="callout">
             <div>
-              <h2>Follow the Junkers</h2>
+              <h2>More from Little Junkers</h2>
               <p className="muted" style={{ marginTop: 6 }}>
-                Real jobs, local events and project tips.
+                Photos from our jobs and tips for your next cleanup.
               </p>
               <ul className="chips" style={{ marginTop: 12 }}>
                 {communityProfiles.map((profile) => (
@@ -120,9 +119,9 @@ export default function BlogIndex() {
               <Link className="btn btn--secondary" href="/#sizes">
                 See Sizes &amp; Prices
               </Link>
-              <a className="btn btn--primary" href={bookingUrl()}>
-                Book a Dumpster
-              </a>
+              <Link className="btn btn--primary" href="/plan">
+                See my estimate
+              </Link>
             </div>
           </div>
         </div>
