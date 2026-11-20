@@ -47,9 +47,8 @@ export default async function Home() {
             <p className="lead">Check your delivery area and see dumpster prices. Enter a city or ZIP.</p>
             <ZipCheck />
             <p className="hero__meta">
-              <span>11 · 16 · 21-yard dumpsters</span>
-              <span>Locally owned</span>
-              <span>11, 16 and 21 yards</span>
+              <span>11-, 16- and 21-yard Pink Bins</span>
+              <span>Locally owned in Peachtree City</span>
             </p>
             <p className="hero__meta">
               <Link href="/faq#which-size">Help me choose a size</Link>
@@ -157,7 +156,7 @@ export default async function Home() {
         <div className="container">
           <div className="section-head">
             <h2>Seen around town</h2>
-            <p>Real Little Junkers jobs. No stock photos.</p>
+            <p>Photos from our deliveries around Fayette and Coweta County.</p>
           </div>
           <PhotoRail
             label="Little Junkers job photos"
