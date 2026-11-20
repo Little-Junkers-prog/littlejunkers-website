@@ -100,7 +100,7 @@ export function AreaAnswer({ result }: { result: AreaResult }) {
       <div className="zip__result">
         <h3>We deliver in {result.label}</h3>
         <p>Delivery fees vary by ZIP here. We can confirm the fee using your full address before booking.</p>
-        <div className="btn-row" style={{ marginTop: 12 }}><a className="btn btn--primary" href={"/plan?location=" + encodeURIComponent(result.query)}>See my estimate</a></div>
+        <div className="btn-row" style={{ marginTop: 12 }}><a className="btn btn--primary" href={"/plan?location=" + encodeURIComponent(result.query)}>Start Booking</a></div>
       </div>
     );
   }
@@ -117,7 +117,7 @@ export function AreaAnswer({ result }: { result: AreaResult }) {
       </dl>
       <div className="btn-row">
         <a className="btn btn--primary" href={zip ? "/plan?zip=" + encodeURIComponent(zip) : "/plan?location=" + encodeURIComponent(result.query)}>
-          See my estimate
+          Start Booking
         </a>
         <a className="btn btn--secondary" href="/#sizes">
           See sizes and prices
