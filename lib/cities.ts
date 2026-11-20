@@ -75,7 +75,7 @@ export const cities: CityContent[] = [
     county: "Fayette County",
     metaDescription:
       "Dumpster rental in Peachtree City, GA from the pink-dumpster company based here. See current 11, 16 and 21-yard prices and book online.",
-    intro: "Peachtree City is home. Little Junkers is owned and run here by Marcus and Ivy Griffin.",
+    intro: "Peachtree City is home. Little Junkers is owned and run here by Marcus and Ivy.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y21PeachtreeCity,
     proof: [photos.y21PeachtreeCity, { needed: "Peachtree City job photo: 11 or 16-yard in a driveway, city named in the file" }],
@@ -86,7 +86,7 @@ export const cities: CityContent[] = [
     faqs: [
       {
         q: "Are you actually based in Peachtree City?",
-        a: "Yes. Little Junkers is a Peachtree City, Georgia business in Fayette County, not Peachtree Corners. Marcus and Ivy Griffin own and run it.",
+        a: "Yes. Little Junkers is a Peachtree City, Georgia business in Fayette County, not Peachtree Corners. Marcus and Ivy own and run it.",
       },
       deliveryFaq("Peachtree City"),
       {

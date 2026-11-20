@@ -37,7 +37,13 @@ When you use our website, we may automatically collect:
 
 Some of this is collected with cookies and similar technologies. See our [Cookie Policy](/cookie-policy).
 
-### C) Payment information
+### C) Dumpster comparison activity and callback requests
+
+On our dumpster comparison page, we count which independent providers visitors choose to open. These anonymous outbound-click counts include the provider, selected dumpster size, and rental length; the comparison measurement does **not** save your name, phone number, IP address, persistent visitor ID, or marketing identifier. An outbound click does not tell us whether you rented from that provider.
+
+If you voluntarily request a callback, we save the contact details you submit, the provider you were reviewing, and your rental question as a service inquiry so our team can respond. Submitting an inquiry does not enroll you in marketing messages. The rest of our cookie and optional analytics choices continue to apply.
+
+### D) Payment information
 
 Online payments are processed by Stripe. We do **not** receive or store full card numbers. We receive payment confirmation and limited details (such as card brand and last four digits) for accounting and customer support.
 

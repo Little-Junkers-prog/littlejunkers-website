@@ -8,9 +8,9 @@ import { photos } from "@/lib/media";
 import { sizes } from "@/lib/sizes";
 
 export const metadata: Metadata = {
-  title: "About Little Junkers | Marcus & Ivy Griffin, Peachtree City",
+  title: "About Little Junkers | Marcus and Ivy, Peachtree City",
   description:
-    "Little Junkers is a dumpster rental company in Peachtree City, Georgia, owned and run by Marcus and Ivy Griffin since 2024.",
+    "Little Junkers is a dumpster rental company in Peachtree City, Georgia, owned and run by Marcus and Ivy since 2024.",
   alternates: { canonical: "/about-us" },
 };
 
@@ -36,7 +36,7 @@ export default function About() {
               Local owners. Real service. Cleaner <span className="accent">neighborhoods.</span>
             </h1>
             <p className="lead">
-              Little Junkers is a dumpster rental company in Peachtree City, Georgia. Marcus and Ivy Griffin started it in 2024 and
+              Little Junkers is a dumpster rental company in Peachtree City, Georgia. Marcus and Ivy started it in 2024 and
               run it today.
             </p>
             <div className="btn-row">
@@ -68,7 +68,7 @@ export default function About() {
         <div className="container split">
           <div className="stack">
             <p className="eyebrow">Who we are</p>
-            <h2>Marcus and Ivy Griffin</h2>
+            <h2>Marcus and Ivy</h2>
             <p>
               We own Little Junkers and we run it. We rent three sizes of pink roll-off dumpsters:{" "}
               {sizes.map((size, index) => (

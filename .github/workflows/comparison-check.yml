@@ -1,0 +1,51 @@
+name: Comparison tool checks
+
+on:
+  pull_request:
+    paths:
+      - "app/api/comparison/**"
+      - "app/compare/**"
+      - "components/ComparisonTool.tsx"
+      - "components/CompetitorExitDialog.tsx"
+      - "components/ComparisonTurnstile.tsx"
+      - "content/legal/privacy.md"
+      - "components/ConsentBanner.tsx"
+      - "lib/comparison*"
+      - "scripts/check-comparison.mjs"
+      - "scripts/check-owner-names.mjs"
+      - "app/about-us/**"
+      - "app/page.tsx"
+      - "lib/company.ts"
+      - "lib/cities.ts"
+      - "lib/media.ts"
+      - "public/experience-preview.html"
+      - "content/blog/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/comparison-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comparison:
+    name: Evidence integrity + TypeScript
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Comparison regression tests
+        run: npm run check:comparison
+      - name: Public owner-name privacy check
+        run: npm run check:owner-names
+      - name: TypeScript
+        run: npm run typecheck
