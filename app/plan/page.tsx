@@ -6,7 +6,7 @@ import type { SizeYards } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Book a Dumpster Online",
-  description: "Start your Little Junkers dumpster booking. Choose an 11-, 16- or 21-yard Pink Bin, enter your city or ZIP, and select your rental dates."
+  description: "Start your Little Junkers dumpster booking. Choose an 11-, 16- or 21-yard Pink Bin, enter your city or ZIP, and select your rental dates.",
   robots: { index: false, follow: false }
 };
 type Params = Record<string, string | string[] | undefined>;
