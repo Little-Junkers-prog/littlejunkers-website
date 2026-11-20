@@ -146,7 +146,7 @@ export default async function Home() {
             <p className="lead">We started Little Junkers in Peachtree City in 2024, and we run it ourselves.</p>
             <p>
               <Link className="text-link" href="/about-us">
-                Meet Marcus &amp; Ivy
+                Meet Marcus and Ivy
               </Link>
             </p>
           </div>
