@@ -8,7 +8,7 @@ import { photos } from "@/lib/media";
 import { sizes } from "@/lib/sizes";
 
 export const metadata: Metadata = {
-  title: "About Little Junkers | Marcus & Ivy, Peachtree City",
+  title: "About Little Junkers | Marcus and Ivy, Peachtree City",
   description:
     "Little Junkers is a dumpster rental company in Peachtree City, Georgia, owned and run by Marcus and Ivy since 2024.",
   alternates: { canonical: "/about-us" },
