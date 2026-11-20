@@ -63,7 +63,7 @@ for (let i = 0; i < matches.length; i++) {
 assert.deepEqual([...seen].sort(), cases.map(([name]) => name).sort(), "seven preserved cities must all be present");
 assert.equal(cities.includes("needed:"), false, "do not publicly render unfinished city photo slots");
 assert.equal(cities.includes("genericPlacement("), false, "do not reintroduce city-name-swap placement copy");
-assert.ok(page.includes("documentedPhotos.length > 0"), "empty photo galleries must not render");
+assert.ok(page.includes("documentedPhotos.length > 1") && page.includes("documentedPhotos.length === 1"), "only verified nonempty local galleries may render");
 assert.ok(page.includes("city.heroDisclosure"), "general-location hero must be labeled honestly");
 assert.ok(page.includes("city.proofHeading"), "unique local proof headings must be visible");
 assert.ok(page.includes('location={city.city}'), "city estimate must preserve its location");
