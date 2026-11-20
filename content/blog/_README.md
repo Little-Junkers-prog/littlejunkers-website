@@ -7,7 +7,7 @@ Files starting with `_` are ignored.
 ---
 title: "Post title"
 date: 2026-11-16
-author: "Marcus Griffin"
+author: "Marcus"
 excerpt: "One or two sentences for the blog index."
 category: real-jobs        # story | real-jobs | guides | events | neighborhoods
 status: draft              # draft | published. Drafts never render.
