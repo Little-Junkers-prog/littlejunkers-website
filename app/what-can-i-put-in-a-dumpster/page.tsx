@@ -4,7 +4,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqList from "@/components/FaqList";
 import MaterialSearch from "@/components/MaterialSearch";
-import { bookingUrl, smsHref } from "@/lib/company";
+import { smsHref } from "@/lib/company";
 import { byStatus, type Material } from "@/lib/materials";
 import { sizes } from "@/lib/sizes";
 
@@ -57,9 +57,9 @@ export default function Materials() {
         <div className="container">
           <p className="eyebrow">What can I put in a dumpster?</p>
           <h1>
-            Can I toss <span className="accent">this?</span>
+            What can go in a <span className="accent">dumpster?</span>
           </h1>
-          <p className="lead">Most household and remodel debris is fine. A few things need a heads-up. A few can&apos;t go in at all.</p>
+          <p className="lead">Furniture, wood and many renovation materials are fine. Some items have special rules, and others need to stay out. Search for an item before you load it.</p>
           <MaterialSearch />
         </div>
       </section>
@@ -94,7 +94,7 @@ export default function Materials() {
         <div className="container">
           <div className="section-head">
             <span className="status status--instructions">Accepted with instructions</span>
-            <h2 style={{ marginTop: 8 }}>Accepted, with a few conditions</h2>
+            <h2 style={{ marginTop: 8 }}>Check these items before loading</h2>
           </div>
           <div className="grid grid--3">
             {instructions.map((item) => (
@@ -149,9 +149,9 @@ export default function Materials() {
           </div>
           <FaqList items={faqs} />
           <div className="btn-row" style={{ marginTop: 24 }}>
-            <a className="btn btn--primary" href={bookingUrl()}>
-              Check Dates &amp; Book
-            </a>
+            <Link className="btn btn--primary" href="/plan">
+              See my estimate
+            </Link>
             {sizes.map((size) => (
               <Link className="btn btn--secondary" href={`/${size.slug}`} key={size.slug}>
                 {size.yards}-Yard
