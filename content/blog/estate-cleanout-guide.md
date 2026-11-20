@@ -1,5 +1,5 @@
 ---
-title: "Tackling an Estate Cleanout: A Compassionate Guide to Clearing a Loved One's Home"
+title: "Estate Cleanout Guide: Where to Start and What to Keep"
 date: 2026-05-27
 author: "Little Junkers"
 excerpt: "A gentle, step-by-step way to work through a house full of memories: what to find first, how to sort, and how to handle what's left."
@@ -15,17 +15,13 @@ seoTitle: "Estate Cleanout Guide for Fayette County, GA"
 seoDescription: "Clearing a loved one's home is tough. Our step-by-step guide helps Fayette County families work through an estate cleanout with care."
 ---
 
-Today, we're stepping away from our usual lighthearted guides to talk about something heavier, but important.
+Clearing a home after a death, move or major life change often means sorting through more than furniture. There may be paperwork, photographs, valuables and items several family members want to keep. Before you arrange a dumpster, set those aside and decide who needs to help make the decisions.
 
-At some point, many of us face a task we never want to think about: wrapping up a loved one's life and clearing out their home. Whether you're handling an estate in Fayetteville, downsizing a family home in Peachtree City, or sorting through a lifetime of memories in Tyrone, this process is tough.
+Here's a practical order for working through a home, room by room.
 
-We know this firsthand. It's an emotional rollercoaster, and figuring out what to keep, what to donate, and what is ready to be let go can feel overwhelming.
+### 1. Agree on the timing
 
-If you are standing in a house full of memories right now wondering, *"Where do I even begin?"*, take a deep breath. You don't have to do it all today. Here is a gentle, step-by-step guide to an estate cleanout with patience, respect, and a clear plan.
-
-### 1. Give Yourself Permission to Pause
-
-First things first: **don't rush.** Unless there is a strict legal or real estate deadline, you don't need to start filling boxes the day after the funeral. Give yourself and your family time to process the loss. When you do start, work in short blocks of time, maybe two or three hours a day. Protecting your emotional energy is the most important part of this process.
+Check any deadlines from the estate, sale or move. If other family members are involved, agree on a sorting schedule and who can approve what is thrown away. Smaller sessions can be easier than trying to empty an entire house in one weekend.
 
 ### 2. Locate the Important Paperwork First
 
@@ -38,19 +34,19 @@ Before you sort through closets or garages, secure the critical documents. Creat
 
 Finding these first means they don't get lost in the shuffle later.
 
-### 3. The "Three-Pile" System (With a Twist)
+### 3. Set up keep, donate and discard areas
 
 When you're ready to tackle a room, grab sticky notes or painter's tape and mark areas for three categories:
 
-- **Keep & Cherish:** Family heirlooms, photographs, and items with deep sentimental value.
-- **Donate & Sell:** Gently used furniture, clothing, and household goods that can help another local family or be sold to settle estate expenses.
-- **Release:** Broken items, old paperwork, worn-out mattresses, damaged furniture, and things that have reached the end of their life.
+- **Keep:** Family heirlooms, photographs, records and anything someone wants to review.
+- **Donate or sell:** Usable furniture, clothing and household goods.
+- **Discard:** Broken items and debris that cannot be reused. Check documents before shredding or discarding them.
 
-> **A quick tip from our hearts to yours:** You do not need to keep *everything* to honor someone's memory. Sometimes a good photograph of a large piece of furniture or an old collection preserves the memory without crowding your own home.
+> **Tip:** Take photos of sentimental items before making decisions, and keep a box for anything the family still needs to discuss.
 
 ### 4. Lean on Local Fayette County Resources
 
-We are blessed to live in a community with fantastic local organizations. If you have items in the "Donate" pile, consider reaching out to local thrift stores, shelters, or ministries in Fayetteville and Peachtree City. Many of them do great work right here and are grateful for household goods and furniture.
+For usable items, check donation centers in Fayetteville or Peachtree City before dropping anything off. Call first to confirm what they accept and whether they have room.
 
 ### 5. Managing the Final "Release" Phase
 
@@ -58,10 +54,8 @@ Once the keepsakes are safe and the donations are packed, you're often left with
 
 This is where the physical burden can start to match the emotional one. Running back and forth to the transfer station in a pickup truck prolongs the process and drains your energy.
 
-A right-sized, clean dumpster in the driveway gives your family one low-stress spot for the true junk. There's no rush, no loading and unloading a truck bed five times, and no piles of trash bags at the curb. You can take your time, go room by room, and let us handle the hauling when you're done. Whole-house cleanouts usually fit the [21-yard Big Junker](/21-yard-the-big-junker); a smaller home or a few rooms may only need the [16-yard](/16-yard-the-mighty-middler).
+A dumpster can give you one place for broken furniture, carpet and other items that cannot be donated. Compare the [16-yard Mighty Middler](/16-yard-the-mighty-middler) and [21-yard Big Junker](/21-yard-the-big-junker) based on the volume and weight of the debris. Mattresses and appliances have separate disposal rules, so [check the list](/what-can-i-put-in-a-dumpster) before loading.
 
-### We're Here for You, Neighbor
+### Plan the rental when you're ready
 
-If you are going through this right now, please know the Little Junkers team is thinking of you.
-
-If you need a tool to make the physical side of this a little easier, we're a phone call or text away. We'll bring over a clean, driveway-safe pink bin, tuck it out of the way, and let you work at your own pace.
+If a dumpster is part of your cleanout, [choose a size and start booking online](/plan). You can also call or text us about the address, driveway access or items you need to dispose of.
