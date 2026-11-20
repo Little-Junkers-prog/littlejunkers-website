@@ -27,7 +27,7 @@ const reasons = [
   ["A smaller truck", "We deliver with a hook-lift truck, not a full-size roll-off, and we check the spot before we set the dumpster down."],
   ["Clear pricing information", "Compare the three-day base, included weight, ZIP delivery fee and conditional charges."],
   ["Plan the right rental", "Choose 3–30 total days in Days Plus, or request a custom quote for longer jobs."],
-  ["Owned here", "Marcus and Ivy Griffin run Little Junkers from Peachtree City."],
+  ["Owned here", "Marcus and Ivy run Little Junkers from Peachtree City."],
 ];
 
 export default async function Home() {
