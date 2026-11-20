@@ -7,7 +7,7 @@ import PhotoRail from "@/components/PhotoRail";
 import { PricingUnavailable, RateList } from "@/components/PriceCards";
 import { PlanLink } from "@/components/PlanLink";
 import ZipCheck from "@/components/ZipCheck";
-import { bookingUrl, company, siteUrl, smsHref } from "@/lib/company";
+import { company, siteUrl, smsHref } from "@/lib/company";
 import { formatTons, formatUsd, getPricing, startingTier } from "@/lib/pricing";
 import type { SizeContent } from "@/lib/sizes";
 
@@ -16,7 +16,6 @@ export default async function SizePage({ size }: { size: SizeContent }) {
   const pricing = await getPricing();
   const facts = pricing?.sizes[size.yards] ?? null;
   const from = pricing ? startingTier(pricing) : null;
-  const book = bookingUrl({ size: size.yards });
   const title = `${size.yards}-Yard Dumpster`;
 
   return (
@@ -214,13 +213,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             provider: { "@id": `${siteUrl}/#business` },
             url: `${siteUrl}/${size.slug}`,
             areaServed: ["Fayette County, GA", "Coweta County, GA"],
-            offers: {
-              "@type": "Offer",
-              name: `${pricing.tiers[0].days}-day rental`,
-              price: pricing.tiers[0].prices[size.yards],
-              priceCurrency: "USD",
-              url: book,
-            },
+
           }}
         />
       ) : null}
