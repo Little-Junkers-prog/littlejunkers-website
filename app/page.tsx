@@ -44,7 +44,7 @@ export default async function Home() {
           <div className="hero__copy">
             <p className="eyebrow experience-hero__eyebrow">Peachtree City, GA · Local Pink Bin rentals</p>
             <h1>
-              <span className="experience-hero__title-first">Need a</span>
+              <span className="experience-hero__title-first">Need a</span>{" "}
               <span className="accent experience-hero__title-last">dumpster?</span>
             </h1>
             <p className="lead">Check your delivery area and see dumpster prices. Enter a city or ZIP.</p>
