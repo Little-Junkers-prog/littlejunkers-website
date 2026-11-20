@@ -76,7 +76,7 @@ export default async function ServiceAreas({ searchParams }: { searchParams: Pro
           <h1>
             Dumpster delivery in <span className="accent">South Metro Atlanta.</span>
           </h1>
-          <p className="lead">Based in Peachtree City, we serve areas around Fayetteville, Newnan, Sharpsburg, Senoia and nearby towns. Enter your city or ZIP to check delivery.</p>
+          <p className="lead">We deliver Pink Bins around Peachtree City, Fayetteville, Newnan and nearby towns. Enter your city or ZIP to check delivery and start booking online.</p>
           <div id="delivery-zip-check" style={{ maxWidth: 560, scrollMarginTop: 100 }}>
             <ZipCheck cta="Check My Area" />
             {/* No-script path: the form submits here and the answer renders on the server. */}
