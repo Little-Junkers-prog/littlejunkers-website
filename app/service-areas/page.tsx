@@ -10,9 +10,9 @@ import { photos } from "@/lib/media";
 import { cityKey, formatUsd, getPricing, lookupArea, type Pricing } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Service Areas | Where Little Junkers Delivers",
+  title: "Dumpster Delivery Areas in Fayette & Coweta County",
   description:
-    "See where Little Junkers delivers dumpsters in Fayette County, Coweta County and South Atlanta, and the delivery fee for your ZIP.",
+    "Check Little Junkers dumpster delivery areas around Peachtree City, Newnan and Fayetteville. Enter your city or ZIP to see the current delivery fee.",
   alternates: { canonical: "/service-areas" },
 };
 
@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: "Can you deliver to rural addresses?",
-    a: "Usually. Tell us about the drive when you book, or text us a photo, so we can check that the truck can get in and out.",
+    a: "It depends on access. If you have a long gravel drive or a steep slope, text us a photo so we can check whether our truck can get in and out.",
   },
   {
     q: "How do I know if my address is in the service area?",
@@ -74,10 +74,10 @@ export default async function ServiceAreas({ searchParams }: { searchParams: Pro
       <section className="page-hero">
         <div className="container">
           <h1>
-            Do we deliver to <span className="accent">you?</span>
+            Dumpster delivery in <span className="accent">South Metro Atlanta.</span>
           </h1>
-          <p className="lead">Enter your city or ZIP.</p>
-          <div style={{ maxWidth: 560 }}>
+          <p className="lead">Based in Peachtree City, we serve areas around Fayetteville, Newnan, Sharpsburg, Senoia and nearby towns. Enter your city or ZIP to check delivery.</p>
+          <div id="delivery-zip-check" style={{ maxWidth: 560, scrollMarginTop: 100 }}>
             <ZipCheck cta="Check My Area" />
             {/* No-script path: the form submits here and the answer renders on the server. */}
             {query && pricing ? <AreaAnswer result={lookupArea(pricing, query)} /> : null}
@@ -97,7 +97,7 @@ export default async function ServiceAreas({ searchParams }: { searchParams: Pro
         <div className="container">
           <div className="section-head">
             <h2>Delivery areas and fees</h2>
-            <p>The delivery fee is added to the dumpster rental price. It isn&apos;t a different rental price.</p>
+            <p>Our rental rates and delivery fees are listed separately, so you can see what applies to your ZIP.</p>
           </div>
 
           {groups.length > 0 ? (
@@ -147,10 +147,10 @@ export default async function ServiceAreas({ searchParams }: { searchParams: Pro
           <div className="callout" style={{ marginTop: 24 }}>
             <div>
               <h3>Don&apos;t see your city?</h3>
-              <p className="muted">We may still deliver there. Enter your ZIP to check.</p>
+              <p className="muted">The list covers common locations, but it isn’t every ZIP we serve. Try yours in the checker above.</p>
             </div>
             <div className="btn-row">
-              <a className="btn btn--secondary" href="#main">
+              <a className="btn btn--secondary" href="#delivery-zip-check">
                 Enter my ZIP
               </a>
               <a className="btn btn--secondary" href={smsHref}>
@@ -164,7 +164,7 @@ export default async function ServiceAreas({ searchParams }: { searchParams: Pro
       <section className="section section--surface">
         <div className="container">
           <div className="section-head">
-            <h2>Seen around town</h2>
+            <h2>Pink Bins around our service area</h2>
           </div>
           <PhotoRail
             label="Little Junkers job photos by city"
@@ -176,7 +176,7 @@ export default async function ServiceAreas({ searchParams }: { searchParams: Pro
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <h2>Service area questions</h2>
+            <h2>Dumpster delivery questions</h2>
           </div>
           <FaqList items={faqs} />
         </div>
