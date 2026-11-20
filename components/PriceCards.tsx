@@ -32,7 +32,7 @@ export default function PriceCards({ pricing, zip, location, deliveryFee }: { pr
               <p className="muted">{size.fitLine}</p>
               <RateList pricing={pricing} yards={size.yards} />
               <div className="price-card__actions">
-                <PlanLink className="btn btn--primary btn--block" size={size.yards} zip={zip} location={location}>See my estimate</PlanLink>
+                <PlanLink className="btn btn--primary btn--block" size={size.yards} zip={zip} location={location}>Start Booking</PlanLink>
                 <Link className="btn btn--secondary btn--block" href={"/" + size.slug}>Is the {size.yards}-yard right for me?</Link>
               </div>
             </div>
@@ -88,7 +88,7 @@ export function PricingUnavailable() {
       </p>
       <div className="btn-row">
         <a className="btn btn--primary" href="/plan">
-          Try the estimate again
+          Check rental pricing
         </a>
         <a className="btn btn--secondary" href={telHref}>
           Call
