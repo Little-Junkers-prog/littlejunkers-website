@@ -19,16 +19,15 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
 
   const cost =
     pricing && tier
-      ? `It depends on the size and how long you keep it. Right now a ${tier.days}-day rental is ${list(
+      ? `For ${tier.days} days, the current base price is ${list(
           SIZE_YARDS.map((y) => `${formatUsd(tier.prices[y])} for the ${y}-yard`),
-        )}.${tier.extraDay ? ` Extra days are ${formatUsd(tier.extraDay)} each.` : ""} Your exact price shows before you pay.`
-      : "It depends on the size, how long you keep it and where you are. Enter your ZIP to see today's price before you book.";
-
+        )}. Your ZIP may add a delivery fee, and extra rental days or disposal weight can change the total. We'll confirm the full price before you reserve.`
+      : "The price depends on dumpster size, rental length and your ZIP. Enter your location for the current base rate, or call us for a quote.";
   const included = pricing
     ? `Drop-off, pickup, and disposal up to the included weight: ${list(
         SIZE_YARDS.map((y) => `${formatTons(pricing.sizes[y].includedTons)} with the ${y}-yard`),
       )}. The starting price covers ${pricing.tiers[0].days} days. Outside our core area a delivery fee is added.`
-    : "Drop-off, pickup, and disposal up to the included weight for your size. The booking page lists the included weight and rental lengths.";
+    : "Drop-off, pickup, and disposal up to the included weight for your size. Ask us for the latest rental length and weight allowance.";
 
   const zones = pricing ? Object.values(pricing.zones).sort((a, b) => a.deliveryFee - b.deliveryFee) : [];
   const paidFees = zones.filter((z) => z.deliveryFee > 0).map((z) => formatUsd(z.deliveryFee));
@@ -50,14 +49,14 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "overweight",
           q: "What happens if my load is over the included weight?",
-          a: `Your load is weighed at the disposal site. If it's over the weight included with your dumpster, the extra weight is billed from that scale ticket${
-            pricing?.overagePerTon ? ` at ${formatUsd(pricing.overagePerTon)} per ton` : ". The rate is shown at checkout before you pay"
+          a: `Your load is weighed at the disposal site. If it exceeds the included allowance, any additional weight charge is calculated from that scale ticket${
+            pricing?.overagePerTon ? ` at ${formatUsd(pricing.overagePerTon)} per ton` : ". Ask us for the current rate"
           }.`,
         },
         {
           id: "extra-days",
           q: "Can I keep the dumpster longer?",
-          a: `Yes. Extra days are ${tier?.extraDay ? `${formatUsd(tier.extraDay)} each` : "billed by the day"}. Text us before your pickup date so we can move it on the schedule.`,
+          a: "You can ask about an extension before your scheduled pickup. We’ll check the calendar and tell you the additional-day price before changing your rental.",
         },
       ],
     },
@@ -68,7 +67,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "which-size",
           q: "What size dumpster do I need?",
-          a: "For a garage or one-room job, the 11-yard. For a remodel or a bigger cleanout, the 16-yard. For a whole house, the 21-yard. If you're stuck between two, text us what you're tossing.",
+          a: "For a small garage or one-room cleanout, start with the 11-yard. The 16- and 21-yard bins give you more room for renovations and bigger cleanouts. Tell us what you're throwing away if you're unsure; heavy materials can reach the weight limit first.",
           top: true,
         },
         {
@@ -91,27 +90,27 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "how-soon",
           q: "How soon can I get a dumpster?",
-          a: "The booking calendar shows the delivery days that are open right now. Pick the one that works for you.",
+          a: "Tell us when you'd like it delivered. We'll check the schedule and confirm a date before you book.",
         },
         {
           id: "be-home",
           q: "Do I need to be home for delivery?",
-          a: "No, as long as the spot is clear and you've told us where you want it.",
+          a: "Often you don't, as long as we've agreed on a drop spot and the driver can reach it. We'll confirm the details before delivery.",
         },
         {
           id: "pickup",
           q: "How does pickup work?",
-          a: "We pick up on the last day of your rental, and we text you the day before as a reminder. Have the dumpster loaded level and the area around it clear.",
+          a: "We arrange pickup for the end of your rental. Before pickup, load no higher than the top rail and leave a clear path for the truck.",
         },
         {
           id: "early-pickup",
           q: "Can you pick it up early if I finish sooner?",
-          a: "Yes. Text us when you're done and we'll schedule the pickup. One thing to know before you ask: the rental ends when we pick up, so days you didn't use can't be saved for a later rental.",
+          a: "Text us when you're finished. We'll check whether an earlier pickup is available. Unused rental days don't carry over to another job.",
         },
         {
           id: "hours",
           q: "What are your hours?",
-          a: `You can book online any time. We answer calls and texts ${company.hoursDisplay}.`,
+          a: `You can check a rental estimate online any time. We answer calls and texts ${company.hoursDisplay}.`,
         },
       ],
     },
@@ -127,7 +126,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "heavy",
           q: "Why does weight matter if everything fits?",
-          a: "Size is how much room you get. Weight is what the disposal site charges for. Shingles, tile and plaster can hit the included weight while the dumpster still looks half empty.",
+          a: "A dumpster can have plenty of room left and still be overweight. Shingles, tile and plaster are heavy, so check the included weight before you choose a size.",
         },
       ],
     },
@@ -168,7 +167,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "permit",
           q: "Do I need a permit?",
-          a: "A driveway on your own property is the simplest spot. If the dumpster will sit in the street or public right-of-way, check with your city first. Your HOA may have rules too.",
+          a: "A driveway is often the easiest spot. If the bin needs to go in a street or public right-of-way, check with your local government. Your HOA may have placement rules too.",
         },
       ],
     },
@@ -197,7 +196,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "how-book",
           q: "How do I book?",
-          a: "Online, any time. Pick your size, your dates and where it goes, then pay. It takes a few minutes.",
+          a: "Start with the online estimate: choose a size, location and rental dates. We'll confirm the final price and availability before you make a reservation.",
           top: true,
         },
         {
@@ -209,7 +208,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "junk-removal",
           q: "Do you haul away single items?",
-          a: `We're a dumpster rental company, not a junk-removal crew. If you only have a few bulky items, text a photo of your pile to ${company.phoneDisplay} and we'll tell you if we can quote a pickup.`,
+          a: `Most of our work is dumpster rental. If you only have a few bulky items, text a photo of your pile to ${company.phoneDisplay} and we'll tell you if we can quote a pickup.`,
         },
       ],
     },
