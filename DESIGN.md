@@ -36,6 +36,14 @@ Keep smaller linked text in dark ink with a visible underline. Keep focus rings 
 - Hover and keyboard-focus interactions on the three product cards communicate selection; the cards never block booking or hide factual pricing.
 - Small scroll reveals only on a few supporting sections; server-rendered content and screen-reader reading order stay intact.
 
+## Prototype A2 — interactive Pink Bin storefront
+
+- Homepage-only `components/PinkBinExperience.tsx` presents the 11-, 16- and 21-yard bins as three keyboard-accessible, visually selected options rather than three unrelated static cards.
+- Choosing a bin changes the authentic equipment photo, name, project-fit examples, canonical three-day starting price, included disposal weight, footprint, sidewall height, any known overweight rate, and the contextual comparison link in one place.
+- The first-party pricing API stays authoritative. The storefront neither calculates an invented Days Plus total nor writes holds, payments or reservations. A ZIP-based delivery fee remains contextual, and actual booking happens in the shared flow.
+- The mobile layout presents the three choices in a compact row and stacks the photograph above product detail. Focus rings, `aria-pressed`, real alt text and reduced-motion support are required.
+- Existing shared `PriceCards` and all seven city-page SEO layouts are deliberately unchanged. Do not embed a duplicate storefront in every city page.
+
 ## Prototype B — three size pages
 
 - Consistent product stage: one large first-party size photograph framed against the warm surface, a big yard-size graphic, size and price facts visible before deep scrolling, and clear action.
