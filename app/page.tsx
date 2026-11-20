@@ -18,16 +18,16 @@ export const metadata = {
 };
 
 const steps = [
-  ["Check your city or ZIP", "See delivery-area fees, then choose your dumpster size."],
-  ["Choose your dates", "See your estimate for a 3–30-day rental."],
-  ["Fill it. We haul it away.", "We set it where you want it and pick it up when your rental ends."],
+  ["Check your city or ZIP", "See where we deliver and what the delivery fee would be."],
+  ["Choose your size and dates", "Compare the Pink Bins and check the cost for the days you need."],
+  ["You load it. We haul it.", "Once your rental is confirmed, we deliver the bin and return for pickup at the end."],
 ];
 
 const reasons = [
-  ["A smaller truck", "We deliver with a hook-lift truck, not a full-size roll-off, and we check the spot before we set the dumpster down."],
-  ["Clear pricing information", "Compare the three-day base, included weight, ZIP delivery fee and conditional charges."],
-  ["Plan the right rental", "Choose 3–30 total days in Days Plus, or request a custom quote for longer jobs."],
-  ["Owned here", "Marcus and Ivy run Little Junkers from Peachtree City."],
+  ["A truck built for smaller jobs", "Our hook-lift truck can work with residential-size bins. Tell us about a narrow driveway or low branches before delivery."],
+  ["Know what the price covers", "See the base rental, included disposal weight and your delivery fee. Ask us about any extra charges before you book."],
+  ["Choose how long you need it", "Start with three days and plan up to 30. We’ll confirm extra-day pricing and available dates with you."],
+  ["Local people on the other end", "Marcus and Ivy own Little Junkers in Peachtree City. Call or text if you need help choosing."],
 ];
 
 export default async function Home() {
@@ -44,7 +44,7 @@ export default async function Home() {
             <h1>
               Need a <span className="accent">dumpster?</span>
             </h1>
-            <p className="lead">Check your delivery area and see dumpster prices. Enter a city or ZIP.</p>
+            <p className="lead">Little Junkers rents 11-, 16- and 21-yard Pink Bins around Peachtree City, Newnan and Fayetteville. Enter your city or ZIP to check local delivery and pricing.</p>
             <ZipCheck />
             <p className="hero__meta">
               <span>11-, 16- and 21-yard Pink Bins</span>
@@ -65,7 +65,7 @@ export default async function Home() {
             <h2>
               Three sizes. Today&apos;s <span className="accent">prices.</span>
             </h2>
-            <p>Every rental includes drop-off, pickup and disposal up to the included weight.</p>
+            <p>See the three-day base price and how much disposal weight is included. Delivery fees depend on your ZIP.</p>
           </div>
           <PriceCards pricing={pricing} />
           <p className="fine" style={{ marginTop: 14 }}><Link href="/pricing">See detailed pricing and fees</Link> · <Link href="/compare">How to compare rental offers</Link></p>
@@ -89,7 +89,7 @@ export default async function Home() {
       <section className="section section--surface" id="compare">
         <div className="container cx-overview">
           <div><p className="eyebrow">Know what you're paying for</p><h2>See how rental prices compare.</h2><p>Rental length, included tonnage, delivery charges and weight overages can matter as much as the dumpster size. Check the details before you choose.</p><div className="btn-row"><Link className="btn btn--primary" href="/compare">See how we compare</Link><Link className="btn btn--secondary" href="/pricing">See our pricing details</Link></div></div>
-          <div className="cx-note"><h3>Four questions worth asking</h3><ol><li>How many rental days are included?</li><li>How much disposal weight is covered?</li><li>What delivery fee applies to my ZIP?</li><li>Is the dumpster available for my full rental?</li></ol><p className="fine">Local competitor prices will only appear when the source and date have been verified.</p></div>
+          <div className="cx-note"><h3>Four questions worth asking</h3><ol><li>How many rental days are included?</li><li>How much disposal weight is covered?</li><li>What delivery fee applies to my ZIP?</li><li>Is the dumpster available for my full rental?</li></ol><p className="fine">We show dated, publicly listed competitor offers and identify charges that still need confirmation.</p></div>
         </div>
       </section>
       <section className="section" id="plan">
@@ -189,7 +189,7 @@ export default async function Home() {
         <div className="container">
           <div className="section-head">
             <h2>Where we deliver</h2>
-            <p>Based in Peachtree City. Delivering across Fayette and Coweta County and nearby South Atlanta communities.</p>
+            <p>We’re based in Peachtree City and serve Newnan, Fayetteville, Sharpsburg, Senoia and nearby communities. Check your ZIP for delivery and any fee.</p>
           </div>
           <ul className="chips">
             {cities.map((city) => (
