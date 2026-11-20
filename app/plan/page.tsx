@@ -3,6 +3,7 @@ import DaysPlusPlanner from "@/components/DaysPlusPlanner";
 import { getPricing } from "@/lib/pricing";
 import { basePriceSnapshot } from "@/lib/days-plus";
 import type { SizeYards } from "@/lib/pricing";
+import { indexable } from "@/lib/indexing";
 
 export const metadata: Metadata = {
   title: "Book a Dumpster Online",
@@ -23,6 +24,11 @@ export default async function PlanPage({searchParams}:{searchParams:Promise<Para
   const location = first(params.location)?.trim().slice(0, 60) || undefined;
   return <section className="section"><div className="container">
     <div className="section-head"><p className="eyebrow">Online dumpster rental</p><h1>Book your Pink Bin</h1><p>Choose your dumpster size, delivery location and rental dates. We'll show the price as you go. Your booking is complete only when payment is accepted and you receive a confirmation.</p></div>
+    {!indexable ? (
+      <div className="notice" role="note">
+        <p><strong>Website preview:</strong> Online payment and reservations are not connected in this version. No booking is created here.</p>
+      </div>
+    ) : null}
     <DaysPlusPlanner initialSize={size} initialDays={days} initialZip={zip} initialLocation={location} basePrices={basePriceSnapshot(pricing)} />
   </div></section>;
 }
