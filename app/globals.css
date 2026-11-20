@@ -2084,15 +2084,19 @@ a:hover {
 .experience-sizes .price-card__photo img {
   transition: transform 350ms ease;
 }
-.experience-sizes .price-card:hover,
 .experience-sizes .price-card:focus-within {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 48px rgba(30, 28, 25, .14);
   border-color: var(--pink-bar);
+  box-shadow: 0 18px 44px rgba(30, 28, 25, .12);
 }
-.experience-sizes .price-card:hover .price-card__photo img,
-.experience-sizes .price-card:focus-within .price-card__photo img {
-  transform: scale(1.045);
+@media (hover: hover) and (pointer: fine) {
+  .experience-sizes .price-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 48px rgba(30, 28, 25, .14);
+    border-color: var(--pink-bar);
+  }
+  .experience-sizes .price-card:hover .price-card__photo img {
+    transform: scale(1.045);
+  }
 }
 .experience-compare {
   background: linear-gradient(135deg, var(--surface-background) 0%, var(--pink-background) 100%);
