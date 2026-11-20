@@ -120,7 +120,7 @@ export default function BlogIndex() {
                 See Sizes &amp; Prices
               </Link>
               <Link className="btn btn--primary" href="/plan">
-                See my estimate
+                Start Online Booking
               </Link>
             </div>
           </div>
