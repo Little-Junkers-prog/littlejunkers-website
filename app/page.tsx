@@ -4,7 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import Photo from "@/components/Photo";
 import PhotoRail from "@/components/PhotoRail";
 import RevealOnScroll from "@/components/RevealOnScroll";
-import PriceCards from "@/components/PriceCards";
+import { PricingUnavailable } from "@/components/PriceCards";
+import PinkBinExperience from "@/components/PinkBinExperience";
 import DaysPlusPlanner from "@/components/DaysPlusPlanner";
 import { basePriceSnapshot } from "@/lib/days-plus";
 import ZipCheck from "@/components/ZipCheck";
@@ -71,11 +72,11 @@ export default async function Home() {
         <div className="container">
           <div className="section-head">
             <h2>
-              Three sizes. Today&apos;s <span className="accent">prices.</span>
+              Meet the <span className="accent">Pink Bins.</span>
             </h2>
-            <p>Every rental includes drop-off, pickup and disposal up to the included weight.</p>
+            <p>Pick a size, look at the actual bin, and see what your three-day starting price covers.</p>
           </div>
-          <PriceCards pricing={pricing} />
+          {pricing ? <PinkBinExperience pricing={pricing} /> : <PricingUnavailable />}
           <p className="fine" style={{ marginTop: 14 }}><Link href="/pricing">See detailed pricing and fees</Link> · <Link href="/compare">How to compare rental offers</Link></p>
           <div className="callout" style={{ marginTop: 24 }}>
             <div>
