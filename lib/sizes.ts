@@ -37,8 +37,8 @@ export const sizes: SizeContent[] = [
     name: "The Little Junker",
     metaTitle: "11-Yard Dumpster Rental | The Little Junker",
     metaDescription:
-      "Our smallest roll-off. A good fit for garage cleanouts, small remodels and tight driveways in Fayette and Coweta County. See the price for your ZIP and book online.",
-    fitLine: "Great for smaller cleanouts, remodels, and tight driveways.",
+      "Rent an 11-yard Little Junker dumpster for garage cleanouts, small remodels and household debris around Peachtree City, Newnan and Fayetteville. Check current rates.",
+    fitLine: "Our smallest Pink Bin, for garage cleanouts and smaller renovation jobs.",
     fitTiles: ["Garage cleanout", "Small kitchen or bath remodel", "Decluttering and household junk", "Yard cleanup"],
     adjacent: [{ text: "Need more room?", label: "See the 16-Yard", slug: SLUG_16 }],
     fitsList: ["Boxes, bags and household junk", "A room or two of old furniture", "Cabinets and countertops from a small remodel", "Brush and yard debris"],
@@ -53,7 +53,7 @@ export const sizes: SizeContent[] = [
       },
       {
         q: "Will it fit in my driveway?",
-        a: "It's our smallest dumpster and the easiest one to place in a short or narrow driveway. We deliver with a hook-lift truck, not a full-size roll-off truck. If you're not sure, text us a photo of the spot.",
+        a: "It's our smallest dumpster, but the truck still needs space to back in and unload it. Text us a photo of your driveway if you're unsure about access.",
       },
       {
         q: "Can I use it for a roof tear-off?",
@@ -61,7 +61,7 @@ export const sizes: SizeContent[] = [
       },
       {
         q: "What if I fill it up early?",
-        a: "Text us. We can pick it up early, or swap it for an empty one if you have more to haul. An early pickup ends the rental, so unused days don't carry over.",
+        a: "Text us if you finish early or need another bin. We'll check pickup or swap availability. Unused rental days don't carry over to a later job.",
       },
     ],
   },
@@ -71,8 +71,8 @@ export const sizes: SizeContent[] = [
     name: "The Mighty Middler",
     metaTitle: "16-Yard Dumpster Rental | The Mighty Middler",
     metaDescription:
-      "A 16-yard dumpster for remodels, deck tear-outs and bigger cleanouts. See what fits, how much weight is included and the price for your ZIP. Book online.",
-    fitLine: "The middle size for remodels, deck tear-outs and bigger cleanouts.",
+      "Compare our 16-yard Mighty Middler dumpster for flooring, renovation debris, deck tear-outs and larger cleanouts in Fayette and Coweta County. Check rates by ZIP.",
+    fitLine: "More room for flooring, deck boards and bigger household cleanouts.",
     fitTiles: ["Kitchen or multi-room remodel", "Deck tear-out", "Basement or attic cleanout", "Roof tear-off"],
     adjacent: [
       { text: "Smaller job?", label: "The 11-Yard may do it", slug: SLUG_11 },
@@ -90,7 +90,7 @@ export const sizes: SizeContent[] = [
       },
       {
         q: "Is the 16-yard right for a roofing job?",
-        a: "Often, yes. For roofing we recommend the 11 or the 16. Shingles are heavy, so tell us the number of squares and layers and we'll help you pick.",
+        a: "The 11- or 16-yard may work, depending on the number of squares and layers. Shingles are heavy, so tell us about the roof before choosing a size.",
       },
       {
         q: "When should I pick the 11-yard instead?",
@@ -108,13 +108,13 @@ export const sizes: SizeContent[] = [
     name: "The Big Junker",
     metaTitle: "21-Yard Dumpster Rental | The Big Junker",
     metaDescription:
-      "Our largest dumpster, for whole-house cleanouts and major remodels. See what fits, how much weight is included and the price for your ZIP. Book online.",
-    fitLine: "Room for whole-house cleanouts and major remodels.",
+      "See the 21-yard Big Junker dumpster for home cleanouts, moving debris and large remodels. Compare capacity, included disposal weight and rates for your ZIP.",
+    fitLine: "Our biggest Pink Bin, for bulky furniture and larger cleanouts.",
     fitTiles: ["Whole-house cleanout", "Major remodel", "Estate or move-out cleanout", "Bulky furniture and fixtures"],
     adjacent: [{ text: "Not that much to haul?", label: "You may only need the 16-Yard", slug: SLUG_16 }],
     fitsList: ["A house full of furniture and boxes", "Cabinets, doors and fixtures from a big remodel", "Carpet and flooring from several rooms", "Bulky items that eat up space"],
     weightNote:
-      "More room doesn't mean more weight. Heavy debris hits the weight limit long before a 21-yard is full, so a smaller size is usually the better pick for dense loads.",
+      "This bin holds more debris and has its own included weight allowance, but heavy material can still hit that limit before it's full. Ask us about shingles, tile or other dense loads.",
     box: { lengthFt: 12, widthFt: 8, wallFt: 6 },
     hero: photos.y21PeachtreeCity,
     gallery: [photos.y21Fayetteville, photos.y21Fairburn, photos.y21Driveway, photos.y21OnTruck],
@@ -125,15 +125,15 @@ export const sizes: SizeContent[] = [
       },
       {
         q: "Will a 21-yard fit in a driveway?",
-        a: "Usually. It's our tallest dumpster, so check for low branches and wires over the spot. Text us a photo if you want a second opinion.",
+        a: "It depends on the driveway and truck access. This is our tallest bin, so check for branches, wires and room for the truck. Text us a photo of the spot.",
       },
       {
         q: "Should I get the 21-yard for roofing?",
-        a: "No. For roofing we recommend the 11 or the 16. Shingles reach the weight limit well before a 21-yard fills up.",
+        a: "Usually, start by asking about the 11- or 16-yard. Shingles are heavy, and the biggest bin isn't automatically the right choice for a roof tear-off.",
       },
       {
         q: "Do I need the biggest size?",
-        a: "Only if you have the volume. If you're clearing one or two rooms, the 16-yard usually covers it and costs less.",
+        a: "Maybe not. If you're clearing one or two rooms, compare the 16-yard first. The 21-yard is useful when the material takes up a lot of space.",
       },
     ],
   },
