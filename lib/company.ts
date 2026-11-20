@@ -5,7 +5,7 @@
 export const company = {
   name: "Little Junkers",
   legalName: "Little Junkers LLC",
-  owners: "Marcus and Ivy Griffin",
+  owners: "Marcus and Ivy",
   founded: 2024,
   phoneDisplay: "(470) 548-4733",
   phoneE164: "+14705484733",
