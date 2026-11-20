@@ -60,7 +60,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
         <div className="container split split--wide">
           <div>
             <div className="section-head">
-              <h2>A great fit for</h2>
+              <h2>Jobs this size can handle</h2>
             </div>
             <div className="grid grid--2">
               {size.fitTiles.map((tile) => (
@@ -88,7 +88,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
       <section className="section section--surface">
         <div className="container split">
           <div className="stack">
-            <h2>What fits</h2>
+            <h2>How much fits?</h2>
             {facts?.truckLoads ? <p className="stat">About {facts.truckLoads}</p> : null}
             <ul className="checklist">
               {size.fitsList.map((item) => (
@@ -99,7 +99,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
           </div>
           <div className="callout" style={{ gridTemplateColumns: "1fr" }}>
             <div>
-              <h3>Heavy stuff? Check the weight first.</h3>
+              <h3>Loading heavy material?</h3>
               <p className="muted" style={{ marginTop: 6 }}>
                 {size.weightNote}
               </p>
@@ -116,7 +116,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
       <section className="section">
         <div className="container split">
           <div className="stack">
-            <h2>Dumpster size &amp; footprint</h2>
+            <h2>Dumpster dimensions</h2>
             <dl className="spec">
               <div>
                 <dt>Length</dt>
@@ -132,13 +132,13 @@ export default async function SizePage({ size }: { size: SizeContent }) {
               </div>
             </dl>
             <p className="muted">
-              Leave room for the truck to back straight in, and look up: low branches and wires over the spot are the usual problem.
+              The truck needs more room than the dumpster itself. Check for overhead wires, low branches and space to back in.
               Not sure it fits? Text a photo of your driveway to <a href={smsHref}>{company.phoneDisplay}</a>.
             </p>
           </div>
 
           <div className="card card--elevated" id="price">
-            <h2 style={{ fontSize: "1.4rem" }}>Your price</h2>
+            <h2 style={{ fontSize: "1.4rem" }}>Starting price and fees</h2>
             {pricing && facts ? (
               <>
                 <p className="price" style={{ marginTop: 8 }}>
@@ -156,7 +156,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                   <Link href={`/compare?size=${size.yards}`}>See how our {size.yards}-yard compares</Link>.
                 </p>
                 <p className="fine" style={{ marginTop: 10 }}>
-                  Extra days and extra weight only apply if you use them.
+                  Extra rental days and disposal weight above the included limit can add charges. Ask us for the full price before reserving.
                 </p>
               </>
             ) : (
@@ -183,7 +183,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             </p>
           </div>
           <div className="stack">
-            <h2>Junker in the wild</h2>
+            <h2>See it on a job</h2>
             <PhotoRail photos={size.gallery} label={`${size.yards}-yard dumpster job photos`} />
           </div>
         </div>
