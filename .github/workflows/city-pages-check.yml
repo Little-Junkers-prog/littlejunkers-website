@@ -1,0 +1,47 @@
+name: City pages / preservation checks
+
+on:
+  pull_request:
+    paths:
+      - "app/[slug]/**"
+      - "app/service-areas/**"
+      - "app/sitemap.ts"
+      - "components/PhotoRail.tsx"
+      - "components/PriceCards.tsx"
+      - "components/PlanLink.tsx"
+      - "lib/cities.ts"
+      - "lib/media.ts"
+      - "app/globals.css"
+      - "docs/phase-2/CITY-PAGE-PRESERVATION-AUDIT-2026-11-20.md"
+      - "scripts/check-city-pages.mjs"
+      - "scripts/check-owner-names.mjs"
+      - "package.json"
+      - ".github/workflows/city-pages-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preservation:
+    name: Seven-city preservation / TypeScript
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: City-route, SEO and first-party proof checks
+        run: npm run check:city-pages
+      - name: Public owner-name privacy check
+        run: npm run check:owner-names
+      - name: Content claims check
+        run: npm run check:content
+      - name: TypeScript
+        run: npm run typecheck

@@ -6,7 +6,7 @@ import { formatDate, getPosts, type Post, type PostCategory } from "@/lib/blog";
 import { bookingUrl, company } from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Junker Journal | The Little Junkers Blog",
+  title: "Junker Journal | Dumpster Tips and Jobs",
   description: "Real jobs, loading tips and local news from Little Junkers, the pink-dumpster company in Peachtree City, Georgia.",
   alternates: { canonical: "/blog" },
 };

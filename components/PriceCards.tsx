@@ -10,7 +10,7 @@ import { threeDayTier } from "@/lib/days-plus";
 // Three size cards with live prices from the canonical pricing contract.
 // Badges render only when Finance set a `badge_tag` on the tier. No popularity
 // claims are added here.
-export default function PriceCards({ pricing, zip, deliveryFee }: { pricing: Pricing | null; zip?: string; deliveryFee?: number }) {
+export default function PriceCards({ pricing, zip, location, deliveryFee }: { pricing: Pricing | null; zip?: string; location?: string; deliveryFee?: number }) {
   if (!pricing) return <PricingUnavailable />;
   const from = threeDayTier(pricing);
   if (!from) return <PricingUnavailable />;
@@ -32,7 +32,7 @@ export default function PriceCards({ pricing, zip, deliveryFee }: { pricing: Pri
               <p className="muted">{size.fitLine}</p>
               <RateList pricing={pricing} yards={size.yards} />
               <div className="price-card__actions">
-                <PlanLink className="btn btn--primary btn--block" size={size.yards} zip={zip}>See my estimate</PlanLink>
+                <PlanLink className="btn btn--primary btn--block" size={size.yards} zip={zip} location={location}>See my estimate</PlanLink>
                 <Link className="btn btn--secondary btn--block" href={"/" + size.slug}>Is the {size.yards}-yard right for me?</Link>
               </div>
             </div>
