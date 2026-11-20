@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "check:content": "node scripts/check-content.mjs",
     "check:owner-names": "node scripts/check-owner-names.mjs",
+    "check:city-pages": "node scripts/check-city-pages.mjs",
     "check:comparison": "node --experimental-strip-types --no-warnings scripts/check-comparison.mjs",
     "build:randy": "node scripts/randy/build-randy.mjs",
     "check:randy": "node --experimental-strip-types --no-warnings scripts/randy/check-seasons.mts"
