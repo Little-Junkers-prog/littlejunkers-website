@@ -53,7 +53,7 @@ export default async function CityPage({ city }: { city: CityContent }) {
           </p>
           <div className="btn-row city-page-hero__actions">
             <Link className="btn btn--primary" href={`/plan?location=${encodeURIComponent(city.city)}`}>
-              See my estimate
+              Start Booking
             </Link>
             <a className="btn btn--secondary" href="#prices">See sizes &amp; prices</a>
           </div>
