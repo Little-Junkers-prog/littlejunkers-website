@@ -42,7 +42,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                 </p>
                 <div className="btn-row">
                   <BookLink className="btn btn--primary" size={size.yards}>
-                    Check Dates &amp; Book
+                    See my estimate
                   </BookLink>
                   <a className="btn btn--secondary" href="#price">
                     See the price for my ZIP
@@ -150,8 +150,12 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                 </div>
                 <ZipCheck cta="Check My ZIP" label="Delivery fee for your city or ZIP" />
                 <BookLink className="btn btn--primary btn--block" size={size.yards}>
-                  Check Dates &amp; Book
+                  See my estimate
                 </BookLink>
+                <p className="fine" style={{ marginTop: 10 }}>
+                  Comparing options?{" "}
+                  <Link href={`/compare?size=${size.yards}`}>See how our {size.yards}-yard compares</Link>.
+                </p>
                 <p className="fine" style={{ marginTop: 10 }}>
                   Extra days and extra weight only apply if you use them.
                 </p>
