@@ -40,7 +40,7 @@ export default function About() {
             </p>
             <div className="btn-row">
               <Link className="btn btn--primary" href="/plan">
-                See my estimate
+                Start Online Booking
               </Link>
               <a className="btn btn--secondary" href={telHref}>
                 Call {company.phoneDisplay}
