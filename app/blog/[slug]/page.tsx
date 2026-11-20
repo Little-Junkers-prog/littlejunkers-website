@@ -7,7 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import PriceTable from "@/components/PriceTable";
 import { LIVE_PRICES_MARKER, formatDate, getPost, getPosts } from "@/lib/blog";
 import { getPricing } from "@/lib/pricing";
-import { bookingUrl, company, siteUrl } from "@/lib/company";
+import { company, siteUrl } from "@/lib/company";
 import { indexable } from "@/lib/indexing";
 
 export const dynamicParams = false;
@@ -96,18 +96,18 @@ export default async function BlogPost({ params }: Props) {
 
             <div className="callout" style={{ marginTop: 32 }}>
               <div>
-                <h2 style={{ fontSize: "1.4rem" }}>Got a project coming up?</h2>
+                <h2 style={{ fontSize: "1.4rem" }}>Need a dumpster for your project?</h2>
                 <p className="muted" style={{ marginTop: 6 }}>
-                  See today&apos;s prices for all three sizes, or call or text {company.phoneDisplay}.
+                  Compare the 11-, 16- and 21-yard Pink Bins, or call or text {company.phoneDisplay} with questions.
                 </p>
               </div>
               <div className="btn-row">
                 <Link className="btn btn--secondary" href="/#sizes">
                   See Sizes &amp; Prices
                 </Link>
-                <a className="btn btn--primary" href={bookingUrl()}>
-                  Book a Dumpster
-                </a>
+                <Link className="btn btn--primary" href="/plan">
+                  See my estimate
+                </Link>
               </div>
             </div>
           </div>
