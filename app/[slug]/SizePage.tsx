@@ -5,7 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import Photo from "@/components/Photo";
 import PhotoRail from "@/components/PhotoRail";
 import { PricingUnavailable, RateList } from "@/components/PriceCards";
-import { BookLink } from "@/components/ZipContext";
+import { PlanLink } from "@/components/PlanLink";
 import ZipCheck from "@/components/ZipCheck";
 import { bookingUrl, company, siteUrl, smsHref } from "@/lib/company";
 import { formatTons, formatUsd, getPricing, startingTier } from "@/lib/pricing";
@@ -41,9 +41,9 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                   core area.
                 </p>
                 <div className="btn-row">
-                  <BookLink className="btn btn--primary" size={size.yards}>
+                  <PlanLink className="btn btn--primary" size={size.yards}>
                     See my estimate
-                  </BookLink>
+                  </PlanLink>
                   <a className="btn btn--secondary" href="#price">
                     See the price for my ZIP
                   </a>
@@ -149,9 +149,9 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                   <RateList pricing={pricing} yards={size.yards} />
                 </div>
                 <ZipCheck cta="Check My ZIP" label="Delivery fee for your city or ZIP" />
-                <BookLink className="btn btn--primary btn--block" size={size.yards}>
+                <PlanLink className="btn btn--primary btn--block" size={size.yards}>
                   See my estimate
-                </BookLink>
+                </PlanLink>
                 <p className="fine" style={{ marginTop: 10 }}>
                   Comparing options?{" "}
                   <Link href={`/compare?size=${size.yards}`}>See how our {size.yards}-yard compares</Link>.
