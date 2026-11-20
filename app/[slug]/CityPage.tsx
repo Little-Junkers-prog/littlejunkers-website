@@ -49,18 +49,19 @@ export default async function CityPage({ city }: { city: CityContent }) {
               </span>
               {zips.length > 0 ? <span>{zips.map((z) => z.zip).join(" & ")}</span> : null}
               {zone ? <span>{zone.deliveryFee === 0 ? "$0 delivery fee" : `${formatUsd(zone.deliveryFee)} delivery fee`}</span> : null}
-              {pricing && zips.length === 0 ? <span>Enter your ZIP below to confirm delivery</span> : null}
+              {pricing && zips.length === 0 ? <span><Link href="/service-areas">Check your ZIP for delivery</Link></span> : null}
             </p>
             <div className="btn-row" style={{ marginTop: 18 }}>
               <a className="btn btn--primary" href="#prices">
                 See {city.city} Prices
               </a>
               <a className="btn btn--secondary" href={telHref}>
-                Call or text {company.phoneDisplay}
+                Call {company.phoneDisplay}
               </a>
             </div>
             <p className="fine">
-              Not in {city.city}? <Link href="/service-areas">Check another area</Link>
+              <a href={smsHref}>Prefer to text us?</a> · Not in {city.city}?{" "}
+              <Link href="/service-areas">Check another area</Link>
             </p>
           </div>
           <div className="city-hero-media">
@@ -91,9 +92,9 @@ export default async function CityPage({ city }: { city: CityContent }) {
             <PhotoRail photos={documentedPhotos} label={`Real Little Junkers job photos from ${city.city}`} />
           ) : (
             <div className="city-proof-summary" role="note">
-              <strong>Documented Sharpsburg rentals</strong>
-              <p>Our rental history includes these sizes at Sharpsburg addresses. Photos on this page show our actual equipment, not a claimed Sharpsburg project.</p>
-              <ul className="chips" aria-label="Dumpster sizes previously rented in Sharpsburg">
+              <strong>Returned rentals in {city.city}</strong>
+              <p>These sizes appear in completed rental records for this city; this isn't a promise of inventory on any specific date.</p>
+              <ul className="chips" aria-label={`Dumpster sizes previously rented in ${city.city}`}>
                 {city.sizesDelivered.map((yards) => <li className="chip" key={yards}>{yards}-yard</li>)}
               </ul>
             </div>
@@ -114,13 +115,28 @@ export default async function CityPage({ city }: { city: CityContent }) {
               included weight early.
             </p>
             <div className="btn-row">
-              <Link className="btn btn--secondary" href="/what-can-i-put-in-a-dumpster">
-                What can go in
+              <Link className="btn btn--secondary" href="/#sizes">
+                Compare our three sizes
               </Link>
               <a className="btn btn--secondary" href={smsHref}>
                 Text us about a heavy load
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section city-materials">
+        <div className="container callout">
+          <div>
+            <h2>What are you putting in the dumpster?</h2>
+            <p className="muted">
+              Furniture, wood and many renovation materials can go in a Little Junkers dumpster, but
+              weight limits and material restrictions still apply. Check an item before you load it.
+            </p>
+          </div>
+          <div className="btn-row">
+            <Link href="/what-can-i-put-in-a-dumpster" className="btn btn--secondary">Check accepted materials</Link>
           </div>
         </div>
       </section>
@@ -163,6 +179,27 @@ export default async function CityPage({ city }: { city: CityContent }) {
           </ul>
         </div>
       </section>
+      {zips.length > 0 ? (
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "@id": `${siteUrl}/${city.slug}#service`,
+          name: `Dumpster Rental in ${city.city}, GA`,
+          serviceType: "Dumpster rental",
+          provider: { "@id": `${siteUrl}/#business` },
+          url: `${siteUrl}/${city.slug}`,
+          areaServed: {
+            "@type": "City",
+            name: city.city,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: city.city,
+              addressRegion: "GA",
+              addressCountry: "US",
+            },
+          },
+        }} />
+      ) : null}
     </>
   );
 }
