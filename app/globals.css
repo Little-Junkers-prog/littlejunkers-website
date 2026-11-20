@@ -1940,3 +1940,32 @@ a:hover {
   .city-proof-summary { padding: 16px; }
   .city-materials .btn { width: 100%; }
 }
+
+
+/* City research pages: keep the local answer and rental decision ahead of photos. */
+.city-page-hero { padding: clamp(25px, 5vw, 58px) 0 clamp(20px, 3vw, 34px); }
+.city-page-hero .container { max-width: 1100px; }
+.city-page-hero h1 { max-width: 19ch; }
+.city-page-hero .lead { max-width: 68ch; }
+.city-page-hero__actions { margin-top: 20px; }
+.city-page-hero .fine { margin-top: 14px; }
+.city-proof__single { max-width: 520px; }
+.city-proof__single .photo { max-height: 450px; }
+.city-proof__single .fine { margin-top: 8px; }
+.city-comparison {
+  margin-top: 24px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  border: 1px solid var(--border-surface);
+  border-radius: var(--radius-card);
+  background: var(--card-background);
+}
+.city-comparison h3 { margin: 0 0 6px; }
+.city-comparison p { color: var(--ink-mid); max-width: 60ch; }
+@media (max-width: 640px) {
+  .city-page-hero__actions .btn, .city-comparison .btn { width: 100%; }
+}
