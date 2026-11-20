@@ -106,7 +106,7 @@ export default async function BlogPost({ params }: Props) {
                   See Sizes &amp; Prices
                 </Link>
                 <Link className="btn btn--primary" href="/plan">
-                  See my estimate
+                  Start Online Booking
                 </Link>
               </div>
             </div>
