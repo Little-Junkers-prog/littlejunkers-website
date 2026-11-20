@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqList from "@/components/FaqList";
+import JsonLd from "@/components/JsonLd";
 import Photo from "@/components/Photo";
 import PhotoRail from "@/components/PhotoRail";
 import PriceCards from "@/components/PriceCards";
 import { cityByName, type CityContent } from "@/lib/cities";
-import { company, smsHref, telHref } from "@/lib/company";
+import { company, siteUrl, smsHref, telHref } from "@/lib/company";
 import { formatUsd, getPricing, zipsForCity } from "@/lib/pricing";
 
 // City template (TIER-1 spec §9A, Newnan visual grammar). ZIPs, zone and fee
@@ -17,12 +18,13 @@ export default async function CityPage({ city }: { city: CityContent }) {
   const zoneKeys = [...new Set(zips.map((z) => z.zone))];
   const zone = pricing && zoneKeys.length === 1 ? pricing.zones[zoneKeys[0]] : null;
   const singleZip = zips.length === 1 ? zips[0].zip : undefined;
+  const documentedPhotos = city.proof.filter((slot) => "src" in slot);
 
   const delivered =
     city.sizesDelivered.length === 3
-      ? `We've delivered all three sizes in ${city.city}.`
+      ? "Completed rental records include all three dumpster sizes."
       : city.sizesDelivered.length > 0
-        ? `So far we've delivered our ${city.sizesDelivered.map((y) => `${y}-yard`).join(" and ")} in ${city.city}.`
+        ? "Completed rentals recorded here: " + city.sizesDelivered.map((y) => y + "-yard").join(" and ") + "."
         : null;
 
   return (
@@ -61,7 +63,10 @@ export default async function CityPage({ city }: { city: CityContent }) {
               Not in {city.city}? <Link href="/service-areas">Check another area</Link>
             </p>
           </div>
-          <Photo photo={city.hero} sizes="(min-width: 900px) 50vw, 100vw" priority />
+          <div className="city-hero-media">
+            <Photo photo={city.hero} sizes="(min-width: 900px) 50vw, 100vw" priority caption={false} />
+            {city.heroDisclosure ? <p className="fine">{city.heroDisclosure}</p> : null}
+          </div>
         </div>
       </section>
 
@@ -70,17 +75,29 @@ export default async function CityPage({ city }: { city: CityContent }) {
           <div className="section-head">
             <h2>Dumpster prices in {city.city}</h2>
           </div>
-          <PriceCards pricing={pricing} zip={singleZip} deliveryFee={zone?.deliveryFee} />
+          <PriceCards pricing={pricing} zip={singleZip} location={city.city} deliveryFee={zone?.deliveryFee} />
         </div>
       </section>
 
       <section className="section section--surface">
         <div className="container">
           <div className="section-head">
-            <h2>Little Junkers in {city.city}</h2>
-            {delivered ? <p>{delivered}</p> : null}
+            <p className="eyebrow">Local experience</p>
+            <h2>{city.proofHeading}</h2>
+            <p>{city.proofCopy}</p>
+            {delivered ? <p className="fine">{delivered}</p> : null}
           </div>
-          <PhotoRail photos={city.proof} label={`Little Junkers job photos from ${city.city}`} />
+          {documentedPhotos.length > 0 ? (
+            <PhotoRail photos={documentedPhotos} label={`Real Little Junkers job photos from ${city.city}`} />
+          ) : (
+            <div className="city-proof-summary" role="note">
+              <strong>Documented Sharpsburg rentals</strong>
+              <p>Our rental history includes these sizes at Sharpsburg addresses. Photos on this page show our actual equipment, not a claimed Sharpsburg project.</p>
+              <ul className="chips" aria-label="Dumpster sizes previously rented in Sharpsburg">
+                {city.sizesDelivered.map((yards) => <li className="chip" key={yards}>{yards}-yard</li>)}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
 
