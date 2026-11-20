@@ -41,7 +41,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                 </p>
                 <div className="btn-row">
                   <PlanLink className="btn btn--primary" size={size.yards}>
-                    See my estimate
+                    Start Booking
                   </PlanLink>
                   <a className="btn btn--secondary" href="#price">
                     See the price for my ZIP
@@ -149,7 +149,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                 </div>
                 <ZipCheck cta="Check My ZIP" label="Delivery fee for your city or ZIP" />
                 <PlanLink className="btn btn--primary btn--block" size={size.yards}>
-                  See my estimate
+                  Start Booking
                 </PlanLink>
                 <p className="fine" style={{ marginTop: 10 }}>
                   Comparing options?{" "}
