@@ -18,9 +18,9 @@ export const metadata = {
 };
 
 const steps = [
-  ["Check your city or ZIP", "See where we deliver and what the delivery fee would be."],
-  ["Choose your size and dates", "Compare the Pink Bins and check the cost for the days you need."],
-  ["You load it. We haul it.", "Once your rental is confirmed, we deliver the bin and return for pickup at the end."],
+  ["Check your area", "Enter your city or ZIP to see delivery fees."],
+  ["Choose a bin and rental dates", "Pick the 11-, 16- or 21-yard Pink Bin and tell us when you need it."],
+  ["Book, load and leave pickup to us", "Review your full price, pay online and get a confirmation before delivery. Then fill your bin and we'll pick it up."],
 ];
 
 const reasons = [
@@ -44,7 +44,7 @@ export default async function Home() {
             <h1>
               Need a <span className="accent">dumpster?</span>
             </h1>
-            <p className="lead">Little Junkers rents 11-, 16- and 21-yard Pink Bins around Peachtree City, Newnan and Fayetteville. Enter your city or ZIP to check local delivery and pricing.</p>
+            <p className="lead">Rent an 11-, 16- or 21-yard Pink Bin in Peachtree City, Newnan, Fayetteville and nearby towns. Enter your city or ZIP to start your rental.</p>
             <ZipCheck />
             <p className="hero__meta">
               <span>11-, 16- and 21-yard Pink Bins</span>
@@ -94,7 +94,7 @@ export default async function Home() {
       </section>
       <section className="section" id="plan">
         <div className="container">
-          <div className="section-head"><p className="eyebrow">Days Plus planner</p><h2>Your project doesn't have to fit a fixed package.</h2><p>Start with three days. Add up to 27 more, or ask for a personal quote on longer projects. Select a size, city or ZIP, and dates to see an estimated price.</p></div>
+          <div className="section-head"><p className="eyebrow">Online rental booking</p><h2>Choose the days that work for you.</h2><p>Start with three days and choose up to 30. Pick your Pink Bin, delivery location and dates. We'll show the price as we get the details needed for your booking.</p></div>
           <DaysPlusPlanner basePrices={basePriceSnapshot(pricing)} />
         </div>
       </section>
@@ -215,10 +215,10 @@ export default async function Home() {
               <h2>
                 Find the right <span className="accent">dumpster.</span>
               </h2>
-              <p style={{ marginTop: 6 }}>Enter your city or ZIP to see an estimate. Call or text us {company.hoursDisplay}.</p>
+              <p style={{ marginTop: 6 }}>Choose a Pink Bin and enter your delivery ZIP to get started online. Questions? Call or text us {company.hoursDisplay}.</p>
             </div>
             <div className="btn-row">
-              <Link className="btn btn--primary" href="/plan">See my estimate</Link>
+              <Link className="btn btn--primary" href="/plan">Start Online Booking</Link>
               <a className="btn btn--secondary" href={telHref}>
                 Call {company.phoneDisplay}
               </a>
