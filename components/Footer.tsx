@@ -28,7 +28,7 @@ export default function Footer() {
               </li>
             </ul>
             <p className="site-footer__muted" style={{ marginTop: 10 }}>
-              Calls and texts {company.hoursDisplay}. Book online any time.
+              Calls and texts {company.hoursDisplay}. Check prices online any time.
             </p>
           </div>
 
