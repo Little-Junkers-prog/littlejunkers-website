@@ -79,7 +79,7 @@ export default async function FaqPage() {
                 Text
               </a>
               <Link className="btn btn--primary" href="/plan">
-                See my estimate
+                Start Online Booking
               </Link>
             </div>
           </div>
