@@ -19,6 +19,15 @@ export default async function CityPage({ city }: { city: CityContent }) {
   const zone = pricing && zoneKeys.length === 1 ? pricing.zones[zoneKeys[0]] : null;
   const singleZip = zips.length === 1 ? zips[0].zip : undefined;
   const documentedPhotos = city.proof.filter((slot) => "src" in slot);
+  const faqs = city.faqs.map((faq) => {
+    if (!/delivery fee/i.test(faq.q) || !zone) return faq;
+    return {
+      ...faq,
+      a: zone.deliveryFee === 0
+        ? `Delivery to the ${city.city} ZIP codes we serve is currently free. The dumpster rental price is listed separately above.`
+        : `The current delivery fee for the ${city.city} ZIP codes shown above is ${formatUsd(zone.deliveryFee)}. You'll see it as a separate charge from the rental price.`,
+    };
+  });
 
 
 
@@ -162,7 +171,7 @@ export default async function CityPage({ city }: { city: CityContent }) {
           <div className="section-head">
             <h2>{city.city} questions</h2>
           </div>
-          <FaqList items={city.faqs} />
+          <FaqList items={faqs} />
           <p style={{ marginTop: 16 }}>
             <Link className="text-link" href="/faq">
               More questions and answers
