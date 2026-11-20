@@ -8,7 +8,7 @@ import { smsHref,telHref,company } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: "Dumpster Rental Pricing in Fayette & Coweta County",
-  description: "Understand Little Junkers dumpster base prices, included weight, delivery fees and the upcoming Days Plus rental experience.",
+  description: "See Little Junkers dumpster prices, included disposal weight, delivery fees and rental-day options for Fayette and Coweta County.",
   alternates: { canonical: "/pricing" }
 };
 export default async function PricingPage() {
@@ -24,11 +24,11 @@ export default async function PricingPage() {
           <h2>{size.yards}-yard · {size.name}</h2>
           <p className="cx-money">{formatUsd(base.prices[size.yards])}</p>
           <p>3 days included · {formatTons(pricing.sizes[size.yards].includedTons)} of disposal weight included</p>
-          <Link href={"/plan?size=" + size.yards}>Plan this dumpster →</Link>
+          <Link href={"/plan?size=" + size.yards}>See my estimate →</Link>
         </article>)}
       </div>
       <div className="cx-note"><h2>Delivery by city or ZIP</h2><p>{Object.values(pricing.zones).sort((a,b)=>a.deliveryFee-b.deliveryFee).map(z=>z.label+": "+(z.deliveryFee===0?"included":formatUsd(z.deliveryFee))).join(" · ")}. Enter your city or ZIP below to check the delivery area.</p></div>
-      <div className="cx-note"><h2>Extra disposal weight</h2><p>{pricing.overagePerTon ? "Current excess disposal-weight rate: "+formatUsd(pricing.overagePerTon)+" per ton above the included limit." : "Excess disposal weight may incur additional fees. Ask for the current overage rate."} This is not the same as the prepaid Days Plus additional-day price.</p></div>
+      <div className="cx-note"><h2>Extra disposal weight</h2><p>{pricing.overagePerTon ? "Current excess disposal-weight rate: "+formatUsd(pricing.overagePerTon)+" per ton above the included limit." : "Excess disposal weight may incur additional fees. Ask for the current overage rate."} Additional rental days have a separate price, which we’ll confirm before booking.</p></div>
     </> : <div className="notice"><h2>We can't verify base pricing right now</h2><p>We won't substitute guessed numbers. <a href={telHref}>Call {company.phoneDisplay}</a> or <a href={smsHref}>text us</a> to ask about current pricing.</p></div>}
     <h2>Need more days?</h2>
     <p>Rent for three days or choose up to 30 total days. Need longer? Contact us for a custom quote. We'll confirm the exact price and available dates before booking.</p>
