@@ -6,7 +6,7 @@ import type { SizeYards } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "See Your Dumpster Rental Estimate",
-  description: "See a price estimate for an 11, 16 or 21-yard dumpster. Enter a city or ZIP and choose your dates.",
+  description: "Plan an 11-, 16- or 21-yard Little Junkers rental. Enter your city or ZIP, choose a rental period and review the current base rate and delivery fee.",
   robots: { index: false, follow: false }
 };
 type Params = Record<string, string | string[] | undefined>;
