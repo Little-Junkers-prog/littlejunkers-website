@@ -95,6 +95,29 @@ export default async function CityPage({ city }: { city: CityContent }) {
         </div>
       </section>
 
+      <section className="section city-rental-steps">
+        <div className="container">
+          <div className="section-head">
+            <h2>How renting a Pink Bin works</h2>
+            <p>We handle the delivery and pickup. You choose the bin and load it.</p>
+          </div>
+          <ol className="grid grid--3 steps">
+            <li>
+              <h3>Pick your size</h3>
+              <p>Check your city or ZIP, compare the 11-, 16- and 21-yard options, and see the starting price.</p>
+            </li>
+            <li>
+              <h3>Choose your dates</h3>
+              <p>Tell us when you need it and for how long. We confirm the price and available dates before a reservation is made.</p>
+            </li>
+            <li>
+              <h3>Fill it up</h3>
+              <p>Load your Pink Bin level with the top. We'll pick it up when the rental is finished.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
       <section className="section">
         <div className="container split">
           <div className="stack">
