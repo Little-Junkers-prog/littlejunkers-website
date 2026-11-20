@@ -16,7 +16,7 @@ seoTitle: "How to Load a Dumpster: 5 Tips to Maximize Space"
 seoDescription: "Five dumpster loading tips that save space and money: sort before you toss, load heavy items first, stack vertically, fill the gaps and size up."
 ---
 
-Renting a dumpster can feel like a game of Tetris: how do you fit all your debris, junk, and renovation leftovers into the box without needing a second one? A little planning goes a long way. Here are five tips to help you stack, sort, and get the most out of your rental.
+A little planning can save space when you're loading a dumpster. Start by separating what you can donate or recycle. Then load bulky items so the bin stays balanced and nothing sticks above the top rail.
 
 ### 1. Sort Before You Toss
 
@@ -47,10 +47,10 @@ Renting a dumpster can feel like a game of Tetris: how do you fit all your debri
 **How to do it:**
 
 - **Stack long, skinny items** (lumber, PVC pipe, trim) along the sides.
-- **Stand large sheets** (drywall, plywood, paneling) upright along one wall instead of laying them flat.
+- **Lay large sheets** (drywall, plywood, paneling) securely so they cannot tip or fall against the door.
 - **Stop at the top rail.** The load has to be level with the top for us to haul it safely.
 
-> *Pro tip:* Lean boards against the back wall at a slight angle so they don't slide as you fill around them.
+> *Tip:* Avoid leaving loose boards standing where they could fall when the door is opened.
 
 ### 4. Fill the Gaps
 
@@ -61,19 +61,19 @@ Renting a dumpster can feel like a game of Tetris: how do you fit all your debri
 - **Toss in irregular scraps** (wood off-cuts, crumpled tarps, insulation) after the big items are in place. They wedge into pockets between larger debris.
 - **Compress soft materials** (rugs, old clothing, carpet padding) so they take as little room as possible.
 
-> *Pro tip:* Keep a shovel or push-stick handy to tamp down each layer.
+> *Tip:* Do not climb into a loaded dumpster to compact the debris. If you cannot load something safely, ask us about a different approach.
 
-### 5. When in Doubt, Order the Larger Dumpster
+### 5. Pick the size for the material
 
 **Why it matters:** Underestimating your project can mean extra rental days or a second dumpster.
 
 **How to do it:**
 
-- **Add a safety buffer:** If you're on the fence between two sizes, go one up.
+- **Check the weight:** For bulky, lighter items, a larger bin may help. Shingles, tile and plaster can hit a weight limit before the dumpster fills up.
 - **Expect surprises:** Renovation projects often reveal hidden waste such as old flooring, insulation, or framing you didn't plan for.
 
 > *Pro tip:* Text us a photo of your pile or tell us the scope. We'll recommend a size.
 
-## Wrapping Up
+## Ready to choose a bin?
 
-With a little foresight and these five strategies, you'll use every cubic foot of your rental and avoid running out of room. Compare the [11-yard](/11-yard-the-little-junker), [16-yard](/16-yard-the-mighty-middler) and [21-yard](/21-yard-the-big-junker), then [book online](https://book.littlejunkersllc.com/rent-a-dumpster) or call or text (470) 548-4733.
+Compare our [11-yard](/11-yard-the-little-junker), [16-yard](/16-yard-the-mighty-middler) and [21-yard](/21-yard-the-big-junker). You can also [start booking online](/plan) or call us at (470) 548-4733.
