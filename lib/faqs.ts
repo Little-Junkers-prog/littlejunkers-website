@@ -196,7 +196,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "how-book",
           q: "How do I book?",
-          a: "Start with the online estimate: choose a size, location and rental dates. We'll confirm the final price and availability before you make a reservation.",
+          a: "Start online by choosing a Pink Bin, delivery details and rental dates. Review the complete price and available delivery window before you pay. Your reservation is confirmed after payment is verified.",
           top: true,
         },
         {
