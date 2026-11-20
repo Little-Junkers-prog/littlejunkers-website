@@ -12,6 +12,14 @@ on:
       - "components/ConsentBanner.tsx"
       - "lib/comparison*"
       - "scripts/check-comparison.mjs"
+      - "scripts/check-owner-names.mjs"
+      - "app/about-us/**"
+      - "app/page.tsx"
+      - "lib/company.ts"
+      - "lib/cities.ts"
+      - "lib/media.ts"
+      - "public/experience-preview.html"
+      - "content/blog/**"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/comparison-check.yml"
@@ -37,5 +45,7 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Comparison regression tests
         run: npm run check:comparison
+      - name: Public owner-name privacy check
+        run: npm run check:owner-names
       - name: TypeScript
         run: npm run typecheck
