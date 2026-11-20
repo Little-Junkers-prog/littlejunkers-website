@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Little Junkers",
   },
   description:
-    "Locally owned dumpster rental in Fayette and Coweta County, Georgia. 11, 16 and 21-yard pink dumpsters. See prices for your ZIP and book online.",
+    "Little Junkers rents 11-, 16- and 21-yard Pink Bin dumpsters in Fayette and Coweta County, Georgia. Check current base prices and delivery fees for your ZIP.",
   robots: indexable ? { index: true, follow: true } : { index: false, follow: false },
   openGraph: { siteName: "Little Junkers", type: "website", locale: "en_US" },
 };
