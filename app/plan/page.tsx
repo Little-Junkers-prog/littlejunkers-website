@@ -5,7 +5,7 @@ import { basePriceSnapshot } from "@/lib/days-plus";
 import type { SizeYards } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "See Your Dumpster Rental Estimate | Little Junkers",
+  title: "See Your Dumpster Rental Estimate",
   description: "See a price estimate for an 11, 16 or 21-yard dumpster. Enter a city or ZIP and choose your dates.",
   robots: { index: false, follow: false }
 };
