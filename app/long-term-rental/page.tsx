@@ -3,7 +3,7 @@ import Link from "next/link";
 import {company,telHref,smsHref} from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Long-Term Dumpster Rental Quotes | Little Junkers",
+  title: "Long-Term Dumpster Rental Quotes",
   description: "Need a dumpster for longer than 30 days? Discuss a personal quote with Little Junkers instead of an automated long-term checkout.",
   alternates: {canonical:"/long-term-rental"}
 };
