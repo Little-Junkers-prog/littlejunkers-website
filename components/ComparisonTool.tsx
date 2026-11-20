@@ -157,7 +157,7 @@ export default function ComparisonTool({
           <div><dt>Extra day</dt><dd>Rate not yet confirmed</dd></div>
         </dl>
         {days > 3 ? <p className="comparison-card__notice">{days - 3} additional days are not yet included in this estimate.</p> : null}
-        <Link className="btn btn--primary btn--block" href={planHref}>See my estimate</Link>
+        <Link className="btn btn--primary btn--block" href={planHref}>Start Booking</Link>
         <p className="fine">The final price and delivery availability are confirmed before booking.</p>
       </article>
       {visible.map((offer) => <article className="comparison-card" key={offer.providerId}>
