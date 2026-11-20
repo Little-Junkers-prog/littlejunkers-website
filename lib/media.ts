@@ -71,19 +71,19 @@ export const photos = {
     src: "/images/team/marcus-and-ivy-truck.jpg",
     width: 1600,
     height: 1200,
-    alt: "Ivy and Marcus Griffin, owners of Little Junkers, in the Little Junkers truck",
+    alt: "Marcus and Ivy, owners of Little Junkers, in the Little Junkers truck",
   },
   ivyTruck: {
     src: "/images/team/ivy-truck-new-bin.jpg",
     width: 1600,
     height: 900,
-    alt: "Ivy Griffin standing beside the Little Junkers truck carrying a new pink dumpster",
+    alt: "Ivy standing beside the Little Junkers truck carrying a new pink dumpster",
   },
   marcusTruck: {
     src: "/images/team/marcus-truck-new-bin.jpg",
     width: 1600,
     height: 900,
-    alt: "Marcus Griffin standing beside the Little Junkers truck carrying a new pink dumpster",
+    alt: "Marcus standing beside the Little Junkers truck carrying a new pink dumpster",
   },
   truckDoor: {
     src: "/images/team/truck-door-logo.jpg",
