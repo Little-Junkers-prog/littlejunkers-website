@@ -99,8 +99,8 @@ export default function DaysPlusPlanner({
       <div className="cx-planner__intro">
         <div>
           <p className="eyebrow">Choose your dumpster</p>
-          <h3>See your price as you go.</h3>
-          <p>Select a size, city or ZIP, date, and rental length. Your estimate will update with the details we know.</p>
+          <h3>Build a rental estimate</h3>
+          <p>Choose a size and rental period, then enter your city or ZIP. We'll show the base rate and any confirmed delivery fee.</p>
         </div>
         <small>Preview · no reservations</small>
       </div>
