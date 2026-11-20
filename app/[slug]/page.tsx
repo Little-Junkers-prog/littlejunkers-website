@@ -28,9 +28,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const city = cityBySlug(slug);
   if (city) {
     return {
-      title: `Dumpster Rental in ${city.city}, GA`,
+      title: { absolute: city.metaTitle },
       description: city.metaDescription,
       alternates: { canonical: `/${slug}` },
+      openGraph: {
+        title: city.metaTitle,
+        description: city.metaDescription,
+        url: `/${slug}`,
+        ...( "src" in city.hero ? {
+          images: [{ url: city.hero.src, width: city.hero.width, height: city.hero.height, alt: city.hero.alt }]
+        } : {}),
+      },
     };
   }
   const legal = getLegalDoc(slug);
