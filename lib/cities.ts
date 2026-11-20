@@ -15,6 +15,9 @@ export type CityContent = {
   county: string;
   metaDescription: string;
   intro: string;
+  proofHeading: string;
+  proofCopy: string;
+  heroDisclosure?: string;
   sizesDelivered: SizeYards[];
   proof: PhotoSlot[];
   hero: PhotoSlot;
@@ -35,11 +38,6 @@ const deliveryFaq = (city: string) => ({
   a: "The booking calendar shows the delivery days that are open right now. Pick the one that works and you're set.",
 });
 
-const genericPlacement = (city: string) => ({
-  heading: "Where it goes",
-  body: `Most ${city} customers put the dumpster in the driveway. If you want it on the street or anywhere off your property, check with the city and your HOA first. Rules vary, and we'd rather you find out before delivery day.`,
-});
-
 export const cities: CityContent[] = [
   {
     city: "Newnan",
@@ -48,6 +46,8 @@ export const cities: CityContent[] = [
     metaDescription:
       "Pink dumpsters delivered in Newnan, GA. See current prices for 11, 16 and 21-yard dumpsters, check your ZIP and book online with Little Junkers.",
     intro: "We deliver all three sizes in Newnan, from garage cleanouts to full remodels.",
+    proofHeading: "Little Junkers jobs in Newnan",
+    proofCopy: "Our Newnan photos show a full 11-yard dumpster and two 16-yard placements, one by a garage and one in a yard. Completed rentals here also include the 21-yard. These are our containers on real jobs, not stock photos.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y16NewnanGarage,
     proof: [photos.y16NewnanYard, photos.y11Newnan, photos.y16NewnanGarage],
@@ -76,12 +76,14 @@ export const cities: CityContent[] = [
     metaDescription:
       "Dumpster rental in Peachtree City, GA from the pink-dumpster company based here. See current 11, 16 and 21-yard prices and book online.",
     intro: "Peachtree City is home. Little Junkers is owned and run here by Marcus and Ivy.",
+    proofHeading: "A Peachtree City driveway, photographed by our team",
+    proofCopy: "The 21-yard pictured here is a Little Junkers dumpster placed in Peachtree City. Our completed rental records also include the 11- and 16-yard sizes in this city.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y21PeachtreeCity,
-    proof: [photos.y21PeachtreeCity, { needed: "Peachtree City job photo: 11 or 16-yard in a driveway, city named in the file" }],
+    proof: [photos.y21PeachtreeCity],
     placement: {
-      heading: "Driveways and cart paths",
-      body: "Most Peachtree City customers put the dumpster in the driveway. If a golf cart path crosses or borders your driveway, tell us when you book and we'll plan the placement around it. For street placement, check with the city and your HOA first.",
+      heading: "Driveways and golf cart paths",
+      body: "If reaching the drop spot would involve crossing or using a public cart path or right-of-way, check with Peachtree City before scheduling. The city publishes a cart-path encroachment permit application. For a driveway placement, show us any tight access or overhead branches so we can plan the drop spot.",
     },
     faqs: [
       {
@@ -103,11 +105,16 @@ export const cities: CityContent[] = [
     county: "Fayette County",
     metaDescription:
       "Dumpster rental in Fayetteville, GA. Little Junkers delivers 11, 16 and 21-yard pink dumpsters across Fayette County. See prices for your ZIP and book online.",
-    intro: "We've set all three sizes in Fayetteville driveways. The photos below are from those jobs.",
+    intro: "Our Fayetteville photos show an 11-yard driveway placement, a 16-yard delivery and a 21-yard dumpster on site. See the real equipment before you decide.",
+    proofHeading: "Three sizes at Fayetteville jobs",
+    proofCopy: "Our team photographed an 11-yard dumpster in a Fayetteville driveway, a 16-yard being delivered and a 21-yard on site. Completed rentals in Fayetteville include all three sizes.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y11Fayetteville,
     proof: [photos.y16Fayetteville, photos.y21Fayetteville, photos.y11Fayetteville],
-    placement: genericPlacement("Fayetteville"),
+    placement: {
+      heading: "Planning a Fayetteville delivery",
+      body: "Our truck needs a clear route into the placement spot, not just enough room for the dumpster. Check for low tree limbs, wires and tight turns; send us a driveway photo if access looks close.",
+    },
     faqs: [
       {
         q: "Is there a delivery fee in Fayetteville?",
@@ -128,11 +135,16 @@ export const cities: CityContent[] = [
     county: "Coweta County",
     metaDescription:
       "Dumpster rental in Senoia, GA. Little Junkers delivers 11, 16 and 21-yard pink dumpsters in Coweta County. See current prices and book online.",
-    intro: "We deliver all three sizes in Senoia.",
+    intro: "Our Senoia photo shows an 11-yard dumpster loaded level with the top. Completed rentals here also include the 16- and 21-yard sizes.",
+    proofHeading: "An 11-yard Little Junkers in Senoia",
+    proofCopy: "This is a real Senoia job photo, not a generic local illustration. The container is loaded level with the top rail, a useful example of the safe loading limit.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y11Senoia,
-    proof: [photos.y11Senoia, { needed: "Senoia job photo: 16 or 21-yard at a home, city named in the file" }],
-    placement: genericPlacement("Senoia"),
+    proof: [photos.y11Senoia],
+    placement: {
+      heading: "Getting to the placement spot",
+      body: "For a Senoia property with a long drive or gravel surface, check the route and the ground where the container would sit. The truck needs a safe, accessible approach; text us a driveway photo if the turn or slope is uncertain.",
+    },
     faqs: [
       {
         q: "Is there a delivery fee in Senoia?",
@@ -153,11 +165,17 @@ export const cities: CityContent[] = [
     county: "Coweta County",
     metaDescription:
       "Dumpster rental in Sharpsburg, GA. Little Junkers delivers 11, 16 and 21-yard pink dumpsters in Coweta County. See current prices and book online.",
-    intro: "We deliver all three sizes in Sharpsburg.",
+    intro: "We've completed rentals in Sharpsburg with 11-, 16- and 21-yard dumpsters. The right size depends on what you are clearing out and how heavy it is.",
+    proofHeading: "Our completed rental history in Sharpsburg",
+    proofCopy: "Our records include completed Sharpsburg rentals in all three dumpster sizes. We don't yet have an approved Sharpsburg job photograph on this site, so we won't present a nearby job as if it happened here.",
+    heroDisclosure: "Little Junkers equipment photo from our service area, not a Sharpsburg-specific job.",
     sizesDelivered: [11, 16, 21],
-    hero: { needed: "Sharpsburg hero: pink dumpster in a Sharpsburg driveway" },
-    proof: [{ needed: "Sharpsburg job photo with dumpster size" }, { needed: "Second Sharpsburg job photo" }],
-    placement: genericPlacement("Sharpsburg"),
+    hero: photos.hero,
+    proof: [],
+    placement: {
+      heading: "Have a gate, gravel drive or tight turn?",
+      body: "If you're arranging a Sharpsburg rental, tell us about gates, low branches, uneven ground or a long approach before delivery. A photo of the proposed drop spot helps us check truck access.",
+    },
     faqs: [
       {
         q: "Is there a delivery fee in Sharpsburg?",
@@ -178,11 +196,16 @@ export const cities: CityContent[] = [
     county: "Fayette County",
     metaDescription:
       "Dumpster rental in Tyrone, GA. Little Junkers delivers pink roll-off dumpsters in Fayette County. See current prices and book online.",
-    intro: "Tyrone is right next door to us in Peachtree City.",
+    intro: "We've photographed our compact 11-yard dumpster at a Tyrone property. Check the delivery area for ZIP 30290 and tell us about the driveway before you choose a date.",
+    proofHeading: "An 11-yard dumpster photographed in Tyrone",
+    proofCopy: "This first-party photo shows our 11-yard dumpster in a Tyrone driveway. We can help you decide whether a smaller footprint or a larger container is right for your project.",
     sizesDelivered: [],
     hero: photos.y11Tyrone,
-    proof: [photos.y11Tyrone, { needed: "Second Tyrone job photo with dumpster size" }],
-    placement: genericPlacement("Tyrone"),
+    proof: [photos.y11Tyrone],
+    placement: {
+      heading: "Room for the truck matters",
+      body: "A small dumpster still arrives on a hook-lift truck. For a Tyrone driveway, leave a clear backing path and tell us about low branches, wires or a tight approach. Not sure about clearance? Send us a photo.",
+    },
     faqs: [
       {
         q: "Is there a delivery fee in Tyrone?",
@@ -203,11 +226,16 @@ export const cities: CityContent[] = [
     county: "Fulton County",
     metaDescription:
       "Dumpster rental in Fairburn, GA. Little Junkers delivers pink roll-off dumpsters in south Fulton County. See current prices and book online.",
-    intro: "We deliver in Fairburn, just up the road from our home base in Peachtree City.",
+    intro: "The 21-yard Little Junkers shown here is photographed in a Fairburn driveway. Our completed rental records also include 11-yard dumpsters in this market.",
+    proofHeading: "Real Little Junkers equipment in Fairburn",
+    proofCopy: "Our Fairburn image shows the 21-yard in a driveway, and completed rental records include both 11- and 21-yard jobs. Match the container to your debris and check access before delivery.",
     sizesDelivered: [11, 21],
     hero: photos.y21Fairburn,
-    proof: [photos.y21Fairburn, { needed: "Second Fairburn job photo with dumpster size" }],
-    placement: genericPlacement("Fairburn"),
+    proof: [photos.y21Fairburn],
+    placement: {
+      heading: "Pick a safe, reachable drop spot",
+      body: "For a Fairburn delivery, check the access route as well as the place where the container will sit. A steep slope, narrow turn or overhead obstruction can change where we can set it. Text us a photo if you're unsure.",
+    },
     faqs: [
       {
         q: "Is there a delivery fee in Fairburn?",
