@@ -24,7 +24,7 @@ export default async function PricingPage() {
           <h2>{size.yards}-yard · {size.name}</h2>
           <p className="cx-money">{formatUsd(base.prices[size.yards])}</p>
           <p>3 days included · {formatTons(pricing.sizes[size.yards].includedTons)} of disposal weight included</p>
-          <Link href={"/plan?size=" + size.yards}>See my estimate →</Link>
+          <Link href={"/plan?size=" + size.yards}>Start booking →</Link>
         </article>)}
       </div>
       <div className="cx-note"><h2>What is the delivery fee?</h2><p>{Object.values(pricing.zones).sort((a,b)=>a.deliveryFee-b.deliveryFee).map(z=>z.label+": "+(z.deliveryFee===0?"$0 delivery":formatUsd(z.deliveryFee)+" delivery")).join(" · ")}. Use the planner below to check the fee for your ZIP.</p></div>
