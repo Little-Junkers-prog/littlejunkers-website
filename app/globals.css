@@ -1921,3 +1921,22 @@ a:hover {
 .comparison-exit__error{color:#aa113b;font-weight:700;font-size:.9rem}
 .comparison-exit__callback-form .fine{color:var(--ink-mid);font-size:.83rem}
 .comparison-exit__callback:focus-visible,.comparison-exit__callback input:focus-visible{outline:3px solid var(--pink-text);outline-offset:2px}
+
+
+/* Priority city pages — truthful proof, clear context and no placeholder media. */
+.city-hero-media { min-width: 0; }
+.city-hero-media .photo { width: 100%; }
+.city-hero-media > .fine { margin-top: 8px; line-height: 1.45; }
+.city-proof-summary { max-width: 720px; border: 1px solid var(--border-card); border-radius: var(--radius-card); background: var(--card-background); padding: 22px; }
+.city-proof-summary > strong { display: block; font-size: 1.2rem; margin-bottom: 6px; }
+.city-proof-summary p { max-width: 58ch; color: var(--ink-mid); }
+.city-proof-summary .chips { margin-top: 16px; }
+.city-materials .callout { margin-inline: auto; }
+.city-materials .callout p { margin-top: 8px; max-width: 65ch; }
+@media (min-width: 800px) {
+  .city-materials .callout { grid-template-columns: minmax(0, 1fr) auto; }
+}
+@media (max-width: 640px) {
+  .city-proof-summary { padding: 16px; }
+  .city-materials .btn { width: 100%; }
+}
