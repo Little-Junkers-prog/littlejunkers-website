@@ -70,8 +70,14 @@ Avoid:
 ## Bottoms / footwear
 
 For full-body uses:
-- dark work jeans/pants;
-- brown or dark neutral work boots.
+- dark charcoal, black, or very dark indigo work jeans/pants;
+- clean dark work boots in black or a dark neutral brown;
+- no jewelry, chains, watches, bracelets, rings, or decorative adornments;
+- no unnecessary tools or props.
+
+Randy should look tidy, friendly, capable, and professional. The full-body reference may be used sparingly for scale/height-comparison illustrations beside dumpsters and similar educational visuals.
+
+Do not present a Randy-to-dumpster illustration as a literal dimensional comparison until a canonical Randy height has been explicitly defined. Until then, any such composition is illustrative only.
 
 The standard chat avatar and modal art normally use head-and-shoulders or waist-up crops, so the lower-body outfit is not required in every asset.
 
@@ -124,8 +130,9 @@ Canonical colors:
 Rules:
 - Signature Pink is an accent, not a giant full-field background.
 - Do not introduce purple, blue, or green CTA colors into Randy UI.
-- Randy's clothing remains primarily black/dark neutral.
-- Pink accents should connect the character to the brand without turning Randy into a pink character.
+- Randy's standard clothing remains primarily black/dark neutral.
+- Approved seasonal variants may temporarily alter Randy's shirt or hat as defined in the Seasonal Variants section.
+- Pink accents should connect the character to the brand without turning Randy into a pink character outside an approved seasonal treatment.
 
 ---
 
@@ -175,7 +182,214 @@ Every new pose must preserve the same face, hair, beard, hat, logo treatment, bo
 
 ---
 
-# 9. Website Usage
+# 9. Seasonal Variants
+
+Seasonal Randy variants are approved as a controlled extension of the canonical character. They are intended to keep the website and assistant experience fresh without turning Randy into a costume character.
+
+Core rule:
+- Randy's face, skin tone, hair, beard, body proportions, illustration style, professionalism, and official Little Junkers identity never change.
+- Seasonal treatments may change only one or two apparel/accessory elements unless specifically approved otherwise.
+- No seasonal variant may imply a charity partnership, sponsorship, donation, endorsement, or organizational affiliation that does not actually exist.
+- The raccoon remains a logo/mascot element only and is never Randy's companion, pet, or sidekick.
+
+## Standard/default Randy
+
+Used whenever no seasonal window is active:
+- black/dark Little Junkers polo;
+- black cap with approved raccoon logo;
+- dark pants/work jeans for full-body art;
+- dark work boots.
+
+## Valentine's Day
+
+Annual window: **February 14 only**
+
+Treatment:
+- standard dark polo;
+- Signature Pink `#FFCEE4` cap or a very small approved pink heart/accent;
+- no oversized hearts, novelty costumes, or romantic copy built into the artwork.
+
+## Memorial Day / Military Family Tribute
+
+Annual window: **Friday before Memorial Day through Memorial Day, inclusive**
+
+Treatment:
+- standard dark Little Junkers polo;
+- dark charcoal or muted olive cap with a small, tasteful U.S. flag side patch or restrained red/white/blue detail;
+- keep the approved Little Junkers raccoon logo as the primary front mark;
+- no camouflage uniform, medals, ribbons, rank insignia, branch insignia, dog tags, tactical gear, or imitation military uniform;
+- no celebratory language that conflicts with Memorial Day's remembrance purpose;
+- no statement or visual implication that Little Junkers is affiliated with, endorsed by, or fundraising for the U.S. military or a veterans organization unless that becomes factually true.
+
+This variant is a restrained family-service tribute, informed by the Griffin family's military service, not a military costume.
+
+## Fourth of July
+
+Annual window: **June 27 through July 11, inclusive**
+
+Treatment:
+- standard dark polo;
+- restrained red/white/blue cap treatment or small patriotic accent;
+- do not turn Randy into an Uncle Sam character;
+- no flag costume or oversized patriotic props.
+
+## October / Breast Cancer Awareness
+
+Annual window: **October 1-15, inclusive**
+
+Treatment:
+- Signature Pink `#FFCEE4` polo;
+- Dark Hero `#1E1C19` Little Junkers lettering/raccoon logo treatment;
+- standard dark cap;
+- no awareness ribbon or third-party awareness logo unless separately approved;
+- no copy or visual treatment implying Little Junkers is an official partner, sponsor, fundraiser, or donor unless that becomes factually true.
+
+This is a subtle brand-color acknowledgment only.
+
+## Halloween
+
+Annual window: **October 16-31, inclusive**
+
+Treatment:
+- standard dark Little Junkers polo;
+- restrained Halloween cap/brim accent or similarly small seasonal hat treatment;
+- no face paint, masks, fangs, horror imagery, or full costume.
+
+Halloween is a distinct second-half-of-October variant and does not retain the October Awareness pink polo.
+
+## Fall / Thanksgiving
+
+Annual window: **November 1 through Thanksgiving Day, inclusive**
+
+The owner's intended seasonal handoff is that the broader fall period runs until the day after Thanksgiving, while Christmas also begins the day after Thanksgiving. To avoid two active variants on the same date, the visible Fall/Thanksgiving variant ends at the close of Thanksgiving Day and Christmas takes precedence beginning the following day.
+
+Treatment:
+- standard dark polo;
+- warm cream/tan knit cap or restrained fall cap treatment;
+- no turkey costume, pilgrim costume, or novelty food props.
+
+## Christmas
+
+Annual window: **day after Thanksgiving through December 26, inclusive**
+
+Treatment:
+- standard dark Little Junkers polo;
+- traditional red-and-white Santa-style hat;
+- no Christmas sweater, elf costume, presents, ornaments, or extra decorative clutter unless separately approved.
+
+## New Year's
+
+Annual window: **December 27 through January 7, inclusive**
+
+Treatment:
+- standard dark Little Junkers polo;
+- restrained black/dark celebratory hat or cap treatment with small Signature Pink `#FFCEE4` or metallic-neutral detailing;
+- no glitter-heavy costume, novelty glasses, champagne imagery, or party props;
+- keep the treatment professional and consistent with the Little Junkers visual system.
+
+## Variant precedence
+
+When a calculated holiday window could overlap another, use this priority:
+1. Christmas;
+2. New Year's;
+3. Halloween;
+4. October Awareness;
+5. Fall / Thanksgiving;
+6. Memorial Day / Military Family Tribute;
+7. Fourth of July;
+8. Valentine's Day;
+9. Standard/default.
+
+The schedule is intentionally designed to minimize overlap:
+- October Awareness ends October 15; Halloween begins October 16.
+- Fall/Thanksgiving displays through Thanksgiving Day; Christmas begins the day after Thanksgiving.
+- Christmas ends December 26; New Year's begins December 27.
+
+## Implementation rule
+
+Seasonal selection should be centralized in one reusable configuration/helper rather than implemented as scattered page-specific date checks.
+
+The selector should:
+- use the Little Junkers operating timezone;
+- evaluate the current local calendar date;
+- return one canonical Randy variant key;
+- fall back to `standard` outside approved windows;
+- allow a future explicit override for testing/preview without changing production dates.
+
+Initial variant keys:
+
+```text
+standard
+valentines
+memorial_day
+fourth_of_july
+october_awareness
+halloween
+fall_thanksgiving
+christmas
+new_years
+```
+
+Date logic requirements:
+- fixed-date windows may be stored as month/day ranges;
+- Thanksgiving-dependent windows must calculate U.S. Thanksgiving dynamically each year as the fourth Thursday in November;
+- Memorial Day-dependent windows must calculate U.S. Memorial Day dynamically each year as the last Monday in May;
+- all start and end dates are inclusive;
+- calculations use the Little Junkers operating timezone, not UTC;
+- preview/testing may force a variant key without changing the production calendar configuration.
+
+Do not create additional seasonal variants without updating this specification first.
+
+## Shared seasonal asset system
+
+The seasonal selector is a **sitewide visual-governance mechanism**, not a Randy-only feature.
+
+The same canonical variant key and operating-timezone date logic must be available to other approved illustrated assets so seasonal treatments stay coordinated. Randy remains the character authority, but participating assets should not implement their own independent holiday calendars.
+
+### Little Junkers pickup truck
+
+Approved illustrated pickup-truck assets — especially truck-vs-dumpster size guidance and other educational renderings — participate in the same seasonal variant system as Randy.
+
+Core truck rules:
+- the truck must remain immediately recognizable as the Little Junkers pickup truck;
+- preserve the truck's core silhouette, proportions, branding, wheels, cab/bed relationship, and scale usefulness;
+- seasonal decoration is secondary and restrained;
+- never obscure the Little Junkers logo or make the truck harder to use as a size/scale reference;
+- do not turn the truck into a parade float, costume vehicle, toy-like prop, or novelty illustration;
+- when Randy and the truck appear together, both must use the same active seasonal variant.
+
+Approved truck treatments by existing variant key:
+- `standard`: no seasonal decoration;
+- `valentines`: subtle Signature Pink accent such as a small mirror, grille, or trim detail; no oversized hearts;
+- `memorial_day`: restrained patriotic detail such as a small flag-style accent or muted red/white/blue trim; no camouflage, military insignia, or implied military affiliation;
+- `fourth_of_july`: restrained red/white/blue bunting, pennant, mirror, or grille detail; no oversized flag treatment;
+- `october_awareness`: subtle pink trim/accent only; no ribbon or implied charity/awareness partnership;
+- `halloween`: small tasteful Halloween trim or warm/orange accent; no faces, teeth, horror styling, or costume-truck treatment;
+- `fall_thanksgiving`: restrained autumn leaf/cream/tan accent; no novelty food or character props;
+- `christmas`: small Christmas lights are expressly approved; a restrained wreath or similarly clean festive accent may be used if it does not obscure branding or form;
+- `new_years`: restrained celebratory trim using approved pink and/or metallic-neutral accents; no confetti-heavy or party-prop treatment.
+
+### New visual-asset review requirement
+
+Every new reusable illustrated or decorative website asset must include an explicit seasonal-theming decision during asset development.
+
+The review must record one of:
+1. **Seasonal participant** — the asset uses the centralized variant key and has approved treatments defined before production use; or
+2. **Seasonally neutral** — the asset intentionally remains unchanged year-round.
+
+Do not assume every asset should be seasonal. The decision should consider:
+- whether seasonal treatment adds useful brand personality;
+- whether it would distract from conversion, comprehension, safety, pricing, legal, or transactional content;
+- whether the asset appears near Randy or another seasonal participant and therefore benefits from visual coordination;
+- whether seasonal decoration would reduce professionalism or make the asset feel overly playful.
+
+Transactional, legal, safety-critical, pricing-critical, and data-visualization assets should default to **seasonally neutral** unless an explicit design approval says otherwise.
+
+Seasonal participation is a design-system choice and must not be implemented ad hoc at the page level.
+
+---
+
+# 10. Website Usage
 
 ## Homepage
 
@@ -201,7 +415,7 @@ The bubble must be visually consistent sitewide.
 
 ---
 
-# 10. Chat Modal Visual Treatment
+# 11. Chat Modal Visual Treatment
 
 Suggested production treatment:
 
@@ -216,7 +430,7 @@ Do not make the chat window look like a separate third-party product.
 
 ---
 
-# 11. Asset Requirements
+# 12. Asset Requirements
 
 A final Randy asset set should include:
 
@@ -239,7 +453,7 @@ The raccoon hat logo and Little Junkers shirt logo should use approved source ar
 
 ---
 
-# 12. Generation / Creative Prompt Guardrails
+# 13. Generation / Creative Prompt Guardrails
 
 Any future image-generation prompt for Randy must explicitly include:
 
@@ -255,13 +469,15 @@ Any future image-generation prompt for Randy must explicitly include:
 - no photorealism;
 - no tattoos unless later explicitly approved;
 - no random accessories;
-- no alternate logos.
+- no alternate logos;
+- no companion raccoon;
+- seasonal apparel only when using an approved seasonal variant from this specification.
 
 Generated variants are not automatically canonical. They must be checked against the master reference before use.
 
 ---
 
-# 13. Character Governance
+# 14. Character Governance
 
 The master Randy reference and this specification are the source of truth.
 
