@@ -64,7 +64,7 @@ assert.equal(e.estimatedRentalSubtotal, null, "unapproved rate cannot be used");
 
 const pricing = read("lib/pricing.ts");
 assert.ok(pricing.includes('proposed?.status === "approved"'), "canonical API must affirm approval");
-assert.ok(pricing.includes("proposed?.effectiveFrom"), "approved rate must be effective");
+assert.ok(pricing.includes('typeof proposed.effectiveFrom === "string"'), "approved rate must be effective");
 assert.ok(pricing.includes('proposed?.maxDays === 30'), "approved contract must cover 3-30 days");
 assert.ok(!pricing.includes("ratePerExtraDay: tier.extraDay"), "never use legacy overage");
 const planner = read("components/DaysPlusPlanner.tsx");
