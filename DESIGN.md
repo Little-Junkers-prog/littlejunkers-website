@@ -28,6 +28,15 @@ Experience is how confidently and comfortably a customer moves from curious visi
 
 Keep smaller linked text in dark ink with a visible underline. Keep focus rings and contrast accessible.
 
+## Universal navigation — small screens to desktop
+
+- Keep the Little Junkers logo and a **Start Booking** button in the desktop header. The company phone number stays available beside the menu on wider screens.
+- Use one consistent right-side menu on all viewports. The horizontal desktop nav was removed because long links wrapped awkwardly and crowded the brand.
+- Include the three named dumpster product pages, all-sizes anchor, Pricing, Compare, Service Areas, Materials, FAQ, About, Blog and a direct booking action in the drawer.
+- Drawer opens from the right with a dimmed background, explicit close button, outside-click dismissal, Escape dismissal, scroll lock, keyboard focus management and reduced-motion support.
+- Keep navigation links in the server-rendered HTML even though the open drawer portals to the document body for proper stacking. This protects SEO and avoids sticky-header clipping.
+- Never remove the primary booking CTA just to make the header minimal. Checkout completion still requires the separate launch-gated transaction integration.
+
 ## Prototype A — homepage
 
 - Dramatic photographic top, with the real `hero-driveway` image substantially more visible on the right and a readable horizontal dark gradient behind copy.
