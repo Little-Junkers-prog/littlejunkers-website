@@ -10,7 +10,7 @@ export default function MobileBar() {
       <a className="btn btn--secondary" href={smsHref}>
         Text
       </a>
-      <Link className="btn btn--primary" href="/plan">Prices</Link>
+      <Link className="btn btn--primary" href="/plan">Book</Link>
     </div>
   );
 }
