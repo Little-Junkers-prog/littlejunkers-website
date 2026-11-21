@@ -83,8 +83,8 @@ assert.ok(drawer.includes('event.key !== "Tab"'), "keyboard focus is contained i
 assert.ok(drawer.includes('onClick={() => close(true)}'), "drawer can close with outside click or close button");
 assert.ok(drawer.includes('href="/#sizes"'), "the all-sizes page remains discoverable");
 assert.ok(drawer.includes("aria-current={pathname === item.href"), "drawer identifies current page");
-assert.ok(!css.includes(".mobile-bar,\\n  .menu {"), "desktop breakpoint no longer hides the menu");
-assert.ok(!css.includes(".site-nav {\\n    display: flex;"), "desktop breakpoint does not restore old nav");
+assert.ok(!css.includes(".mobile-bar,\n  .menu {"), "desktop breakpoint no longer hides the menu");
+assert.ok(!css.includes(".site-nav {\n    display: flex;"), "desktop breakpoint does not restore old nav");
 assert.ok(css.includes(".menu__layer.is-open"), "desktop backdrop and drawer are visible when opened");
 assert.ok(css.includes(".menu__button-label"), "menu is recognizable on desktop");
 assert.ok(css.includes("@media (prefers-reduced-motion: reduce)"), "drawer motion respects reduced motion");
