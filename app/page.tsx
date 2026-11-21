@@ -104,7 +104,7 @@ export default async function Home() {
       <section className="section experience-plan" id="plan">
         <div className="container">
           <div className="section-head"><p className="eyebrow">Days Plus planner</p><h2>Your project doesn't have to fit a fixed package.</h2><p>Start with three days. Add up to 27 more, or ask for a personal quote on longer projects. Select a size, city or ZIP, and dates to see an estimated price.</p></div>
-          <DaysPlusPlanner basePrices={basePriceSnapshot(pricing)} />
+          <DaysPlusPlanner basePrices={basePriceSnapshot(pricing)} daysPlusRates={pricing?.daysPlusRates ?? null} />
         </div>
       </section>
 
