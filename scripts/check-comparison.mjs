@@ -131,10 +131,10 @@ assert.equal(rankComparisonCards(mock,16,3)[0].price,525,"ranking cannot be engi
 const comparisonMarkup = readFileSync(new URL("../components/ComparisonTool.tsx", import.meta.url), "utf8");
 const firstCard = comparisonMarkup.slice(
   comparisonMarkup.indexOf('className="comparison-card comparison-card--lj"'),
-  comparisonMarkup.indexOf('{visible.map((offer)')
+  comparisonMarkup.indexOf('{visible.map((offer')
 );
 const competitorCard = comparisonMarkup.slice(
-  comparisonMarkup.indexOf('{visible.map((offer)'),
+  comparisonMarkup.indexOf('{visible.map((offer'),
   comparisonMarkup.indexOf('{current && current.comparison.status === "ready"')
 );
 const expectedRows = ["Size", "Rental duration", "Included weight", "Delivery", "Extra weight", "Extra day"];
