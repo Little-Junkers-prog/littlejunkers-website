@@ -12,6 +12,8 @@ const design = read("DESIGN.md");
 const pricing = read("components/PriceCards.tsx");
 const city = read("app/[slug]/CityPage.tsx");
 const charter = read("PROJECT-CHARTER.md");
+const header = read("components/Header.tsx");
+const drawer = read("components/MobileMenu.tsx");
 
 assert.ok(home.includes('className="hero on-dark experience-hero"'), "home has scoped signature hero");
 assert.ok(home.includes("photos.hero.src"), "homepage hero uses first-party photo manifest");
@@ -67,4 +69,23 @@ assert.ok(charter.includes("booking") || charter.includes("Booking"), "project c
 assert.ok(!home.includes("import * as THREE"), "no unapproved 3D runtime bundle");
 assert.ok(!css.includes("scroll-behavior: instant"), "accessible scroll behavior preserved");
 
+assert.ok(!header.includes('className="site-nav"'), "desktop nav rows should not reappear");
+assert.ok(header.includes("<MobileMenu"), "one universal navigation component at every size");
+assert.ok(header.includes('site-header__book'), "booking CTA stays prominent in desktop header");
+assert.ok(header.includes('Start Booking'), "booking CTA remains primary");
+assert.ok(drawer.includes("createPortal(drawer, document.body)"), "drawer is not clipped by sticky header stacking");
+assert.ok(drawer.includes('aria-expanded={open}'), "menu button announces open state");
+assert.ok(drawer.includes('aria-controls={panelId}'), "menu button controls drawer");
+assert.ok(drawer.includes('role="dialog"'), "drawer provides appropriate accessible modal semantics");
+assert.ok(drawer.includes("inert={!open}"), "closed drawer is not tabbable");
+assert.ok(drawer.includes('event.key === "Escape"'), "Escape dismisses drawer");
+assert.ok(drawer.includes('event.key !== "Tab"'), "keyboard focus is contained in open drawer");
+assert.ok(drawer.includes('onClick={() => close(true)}'), "drawer can close with outside click or close button");
+assert.ok(drawer.includes('href="/#sizes"'), "the all-sizes page remains discoverable");
+assert.ok(drawer.includes("aria-current={pathname === item.href"), "drawer identifies current page");
+assert.ok(!css.includes(".mobile-bar,\\n  .menu {"), "desktop breakpoint no longer hides the menu");
+assert.ok(!css.includes(".site-nav {\\n    display: flex;"), "desktop breakpoint does not restore old nav");
+assert.ok(css.includes(".menu__layer.is-open"), "desktop backdrop and drawer are visible when opened");
+assert.ok(css.includes(".menu__button-label"), "menu is recognizable on desktop");
+assert.ok(css.includes("@media (prefers-reduced-motion: reduce)"), "drawer motion respects reduced motion");
 console.log("Experience design prototype contract checks passed.");
