@@ -2943,3 +2943,133 @@ a:hover {
     transition: none !important;
   }
 }
+
+
+/* Days Plus pricing clarity and comparison mobile discoveries. */
+.cx-planner__subtotal-label {
+  font-size: .77rem !important;
+  color: var(--ink-mid);
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin: 0 0 8px !important;
+}
+.cx-planner__breakdown {
+  display: grid;
+  gap: 0;
+  margin: 18px 0 12px;
+  border-top: 1px solid var(--border-card);
+}
+.cx-planner__breakdown > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border-card);
+  font-size: .91rem;
+}
+.cx-planner__breakdown > div > strong {
+  font-weight: 850;
+  text-align: right;
+}
+.cx-planner__breakdown > div.cx-planner__unpriced > strong {
+  color: var(--pink-text);
+}
+.cx-planner__pending .cx-planner__incomplete {
+  background: var(--pink-background);
+  border-left: 4px solid var(--pink-text);
+  border-radius: var(--radius-control);
+  padding: 12px 13px;
+  color: var(--ink-primary);
+  line-height: 1.5;
+  margin: 14px 0 0;
+}
+@media (max-width: 600px) {
+  .cx-planner__pending .cx-estimate-price {
+    font-size: clamp(1.7rem, 7vw, 2.25rem);
+    overflow-wrap: anywhere;
+  }
+}
+/* Comparison cards stay unchanged on desktop: mobile gets an explicit path down. */
+.comparison-scroll-hint,
+.comparison-between-cards {
+  display: none;
+}
+#comparison-competitors { scroll-margin-top: 94px; }
+@media (max-width: 650px) {
+  .comparison-scroll-hint {
+    border: 1px solid var(--pink-bar);
+    border-radius: var(--radius-card);
+    padding: 12px 16px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--pink-background);
+    color: var(--ink-primary);
+  }
+  .comparison-scroll-hint__label {
+    font-size: .79rem;
+    font-weight: 750;
+    color: var(--ink-mid);
+    max-width: 120px;
+    line-height: 1.35;
+  }
+  .comparison-scroll-hint__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 850;
+    font-size: .93rem;
+    text-decoration: none;
+    color: var(--ink-primary);
+  }
+  .comparison-scroll-hint__arrow {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--dark-hero);
+    color: var(--signature-pink);
+    font-size: 1.55rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .comparison-between-cards {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: var(--pink-background);
+    border-radius: var(--radius-card);
+    padding: 14px;
+    color: var(--ink-primary);
+    font-size: .88rem;
+    font-weight: 850;
+    text-align: center;
+  }
+  .comparison-between-cards a {
+    display: inline-flex;
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+}
+@media (max-width: 650px) and (prefers-reduced-motion: no-preference) {
+  @keyframes comparison-arrow-point {
+    0%, 100% { transform: translateY(0); }
+    45% { transform: translateY(5px); }
+  }
+  .comparison-scroll-hint__arrow {
+    animation: comparison-arrow-point 1.7s ease-in-out infinite;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .comparison-scroll-hint__arrow { animation: none !important; }
+}
