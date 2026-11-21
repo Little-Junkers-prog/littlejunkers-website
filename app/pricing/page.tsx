@@ -33,5 +33,5 @@ export default async function PricingPage() {
     <h2>Need more days?</h2>
     <p>Rent for three days or choose up to 30 total days. Need longer? Contact us for a custom quote. We'll confirm the exact price and available dates before booking.</p>
     <p><Link href="/compare">See how we compare →</Link> · <Link href="/long-term-rental">Longer-term rental questions</Link></p>
-  </div></section><section className="section section--surface"><div className="container"><DaysPlusPlanner basePrices={basePriceSnapshot(pricing)} /></div></section></>;
+  </div></section><section className="section section--surface"><div className="container"><DaysPlusPlanner basePrices={basePriceSnapshot(pricing)} daysPlusRates={pricing?.daysPlusRates ?? null} /></div></section></>;
 }

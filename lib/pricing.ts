@@ -6,6 +6,7 @@
 // pages show a "see current prices" state. There is no stale fallback.
 
 import { bookingOrigin } from "./company";
+import type { ApprovedDaysPlusRates } from "./days-plus";
 
 export type SizeYards = 11 | 16 | 21;
 export const SIZE_YARDS: SizeYards[] = [11, 16, 21];
@@ -30,6 +31,9 @@ export type Pricing = {
   sizes: Record<SizeYards, SizeFacts>;
   // Per-ton rate for weight over the included tonnage, billed at disposal.
   overagePerTon: number | null;
+  // Nullable until the canonical booking API explicitly exposes APPROVED prepaid Days Plus rates.
+  // Legacy tier.dailyOverage must never populate this field.
+  daysPlusRates: ApprovedDaysPlusRates | null;
 };
 
 const REVALIDATE_SECONDS = 600;
@@ -99,7 +103,36 @@ function parse(payload: any): Pricing | null {
     : null;
   const overage = overageRow ? num(overageRow.amount) : null;
 
-  return { tiers, zones, zips, sizes, overagePerTon: overage && overage > 0 ? overage : null };
+
+  // Future canonical contract: do not infer prepaid extra-day pricing from the
+  // older 3/5/7-day packages or their dailyOverage column.
+  const proposed = payload.daysPlusContract;
+  let daysPlusRates: ApprovedDaysPlusRates | null = null;
+  if (proposed?.status === "approved" && proposed?.baseDays === 3 &&
+      proposed?.maxDays === 30 && typeof proposed.approvalId === "string" &&
+      proposed.approvalId.trim().length > 0 &&
+      typeof proposed.effectiveFrom === "string" &&
+      /^\\d{4}-\\d{2}-\\d{2}$/.test(proposed.effectiveFrom)) {
+    const today = new Date().toISOString().slice(0, 10);
+    const from = proposed.effectiveFrom;
+    const to = typeof proposed.effectiveTo === "string" ? proposed.effectiveTo : null;
+    if (from <= today && (!to || (/^\\d{4}-\\d{2}-\\d{2}$/.test(to) && to >= today))) {
+      const approved = {} as Record<SizeYards, number>;
+      let valid = true;
+      for (const yards of SIZE_YARDS) {
+        const raw = proposed.ratePerExtraDay?.[String(yards)];
+        const value = raw === null || raw === undefined || raw === "" ? null : num(raw);
+        if (value === null || value < 0) { valid = false; break; }
+        approved[yards] = value;
+      }
+      if (valid) {
+        daysPlusRates = { baseDays: 3, maxDays: 30,
+          ratePerExtraDay: approved, approvalId: proposed.approvalId };
+      }
+    }
+  }
+
+  return { tiers, zones, zips, sizes, overagePerTon: overage && overage > 0 ? overage : null, daysPlusRates };
 }
 
 export async function getPricing(): Promise<Pricing | null> {

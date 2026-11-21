@@ -26,21 +26,13 @@ export default function Header() {
           <span>Little Junkers</span>
         </Link>
 
-        <nav className="site-nav" aria-label="Main">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
         <div className="site-header__actions">
           <a className="site-header__phone" href={telHref}>
             {company.phoneDisplay}
           </a>
-          <a className="btn btn--primary" href="/plan">
-            Check Prices
-          </a>
+          <Link className="btn btn--primary site-header__book" href="/plan">
+            Start Booking
+          </Link>
           <MobileMenu
             dumpsters={sizes.map((size) => ({ href: `/${size.slug}`, label: `${size.yards}-Yard · ${size.name}` }))}
             more={links.slice(1)}
