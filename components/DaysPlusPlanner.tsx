@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSavedArea, useSavedLocationQuery } from "./ZipContext";
 import { company, smsHref, telHref } from "@/lib/company";
 import { formatUsd, type AreaResult, type SizeYards } from "@/lib/pricing";
-import type { BasePriceMap } from "@/lib/days-plus";
+import { estimateDaysPlus, type BasePriceMap, type ApprovedDaysPlusRates } from "@/lib/days-plus";
 
 type Props = {
   initialSize?: SizeYards;
@@ -13,6 +13,7 @@ type Props = {
   initialZip?: string;
   initialLocation?: string;
   basePrices: BasePriceMap | null;
+  daysPlusRates: ApprovedDaysPlusRates | null;
 };
 type Lookup =
   | { status: "idle" }
@@ -30,7 +31,7 @@ function displayDate(value: string) {
 }
 
 export default function DaysPlusPlanner({
-  initialSize, initialDays = 3, initialZip, initialLocation, basePrices
+  initialSize, initialDays = 3, initialZip, initialLocation, basePrices, daysPlusRates
 }: Props) {
   const savedArea = useSavedArea();
   const savedLocation = useSavedLocationQuery();
@@ -77,9 +78,12 @@ export default function DaysPlusPlanner({
   const currentResult = lookup.status === "done" && lookup.query === currentQuery ? lookup.result : null;
   const verifiedArea = currentResult?.status === "served" ? currentResult : null;
   const areaFee = verifiedArea ? verifiedArea.zone.deliveryFee : null;
-  const base = basePrices ? (size ? basePrices[size] : Math.min(...Object.values(basePrices))) : null;
-  const subtotal = base !== null && Number.isFinite(base) ? base + (areaFee ?? 0) : null;
-  const extraDays = days - 3;
+  const estimate = estimateDaysPlus({ basePrices, rates: daysPlusRates, size, days, deliveryFee: areaFee });
+  const startingBase = basePrices ? Math.min(...Object.values(basePrices)) : null;
+  const extraDays = estimate.extraDays;
+  const needsDaysPrice = estimate.missing.includes("extra_day_rate");
+  const fullRentalSubtotal = estimate.estimatedRentalSubtotal;
+  const knownSubtotal = estimate.knownSubtotal;
 
   let areaMessage = "Enter a city or ZIP to check delivery fees.";
   if (currentQuery) {
@@ -98,9 +102,9 @@ export default function DaysPlusPlanner({
     <div className="cx-planner">
       <div className="cx-planner__intro">
         <div>
-          <p className="eyebrow">Choose your dumpster</p>
-          <h3>See your price as you go.</h3>
-          <p>Select a size, city or ZIP, date, and rental length. Your estimate will update with the details we know.</p>
+          <p className="eyebrow">Plan your Pink Bin rental</p>
+          <h3>Tell us what you need.</h3>
+          <p>Pick your dumpster, tell us where it's going, and choose your dates. We'll show the rental charges as you go.</p>
         </div>
         <small>Preview · no reservations</small>
       </div>
@@ -144,19 +148,39 @@ export default function DaysPlusPlanner({
             <label className="cx-planner__range-label" htmlFor="plan-days">Choose 3–30 days</label>
             <input id="plan-days" type="range" min={3} max={30} step={1} value={days}
               onChange={(event) => { setDays(Number(event.target.value)); setReviewed(false); }} />
-            <p>{days === 3 ? "Three days included." : extraDays + " additional " + (extraDays === 1 ? "day" : "days") + " selected. Additional-day price to be confirmed."}</p>
+            <p>{days === 3 ? "Your base rental covers three days." :
+              estimate.extraDaysCharge !== null && estimate.perExtraDay !== null
+                ? extraDays + " extra " + (extraDays === 1 ? "day" : "days") + " at " + formatUsd(estimate.perExtraDay) + "/day: " + formatUsd(estimate.extraDaysCharge) + "."
+                : extraDays + " extra " + (extraDays === 1 ? "day" : "days") + ". We'll confirm the additional-day price before booking."}</p>
             <Link href="/long-term-rental">Need more than 30 days? Request a quote</Link>
           </fieldset>
         </div>
-        <aside className="cx-planner__summary" aria-label="Price estimate">
-          <p className="eyebrow">Your price estimate</p>
+        <aside className="cx-planner__summary" aria-label="Rental pricing summary">
+          <p className="eyebrow">Your rental pricing</p>
           <div className="cx-planner__pending" aria-live="polite">
-            <strong className="cx-estimate-price">{subtotal !== null ? formatUsd(subtotal) : "Price unavailable"}</strong>
-            <p>{subtotal === null ? "We couldn't retrieve the current base prices. Call or text for a quote." :
-              !size ? "Starting price for our 11-yard dumpster. Choose a size to update it." :
-              "Current three-day base" + (areaFee !== null ? " plus the delivery fee for this area." : ". Delivery fee not yet included.")}</p>
-            {extraDays > 0 ? <p><strong>{extraDays} extra {extraDays === 1 ? "day" : "days"}:</strong> price not yet included.</p> : null}
-            <p className="fine">Estimate only. Final charges and availability are confirmed before payment.</p>
+            <p className="cx-planner__subtotal-label">{fullRentalSubtotal !== null ? "Estimated rental subtotal" :
+              !size ? "Starting at · 3-day rental" : needsDaysPrice ? "Full rental price pending" : "Current known charges"}</p>
+            <strong className="cx-estimate-price">
+              {fullRentalSubtotal !== null ? formatUsd(fullRentalSubtotal) :
+                !size && startingBase !== null ? formatUsd(startingBase) :
+                needsDaysPrice ? "Extra days not priced" :
+                knownSubtotal !== null ? formatUsd(knownSubtotal) : "Price unavailable"}
+            </strong>
+            <div className="cx-planner__breakdown">
+              <div><span>3-day rental</span><strong>{size && estimate.base !== null ? formatUsd(estimate.base) : !size && startingBase !== null ? "From " + formatUsd(startingBase) : "Choose a size"}</strong></div>
+              {extraDays > 0 ? <div className={needsDaysPrice ? "cx-planner__unpriced" : ""}>
+                <span>{extraDays} extra {extraDays === 1 ? "day" : "days"}{estimate.perExtraDay !== null ? " × " + formatUsd(estimate.perExtraDay) : ""}</span>
+                <strong>{estimate.extraDaysCharge !== null ? formatUsd(estimate.extraDaysCharge) : "Not yet priced"}</strong>
+              </div> : null}
+              <div><span>Delivery fee</span><strong>{estimate.delivery !== null ? formatUsd(estimate.delivery) : "Enter a city or ZIP"}</strong></div>
+            </div>
+            {needsDaysPrice ? <p className="cx-planner__incomplete">
+              The {days}-day total is not available yet. The base rental
+              {estimate.base !== null ? " is " + formatUsd(estimate.base) : ""}
+              {estimate.delivery !== null ? " and your delivery fee is " + formatUsd(estimate.delivery) : ""}.
+              We won't guess the additional-day charge.
+            </p> : null}
+            <p className="fine">This is an estimate, not a confirmed quote. Final fees and delivery availability must be verified before payment.</p>
           </div>
           <dl>
             <div><dt>Dumpster</dt><dd>{size ? size + "-yard" : "Choose a size"}</dd></div>
@@ -165,13 +189,15 @@ export default function DaysPlusPlanner({
             <div><dt>Requested date</dt><dd>{date ? displayDate(date) : "Choose a date"}</dd></div>
             <div><dt>Rental length</dt><dd>{days} days</dd></div>
           </dl>
-          <button type="button" className="btn btn--primary btn--block" onClick={() => setReviewed(true)}>Review my estimate</button>
+          <button type="button" className="btn btn--primary btn--block" onClick={() => setReviewed(true)}>Review rental details</button>
           {reviewed ? <p role="status" className="cx-planner__status">
             {!size ? "Choose a dumpster size to narrow your estimate." :
               !currentQuery ? "Enter a city or ZIP to check delivery fees." :
               !date ? "Choose a preferred delivery date." :
               currentResult?.status === "unknown" ? "Please contact us to confirm the delivery area." :
-              "Your estimate is shown above. We'll confirm an exact price and available dates before booking."}
+              needsDaysPrice ? "Additional-day pricing hasn't been approved yet. Call or text us if you need a complete quote for this rental." :
+              fullRentalSubtotal === null ? "We'll confirm the delivery fee and remaining charges before you book." :
+              "Your estimated rental subtotal is above. Final availability and any other charges need confirmation before payment."}
           </p> : null}
           <p className="fine"><a href={telHref}>Call {company.phoneDisplay}</a> or <a href={smsHref}>text us</a> with questions.</p>
         </aside>
