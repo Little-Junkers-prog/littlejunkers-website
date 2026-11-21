@@ -23,7 +23,9 @@ type Payload = {
   littleJunkers: {
     base: number | null; baseDays: number; includedTons: number;
     overagePerTon: number | null; deliveryFee: number | null;
-    knownSubtotal: number | null; additionalDaysPriced: boolean; confirmedQuote: false;
+    knownSubtotal: number | null; additionalDaysPriced: boolean;
+    extraDaysCharge: number | null; perExtraDay: number | null;
+    estimatedRentalSubtotal: number | null; confirmedQuote: false;
   };
   comparison: { status: "ready" | "source_unavailable"; source: "live" | "review_snapshot" | "unavailable"; snapshotAsOf: string | null; verifiedLocalCount: number; fallbackUsed: boolean; candidates: Offer[] };
 };
@@ -87,6 +89,10 @@ export default function ComparisonTool({
   const local = current?.littleJunkers;
   const results = current?.comparison.candidates ?? [];
   const visible = showMore ? results : results.slice(0, 2);
+  const visibleCount = visible.length;
+  const showCompetitorCue = !!current && current.comparison.status === "ready" && visibleCount > 0;
+  const localSubtotal = local?.estimatedRentalSubtotal ?? null;
+  const incompleteDays = days > 3 && !local?.additionalDaysPriced;
   // Anonymous first-party click count. Navigation always wins if reporting fails.
   // No cookies, visitor ID, name, phone or address are sent in this payload.
   function recordCompetitorClick(providerId: string, action: "detail" | "outbound") {
@@ -142,25 +148,49 @@ export default function ComparisonTool({
         Their delivery availability and final price in your area are <strong>not verified</strong>.
       </p>
     </div>}
+    {showCompetitorCue && <div className="comparison-scroll-hint">
+      <span className="comparison-scroll-hint__label">Your comparisons are ready</span>
+      <a href="#comparison-competitors" className="comparison-scroll-hint__link">
+        View {visibleCount} more {visibleCount === 1 ? "company" : "companies"} below
+        <span className="comparison-scroll-hint__arrow" aria-hidden="true">↓</span>
+      </a>
+    </div>}
     <div className="comparison-results">
       <article className="comparison-card comparison-card--lj">
         <p className="comparison-card__eyebrow">Little Junkers</p>
         <h2>{size}-yard dumpster</h2>
-        <p className="comparison-card__price">{local?.base !== null && local?.base !== undefined ? formatUsd(local.base) : "Check current price"}</p>
-        <p className="comparison-card__price-note">3-day base {local?.base !== null && local?.base !== undefined ? "estimate" : "price"}</p>
+        <p className="comparison-card__price">
+          {incompleteDays ? "Full price pending" :
+            localSubtotal !== null ? formatUsd(localSubtotal) :
+            local?.knownSubtotal !== null && local?.knownSubtotal !== undefined ? formatUsd(local.knownSubtotal) :
+            local?.base !== null && local?.base !== undefined ? formatUsd(local.base) : "Check current price"}
+        </p>
+        <p className="comparison-card__price-note">
+          {incompleteDays ? "3-day base: " + (local?.base !== null && local?.base !== undefined ? formatUsd(local.base) : "Checking") + "; " + (days - 3) + " additional days need a price" :
+            localSubtotal !== null ? "Estimated " + days + "-day rental subtotal; final fees may apply" :
+            "Known rental charges so far; delivery and other fees may apply"}
+        </p>
         <dl>
           <div><dt>Size</dt><dd>{size}-yard dumpster</dd></div>
           <div><dt>Rental duration</dt><dd>{days} days</dd></div>
           <div><dt>Included weight</dt><dd>{local ? formatTons(local.includedTons) : "Checking"}</dd></div>
           <div><dt>Delivery</dt><dd>{local ? (local.deliveryFee === null ? "Not yet priced" : local.deliveryFee === 0 ? "Free for this area" : formatUsd(local.deliveryFee)) : "Check city or ZIP"}</dd></div>
           <div><dt>Extra weight</dt><dd>{local ? money(local.overagePerTon) + (local.overagePerTon !== null ? "/ton" : "") : "Checking"}</dd></div>
-          <div><dt>Extra day</dt><dd>Rate not yet confirmed</dd></div>
+          <div><dt>Extra day</dt><dd>{days > 3 && local?.perExtraDay !== null && local?.perExtraDay !== undefined
+          ? formatUsd(local.perExtraDay) + "/day" : "Rate not yet confirmed"}</dd></div>
         </dl>
-        {days > 3 ? <p className="comparison-card__notice">{days - 3} additional days are not yet included in this estimate.</p> : null}
-        <Link className="btn btn--primary btn--block" href={planHref}>See my estimate</Link>
+        {incompleteDays ? <p className="comparison-card__notice">{days - 3} additional days are not included. We won't guess the rate.</p> : null}
+        <Link className="btn btn--primary btn--block" href={planHref}>Start Booking</Link>
         <p className="fine">The final price and delivery availability are confirmed before booking.</p>
       </article>
-      {visible.map((offer) => <article className="comparison-card" key={offer.providerId}>
+      {showCompetitorCue && <div className="comparison-between-cards">
+        <span>Keep scrolling to compare the other companies</span>
+        <a href="#comparison-competitors" aria-label="Jump to competitor offers">
+          <span className="comparison-scroll-hint__arrow" aria-hidden="true">↓</span>
+        </a>
+      </div>}
+      {visible.map((offer, index) => <article className="comparison-card"
+        key={offer.providerId} id={index === 0 ? "comparison-competitors" : undefined}>
         <p className="comparison-card__eyebrow">{offer.coverage === "verified" ? "Listed in your city" : "Regional reference · coverage unverified"}</p>
         <h2>{offer.name}</h2>
         <p className="comparison-card__price">
