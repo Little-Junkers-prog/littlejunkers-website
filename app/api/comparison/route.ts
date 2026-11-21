@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPricing, lookupArea } from "@/lib/pricing";
 import { getComparisonCandidates } from "@/lib/comparison";
+import { basePriceSnapshot, estimateDaysPlus } from "@/lib/days-plus";
 
 export const dynamic = "force-dynamic";
 
@@ -22,19 +23,25 @@ export async function GET(request: NextRequest) {
   }
   const area = lookupArea(pricing, location);
   const comparison = await getComparisonCandidates(size as 11 | 16 | 21, area, days);
-  const tier = pricing.tiers.find((row) => row.days === 3);
-  const base = tier?.prices[size as 11 | 16 | 21] ?? null;
-  // A zone fee can be estimated only when the input is unambiguous.
+  // Prepaid Days Plus uses only a separately approved canonical rate.
+  // Never infer it from 5-/7-day packages or legacy dailyOverage.
   const deliveryFee = area.status === "served" ? area.zone.deliveryFee : null;
+  const daysQuote = estimateDaysPlus({
+    basePrices: basePriceSnapshot(pricing), rates: pricing.daysPlusRates,
+    size: size as 11 | 16 | 21, days, deliveryFee,
+  });
   return NextResponse.json({
     request: { location, size, days },
     location: area,
     size, days,
     littleJunkers: {
-      base, baseDays: 3, includedTons: pricing.sizes[size as 11 | 16 | 21].includedTons,
+      base: daysQuote.base, baseDays: 3, includedTons: pricing.sizes[size as 11 | 16 | 21].includedTons,
       overagePerTon: pricing.overagePerTon, deliveryFee,
-      knownSubtotal: base !== null && deliveryFee !== null ? base + deliveryFee : null,
-      additionalDaysPriced: days === 3,
+      knownSubtotal: daysQuote.knownSubtotal,
+      additionalDaysPriced: daysQuote.extraDaysCharge !== null,
+      extraDaysCharge: daysQuote.extraDaysCharge,
+      perExtraDay: daysQuote.perExtraDay,
+      estimatedRentalSubtotal: daysQuote.estimatedRentalSubtotal,
       confirmedQuote: false,
     },
     comparison,
