@@ -1,9 +1,9 @@
 ---
-title: "Ready to Reclaim Your Space? The Ultimate Guide to DIY Junk Removal"
+title: "DIY Junk Removal: Rent a Dumpster and Do It Yourself"
 date: 2025-08-29
-updated: 2026-11-16
+updated: 2026-11-22
 author: "Little Junkers"
-excerpt: "You sort and load on your own schedule, we haul it away. Why a dumpster rental is the do-it-yourself alternative to a junk removal crew."
+excerpt: "You sort and load on your own schedule, we haul it away. How a dumpster rental works as the do-it-yourself option for junk removal."
 category: guides
 status: published
 index: true
@@ -16,23 +16,19 @@ seoTitle: "DIY Junk Removal: Rent a Dumpster and Do It Yourself"
 seoDescription: "DIY junk removal in South Atlanta: you load, we haul. How a dumpster rental compares with hiring a junk removal crew, and how to get started."
 ---
 
-We've all seen the commercials: a team of smiling professionals swoops in and makes your junk disappear. It's called "junk removal," and it's a popular way to get rid of unwanted stuff. But what if you could get the same result on your own schedule, often for less?
+You've probably seen the junk removal ads: a crew shows up, loads everything and drives off. That works. But a lot of people would rather sort through their own stuff, work on their own schedule and keep the cost down. That's DIY junk removal. We drop off a dumpster, you fill it, and we haul it away.
 
-Welcome to DIY junk removal. Here's how a dumpster rental puts you in control of your cleanout.
+## Why People Go the DIY Route
 
-## The Appeal of DIY Junk Removal
+- **You know the price up front.** Junk removal crews usually price by how much stuff you have and how long it takes to load, so you often don't know the bill until the truck is full. A dumpster rental has a set price for your size, and you can [see it before you book](/pricing).
+- **You set the pace.** You don't have to have everything ready for one pickup window. Load a little each evening or knock it out over a weekend.
+- **You decide what goes.** Going through your own things lets you pull out what's worth donating, selling or keeping.
 
-The concept is simple: you handle the sorting and loading, and we handle the haul-away. It suits anyone who wants to:
+## How It Works
 
-- **Save money:** Junk removal services in the South Atlanta area usually charge by the volume of your junk and the labor involved, so the bill isn't known until the truck is loaded. A dumpster rental has a published, upfront price. [See today's prices](/#sizes).
-- **Control the process:** With a rental, you set the pace. There's no pressure to have everything ready for a pickup window. Work over a few days and only get rid of what you want to.
-- **Declutter with purpose:** Sorting your own belongings gives you the chance to decide what gets donated, recycled, or saved.
+1. **Pick a size.** Three sizes cover everything from one garage to a whole house: the [11-yard](/11-yard-the-little-junker), [16-yard](/16-yard-the-mighty-middler) and [21-yard](/21-yard-the-big-junker).
+2. **[Book it on our site](/plan).** Enter your city or ZIP, pick your size and choose your dates.
+3. **Fill it up.** Old furniture, remodel debris, yard waste and household junk can all go in. Check [what you can put in a dumpster](/what-can-i-put-in-a-dumpster) for the few exceptions.
+4. **We haul it away.** We pick it up on the last day of your rental, and we text you the day before.
 
-## How to Start Your DIY Junk Removal Project
-
-1. **Choose your dumpster.** Three sizes cover everything from a garage cleanout to a whole-house project: [11-yard](/11-yard-the-little-junker), [16-yard](/16-yard-the-mighty-middler) and [21-yard](/21-yard-the-big-junker).
-2. **[Book online](https://book.littlejunkersllc.com/rent-a-dumpster).** Enter your ZIP and choose your dates.
-3. **Fill it up.** Take your time. Old furniture, remodel debris, yard waste and household junk can all go in. Check [what you can put in a dumpster](/what-can-i-put-in-a-dumpster) for the few exceptions.
-4. **We haul it away.** We pick up on the last day of your rental and send a text the day before.
-
-Ready to take on the clutter? Turn your next big cleanout into a DIY project.
+Not sure which size? Text us a photo of the pile and we'll tell you.
