@@ -20,6 +20,8 @@ const banned = [
   [/has(n'?t| not) been approved|fleet-confirmed|build my rental/i, "internal process language in customer copy", "pages"],
   [/seamless|stress-free|hassle-free|tailored solution|designed with you in mind|game[- ]changer|peace of mind/i, "generic AI/corporate filler", "pages"],
   [/\u2014/, "em dash in customer copy (rewrite the sentence)", "pages"],
+  // ADR-CX-004: booking happens inside the site. No CTA may send customers to the booking app.
+  [/bookingUrl\(|book\.littlejunkersllc\.com\/rent-a-dumpster/, "booking CTA must stay in-site (ADR-CX-004)", "pages"],
 ];
 
 const roots = ["app", "components", "lib", "content"];

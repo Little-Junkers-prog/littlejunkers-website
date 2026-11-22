@@ -1,9 +1,10 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqList from "@/components/FaqList";
 import FaqSearch from "@/components/FaqSearch";
 import JsonLd from "@/components/JsonLd";
-import { bookingUrl, company, smsHref, telHref } from "@/lib/company";
+import { company, smsHref, telHref } from "@/lib/company";
 import { buildFaqs } from "@/lib/faqs";
 import { getPricing } from "@/lib/pricing";
 
@@ -77,9 +78,9 @@ export default async function FaqPage() {
               <a className="btn btn--secondary" href={smsHref}>
                 Text
               </a>
-              <a className="btn btn--primary" href={bookingUrl()}>
+              <Link className="btn btn--primary" href="/plan">
                 Book a Dumpster
-              </a>
+              </Link>
             </div>
           </div>
         </div>

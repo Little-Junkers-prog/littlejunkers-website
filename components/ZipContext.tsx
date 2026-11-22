@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { bookingUrl } from "@/lib/company";
-import type { SizeYards } from "@/lib/pricing";
 
 // Remembers the visitor's last confirmed ZIP in this browser (sessionStorage),
 // so every price card and Book button on the site carries it into booking and
@@ -61,16 +59,6 @@ export function useSavedArea(): SavedArea | null {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   return mounted ? area : null;
-}
-
-// Book button that adds the saved ZIP (and a size, when given) to the handoff.
-export function BookLink({ size, className, children }: { size?: SizeYards; className?: string; children: React.ReactNode }) {
-  const area = useSavedArea();
-  return (
-    <a className={className} href={bookingUrl({ size, zip: area?.zip })}>
-      {children}
-    </a>
-  );
 }
 
 // One line under the price cards: the fee for the saved ZIP, or the generic note.

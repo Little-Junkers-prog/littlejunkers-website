@@ -14,6 +14,10 @@ Existing Odoo pages, prototypes, old branches, and historical code are reference
 
 The strategic objective is to build Little Junkers as a secure, bilingual, conversion-first Customer Experience Platform — not to recreate the Odoo website.
 
+## Booking lives in the website
+
+See [ADR-CX-004](docs/decisions/ADR-CX-004-in-site-booking.md): every booking CTA stays in the site. Never link customers to the booking app; reuse its server contracts instead of copying them.
+
 ## Current approved shopping architecture
 
 See [ADR-CX-002](docs/decisions/ADR-CX-002-shopping-hub-architecture.md): homepage shopping hub plus **retained dedicated SEO/intent pages**. Concept copy is not final. Days Plus 3–30 total days; 31+ human quote. Phase 1 website branch must not create real holds or charges before pricing/Fleet/CSR/checkout integration is separately approved and verified.

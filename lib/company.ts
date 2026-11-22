@@ -33,17 +33,10 @@ export const company = {
 
 export const siteUrl = "https://www.littlejunkersllc.com";
 
-// The booking app stays the transaction authority (D-007). Until the rebuilt
-// flow ships, CTAs hand off to the live funnel with the context it already reads.
+// Origin of the booking app's server APIs (pricing, Randy). Customers never get sent
+// there: every booking CTA stays inside this site (ADR-CX-004). The booking app's
+// funnel pages retire once in-site checkout is live.
 export const bookingOrigin = "https://book.littlejunkersllc.com";
-
-export function bookingUrl(context: { size?: 11 | 16 | 21; zip?: string } = {}): string {
-  const params = new URLSearchParams();
-  if (context.size) params.set("size", String(context.size));
-  if (context.zip && /^\d{5}$/.test(context.zip)) params.set("zip", context.zip);
-  const query = params.toString();
-  return `${bookingOrigin}/rent-a-dumpster${query ? `?${query}` : ""}`;
-}
 
 export const telHref = `tel:${company.phoneE164}`;
 export const smsHref = `sms:${company.textE164}`;
