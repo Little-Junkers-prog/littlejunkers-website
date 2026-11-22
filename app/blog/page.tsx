@@ -56,11 +56,8 @@ export default function BlogIndex() {
         <section className="section">
           <div className="container">
             <div className="notice">
-              <h2 style={{ fontSize: "1.3rem" }}>Posts are being moved over</h2>
-              <p style={{ marginTop: 6 }}>
-                Draft note: the existing blog articles have not been migrated into this build yet. The templates and URL
-                redirects are ready for them.
-              </p>
+              <h2 style={{ fontSize: "1.3rem" }}>No posts yet</h2>
+              <p style={{ marginTop: 6 }}>Check back soon.</p>
             </div>
           </div>
         </section>

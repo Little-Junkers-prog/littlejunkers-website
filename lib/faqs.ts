@@ -21,7 +21,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
     pricing && tier
       ? `It depends on the size and how long you keep it. Right now a ${tier.days}-day rental is ${list(
           SIZE_YARDS.map((y) => `${formatUsd(tier.prices[y])} for the ${y}-yard`),
-        )}.${tier.extraDay ? ` Extra days are ${formatUsd(tier.extraDay)} each.` : ""} Your exact price shows before you pay.`
+        )}. Extra days are priced separately. Your exact price shows before you pay.`
       : "It depends on the size, how long you keep it and where you are. Enter your ZIP to see today's price before you book.";
 
   const included = pricing
@@ -57,7 +57,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "extra-days",
           q: "Can I keep the dumpster longer?",
-          a: `Yes. Extra days are ${tier?.extraDay ? `${formatUsd(tier.extraDay)} each` : "billed by the day"}. Text us before your pickup date so we can move it on the schedule.`,
+          a: "Yes, up to 30 days in total. Pick your days when you book, or text us before your pickup date and we'll move it on the schedule. We'll confirm the extra-day price first.",
         },
       ],
     },
@@ -106,7 +106,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "early-pickup",
           q: "Can you pick it up early if I finish sooner?",
-          a: "Yes. Text us when you're done and we'll schedule the pickup. One thing to know before you ask: the rental ends when we pick up, so days you didn't use can't be saved for a later rental.",
+          a: "Yes. Text us when you're done and we'll schedule the pickup. Just know the rental ends when we pick up, so days you didn't use can't be saved for a later rental.",
         },
         {
           id: "hours",

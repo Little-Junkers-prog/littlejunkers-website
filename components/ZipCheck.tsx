@@ -99,7 +99,7 @@ export function AreaAnswer({ result }: { result: AreaResult }) {
     return (
       <div className="zip__result">
         <h3>We deliver in {result.label}</h3>
-        <p>Delivery fees vary by ZIP here. We can confirm the fee using your full address before booking.</p>
+        <p>The delivery fee here depends on your ZIP. Give us your address and we&apos;ll confirm it before you book.</p>
         <div className="btn-row" style={{ marginTop: 12 }}><a className="btn btn--primary" href={"/plan?location=" + encodeURIComponent(result.query)}>See my estimate</a></div>
       </div>
     );

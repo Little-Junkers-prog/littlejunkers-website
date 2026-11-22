@@ -75,7 +75,7 @@ export default function ComparisonTool({
         const result = await response.json() as Payload;
         if (!controller.signal.aborted) { setPayload(result); setStatus("ready"); }
       } catch {
-        if (!controller.signal.aborted) { setPayload(null); setStatus("error"); setError("We couldn't load the comparison right now. Try again or check the companies' websites."); }
+        if (!controller.signal.aborted) { setPayload(null); setStatus("error"); setError("We couldn't load the prices right now. Try again in a minute."); }
       }
     }, 350);
     return () => { window.clearTimeout(timer); controller.abort(); };
@@ -135,17 +135,17 @@ export default function ComparisonTool({
       {status === "idle" ? "Enter your city or ZIP to check local options." :
        status === "error" ? error :
        !current ? "Checking local options…" :
-       current.location.status === "served" ? "Published offers for " + current.location.label + ". Confirm delivery and final price directly." :
-       current.location.status === "split" ? "Enter your ZIP for a more precise delivery estimate." :
-       "We have not verified two competitors serving " + current.request.location + ". Here are regional reference offers."}
+       current.location.status === "served" ? "Prices for " + current.location.label + ". Check the final price and delivery with each company." :
+       current.location.status === "split" ? "Type your ZIP to get a closer delivery price." :
+       "We haven't confirmed two other companies that deliver to " + current.request.location + ". Here are some nearby ones."}
     </div>
 
     {current?.comparison.fallbackUsed && <div className="comparison-fallback" role="note">
-      <strong>Regional reference comparisons</strong>
+      <strong>Nearby companies</strong>
       <p>
-        We haven't verified two companies serving {current.request.location}. To help you compare,
-        we've included vetted providers with published offers for similar-sized dumpsters.
-        Their delivery availability and final price in your area are <strong>not verified</strong>.
+        We haven&apos;t found two other companies that deliver to {current.request.location}.
+        These companies are nearby and have similar dumpsters. We <strong>don&apos;t know</strong> if
+        they deliver to you or what they&apos;d charge. Ask them.
       </p>
     </div>}
     {showCompetitorCue && <div className="comparison-scroll-hint">
@@ -166,9 +166,9 @@ export default function ComparisonTool({
             local?.base !== null && local?.base !== undefined ? formatUsd(local.base) : "Check current price"}
         </p>
         <p className="comparison-card__price-note">
-          {incompleteDays ? "3-day base: " + (local?.base !== null && local?.base !== undefined ? formatUsd(local.base) : "Checking") + "; " + (days - 3) + " additional days need a price" :
-            localSubtotal !== null ? "Estimated " + days + "-day rental subtotal; final fees may apply" :
-            "Known rental charges so far; delivery and other fees may apply"}
+          {incompleteDays ? "3-day rental: " + (local?.base !== null && local?.base !== undefined ? formatUsd(local.base) : "Checking") + ". Call us to price the other " + (days - 3) + " days." :
+            localSubtotal !== null ? "Estimate for " + days + " days. Other fees may apply." :
+            "Price so far. Delivery and other fees may apply."}
         </p>
         <dl>
           <div><dt>Size</dt><dd>{size}-yard dumpster</dd></div>
@@ -179,9 +179,9 @@ export default function ComparisonTool({
           <div><dt>Extra day</dt><dd>{days > 3 && local?.perExtraDay !== null && local?.perExtraDay !== undefined
           ? formatUsd(local.perExtraDay) + "/day" : "Rate not yet confirmed"}</dd></div>
         </dl>
-        {incompleteDays ? <p className="comparison-card__notice">{days - 3} additional days are not included. We won't guess the rate.</p> : null}
+        {incompleteDays ? <p className="comparison-card__notice">The other {days - 3} days aren&apos;t in this price yet. Call or text us and we&apos;ll quote them.</p> : null}
         <Link className="btn btn--primary btn--block" href={planHref}>Start Booking</Link>
-        <p className="fine">The final price and delivery availability are confirmed before booking.</p>
+        <p className="fine">We confirm your final price and delivery date before you book.</p>
       </article>
       {showCompetitorCue && <div className="comparison-between-cards">
         <span>Keep scrolling to compare the other companies</span>
@@ -191,34 +191,34 @@ export default function ComparisonTool({
       </div>}
       {visible.map((offer, index) => <article className="comparison-card"
         key={offer.providerId} id={index === 0 ? "comparison-competitors" : undefined}>
-        <p className="comparison-card__eyebrow">{offer.coverage === "verified" ? "Listed in your city" : "Regional reference · coverage unverified"}</p>
+        <p className="comparison-card__eyebrow">{offer.coverage === "verified" ? "Serves your city" : "Nearby · may not deliver to you"}</p>
         <h2>{offer.name}</h2>
         <p className="comparison-card__price">
-          {offer.priceStatus !== "verified" ? "Price not verified" :
+          {offer.priceStatus !== "verified" ? "No posted price" :
            offer.priceDays !== null && offer.priceDays < days ? "Request " + days + "-day price" :
            (offer.priceQualifier === "starting_plus_delivery" ? "From " : "") + money(offer.price)}
         </p>
         <p className="comparison-card__price-note">
-          {offer.priceStatus !== "verified" ? "Check directly for current terms" :
+          {offer.priceStatus !== "verified" ? "Check their website for current prices" :
            offer.priceDays !== null && offer.priceDays < days
-             ? "Reference: " + money(offer.price) + " for up to " + offer.priceDays + " days; not a " + days + "-day quote"
+             ? money(offer.price) + " for up to " + offer.priceDays + " days. Ask them about " + days + " days."
              : offer.priceQualifier === "starting_plus_delivery"
-               ? "Published " + offer.priceDays + "-day starting price; delivery extra"
-               : "Published " + offer.priceDays + "-day offer; delivery fee unconfirmed"}
+               ? "Starting price for " + offer.priceDays + " days, plus delivery"
+               : "Price for " + offer.priceDays + " days. Ask them about delivery."}
         </p>
         <dl>
           <div><dt>Size</dt><dd>{offer.actualYards}-yard {offer.containerType === "dump_trailer" ? "dump trailer" : "dumpster"}</dd></div>
-          <div><dt>Rental duration</dt><dd>{offer.priceDays ? offer.priceDays + " days" : "Not verified"}</dd></div>
-          <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? formatTons(offer.includedTons) : "Not verified"}</dd></div>
+          <div><dt>Rental duration</dt><dd>{offer.priceDays ? offer.priceDays + " days" : "Not posted"}</dd></div>
+          <div><dt>Included weight</dt><dd>{offer.includedTons !== null ? formatTons(offer.includedTons) : "Not posted"}</dd></div>
           <div><dt>Delivery</dt><dd>Fee not confirmed</dd></div>
           <div><dt>Extra weight</dt><dd>{offer.overagePerPound !== null ? formatUsd(offer.overagePerPound) + "/lb" :
-            offer.overagePerTon !== null ? money(offer.overagePerTon) + "/ton" : "Not verified"}</dd></div>
-          <div><dt>Extra day</dt><dd>{offer.extraDayFee !== null ? money(offer.extraDayFee) + "/day" : "Not verified"}</dd></div>
+            offer.overagePerTon !== null ? money(offer.overagePerTon) + "/ton" : "Not posted"}</dd></div>
+          <div><dt>Extra day</dt><dd>{offer.extraDayFee !== null ? money(offer.extraDayFee) + "/day" : "Not posted"}</dd></div>
         </dl>
         {offer.priceStatus === "verified" && offer.priceDays !== days ? <p className="comparison-card__notice">
           {offer.priceDays !== null && offer.priceDays > days
-            ? "This offer includes up to " + offer.priceDays + " days; you selected " + days + ". The published price is shown without adjustment."
-            : "This published price covers " + offer.priceDays + " days, shorter than your " + days + "-day selection. Extra days are not included."}
+            ? "Their price covers up to " + offer.priceDays + " days. We didn't lower it for your " + days + " days."
+            : "Their price covers " + offer.priceDays + " days, so the rest of your " + days + " days aren't included."}
         </p> : null}
         <a className="btn btn--secondary btn--block" href={offer.sourceUrl ?? offer.website} target="_blank" rel="noopener noreferrer"
           onAuxClick={() => recordCompetitorClick(offer.providerId, "outbound")}
@@ -236,15 +236,14 @@ export default function ComparisonTool({
         <p className="fine comparison-card__source">
           Independent provider; not affiliated with Little Junkers.{" "}
           {offer.verifiedOn
-            ? <> Published website information checked {labelDate(offer.verifiedOn)}.</>
-            : <> Current pricing has not been verified.</>}
-          {" "}Confirm prices and terms directly with the company.
+            ? <> We checked their website on {labelDate(offer.verifiedOn)}.</>
+            : <> We haven&apos;t checked their current prices.</>}
+          {" "}Confirm prices and terms with them.
         </p>
       </article>)}
       {current && current.comparison.status === "ready" && results.length < 2 && <article className="comparison-card comparison-card--empty">
         <h2>More local companies</h2>
-        <p>We haven't confirmed two comparable offers for this location and size yet. That doesn't mean other companies don't serve your area.</p>
-        <p>We only show a price when the source, rental term and local coverage have been verified.</p>
+        <p>We haven&apos;t found two other companies with posted prices for this size here yet. Others may still serve your area.</p>
       </article>}
     </div>
     {results.length > 2 && <button className="btn btn--secondary comparison-more" type="button"
@@ -252,11 +251,11 @@ export default function ComparisonTool({
       {showMore ? "Show fewer companies" : "See more companies (" + (results.length - 2) + ")"}
     </button>}
     {current && current.comparison.status !== "ready" &&
-      <p className="comparison-source-note" role="alert">Competitor data is temporarily unavailable. Please check providers directly or try again.</p>}
+      <p className="comparison-source-note" role="alert">Other companies' prices won't load right now. Try again in a minute.</p>}
     {current?.comparison.source === "review_snapshot" &&
-      <p className="comparison-source-note">Competitor examples are from our vetted, dated comparison records (last exported {labelDate(current.comparison.snapshotAsOf)}). Online prices and availability may change.</p>}
-    <p className="comparison-source-note">Competitor information comes from offers publicly posted on each company's website. Little Junkers is not affiliated with, endorsed by, or acting as an agent for these providers. Published prices, rental periods, included weight and fees can change or differ by location. Confirm current availability, delivery charges and final terms directly with each company before renting.</p>
-    <p className="fine"><Link href="/pricing">Little Junkers pricing details</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
+      <p className="comparison-source-note">We last checked other companies' prices on {labelDate(current.comparison.snapshotAsOf)}. They may have changed since.</p>}
+    <p className="comparison-source-note">Other companies' details come from offers publicly posted on each company's website. Little Junkers isn't affiliated with these companies. They don't endorse us, and we don't act for them. Their prices, days, weight limits and fees can change or be different where you live. Check with each company before you rent.</p>
+    <p className="fine"><Link href="/pricing">Our prices and fees</Link> · <Link href="/long-term-rental">Need more than 30 days?</Link></p>
     <CompetitorExitDialog target={exitTarget} onClose={() => setExitTarget(null)}
       onOutboundClick={(providerId) => recordCompetitorClick(providerId, "outbound")}
       location={current?.location.status === "served"

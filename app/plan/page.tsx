@@ -22,7 +22,7 @@ export default async function PlanPage({searchParams}:{searchParams:Promise<Para
   const zip = /^\d{5}$/.test(rawZip) ? rawZip : undefined;
   const location = first(params.location)?.trim().slice(0, 60) || undefined;
   return <section className="section"><div className="container">
-    <div className="section-head"><p className="eyebrow">Online dumpster rental</p><h1>Pick your Pink Bin and rental dates</h1><p>Tell us what size you need, where to deliver it, and how long you want it. You’ll see the rental charges and any details we still need to confirm.</p></div>
+    <div className="section-head"><p className="eyebrow">Online dumpster rental</p><h1>Pick your Pink Bin and rental dates</h1><p>Pick a size, tell us where it’s going and how long you need it. Your estimate updates as you go.</p></div>
     <DaysPlusPlanner initialSize={size} initialDays={days} initialZip={zip} initialLocation={location} basePrices={basePriceSnapshot(pricing)} daysPlusRates={pricing?.daysPlusRates ?? null} />
   </div></section>;
 }

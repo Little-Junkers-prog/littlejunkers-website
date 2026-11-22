@@ -90,11 +90,11 @@ export default function DaysPlusPlanner({
     if (lookup.status === "loading" && lookup.query === currentQuery) areaMessage = "Checking " + currentQuery + "…";
     else if (currentResult?.status === "served") {
       areaMessage = "We deliver to " + currentResult.label + ". Delivery fee: " + (currentResult.zone.deliveryFee === 0 ? "free" : formatUsd(currentResult.zone.deliveryFee)) + ".";
-      if (currentResult.zips.length > 1) areaMessage += " We'll confirm the exact address before booking.";
+      if (currentResult.zips.length > 1) areaMessage += " We'll check your address before you book.";
     } else if (currentResult?.status === "split") {
-      areaMessage = "We deliver in " + currentResult.label + ", but the fee varies by ZIP. We can confirm it with your address.";
+      areaMessage = "We deliver in " + currentResult.label + ". The fee depends on your ZIP, so we'll confirm it with your address.";
     } else if (currentResult?.status === "unknown") areaMessage = "We couldn't confirm that location. Call or text us and we'll check.";
-    else if (lookup.status === "error" && lookup.query === currentQuery) areaMessage = "Location lookup isn't available right now. Call or text for delivery fees.";
+    else if (lookup.status === "error" && lookup.query === currentQuery) areaMessage = "We can't check that right now. Call or text us for your delivery fee.";
     else areaMessage = "Checking the delivery area…";
   }
 
@@ -156,10 +156,10 @@ export default function DaysPlusPlanner({
           </fieldset>
         </div>
         <aside className="cx-planner__summary" aria-label="Rental pricing summary">
-          <p className="eyebrow">Your rental pricing</p>
+          <p className="eyebrow">Your estimate</p>
           <div className="cx-planner__pending" aria-live="polite">
             <p className="cx-planner__subtotal-label">{fullRentalSubtotal !== null ? "Estimated rental subtotal" :
-              !size ? "Starting at · 3-day rental" : needsDaysPrice ? "Full rental price pending" : "Current known charges"}</p>
+              !size ? "Starting at · 3-day rental" : needsDaysPrice ? "Full rental price pending" : "Your price so far"}</p>
             <strong className="cx-estimate-price">
               {fullRentalSubtotal !== null ? formatUsd(fullRentalSubtotal) :
                 !size && startingBase !== null ? formatUsd(startingBase) :
@@ -170,17 +170,17 @@ export default function DaysPlusPlanner({
               <div><span>3-day rental</span><strong>{size && estimate.base !== null ? formatUsd(estimate.base) : !size && startingBase !== null ? "From " + formatUsd(startingBase) : "Choose a size"}</strong></div>
               {extraDays > 0 ? <div className={needsDaysPrice ? "cx-planner__unpriced" : ""}>
                 <span>{extraDays} extra {extraDays === 1 ? "day" : "days"}{estimate.perExtraDay !== null ? " × " + formatUsd(estimate.perExtraDay) : ""}</span>
-                <strong>{estimate.extraDaysCharge !== null ? formatUsd(estimate.extraDaysCharge) : "Not yet priced"}</strong>
+                <strong>{estimate.extraDaysCharge !== null ? formatUsd(estimate.extraDaysCharge) : "Call for price"}</strong>
               </div> : null}
               <div><span>Delivery fee</span><strong>{estimate.delivery !== null ? formatUsd(estimate.delivery) : "Enter a city or ZIP"}</strong></div>
             </div>
             {needsDaysPrice ? <p className="cx-planner__incomplete">
-              The {days}-day total is not available yet. The base rental
+              We can&apos;t show a {days}-day total online yet. The 3-day rental
               {estimate.base !== null ? " is " + formatUsd(estimate.base) : ""}
-              {estimate.delivery !== null ? " and your delivery fee is " + formatUsd(estimate.delivery) : ""}.
-              We won't guess the additional-day charge.
+              {estimate.delivery !== null ? " and delivery is " + formatUsd(estimate.delivery) : ""}.
+              Call or text us and we&apos;ll quote the extra days.
             </p> : null}
-            <p className="fine">This is an estimate, not a confirmed quote. Final fees and delivery availability must be verified before payment.</p>
+            <p className="fine">This is an estimate. We confirm your final price and delivery date before you pay.</p>
           </div>
           <dl>
             <div><dt>Dumpster</dt><dd>{size ? size + "-yard" : "Choose a size"}</dd></div>
@@ -191,13 +191,13 @@ export default function DaysPlusPlanner({
           </dl>
           <button type="button" className="btn btn--primary btn--block" onClick={() => setReviewed(true)}>Review rental details</button>
           {reviewed ? <p role="status" className="cx-planner__status">
-            {!size ? "Choose a dumpster size to narrow your estimate." :
+            {!size ? "Pick a size to see your price." :
               !currentQuery ? "Enter a city or ZIP to check delivery fees." :
-              !date ? "Choose a preferred delivery date." :
-              currentResult?.status === "unknown" ? "Please contact us to confirm the delivery area." :
-              needsDaysPrice ? "Additional-day pricing hasn't been approved yet. Call or text us if you need a complete quote for this rental." :
-              fullRentalSubtotal === null ? "We'll confirm the delivery fee and remaining charges before you book." :
-              "Your estimated rental subtotal is above. Final availability and any other charges need confirmation before payment."}
+              !date ? "Pick the day you want it." :
+              currentResult?.status === "unknown" ? "Call or text us and we'll check that location." :
+              needsDaysPrice ? "We can't price extra days online yet. Call or text us and we'll give you the full price." :
+              fullRentalSubtotal === null ? "We'll confirm the delivery fee and any other charges before you book." :
+              "That's your estimate. We'll confirm the date and any other charges before you pay."}
           </p> : null}
           <p className="fine"><a href={telHref}>Call {company.phoneDisplay}</a> or <a href={smsHref}>text us</a> with questions.</p>
         </aside>

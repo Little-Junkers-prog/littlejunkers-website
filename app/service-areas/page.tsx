@@ -97,7 +97,7 @@ export default async function ServiceAreas({ searchParams }: { searchParams: Pro
         <div className="container">
           <div className="section-head">
             <h2>Delivery areas and fees</h2>
-            <p>The delivery fee is added to the dumpster rental price. It isn&apos;t a different rental price.</p>
+            <p>The dumpster price is the same everywhere. Some areas add a delivery fee on top.</p>
           </div>
 
           {groups.length > 0 ? (

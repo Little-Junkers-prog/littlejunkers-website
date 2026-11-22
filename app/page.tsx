@@ -20,16 +20,16 @@ export const metadata = {
 };
 
 const steps = [
-  ["Check your city or ZIP", "See delivery-area fees, then choose your dumpster size."],
-  ["Choose your dates", "See your estimate for a 3–30-day rental."],
+  ["Check your city or ZIP", "You'll see your delivery fee. Then pick a size."],
+  ["Pick your dates", "Keep it anywhere from 3 to 30 days."],
   ["Fill it. We haul it away.", "We set it where you want it and pick it up when your rental ends."],
 ];
 
 const reasons = [
-  ["A smaller truck", "We deliver with a hook-lift truck, not a full-size roll-off, and we check the spot before we set the dumpster down."],
-  ["Clear pricing information", "Compare the three-day base, included weight, ZIP delivery fee and conditional charges."],
-  ["Plan the right rental", "Choose 3–30 total days in Days Plus, or request a custom quote for longer jobs."],
-  ["Owned here", "Marcus and Ivy run Little Junkers from Peachtree City."],
+  ["A smaller truck", "Our hook-lift truck is smaller than a full-size roll-off truck. We look at the spot before we set the dumpster down."],
+  ["Prices up front", "You can see the 3-day price, the weight that's included and your delivery fee before you book."],
+  ["Keep it as long as you need", "Pick 3 to 30 days. Need it longer? Call us and we'll put a quote together."],
+  ["Owned right here", "Marcus and Ivy run Little Junkers out of Peachtree City."],
 ];
 
 export default async function Home() {
@@ -48,7 +48,7 @@ export default async function Home() {
               <span className="experience-hero__title-first">Need a</span>{" "}
               <span className="accent experience-hero__title-last">dumpster?</span>
             </h1>
-            <p className="lead">Check your delivery area and see dumpster prices. Enter a city or ZIP.</p>
+            <p className="lead">Type your city or ZIP to see prices and your delivery fee.</p>
             <ZipCheck />
             <p className="hero__meta">
               <span>11-, 16- and 21-yard Pink Bins</span>
@@ -74,10 +74,10 @@ export default async function Home() {
             <h2>
               Meet the <span className="accent">Pink Bins.</span>
             </h2>
-            <p>Pick a size, look at the actual bin, and see what your three-day starting price covers.</p>
+            <p>Tap a size to see the bin and what the 3-day price covers.</p>
           </div>
           {pricing ? <PinkBinExperience pricing={pricing} /> : <PricingUnavailable />}
-          <p className="fine" style={{ marginTop: 14 }}><Link href="/pricing">See detailed pricing and fees</Link> · <Link href="/compare">How to compare rental offers</Link></p>
+          <p className="fine" style={{ marginTop: 14 }}><Link href="/pricing">All prices and fees</Link> · <Link href="/compare">See how we compare</Link></p>
           <div className="callout" style={{ marginTop: 24 }}>
             <div>
               <h3>Not sure which size?</h3>
@@ -97,13 +97,13 @@ export default async function Home() {
 
       <section className="section section--surface experience-compare" id="compare">
         <div className="container cx-overview">
-          <div><p className="eyebrow">Know what you're paying for</p><h2>See how rental prices compare.</h2><p>Rental length, included tonnage, delivery charges and weight overages can matter as much as the dumpster size. Check the details before you choose.</p><div className="btn-row"><Link className="btn btn--primary" href="/compare">See how we compare</Link><Link className="btn btn--secondary" href="/pricing">See our pricing details</Link></div></div>
-          <div className="cx-note"><h3>Four questions worth asking</h3><ol><li>How many rental days are included?</li><li>How much disposal weight is covered?</li><li>What delivery fee applies to my ZIP?</li><li>Is the dumpster available for my full rental?</li></ol><p className="fine">Local competitor prices will only appear when the source and date have been verified.</p></div>
+          <div><p className="eyebrow">Shopping around?</p><h2>See how we compare.</h2><p>Days included, weight included and delivery fees change from one company to the next. We put local companies' published prices side by side so you can check.</p><div className="btn-row"><Link className="btn btn--primary" href="/compare">See how we compare</Link><Link className="btn btn--secondary" href="/pricing">See our pricing details</Link></div></div>
+          <div className="cx-note"><h3>Ask any dumpster company</h3><ol><li>How many rental days are included?</li><li>How much disposal weight is covered?</li><li>What delivery fee applies to my ZIP?</li><li>Is it available for my whole rental?</li></ol></div>
         </div>
       </section>
       <section className="section experience-plan" id="plan">
         <div className="container">
-          <div className="section-head"><p className="eyebrow">Days Plus planner</p><h2>Your project doesn't have to fit a fixed package.</h2><p>Start with three days. Add up to 27 more, or ask for a personal quote on longer projects. Select a size, city or ZIP, and dates to see an estimated price.</p></div>
+          <div className="section-head"><p className="eyebrow">Days Plus</p><h2>Pick how many days you need.</h2><p>Every rental starts with 3 days. Add up to 27 more, or call us for anything longer. Choose a size, your city or ZIP and a date to see your estimate.</p></div>
           <DaysPlusPlanner basePrices={basePriceSnapshot(pricing)} daysPlusRates={pricing?.daysPlusRates ?? null} />
         </div>
       </section>
@@ -134,7 +134,6 @@ export default async function Home() {
       <section className="section experience-reasons">
         <RevealOnScroll className="container">
           <div className="section-head">
-            <p className="eyebrow">A different kind of dumpster company</p>
             <h2>Why Little Junkers</h2>
           </div>
           <div className="grid grid--4 experience-reasons__grid">
@@ -171,9 +170,9 @@ export default async function Home() {
       <section className="section experience-gallery">
         <div className="container">
           <div className="section-head">
-            <p className="eyebrow">On actual Little Junkers jobs</p>
+            <p className="eyebrow">Our jobs</p>
             <h2>Seen around town</h2>
-            <p>Photos from our deliveries around Fayette and Coweta County.</p>
+            <p>A few of our deliveries around town.</p>
           </div>
           <PhotoRail
             label="Little Junkers job photos"

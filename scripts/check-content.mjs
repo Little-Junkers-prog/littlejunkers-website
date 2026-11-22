@@ -15,6 +15,11 @@ const banned = [
   [/464-7364/, "stale phone number"],
   [/flat rate/i, "roofing language: say inclusive rate"],
   [/junk removal company|full-service junk/i, "junk-removal positioning"],
+  // AI drift: build notes, reviewer language and filler that leaked into customer copy (ADR-CX-003).
+  [/won'?t guess|won'?t substitute|draft note|slot for the|prototype|vetted|regional reference/i, "internal or method note in customer copy", "pages"],
+  [/has(n'?t| not) been approved|fleet-confirmed|build my rental/i, "internal process language in customer copy", "pages"],
+  [/seamless|stress-free|hassle-free|tailored solution|designed with you in mind|game[- ]changer|peace of mind/i, "generic AI/corporate filler", "pages"],
+  [/\u2014/, "em dash in customer copy (rewrite the sentence)", "pages"],
 ];
 
 const roots = ["app", "components", "lib", "content"];
@@ -35,7 +40,9 @@ for (const file of files) {
   const lines = fs.readFileSync(file, "utf8").split("\n");
   lines.forEach((line, index) => {
     if (/^\s*(\/\/|\*|\/\*)/.test(line)) return; // code comments are not customer-facing
-    for (const [pattern, reason] of banned) {
+    for (const [pattern, reason, scope] of banned) {
+      // "pages" rules cover site pages and components; migrated blog posts get their own editorial pass.
+      if (scope === "pages" && file.endsWith(".md")) continue;
       if (pattern.test(line)) {
         failures += 1;
         console.error(`${file}:${index + 1}  ${reason}\n    ${line.trim()}`);

@@ -101,7 +101,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="fine">Capacity shown is an approximate volume comparison. Weight limits still apply.</p>
+            <p className="fine">Truck loads are a rough guide to space. Weight limits still apply.</p>
           </div>
           <div className="callout" style={{ gridTemplateColumns: "1fr" }}>
             <div>

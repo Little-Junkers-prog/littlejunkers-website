@@ -86,11 +86,11 @@ export default function PinkBinExperience({ pricing }: { pricing: Pricing }) {
             <span>THE PINK BIN LINEUP</span>
             <strong>{selected}<small>YARD</small></strong>
           </div>
-          <p className="bin-shop__photo-credit">Real Little Junkers equipment · {size.hero.caption ?? "From our service area"}</p>
+          <p className="bin-shop__photo-credit">{size.hero.caption ?? "One of our Pink Bins on a local job"}</p>
         </div>
 
         <div className="bin-shop__details" aria-live="polite" aria-atomic="false">
-          <p className="eyebrow">Meet your Pink Bin</p>
+          <p className="eyebrow">{selected}-yard Pink Bin</p>
           <h3>{size.name}</h3>
           <p className="bin-shop__details-description">{size.fitLine}</p>
           <div className="bin-shop__price">
@@ -98,7 +98,7 @@ export default function PinkBinExperience({ pricing }: { pricing: Pricing }) {
               <small>3-day base rental</small>
               <strong>{formatUsd(price)}</strong>
             </div>
-            <span>Price before any ZIP-based delivery fee or extra charges</span>
+            <span>Plus your delivery fee, if your ZIP has one</span>
           </div>
           <div className="bin-shop__fits">
             <h4>A good fit for</h4>
@@ -110,7 +110,7 @@ export default function PinkBinExperience({ pricing }: { pricing: Pricing }) {
           </div>
           <dl className="bin-shop__facts">
             <div><dt>Dumpster size</dt><dd>{selected} cubic yards</dd></div>
-            <div><dt>Included disposal weight</dt><dd>{typeof included === "number" ? formatTons(included) : "Confirm with us"}</dd></div>
+            <div><dt>Included disposal weight</dt><dd>{typeof included === "number" ? formatTons(included) : "Ask us"}</dd></div>
             <div><dt>Footprint</dt><dd>{size.box.lengthFt} ft × {size.box.widthFt} ft</dd></div>
             <div><dt>Sidewall height</dt><dd>{size.box.wallFt} ft</dd></div>
             {pricing.overagePerTon != null ? (
@@ -127,15 +127,15 @@ export default function PinkBinExperience({ pricing }: { pricing: Pricing }) {
             </Link>
           </div>
           <p className="fine bin-shop__smallprint">
-            Need more than three days? Choose your rental length in the next step.
-            Additional-day pricing and availability are confirmed before a reservation.
+            Need it longer than 3 days? You&apos;ll pick your days next. We confirm your
+            delivery date and the extra-day price before you book.
           </p>
         </div>
       </div>
 
       <div className="bin-shop__footer">
-        <p>Still comparing rental companies? Compare the included days, weight and delivery fees—not just the starting price.</p>
-        <Link href={`/compare?size=${selected}`}>Compare local offers for the {selected}-yard <span aria-hidden="true">↗</span></Link>
+        <p>Shopping around?</p>
+        <Link href={`/compare?size=${selected}`}>See how our {selected}-yard compares <span aria-hidden="true">↗</span></Link>
       </div>
     </div>
   );

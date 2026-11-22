@@ -14,12 +14,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about-us" },
 };
 
-const proof = ["Locally owned in Peachtree City", "Established 2024", "Upfront pricing", "Driveway-friendly dumpsters", "Real local owners"];
+const proof = ["Based in Peachtree City", "Started in 2024", "11-, 16- and 21-yard dumpsters", `Call or text ${company.hoursDisplay}`];
 
 const approach = [
   ["Simple booking", "Pick a size and dates online, any time. No phone tag unless you'd rather talk."],
   ["Prices you can see", "The price for your ZIP shows before you book. Extra days and extra weight only apply if you use them."],
-  ["Care for your property", "We deliver with a hook-lift truck, not a full-size roll-off, and we check the spot before we set the dumpster down."],
+  ["Careful with your driveway", "Our hook-lift truck is smaller than a full-size roll-off. We look at the spot first, and we'll lay down boards to protect your driveway if you ask."],
 ];
 
 export default function About() {
@@ -33,7 +33,7 @@ export default function About() {
         <div className="container split">
           <div className="stack">
             <h1>
-              Local owners. Real service. Cleaner <span className="accent">neighborhoods.</span>
+              Your neighbors with the pink <span className="accent">dumpsters.</span>
             </h1>
             <p className="lead">
               Little Junkers is a dumpster rental company in Peachtree City, Georgia. Marcus and Ivy started it in 2024 and
@@ -80,10 +80,6 @@ export default function About() {
               . We deliver them to homes and job sites across Fayette and Coweta County.
             </p>
             <p>We&apos;re a dumpster rental company. We drop it off, you fill it, and we haul it away.</p>
-            <p className="fine">
-              Slot for the fuller story: how the name came about, why the dumpsters are pink, and the first blue one. It links here
-              once &ldquo;The Little Junkers Story&rdquo; is written and published on the blog.
-            </p>
           </div>
           <div className="grid grid--2">
             <Photo photo={photos.ivyTruck} sizes="(min-width: 900px) 25vw, 100vw" />
@@ -125,7 +121,7 @@ export default function About() {
               ))}
               <li>
                 <Link className="chip" href="/service-areas">
-                  View All Service Areas
+                  All service areas
                 </Link>
               </li>
             </ul>
@@ -145,7 +141,7 @@ export default function About() {
             </div>
             <div className="btn-row">
               <Link className="btn btn--secondary" href="/blog">
-                Check Out Our Blog
+                Read the blog
               </Link>
               <Link className="btn btn--primary" href="/#sizes">
                 See Sizes &amp; Prices
