@@ -5,8 +5,8 @@ import { basePriceSnapshot } from "@/lib/days-plus";
 import type { SizeYards } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "See Your Dumpster Rental Estimate",
-  description: "See a price estimate for an 11, 16 or 21-yard dumpster. Enter a city or ZIP and choose your dates.",
+  title: "Book a Dumpster Online",
+  description: "Choose a Little Junkers Pink Bin, check your delivery area, and select rental dates. Start a dumpster booking online.",
   robots: { index: false, follow: false }
 };
 type Params = Record<string, string | string[] | undefined>;
@@ -22,7 +22,7 @@ export default async function PlanPage({searchParams}:{searchParams:Promise<Para
   const zip = /^\d{5}$/.test(rawZip) ? rawZip : undefined;
   const location = first(params.location)?.trim().slice(0, 60) || undefined;
   return <section className="section"><div className="container">
-    <div className="section-head"><p className="eyebrow">Your rental estimate</p><h1>Check your dumpster price</h1><p>Choose a dumpster, city or ZIP, and dates to see an estimate. We'll confirm the exact price and availability before booking.</p></div>
-    <DaysPlusPlanner initialSize={size} initialDays={days} initialZip={zip} initialLocation={location} basePrices={basePriceSnapshot(pricing)} />
+    <div className="section-head"><p className="eyebrow">Online dumpster rental</p><h1>Pick your Pink Bin and rental dates</h1><p>Pick a size, tell us where it’s going and how long you need it. Your estimate updates as you go.</p></div>
+    <DaysPlusPlanner initialSize={size} initialDays={days} initialZip={zip} initialLocation={location} basePrices={basePriceSnapshot(pricing)} daysPlusRates={pricing?.daysPlusRates ?? null} />
   </div></section>;
 }

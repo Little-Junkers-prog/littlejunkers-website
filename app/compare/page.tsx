@@ -3,7 +3,7 @@ import ComparisonTool from "@/components/ComparisonTool";
 
 export const metadata: Metadata = {
   title: "Compare Local Dumpster Rental Prices",
-  description: "Compare local dumpster sizes, published rental prices, included weight, rental terms and delivery details for a city or ZIP in South Metro Atlanta.",
+  description: "See our dumpster prices next to what other local companies post online. Compare days, weight and delivery for your city or ZIP.",
   alternates: { canonical: "/compare" }
 };
 
@@ -25,7 +25,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
       <div className="container comparison-hero__inner">
         <p className="eyebrow">Local dumpster rental comparison</p>
         <h1 id="comparison-heading">See how we compare.</h1>
-        <p>Published rental prices, dumpster sizes, and the terms worth checking before you rent.</p>
+        <p>Our prices next to what other local companies post online. Check the days, the weight and the delivery fee.</p>
       </div>
     </section>
     <section className="section comparison-content">

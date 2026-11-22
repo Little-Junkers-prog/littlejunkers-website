@@ -22,9 +22,9 @@ export default async function SizePage({ size }: { size: SizeContent }) {
     <>
       <Breadcrumbs trail={[{ label: title, href: `/${size.slug}` }]} />
 
-      <section className="page-hero">
-        <div className="container split">
-          <div className="stack">
+      <section className="page-hero experience-size">
+        <div className="container split experience-size__layout">
+          <div className="stack experience-size__copy">
             <p className="eyebrow">{size.name}</p>
             <h1>
               {size.yards}-Yard <span className="accent">Dumpster</span>
@@ -52,11 +52,17 @@ export default async function SizePage({ size }: { size: SizeContent }) {
               <PricingUnavailable />
             )}
           </div>
-          <Photo photo={size.hero} sizes="(min-width: 900px) 50vw, 100vw" priority caption={false} />
+          <div className="experience-size__visual">
+            <Photo photo={size.hero} sizes="(min-width: 900px) 50vw, 100vw" priority caption={false} />
+            <div className="experience-size__marker" aria-hidden="true">
+              <strong>{size.yards}</strong>
+              <span>CUBIC YARDS</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section experience-size__fit">
         <div className="container split split--wide">
           <div>
             <div className="section-head">
@@ -95,7 +101,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="fine">Capacity shown is an approximate volume comparison. Weight limits still apply.</p>
+            <p className="fine">Truck loads are a rough guide to space. Weight limits still apply.</p>
           </div>
           <div className="callout" style={{ gridTemplateColumns: "1fr" }}>
             <div>
@@ -137,7 +143,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             </p>
           </div>
 
-          <div className="card card--elevated" id="price">
+          <div className="card card--elevated experience-size__price" id="price">
             <h2 style={{ fontSize: "1.4rem" }}>Your price</h2>
             {pricing && facts ? (
               <>
@@ -183,7 +189,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             </p>
           </div>
           <div className="stack">
-            <h2>Junker in the wild</h2>
+            <h2>On a real job</h2>
             <PhotoRail photos={size.gallery} label={`${size.yards}-yard dumpster job photos`} />
           </div>
         </div>

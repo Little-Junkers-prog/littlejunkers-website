@@ -36,7 +36,7 @@ const sizeFaq = {
 
 const deliveryFaq = (city: string) => ({
   q: `How soon can you deliver in ${city}?`,
-  a: "Tell us your ZIP and the date you'd prefer. We'll confirm the available delivery options before you reserve anything.",
+  a: "Tell us your ZIP and the day you'd like it. We'll confirm the delivery date with you before you book.",
 });
 
 export const cities: CityContent[] = [
@@ -49,7 +49,7 @@ export const cities: CityContent[] = [
       "Dumpster rental in Newnan, GA. Compare 11-, 16- and 21-yard Pink Bins, included disposal weight and delivery fees for your address.",
     intro: "Cleaning out a garage, replacing flooring or clearing out a house in Newnan? We offer 11-, 16- and 21-yard Pink Bins. Check the price for your address below.",
     proofHeading: "Pink Bins at Newnan homes",
-    proofCopy: "Here are a few of our Newnan dumpsters. The photos show an 11-yard bin filled for pickup and 16-yard bins beside a garage and in a yard. They can help you picture how much space you'll need.",
+    proofCopy: "A few of our Newnan jobs: an 11-yard filled and ready for pickup, and 16-yards beside a garage and out in a yard.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y16NewnanGarage,
     proof: [photos.y16NewnanYard, photos.y11Newnan, photos.y16NewnanGarage],
@@ -109,9 +109,9 @@ export const cities: CityContent[] = [
     metaTitle: "Fayetteville, GA Dumpster Rental | Little Junkers",
     metaDescription:
       "Dumpster rental in Fayetteville, GA. Compare 11-, 16- and 21-yard Pink Bins, included weight and delivery fees for your address.",
-    intro: "Cleaning out a room, replacing flooring or taking on a remodel in Fayetteville? Our Pink Bins come in three sizes, so you can pick the space you need without guessing.",
+    intro: "Cleaning out a room, replacing flooring or taking on a remodel in Fayetteville? Our Pink Bins come in three sizes. Not sure which one? Text us what you're tossing.",
     proofHeading: "We've delivered all three sizes in Fayetteville",
-    proofCopy: "These are our dumpsters on Fayetteville jobs: an 11-yard in a driveway, a 16-yard being delivered and a 21-yard on site. Have a look at the photos, then compare sizes above.",
+    proofCopy: "We've had all three sizes out in Fayetteville: an 11-yard in a driveway, a 16-yard coming off the truck and a 21-yard on a job.",
     sizesDelivered: [11, 16, 21],
     hero: photos.y11Fayetteville,
     proof: [photos.y16Fayetteville, photos.y21Fayetteville, photos.y11Fayetteville],

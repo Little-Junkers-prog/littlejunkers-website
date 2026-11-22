@@ -99,8 +99,8 @@ export default function CompetitorExitDialog({
         <p className="eyebrow">Before you go</p>
         <h2 id="comparison-exit-title">Want a second opinion?</h2>
         <p id="comparison-exit-description">
-          You&apos;re heading to {target.name}. Rental days, included weight and delivery
-          charges can make published prices difficult to compare. We can help sort it out.
+          You&apos;re heading to {target.name}&apos;s website. If the days, weight or delivery
+          fees are hard to line up, we&apos;re happy to help you sort it out.
         </p>
         <div className="comparison-exit__form">
           <label htmlFor="comparison-exit-reason">What matters most to you? <span>(optional)</span></label>
@@ -114,14 +114,14 @@ export default function CompetitorExitDialog({
             value={firstName} onChange={(event) => setFirstName(event.target.value)} />
           <a className="btn btn--primary btn--block" href={smsLink}>Ask us by text</a>
           <p className="fine">
-            Opens a text draft. Nothing is sent until you send it.
-            We&apos;ll only reply about your request. <a href={emailLink}>Prefer email?</a>
+            This opens a text on your phone. Nothing goes out until you hit send,
+            and we&apos;ll only text you back about this. <a href={emailLink}>Prefer email?</a>
           </p>
         </div>
         <details className="comparison-exit__callback" open={callbackOpen}
           onToggle={(event)=>setCallbackOpen(event.currentTarget.open)}>
           <summary>Prefer a callback? Leave your name and number</summary>
-          {saved ? <p role="status">Thank you. Your request was saved for our team to follow up.</p> :
+          {saved ? <p role="status">Thanks. We got your request and we&apos;ll call you.</p> :
             <form onSubmit={submitCallback} className="comparison-exit__callback-form">
               <label htmlFor="comparison-callback-name">Name</label>
               <input id="comparison-callback-name" required maxLength={80} autoComplete="name"
@@ -160,8 +160,8 @@ export default function CompetitorExitDialog({
             onClick={() => { onOutboundClick(target.providerId); onClose(); }}>
             Continue to {target.name} <span aria-hidden="true">↗</span>
           </a>
-          <p className="fine">No form or contact details are required to visit their website.
-            Anonymous outbound clicks are counted to understand comparison interest.</p>
+          <p className="fine">You don&apos;t have to fill anything out to visit their site. We count
+            clicks to other companies&apos; sites, with no personal details attached.</p>
         </div>
       </div>
     </dialog>

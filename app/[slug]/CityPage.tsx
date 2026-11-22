@@ -117,7 +117,7 @@ export default async function CityPage({ city }: { city: CityContent }) {
             </li>
             <li>
               <h3>Choose your dates</h3>
-              <p>Tell us when you need it and for how long. We confirm the price and available dates before a reservation is made.</p>
+              <p>Tell us when you need it and for how long. We confirm the price and date before you book.</p>
             </li>
             <li>
               <h3>Fill it up</h3>

@@ -1,0 +1,62 @@
+name: V2 experience prototype checks
+
+on:
+  pull_request:
+    paths:
+      - "app/page.tsx"
+      - "app/[slug]/SizePage.tsx"
+      - "app/globals.css"
+      - "components/RevealOnScroll.tsx"
+      - "components/PriceCards.tsx"
+      - "DESIGN.md"
+      - "scripts/check-experience.mjs"
+      - "scripts/check-days-plus.mjs"
+      - "scripts/check-content.mjs"
+      - "scripts/check-readability.mjs"
+      - "components/**"
+      - "lib/**"
+      - "app/**"
+      - "lib/days-plus.ts"
+      - "lib/pricing.ts"
+      - "components/DaysPlusPlanner.tsx"
+      - "components/ComparisonTool.tsx"
+      - "app/api/comparison/route.ts"
+      - "app/plan/page.tsx"
+      - "package.json"
+      - ".github/workflows/experience-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual-contract:
+    name: Experience / accessibility / TypeScript
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Experience design contract checks
+        run: npm run check:experience
+      - name: Days Plus pricing and comparison cues
+        run: npm run check:days-plus
+      - name: Seven city route preservation checks
+        run: npm run check:city-pages
+      - name: Public owner-name privacy check
+        run: npm run check:owner-names
+      - name: Comparison regression
+        run: npm run check:comparison
+      - name: Banned claims and AI-drift wording
+        run: npm run check:content
+      - name: Booking-page reading level
+        run: npm run check:readability
+      - name: TypeScript
+        run: npm run typecheck

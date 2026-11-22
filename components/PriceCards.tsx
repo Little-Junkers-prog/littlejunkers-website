@@ -47,7 +47,7 @@ export default function PriceCards({ pricing, zip, location, deliveryFee }: { pr
         ) : (
           `A ${formatUsd(deliveryFee)} delivery fee is added for this area.`
         )}{" "}
-        Delivery and extra-day charges will be shown when available. Excess disposal weight may cost extra.
+        Extra days and extra weight are added only if you need them.
       </p>
     </>
   );
@@ -82,13 +82,13 @@ export function RateList({ pricing, yards }: { pricing: Pricing; yards: 11 | 16 
 export function PricingUnavailable() {
   return (
     <div className="notice">
-      <h3>Current three-day base rates unavailable</h3>
+      <h3>Prices aren&apos;t loading right now</h3>
       <p style={{ margin: "6px 0 14px" }}>
-        We can&apos;t verify today&apos;s three-day base prices. Call or text {company.phoneDisplay} for an updated rate.
+        Call or text {company.phoneDisplay} and we&apos;ll give you today&apos;s price.
       </p>
       <div className="btn-row">
         <a className="btn btn--primary" href="/plan">
-          Open rental planner
+          Plan your rental
         </a>
         <a className="btn btn--secondary" href={telHref}>
           Call
