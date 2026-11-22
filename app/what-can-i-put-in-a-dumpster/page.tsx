@@ -4,7 +4,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqList from "@/components/FaqList";
 import MaterialSearch from "@/components/MaterialSearch";
-import { bookingUrl, smsHref } from "@/lib/company";
+import { smsHref } from "@/lib/company";
 import { byStatus, type Material } from "@/lib/materials";
 import { sizes } from "@/lib/sizes";
 
@@ -149,9 +149,9 @@ export default function Materials() {
           </div>
           <FaqList items={faqs} />
           <div className="btn-row" style={{ marginTop: 24 }}>
-            <a className="btn btn--primary" href={bookingUrl()}>
+            <Link className="btn btn--primary" href="/plan">
               Check Dates &amp; Book
-            </a>
+            </Link>
             {sizes.map((size) => (
               <Link className="btn btn--secondary" href={`/${size.slug}`} key={size.slug}>
                 {size.yards}-Yard

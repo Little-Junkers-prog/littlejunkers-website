@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { formatDate, getPosts, type Post, type PostCategory } from "@/lib/blog";
-import { bookingUrl, company } from "@/lib/company";
+import { company } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: "Junker Journal | Dumpster Tips and Jobs",
@@ -117,9 +117,9 @@ export default function BlogIndex() {
               <Link className="btn btn--secondary" href="/#sizes">
                 See Sizes &amp; Prices
               </Link>
-              <a className="btn btn--primary" href={bookingUrl()}>
+              <Link className="btn btn--primary" href="/plan">
                 Book a Dumpster
-              </a>
+              </Link>
             </div>
           </div>
         </div>

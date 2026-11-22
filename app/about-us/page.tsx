@@ -3,7 +3,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Photo from "@/components/Photo";
 import { cityByName } from "@/lib/cities";
-import { bookingUrl, company, telHref } from "@/lib/company";
+import { company, telHref } from "@/lib/company";
 import { photos } from "@/lib/media";
 import { sizes } from "@/lib/sizes";
 
@@ -40,9 +40,9 @@ export default function About() {
               run it today.
             </p>
             <div className="btn-row">
-              <a className="btn btn--primary" href={bookingUrl()}>
+              <Link className="btn btn--primary" href="/plan">
                 Rent a Dumpster
-              </a>
+              </Link>
               <a className="btn btn--secondary" href={telHref}>
                 Call or text {company.phoneDisplay}
               </a>

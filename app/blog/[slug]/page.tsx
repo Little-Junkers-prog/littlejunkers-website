@@ -7,7 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import PriceTable from "@/components/PriceTable";
 import { LIVE_PRICES_MARKER, formatDate, getPost, getPosts } from "@/lib/blog";
 import { getPricing } from "@/lib/pricing";
-import { bookingUrl, company, siteUrl } from "@/lib/company";
+import { company, siteUrl } from "@/lib/company";
 import { indexable } from "@/lib/indexing";
 
 export const dynamicParams = false;
@@ -105,9 +105,9 @@ export default async function BlogPost({ params }: Props) {
                 <Link className="btn btn--secondary" href="/#sizes">
                   See Sizes &amp; Prices
                 </Link>
-                <a className="btn btn--primary" href={bookingUrl()}>
+                <Link className="btn btn--primary" href="/plan">
                   Book a Dumpster
-                </a>
+                </Link>
               </div>
             </div>
           </div>

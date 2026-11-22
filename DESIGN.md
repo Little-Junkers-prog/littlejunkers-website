@@ -15,7 +15,7 @@ Experience is how confidently and comfortably a customer moves from curious visi
 2. **Photographs do the talking.** Use only first-party images from lib/media.ts. Make the pink bins big enough to see. Let captions identify real locations without inventing jobs or customer quotes.
 3. **A little depth goes a long way.** Photo framing, asymmetric layouts, typographic scale and restrained shadows. No extra color palette, random stock imagery, exaggerated parallax or expensive 3D bundles.
 4. **Motion must explain a transition.** Subtle hero entrance, on-hover product focus, and scroll reveal for a couple of sections. Never animate the price after confirmation, shift button targets, delay interactive content or interfere with keyboard use. Respect prefers-reduced-motion and no-JavaScript rendering.
-5. **Booking remains the primary journey.** Changes in this PR must not alter inventory, fees, consent, payment, booking business logic, checkout integration or redirect behavior. Full online checkout is a separate launch prerequisite; no CTA may falsely claim the site can now take payment.
+5. **Booking happens inside the site (ADR-CX-004).** The website is the whole experience, checkout included. Every booking CTA goes to the one in-site booking destination (today `/plan`) or an in-site modal; none link to the booking app. Until in-site checkout is live, no CTA may claim the site can take payment, and design changes must not alter inventory, fees, consent, payment or booking business logic.
 
 ### Approved existing tokens (do not modify)
 
@@ -49,7 +49,7 @@ Keep smaller linked text in dark ink with a visible underline. Keep focus rings 
 
 - Homepage-only `components/PinkBinExperience.tsx` presents the 11-, 16- and 21-yard bins as three keyboard-accessible, visually selected options rather than three unrelated static cards.
 - Choosing a bin changes the authentic equipment photo, name, project-fit examples, canonical three-day starting price, included disposal weight, footprint, sidewall height, any known overweight rate, and the contextual comparison link in one place.
-- The first-party pricing API stays authoritative. The storefront neither calculates an invented Days Plus total nor writes holds, payments or reservations. A ZIP-based delivery fee remains contextual, and actual booking happens in the shared flow.
+- The first-party pricing API stays authoritative. The storefront neither calculates an invented Days Plus total nor writes holds, payments or reservations. A ZIP-based delivery fee remains contextual, and actual booking happens in the in-site booking flow.
 - The mobile layout presents the three choices in a compact row and stacks the photograph above product detail. Focus rings, `aria-pressed`, real alt text and reduced-motion support are required.
 - Existing shared `PriceCards` and all seven city-page SEO layouts are deliberately unchanged. Do not embed a duplicate storefront in every city page.
 
