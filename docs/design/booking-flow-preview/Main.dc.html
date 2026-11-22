@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Little Junkers booking flow</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#EDEAE4}
+a{color:#a8406a}a:hover{color:#7d2c4d}
+.lj-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;border:0;background:#FFCEE4;color:#1A1A1A;font:700 16px system-ui,-apple-system,sans-serif;cursor:pointer;text-decoration:none}
+.lj-btn:hover{background:#FFB3D4;color:#1A1A1A}
+.lj-btn-dark{background:#1E1C19;color:#ffffff}
+.lj-btn-dark:hover{background:#3a3631;color:#ffffff}
+.lj-ghost{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #E5E0D8;background:#ffffff;color:#1A1A1A;font:600 15px system-ui,-apple-system,sans-serif;cursor:pointer}
+.lj-ghost:hover{background:#FFF5FB}
+.lj-link{background:none;border:0;padding:0;min-height:44px;color:#a8406a;font:600 15px system-ui,-apple-system,sans-serif;cursor:pointer;text-decoration:underline}
+.lj-input{width:100%;box-sizing:border-box;min-height:48px;padding:0 14px;border:1px solid #cfc7bb;border-radius:10px;background:#ffffff;font:16px system-ui,-apple-system,sans-serif;color:#1A1A1A}
+.lj-label{display:block;font:600 14px system-ui,-apple-system,sans-serif;color:#1A1A1A;margin-bottom:6px}
+.lj-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lj-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lj-bar{display:none}
+.lj-pill{display:inline-block;background:#FFCEE4;color:#1A1A1A;border-radius:999px;padding:3px 10px;font:700 13px system-ui,-apple-system,sans-serif}
+.lj-pill-warn{display:inline-block;background:#FFF8EB;border:1px solid #F2CF7A;color:#1A1A1A;border-radius:999px;padding:3px 10px;font:700 13px system-ui,-apple-system,sans-serif}
+@media (max-width: 900px){
+.lj-aside{display:none !important}
+.lj-bar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:20}
+.lj-flow{padding-bottom:120px !important}
+.lj-grid3{grid-template-columns:minmax(0,1fr)}
+.lj-grid2{grid-template-columns:minmax(0,1fr)}
+.lj-main{padding:20px !important}
+}
+</style>
+</helmet>
+<div style="font-family: system-ui, -apple-system, sans-serif; color: #1A1A1A; background: #EDEAE4; min-height: 100vh">
+
+  <div style="background: #d9d4cc; padding: 10px 16px; display: flex; align-items: center; gap: 12px">
+    <div style="display: flex; gap: 6px" aria-hidden="true">
+      <span style="width: 12px; height: 12px; border-radius: 50%; background: #b8b0a6"></span>
+      <span style="width: 12px; height: 12px; border-radius: 50%; background: #b8b0a6"></span>
+      <span style="width: 12px; height: 12px; border-radius: 50%; background: #b8b0a6"></span>
+    </div>
+    <div style="flex: 1; max-width: 640px; display: flex; align-items: center; gap: 8px; background: #ffffff; border-radius: 999px; padding: 7px 14px; font-size: 14px; color: #333333">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+      <span>{{url}}</span>
+    </div>
+    <span style="font-size: 13px; color: #555555">Same address the whole way</span>
+  </div>
+
+  <header style="background: #1E1C19; color: #ffffff">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap">
+      <button type="button" onClick="{{goHome}}" style="display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 0; min-height: 44px; cursor: pointer; color: #ffffff">
+        <img src="/_blob/fb6a52c4fcdd9287b17eb120fdf5c1f3" alt="" style="height: 40px; width: auto">
+        <span style="font-weight: 800; font-size: 18px">Little Junkers</span>
+      </button>
+      <sc-if value="{{showProgress}}" hint-placeholder-val="{{ false }}">
+        <ol style="list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; flex-wrap: wrap; flex: 1; justify-content: center" aria-label="Booking steps">
+          <sc-for list="{{progress}}" as="p" hint-placeholder-count="5">
+            <li style="{{p.style}}">{{p.label}}</li>
+          </sc-for>
+        </ol>
+      </sc-if>
+      <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+        <nav style="display: flex; gap: 18px; flex: 1; justify-content: center; font-size: 15px" aria-label="Main">
+          <span>Sizes</span><span>Pricing</span><span>Service areas</span><span>FAQ</span>
+        </nav>
+      </sc-if>
+      <a href="tel:+14705484733" style="color: #FFCEE4; font-weight: 700; text-decoration: none; margin-left: auto">(470) 548-4733</a>
+    </div>
+  </header>
+
+  <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+    <section style="background: #1E1C19; color: #ffffff; border-radius: 0 0 20px 20px; overflow: hidden">
+      <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+        <div style="flex: 1 1 420px; padding: 56px 20px 64px; display: flex; flex-direction: column; gap: 18px">
+          <p style="margin: 0; font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #B8B0A6">Peachtree City, GA · Pink Bin rentals</p>
+          <h1 style="margin: 0; font-size: 52px; line-height: 1.05">Need a <span style="color: #FFCEE4">dumpster?</span></h1>
+          <p style="margin: 0; font-size: 19px; color: #e9e4dc">Type your city or ZIP to see prices and your delivery fee.</p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; max-width: 520px">
+            <label for="home-zip" style="position: absolute; left: -9999px">City or ZIP</label>
+            <input id="home-zip" class="lj-input" value="Peachtree City 30269" style="flex: 1 1 220px">
+            <button type="button" class="lj-btn" onClick="{{toSize}}">Book a dumpster</button>
+          </div>
+          <p style="margin: 0; font-size: 15px; color: #B8B0A6">11, 16 and 21-yard Pink Bins · Locally owned · Call or text 8 AM–6 PM, every day</p>
+        </div>
+        <div style="flex: 1 1 420px; min-height: 360px">
+          <img src="/_blob/1a09d8b49126c65b09b8db17b42a91c1" alt="Pink Little Junkers dumpster in a home driveway" style="width: 100%; height: 100%; min-height: 360px; object-fit: cover; display: block">
+        </div>
+      </div>
+    </section>
+    <section style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+      <sc-for list="{{sizes}}" as="s" hint-placeholder-count="3">
+        <div style="background: #FAF8F5; border: 1px solid #E5E0D8; border-radius: 12px; overflow: hidden">
+          <img src="{{s.photo}}" alt="{{s.alt}}" style="width: 100%; height: 170px; object-fit: cover; display: block">
+          <div style="padding: 16px">
+            <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #555555">{{s.yards}}-yard</p>
+            <h3 style="margin: 4px 0; font-size: 21px">{{s.name}}</h3>
+            <p style="margin: 0; color: #555555">From <strong style="color: #1A1A1A">{{s.price}}</strong> for 3 days</p>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{isFlow}}" hint-placeholder-val="{{ false }}">
+    <div class="lj-flow" style="max-width: 1200px; margin: 0 auto; padding: 28px 20px 48px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+      <main class="lj-main" style="flex: 999 1 560px; min-width: 0; background: #ffffff; border: 1px solid #E8E3DB; border-radius: 16px; padding: 28px">
+
+        <sc-if value="{{isSize}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 20px">
+            <div>
+              <p style="margin: 0; font-size: 14px; color: #555555">Delivering to <strong style="color: #1A1A1A">Peachtree City 30269</strong> · Free delivery</p>
+              <h1 style="margin: 6px 0 0; font-size: 32px">What are you tossing?</h1>
+              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Pick the job and we'll point you to the right size.</p>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{projects}}" as="pj" hint-placeholder-count="5">
+                <button type="button" onClick="{{pj.pick}}" style="{{pj.style}}" aria-pressed="{{pj.pressed}}">{{pj.label}}</button>
+              </sc-for>
+            </div>
+            <sc-if value="{{hasTip}}" hint-placeholder-val="{{ false }}">
+              <p style="margin: 0; padding: 12px 14px; background: #FFF5FB; border-radius: 10px; color: #1A1A1A">{{tip}}</p>
+            </sc-if>
+            <div class="lj-grid3">
+              <sc-for list="{{sizes}}" as="s" hint-placeholder-count="3">
+                <button type="button" onClick="{{s.pick}}" style="{{s.cardStyle}}" aria-pressed="{{s.pressed}}">
+                  <img src="{{s.photo}}" alt="{{s.alt}}" style="width: 100%; height: 130px; object-fit: cover; display: block; border-radius: 8px">
+                  <sc-if value="{{s.recommended}}" hint-placeholder-val="{{ false }}">
+                    <span style="align-self: flex-start; background: #FFCEE4; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700">Our pick for this job</span>
+                  </sc-if>
+                  <span style="font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #555555">{{s.yards}}-yard</span>
+                  <span style="font-size: 19px; font-weight: 800">{{s.name}}</span>
+                  <span style="color: #555555; font-size: 15px">{{s.fit}}</span>
+                  <span style="font-size: 15px"><strong style="font-size: 22px">{{s.price}}</strong> · 3 days · {{s.tons}} included</span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="display: flex; justify-content: flex-end">
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toDate}}">Next: pick your dates</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isDate}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 22px">
+            <div>
+              <h1 style="margin: 0; font-size: 32px">When do you need it?</h1>
+              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">These are the days we have a {{sizeYards}}-yard open.</p>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{dates}}" as="d" hint-placeholder-count="6">
+                <button type="button" onClick="{{d.pick}}" style="{{d.style}}" aria-pressed="{{d.pressed}}"><span style="font-size: 13px">{{d.dow}}</span><span style="font-size: 20px; font-weight: 800">{{d.day}}</span><span style="font-size: 13px">{{d.mon}}</span></button>
+              </sc-for>
+            </div>
+            <div>
+              <h2 style="margin: 0 0 10px; font-size: 20px">Drop-off time</h2>
+              <div class="lj-grid2">
+                <button type="button" onClick="{{pickStandard}}" style="{{standardStyle}}" aria-pressed="{{standardPressed}}"><strong>Standard</strong><span style="color: #555555">We text you a delivery window the day before.</span><span style="font-weight: 700">Included</span></button>
+                <button type="button" onClick="{{pickEarly}}" style="{{earlyStyle}}" aria-pressed="{{earlyPressed}}" disabled="{{earlyFull}}">
+                  <sc-if value="{{earlyOpen}}" hint-placeholder-val="{{ true }}"><span class="lj-pill-warn">{{earlyLeft}}</span></sc-if>
+                  <sc-if value="{{earlyFull}}" hint-placeholder-val="{{ false }}"><span class="lj-pill-warn">Full on {{dateText}}</span></sc-if>
+                  <strong>Early drop-off</strong>
+                  <span style="color: #555555">Start first thing. It's in your driveway before [TIME], so you and your crew aren't waiting on us.</span>
+                  <span style="font-weight: 700">+ [PRICE]</span>
+                </button>
+              </div>
+              <sc-if value="{{earlyFull}}" hint-placeholder-val="{{ false }}">
+                <p style="margin: 10px 0 0; color: #555555">Morning slots are full that day. Pick another date if you need early drop-off.</p>
+              </sc-if>
+            </div>
+            <div>
+              <h2 style="margin: 0 0 10px; font-size: 20px">How long?</h2>
+              <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap">
+                <button type="button" class="lj-ghost" onClick="{{lessDays}}" aria-label="One less day" style="width: 48px; justify-content: center; font-size: 22px">−</button>
+                <span style="font-size: 26px; font-weight: 800; min-width: 90px; text-align: center">{{days}} days</span>
+                <button type="button" class="lj-ghost" onClick="{{moreDays}}" aria-label="One more day" style="width: 48px; justify-content: center; font-size: 22px">+</button>
+                <span style="color: #555555">{{daysNote}}</span>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+              <button type="button" class="lj-link" onClick="{{toSize}}">Back</button>
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toExtras}}">Next: extras</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isExtras}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 22px">
+            <div>
+              <h1 style="margin: 0; font-size: 32px">Anything to add?</h1>
+              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Add it now and you'll know the whole price up front.</p>
+            </div>
+            <section style="border: 1px solid #E5E0D8; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+              <div>
+                <h2 style="margin: 0; font-size: 20px">Extra weight <span class="lj-pill">Save $20 a ton</span></h2>
+                <p style="margin: 4px 0 0; color: #555555">Skip the surprise bill. Your {{sizeYards}}-yard includes {{includedTons}}. Go over and the landfill charge is $99 a ton after pickup. Add it now for $79.</p>
+                <sc-if value="{{heavyJob}}" hint-placeholder-val="{{ false }}">
+                  <p style="margin: 8px 0 0; font-weight: 600">Shingles get heavy fast. Not sure? Text us how many squares and layers and we&apos;ll help you pick.</p>
+                </sc-if>
+              </div>
+              <div class="lj-grid3">
+                <sc-for list="{{tonOptions}}" as="t" hint-placeholder-count="3">
+                  <button type="button" onClick="{{t.pick}}" style="{{t.style}}" aria-pressed="{{t.pressed}}"><strong>{{t.label}}</strong><span style="color: #555555">{{t.price}}</span></button>
+                </sc-for>
+              </div>
+            </section>
+            <section style="border: 1px solid #E5E0D8; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+              <div>
+                <h2 style="margin: 0; font-size: 20px">Mattresses, tires or appliances?</h2>
+                <p style="margin: 4px 0 0; color: #555555">Toss them in with everything else. Add them here and you'll know the full price now, with nothing new on your bill at pickup.</p>
+              </div>
+              <sc-for list="{{items}}" as="it" hint-placeholder-count="3">
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+                  <span style="flex: 1 1 160px; font-weight: 600">{{it.label}} <span style="color: #555555; font-weight: 400">{{it.each}} each</span></span>
+                  <button type="button" class="lj-ghost" onClick="{{it.dec}}" aria-label="{{it.decLabel}}" style="width: 44px; justify-content: center">−</button>
+                  <span style="min-width: 24px; text-align: center; font-weight: 800">{{it.count}}</span>
+                  <button type="button" class="lj-ghost" onClick="{{it.inc}}" aria-label="{{it.incLabel}}" style="width: 44px; justify-content: center">+</button>
+                </div>
+              </sc-for>
+            </section>
+            <sc-if value="{{canSizeUp}}" hint-placeholder-val="{{ false }}">
+              <section style="border: 2px solid #FFCEE4; background: #FFF5FB; border-radius: 12px; padding: 18px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
+                <img src="{{upPhoto}}" alt="{{upAlt}}" style="width: 120px; height: 84px; object-fit: cover; border-radius: 8px">
+                <div style="flex: 1 1 240px">
+                  <h2 style="margin: 0; font-size: 20px">Don't run out of room</h2>
+                  <p style="margin: 4px 0 0; color: #555555">The {{upYards}}-yard holds about {{upLoads}} pickup loads and includes {{upTons}}. It's {{upDiff}} more now. Running out halfway means a second dumpster, and that starts at {{secondCost}}.</p>
+                </div>
+                <button type="button" class="lj-btn" onClick="{{sizeUp}}">Switch to the {{upYards}}-yard</button>
+              </section>
+            </sc-if>
+            <section style="border: 1px solid #E5E0D8; border-radius: 12px; padding: 18px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+              <input type="checkbox" id="boards" checked style="width: 22px; height: 22px">
+              <label for="boards" style="flex: 1 1 240px"><strong>Driveway boards</strong> <span style="color: #555555">Extra care for your concrete. We put boards under the dumpster at no charge.</span></label>
+            </section>
+            <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+              <button type="button" class="lj-link" onClick="{{toDate}}">Back</button>
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toDetails}}">Next: your details</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isDetails}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 18px">
+            <div>
+              <h1 style="margin: 0; font-size: 32px">Who's it for?</h1>
+              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">You'll only fill this out once.</p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap" role="group" aria-label="Customer type">
+              <sc-for list="{{types}}" as="ty" hint-placeholder-count="3">
+                <button type="button" onClick="{{ty.pick}}" style="{{ty.style}}" aria-pressed="{{ty.pressed}}">{{ty.label}}</button>
+              </sc-for>
+            </div>
+            <sc-if value="{{isPro}}" hint-placeholder-val="{{ false }}">
+              <div><label class="lj-label" for="biz">Company name</label><input id="biz" class="lj-input" placeholder="Company name"></div>
+            </sc-if>
+            <div class="lj-grid2" style="gap: 14px">
+              <div><label class="lj-label" for="nm">Name</label><input id="nm" class="lj-input" placeholder="First and last name"></div>
+              <div><label class="lj-label" for="ph">Mobile</label><input id="ph" class="lj-input" placeholder="Mobile number" type="tel"></div>
+              <div><label class="lj-label" for="em">Email</label><input id="em" class="lj-input" placeholder="Email" type="email"></div>
+              <div><label class="lj-label" for="ad">Where's it going?</label><input id="ad" class="lj-input" placeholder="Street address, Peachtree City 30269"></div>
+            </div>
+            <div><label class="lj-label" for="nt">Where should we put it? <span style="font-weight: 400; color: #555555">(optional)</span></label><input id="nt" class="lj-input" placeholder="Left side of the driveway, near the garage"></div>
+            <div style="display: flex; flex-direction: column; gap: 10px; background: #FAF8F5; border-radius: 12px; padding: 14px">
+              <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c1" checked style="width: 22px; height: 22px; margin: 0"><label for="c1"><strong>Rental texts.</strong> Delivery windows, on-the-way and pickup reminders.</label></div>
+              <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c2" style="width: 22px; height: 22px; margin: 0"><label for="c2"><strong>Deals and news.</strong> Optional.</label></div>
+              <p style="margin: 0; font-size: 14px; color: #555555">These are separate so you can get rental updates without promos. Reply STOP anytime.</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+              <button type="button" class="lj-link" onClick="{{toExtras}}">Back</button>
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toPay}}">Next: review and pay</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isPay}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 18px">
+            <h1 style="margin: 0; font-size: 32px">Review and pay</h1>
+            <div style="display: flex; flex-direction: column; border: 1px solid #E5E0D8; border-radius: 12px">
+              <div style="display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #E5E0D8; align-items: center; flex-wrap: wrap"><span style="flex: 1 1 260px"><strong>Dumpster</strong><br><span style="color: #555555">{{sizeYards}}-yard {{sizeName}}</span></span><button type="button" class="lj-link" onClick="{{toSize}}">Edit</button></div>
+              <div style="display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #E5E0D8; align-items: center; flex-wrap: wrap"><span style="flex: 1 1 260px"><strong>Dates</strong><br><span style="color: #555555">{{dateText}} · {{days}} days · {{windowText}}</span></span><button type="button" class="lj-link" onClick="{{toDate}}">Edit</button></div>
+              <div style="display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #E5E0D8; align-items: center; flex-wrap: wrap"><span style="flex: 1 1 260px"><strong>Extras</strong><br><span style="color: #555555">{{extrasText}}</span></span><button type="button" class="lj-link" onClick="{{toExtras}}">Edit</button></div>
+              <div style="display: flex; gap: 12px; padding: 14px 16px; align-items: center; flex-wrap: wrap"><span style="flex: 1 1 260px"><strong>Delivery</strong><br><span style="color: #555555">Peachtree City 30269 · {{typeLabel}}</span></span><button type="button" class="lj-link" onClick="{{toDetails}}">Edit</button></div>
+            </div>
+            <div style="border: 2px dashed #b8b0a6; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px; background: #FAF8F5">
+              <p style="margin: 0; font-weight: 700">Payment</p>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap">
+                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Card</span>
+                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Apple Pay</span>
+                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Google Pay</span>
+                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Klarna</span>
+                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Affirm</span>
+              </div>
+              <div style="height: 48px; border: 1px solid #cfc7bb; border-radius: 10px; background: #ffffff; display: flex; align-items: center; padding: 0 14px; color: #555555">Card number · MM / YY · CVC</div>
+              <p style="margin: 0; font-size: 14px; color: #555555">Placeholder for the Stripe payment form. It sits right here on our page.</p>
+            </div>
+            <button type="button" class="lj-btn" onClick="{{toDone}}" style="width: 100%; min-height: 56px; font-size: 18px">Pay {{totalText}}</button>
+            <p style="margin: 0; font-size: 14px; color: #555555; text-align: center">Need to change or cancel? Give us 24 hours before delivery.</p>
+          </div>
+        </sc-if>
+      </main>
+
+      <aside class="lj-aside" style="flex: 1 1 320px; background: #ffffff; border: 1px solid #E8E3DB; border-radius: 16px; overflow: hidden; position: sticky; top: 16px" aria-label="Your rental">
+        <img src="{{sizePhoto}}" alt="{{sizeAlt}}" style="width: 100%; height: 180px; object-fit: cover; display: block">
+        <div style="padding: 20px; display: flex; flex-direction: column; gap: 12px">
+          <div>
+            <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #555555">Your Pink Bin</p>
+            <h2 style="margin: 2px 0 0; font-size: 22px">{{sizeYards}}-yard {{sizeName}}</h2>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #E5E0D8; padding-top: 12px">
+            <sc-for list="{{lines}}" as="ln" hint-placeholder-count="3">
+              <div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #555555">{{ln.label}}</span><span style="font-weight: 600">{{ln.amount}}</span></div>
+            </sc-for>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #E5E0D8; padding-top: 12px">
+            <span style="font-weight: 700">Total</span>
+            <span style="font-size: 28px; font-weight: 800">{{totalText}}</span>
+          </div>
+          <sc-if value="{{hasPending}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; font-size: 14px; color: #555555">Plus items marked [PRICE]. We confirm those before you pay.</p>
+          </sc-if>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+            <li>✓ Delivery and pickup included</li>
+            <li>✓ {{includedTons}} of disposal included</li>
+            <li>✓ Locally owned in Peachtree City</li>
+          </ul>
+          <p style="margin: 0; font-size: 15px">Questions? <a href="sms:+14707125079">Text us</a> or call <a href="tel:+14705484733">(470) 548-4733</a>.</p>
+        </div>
+      </aside>
+    </div>
+    <div class="lj-bar" role="region" aria-label="Your rental total">
+      <sc-if value="{{sheetOpen}}" hint-placeholder-val="{{ false }}">
+        <div style="background: #ffffff; border-top: 1px solid #E5E0D8; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; max-height: 50vh; overflow: auto; box-shadow: 0 -12px 30px rgba(30, 28, 25, 0.12)">
+          <sc-for list="{{lines}}" as="ln" hint-placeholder-count="3">
+            <div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #555555">{{ln.label}}</span><span style="font-weight: 600">{{ln.amount}}</span></div>
+          </sc-for>
+          <sc-if value="{{hasPending}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; font-size: 14px; color: #555555">Plus items marked [PRICE]. We confirm those before you pay.</p>
+          </sc-if>
+        </div>
+      </sc-if>
+      <div style="background: #1E1C19; color: #ffffff; padding: 10px 16px; display: flex; align-items: center; gap: 12px">
+        <img src="{{sizePhoto}}" alt="" style="width: 52px; height: 40px; object-fit: cover; border-radius: 6px">
+        <div style="flex: 1; min-width: 0">
+          <div style="font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{barSummary}}</div>
+          <sc-if value="{{hasFlash}}" hint-placeholder-val="{{ false }}"><div style="font-size: 13px; color: #FFCEE4">{{flash}}</div></sc-if>
+        </div>
+        <div style="text-align: right"><div style="font-size: 12px; color: #B8B0A6">Total</div><div style="font-size: 20px; font-weight: 800">{{totalText}}</div></div>
+        <button type="button" onClick="{{toggleSheet}}" aria-expanded="{{sheetExpanded}}" aria-label="Show what's in your rental" style="min-width: 44px; min-height: 44px; border-radius: 10px; border: 1px solid #FFCEE4; background: transparent; color: #FFCEE4; font: 700 14px system-ui, -apple-system, sans-serif; cursor: pointer">{{sheetLabel}}</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isDone}}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 860px; margin: 0 auto; padding: 32px 20px 56px; display: flex; flex-direction: column; gap: 20px">
+      <section style="background: #1E1C19; color: #ffffff; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 10px">
+        <span style="width: 52px; height: 52px; border-radius: 50%; background: #FFCEE4; color: #1A1A1A; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800" aria-hidden="true">✓</span>
+        <h1 style="margin: 0; font-size: 40px">You're booked.</h1>
+        <p style="margin: 0; font-size: 18px; color: #e9e4dc">Your {{sizeYards}}-yard is set for {{dateText}}. We just texted your confirmation.</p>
+      </section>
+      <section style="background: #ffffff; border: 1px solid #E8E3DB; border-radius: 16px; padding: 24px">
+        <h2 style="margin: 0 0 14px; font-size: 22px">What happens next</h2>
+        <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px">
+          <li style="display: flex; gap: 14px"><span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #FFCEE4; display: flex; align-items: center; justify-content: center; font-weight: 800">1</span><span><strong>The day before:</strong> we text your delivery window.</span></li>
+          <li style="display: flex; gap: 14px"><span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #FFCEE4; display: flex; align-items: center; justify-content: center; font-weight: 800">2</span><span><strong>Delivery day:</strong> we text when we're on the way. You don't have to be home if the spot is clear.</span></li>
+          <li style="display: flex; gap: 14px"><span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #FFCEE4; display: flex; align-items: center; justify-content: center; font-weight: 800">3</span><span><strong>Pickup:</strong> on your last day. We text the day before. Load it level with the top.</span></li>
+        </ol>
+      </section>
+      <section style="background: #ffffff; border: 1px solid #E8E3DB; border-radius: 16px; padding: 24px; display: flex; gap: 18px; flex-wrap: wrap; align-items: center">
+        <img src="{{sizePhoto}}" alt="{{sizeAlt}}" style="width: 160px; height: 110px; object-fit: cover; border-radius: 10px">
+        <div style="flex: 1 1 260px">
+          <h2 style="margin: 0; font-size: 20px">{{sizeYards}}-yard {{sizeName}}</h2>
+          <p style="margin: 4px 0 0; color: #555555">{{dateText}} · {{days}} days · {{windowText}}</p>
+          <p style="margin: 4px 0 0; color: #555555">{{extrasText}}</p>
+        </div>
+        <div style="text-align: right"><span style="font-size: 13px; color: #555555">Paid</span><br><strong style="font-size: 24px">{{totalText}}</strong></div>
+      </section>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap">
+        <a class="lj-btn" href="sms:+14707125079">Text us</a>
+        <button type="button" class="lj-ghost" onClick="{{goHome}}">Back to home</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <footer style="background: #1E1C19; color: #B8B0A6; padding: 20px; text-align: center; font-size: 14px">Little Junkers · Peachtree City, GA · (470) 548-4733 · littlejunkersllc.com</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 0, size: 16, project: "remodel", date: 2, early: false, days: 3, tons: 0, mattress: 0, tire: 0, appliance: 0, type: "home", sheet: false, flash: "" };
+  }
+  renderVals() {
+    var s = this.state;
+    var self = this;
+    var set = function (patch) { return function () { self.setState(patch); }; };
+    var money = function (n) { return "$" + n.toLocaleString("en-US"); };
+    var SIZES = {
+      11: { name: "The Little Junker", photo: "/_blob/b4acf6c45710a3de45527f0a0338af38", alt: "11-yard Little Junkers dumpster in a short driveway", price: 325, tons: 1, loads: "4 to 5", fit: "Garage, one room, small remodel or a roof" },
+      16: { name: "The Mighty Middler", photo: "/_blob/31c7071fba8a9febfbf1bdc37c268234", alt: "16-yard Little Junkers dumpster near a garage in Newnan", price: 375, tons: 1.5, loads: "6 to 7", fit: "Remodels, deck tear-outs, bigger cleanouts" },
+      21: { name: "The Big Junker", photo: "/_blob/e2b483b650dd35090024acbb7999fc4d", alt: "21-yard Little Junkers dumpster in a Peachtree City driveway", price: 425, tons: 2, loads: "8 to 10", fit: "Whole-house and estate cleanouts" }
+    };
+    var tonsText = function (t) { return t === 1 ? "1 ton" : t + " tons"; };
+    var PROJECTS = [
+      { id: "garage", label: "Garage or one room", rec: 11, tip: "" },
+      { id: "remodel", label: "Kitchen or bath remodel", rec: 16, tip: "" },
+      { id: "roof", label: "Roof tear-off", rec: 11, tip: "Shingles are heavy. A bigger dumpster won't help, so the 11 or 16 is the right call. You can add weight in the next steps." },
+      { id: "house", label: "Whole house or estate", rec: 21, tip: "" },
+      { id: "unsure", label: "Not sure", rec: 0, tip: "Text us a photo of the pile and we'll tell you which size. (470) 712-5079" }
+    ];
+    var chip = function (on) {
+      return "min-height:44px;padding:0 16px;border-radius:999px;cursor:pointer;font:600 15px system-ui,-apple-system,sans-serif;" + (on ? "background:#1E1C19;color:#ffffff;border:1px solid #1E1C19" : "background:#ffffff;color:#1A1A1A;border:1px solid #cfc7bb");
+    };
+    var card = function (on) {
+      return "display:flex;flex-direction:column;gap:6px;text-align:left;padding:12px;border-radius:12px;cursor:pointer;font:inherit;color:#1A1A1A;background:" + (on ? "#FFF5FB;border:2px solid #C2587A" : "#FAF8F5;border:2px solid #E5E0D8");
+    };
+    var project = PROJECTS.filter(function (p) { return p.id === s.project; })[0];
+    var size = SIZES[s.size];
+
+    // [day, date, morning upgrade slots left]. Sample numbers: the real ones come from the day's early-drop capacity.
+    var DATES = [["Tue", "1", 2], ["Wed", "2", 1], ["Thu", "3", 0], ["Fri", "4", 3], ["Sat", "5", 1], ["Mon", "7", 0]];
+    var slotsLeft = DATES[s.date][2];
+    var dateText = DATES[s.date][0] + ", Dec " + DATES[s.date][1];
+
+    var extraDays = s.days - 3;
+    var ITEMS = [
+      { key: "mattress", label: "Mattresses", each: 35 },
+      { key: "tire", label: "Tires", each: 35 },
+      { key: "appliance", label: "Appliances", each: 45 }
+    ];
+
+    var lines = [{ label: "3-day rental", amount: money(size.price) }, { label: "Delivery and pickup", amount: "Free" }];
+    var total = size.price;
+    if (extraDays > 0) lines.push({ label: extraDays + " extra " + (extraDays === 1 ? "day" : "days"), amount: "[PRICE]" });
+    if (s.early) lines.push({ label: "Early drop-off", amount: "[PRICE]" });
+    if (s.tons > 0) { lines.push({ label: "Extra weight, " + tonsText(s.tons), amount: money(79 * s.tons) }); total += 79 * s.tons; }
+    var extras = [];
+    if (s.tons > 0) extras.push(tonsText(s.tons) + " extra weight");
+    ITEMS.forEach(function (it) {
+      var n = s[it.key];
+      if (n > 0) { lines.push({ label: n + " " + it.label.toLowerCase(), amount: money(it.each * n) }); total += it.each * n; extras.push(n + " " + it.label.toLowerCase()); }
+    });
+    lines.push({ label: "Driveway boards", amount: "Free" });
+    extras.push("driveway boards");
+
+    var up = s.size === 11 ? 16 : s.size === 16 ? 21 : 0;
+    var steps = ["Size", "Dates", "Extras", "Details", "Pay"];
+    var TYPES = [["home", "Home"], ["business", "Business"], ["contractor", "Contractor"]];
+    var typeLabel = TYPES.filter(function (t) { return t[0] === s.type; })[0][1];
+    var urls = ["littlejunkersllc.com", "littlejunkersllc.com/book/size", "littlejunkersllc.com/book/dates", "littlejunkersllc.com/book/extras", "littlejunkersllc.com/book/details", "littlejunkersllc.com/book/pay", "littlejunkersllc.com/book/confirmed"];
+    var go = function (n) { return function () { self.setState({ step: n }); }; };
+
+    return {
+      url: urls[s.step],
+      isHome: s.step === 0,
+      isFlow: s.step >= 1 && s.step <= 5,
+      isDone: s.step === 6,
+      showProgress: s.step >= 1 && s.step <= 5,
+      isSize: s.step === 1, isDate: s.step === 2, isExtras: s.step === 3, isDetails: s.step === 4, isPay: s.step === 5,
+      goHome: go(0), toSize: go(1), toDate: go(2), toExtras: go(3), toDetails: go(4), toPay: go(5), toDone: go(6),
+      progress: steps.map(function (label, i) {
+        var n = i + 1;
+        var st = "padding:6px 12px;border-radius:999px;font-size:14px;font-weight:700;";
+        st += n === s.step ? "background:#FFCEE4;color:#1A1A1A" : n < s.step ? "background:#3a3631;color:#FFCEE4" : "background:transparent;color:#B8B0A6;border:1px solid #4a453f";
+        return { label: (n < s.step ? "✓ " : n + ". ") + label, style: st };
+      }),
+      projects: PROJECTS.map(function (p) {
+        return { label: p.label, pressed: p.id === s.project ? "true" : "false", style: chip(p.id === s.project), pick: function () { self.setState(p.rec ? { project: p.id, size: p.rec } : { project: p.id }); } };
+      }),
+      hasTip: !!project.tip, tip: project.tip,
+      sizes: [11, 16, 21].map(function (y) {
+        var z = SIZES[y];
+        return { yards: y, name: z.name, photo: z.photo, alt: z.alt, price: money(z.price), tons: tonsText(z.tons), fit: z.fit, recommended: project.rec === y, pressed: s.size === y ? "true" : "false", cardStyle: card(s.size === y), pick: set({ size: y, flash: "" }) };
+      }),
+      sizeYards: s.size, sizeName: size.name, sizePhoto: size.photo, sizeAlt: size.alt, includedTons: tonsText(size.tons),
+      dates: DATES.map(function (d, i) {
+        return { dow: d[0], day: d[1], mon: "Dec", pressed: i === s.date ? "true" : "false", pick: set({ date: i, early: s.early && d[2] > 0 }), style: "display:flex;flex-direction:column;align-items:center;justify-content:center;width:76px;min-height:76px;border-radius:12px;cursor:pointer;font-family:inherit;" + (i === s.date ? "background:#1E1C19;color:#ffffff;border:1px solid #1E1C19" : "background:#ffffff;color:#1A1A1A;border:1px solid #cfc7bb") };
+      }),
+      dateText: dateText,
+      pickStandard: set({ early: false, flash: "" }), pickEarly: function () { if (slotsLeft > 0) self.setState({ early: true, flash: "Added early drop-off" }); },
+      earlyOpen: slotsLeft > 0, earlyFull: slotsLeft === 0,
+      earlyLeft: slotsLeft === 1 ? "Only 1 morning slot left" : "Limited: " + slotsLeft + " morning slots left",
+      standardStyle: card(!s.early), earlyStyle: slotsLeft === 0 ? card(false) + ";opacity:.5;cursor:not-allowed" : card(s.early),
+      standardPressed: s.early ? "false" : "true", earlyPressed: s.early ? "true" : "false",
+      windowText: s.early ? "Early drop-off" : "Standard drop-off",
+      days: s.days,
+      lessDays: function () { self.setState({ days: Math.max(3, s.days - 1) }); },
+      moreDays: function () { self.setState({ days: Math.min(30, s.days + 1) }); },
+      daysNote: extraDays > 0 ? "3 days included, plus " + extraDays + " at [PRICE] a day. Up to 30 days." : "3 days included. Add up to 27 more.",
+      heavyJob: s.project === "roof",
+      tonOptions: [0, 1, 2].map(function (t) {
+        return { label: t === 0 ? "No thanks" : "+" + tonsText(t), price: t === 0 ? "$99/ton if you go over" : money(79 * t), pressed: s.tons === t ? "true" : "false", style: card(s.tons === t), pick: set({ tons: t, flash: t ? "Added " + tonsText(t) + " of weight +" + money(79 * t) : "" }) };
+      }),
+      items: ITEMS.map(function (it) {
+        var n = s[it.key];
+        var inc = { flash: "Added " + it.label.toLowerCase().replace(/s$/, "") + " +" + money(it.each) }; inc[it.key] = Math.min(9, n + 1);
+        var dec = { flash: "" }; dec[it.key] = Math.max(0, n - 1);
+        return { label: it.label, each: money(it.each), count: n, inc: set(inc), dec: set(dec), incLabel: "Add one " + it.label.toLowerCase().replace(/s$/, ""), decLabel: "Remove one " + it.label.toLowerCase().replace(/s$/, "") };
+      }),
+      canSizeUp: up > 0,
+      upYards: up, upPhoto: up ? SIZES[up].photo : "", upAlt: up ? SIZES[up].alt : "", upLoads: up ? SIZES[up].loads : "", upTons: up ? tonsText(SIZES[up].tons) : "",
+      upDiff: up ? money(SIZES[up].price - size.price) : "",
+      sizeUp: function () { if (up) self.setState({ size: up, flash: "Moved up to the " + up + "-yard +" + money(SIZES[up].price - size.price) }); },
+      secondCost: money(SIZES[11].price),
+      types: TYPES.map(function (t) { return { label: t[1], pressed: s.type === t[0] ? "true" : "false", style: chip(s.type === t[0]), pick: set({ type: t[0] }) }; }),
+      isPro: s.type !== "home",
+      typeLabel: typeLabel,
+      lines: lines,
+      totalText: money(total),
+      hasPending: extraDays > 0 || s.early,
+      extrasText: extras.join(", "),
+      sheetOpen: s.sheet, sheetExpanded: s.sheet ? "true" : "false", sheetLabel: s.sheet ? "Hide" : "View",
+      toggleSheet: function () { self.setState({ sheet: !s.sheet }); },
+      barSummary: s.size + "-yard · " + s.days + " days" + (s.tons ? " · +" + tonsText(s.tons) : "") + (s.early ? " · early" : ""),
+      hasFlash: !!s.flash, flash: s.flash
+    };
+  }
+}
+</script>
+</body>
+</html>

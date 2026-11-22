@@ -26,6 +26,8 @@ Sessions, not people. Small numbers, so read direction, not percentages.
 - **Details → payment lost about half** (11 → 6). Worth watching in the new flow: that's the long form.
 - **Payment form → paid was strong** (6 → 5). The embedded Stripe step works; keep it.
 
+**Design:** the screens, copy, upsells and mobile/desktop behavior are specified in [`../design/BOOKING-FLOW-DESIGN-SPEC.md`](../design/BOOKING-FLOW-DESIGN-SPEC.md), with a clickable preview. Build to that spec.
+
 ## 2. The journey stays the one already approved
 
 STRATEGY-ARCHIVE §20.7 locked the checkout architecture on October 1. The in-site flow keeps it and moves it into the website's look:
