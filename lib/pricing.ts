@@ -112,11 +112,11 @@ function parse(payload: any): Pricing | null {
       proposed?.maxDays === 30 && typeof proposed.approvalId === "string" &&
       proposed.approvalId.trim().length > 0 &&
       typeof proposed.effectiveFrom === "string" &&
-      /^\\d{4}-\\d{2}-\\d{2}$/.test(proposed.effectiveFrom)) {
+      /^\d{4}-\d{2}-\d{2}$/.test(proposed.effectiveFrom)) {
     const today = new Date().toISOString().slice(0, 10);
     const from = proposed.effectiveFrom;
     const to = typeof proposed.effectiveTo === "string" ? proposed.effectiveTo : null;
-    if (from <= today && (!to || (/^\\d{4}-\\d{2}-\\d{2}$/.test(to) && to >= today))) {
+    if (from <= today && (!to || (/^\d{4}-\d{2}-\d{2}$/.test(to) && to >= today))) {
       const approved = {} as Record<SizeYards, number>;
       let valid = true;
       for (const yards of SIZE_YARDS) {
