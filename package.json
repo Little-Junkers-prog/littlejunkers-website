@@ -9,6 +9,8 @@
     "typecheck": "tsc --noEmit",
     "check:content": "node scripts/check-content.mjs",
     "check:readability": "node scripts/check-readability.mjs",
+    "check:blog": "node scripts/check-blog.mjs",
+    "blog:photos": "node scripts/blog-photos.mjs",
     "check:owner-names": "node scripts/check-owner-names.mjs",
     "check:city-pages": "node scripts/check-city-pages.mjs",
     "check:experience": "node scripts/check-experience.mjs",

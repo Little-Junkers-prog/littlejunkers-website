@@ -13,6 +13,9 @@ on:
       - "scripts/check-days-plus.mjs"
       - "scripts/check-content.mjs"
       - "scripts/check-readability.mjs"
+      - "scripts/check-blog.mjs"
+      - "content/**"
+      - "public/images/**"
       - "components/**"
       - "lib/**"
       - "app/**"
@@ -58,5 +61,7 @@ jobs:
         run: npm run check:content
       - name: Booking-page reading level
         run: npm run check:readability
+      - name: Blog posts
+        run: npm run check:blog
       - name: TypeScript
         run: npm run typecheck
