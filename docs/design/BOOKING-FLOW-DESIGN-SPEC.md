@@ -1,6 +1,6 @@
 # Booking Flow Design Spec
 
-**Status:** In owner review. Revision 2, November 22, 2026. Items marked **Locked** were approved by Marcus in review; everything else is the current draft.
+**Status:** In owner review. Revision 2 merged to main (PR #13); revision 3 in progress on PR #14. Items marked **Locked** were approved by Marcus in review; everything else is the current draft.
 **Live preview (clickable):** https://claude.ai/artifact/Qf1YZuYMYtZvsdyHKEgZeR (desktop and phone frames; press Play)
 **Preview source in this repo:** [`booking-flow-preview/`](booking-flow-preview/) (see its README)
 **Plan this belongs to:** [`../phase-2/BOOKING-FLOW-PLAN-2026-11-22.md`](../phase-2/BOOKING-FLOW-PLAN-2026-11-22.md) · Decision: [ADR-CX-004](../decisions/ADR-CX-004-in-site-booking.md)
@@ -94,3 +94,4 @@ Ticket examples at today's prices: 11-yard + 1 ton = $404 · 16-yard + 1 ton = $
 | --- | --- | --- |
 | 1 | Nov 22, 2026 | First clickable preview: home → size → dates → extras → details → pay (placeholder) → confirmed, real photos and Supabase prices. |
 | 2 | Nov 22, 2026 | Phone frame with the bottom running-total bar (L3); desktop summary pinned (L2); benefit-led option copy (L4); limited morning slots with grayed-out full days (L5). |
+| 3 | In progress | Marcus's next review round. Changes are recorded here, in the preview and in `booking-flow-preview/` together. |
