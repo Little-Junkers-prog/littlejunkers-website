@@ -26,6 +26,15 @@ Sprint 1 is complete. The following items are intentionally parked for future sp
 - **SEO/AIO:** Write as a factual founder/company story with clear entities, dates, locations, services, and internal links. Avoid generic founder-brand filler.
 - **Media:** Use real Marcus/Ivy, truck, original blue dumpster, pink dumpsters, and early-business photos where available.
 
+### [ADMIN-CONTENT] Automated content calendar and social posting from the admin app
+- **Origin:** Owner direction, November 22, 2026.
+- **Goal:** 3 posts a week, all run from the admin app: 1 blog post (SEO and expertise) and 2 social posts. Coordinated, timed, with the schedule written out a month ahead so it's clear when everything goes live.
+- **Media:** pulled from real job photos saved in Supabase (depends on the D-008 photo uploader).
+- **Posting engine:** Upload-Post on a paid plan with every channel connected (Facebook, Instagram, Google Business Profile, LinkedIn, YouTube). Muse is retired. Make is optional, only as a trigger that hands posts to Upload-Post.
+- **Guardrails:** owner approves each post's caption and photo before it publishes; no auto-DMs, auto-comment replies or deletions; Little Junkers accounts only; every post logged in Supabase.
+- **Interim:** blog posts follow `docs/BLOG-PUBLISHING.md`; Claude posts social captions through Upload-Post only after the owner's yes.
+- **Status:** parked for the admin-app build; not a website launch blocker.
+
 ## Open Action Items — October 2026 Backend / Website Migration
 
 ### [BACKEND-001] Resolve rejected booking-hold event telemetry

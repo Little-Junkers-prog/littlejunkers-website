@@ -1,0 +1,63 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-22T12:15:47Z"
+  },
+  "title": "Little Junkers booking flow preview",
+  "launch": {
+    "view": "focused",
+    "file": "Main.dc.html"
+  },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 1100,
+      "title": "Desktop: home to confirmation (clickable)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Mobile.dc.html": {
+      "x": 1360,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Phone: same flow with the running-total bar",
+      "is_interactive": true,
+      "radius": 28
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Mobile.dc.html"
+  ],
+  "notes": {
+    "title": {
+      "x": 0,
+      "y": -300,
+      "text": "One site, one look: home \u2192 book \u2192 pay \u2192 booked",
+      "kind": "title1",
+      "maxW": 1280
+    },
+    "how": {
+      "x": 1830,
+      "y": 0,
+      "w": 380,
+      "size": "m",
+      "fill": "pink",
+      "text": "Press Play on either frame and click through as a customer.\n\nDesktop: your rental stays pinned on the right. Phone: a bar at the bottom shows what you've added and the running total; tap View for the full list.\n\nReal prices from Supabase: 3-day bases $325/$375/$425, prepaid weight $79/ton (vs $99 after), mattress/tire $35, appliance $45.\n\nMorning slot counts are sample numbers. Thu Dec 3 and Mon Dec 7 show a full morning so you can see the grayed-out state.\n\n[PRICE] / [TIME] = not set yet. Payment is a placeholder."
+    }
+  },
+  "designSystems": [
+    {
+      "title": "Little Junkers",
+      "namespace": "little-junkers",
+      "artifact": "https://claude.ai/artifact/L671WAereY2wuFp6G88PMW",
+      "version": "1793281778-cf0f",
+      "copiedAt": "2026-11-22T12:15:47Z"
+    }
+  ]
+}
