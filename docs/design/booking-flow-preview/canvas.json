@@ -48,7 +48,7 @@
       "w": 380,
       "size": "m",
       "fill": "pink",
-      "text": "Press Play on either frame and click through as a customer.\n\nDesktop: your rental stays pinned on the right. Phone: a bar at the bottom shows what you've added and the running total; tap View for the full list.\n\nReal prices from Supabase: 3-day bases $325/$375/$425, prepaid weight $79/ton (vs $99 after), mattress/tire $35, appliance $45.\n\nMorning slot counts are sample numbers. Thu Dec 3 and Mon Dec 7 show a full morning so you can see the grayed-out state.\n\n[PRICE] / [TIME] = not set yet. Payment is a placeholder."
+      "text": "Press Play on either frame and click through as a customer.\n\nDates step: pick how many days first (type it, tap \u2212 / +, or 3 days / 1 week / 2 weeks / 30 days), then the drop-off day. Only days where the dumpster is free for the whole rental can be picked.\n\nSample calendar: the dumpster is already booked Dec 9\u201315. Try 3 days, then 14 days, and watch the open days change.\n\nDesktop: your rental stays pinned on the right. Phone: the bottom bar shows what you've added and the running total.\n\nReal prices from Supabase: 3-day bases $325/$375/$425, prepaid weight $79/ton (vs $99 after), mattress/tire $35, appliance $45. Morning slot counts are sample numbers.\n\n[PRICE] / [TIME] = not set yet. Payment is a placeholder."
     }
   },
   "designSystems": [

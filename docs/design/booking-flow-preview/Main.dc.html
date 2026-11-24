@@ -147,14 +147,40 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
         <sc-if value="{{isDate}}" hint-placeholder-val="{{ false }}">
           <div style="display: flex; flex-direction: column; gap: 22px">
             <div>
-              <h1 style="margin: 0; font-size: 32px">When do you need it?</h1>
-              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">These are the days we have a {{sizeYards}}-yard open.</p>
+              <h1 style="margin: 0; font-size: 32px">How long do you need it?</h1>
+              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Every rental includes 3 days. Keep it up to 30.</p>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px">
-              <sc-for list="{{dates}}" as="d" hint-placeholder-count="6">
-                <button type="button" onClick="{{d.pick}}" style="{{d.style}}" aria-pressed="{{d.pressed}}"><span style="font-size: 13px">{{d.dow}}</span><span style="font-size: 20px; font-weight: 800">{{d.day}}</span><span style="font-size: 13px">{{d.mon}}</span></button>
-              </sc-for>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+                <button type="button" class="lj-ghost" onClick="{{lessDays}}" aria-label="One less day" style="width: 52px; min-height: 52px; justify-content: center; font-size: 24px">−</button>
+                <label for="days-input" style="position: absolute; left: -9999px">Number of days</label>
+                <input id="days-input" class="lj-input" type="number" inputmode="numeric" min="3" max="30" value="{{daysInput}}" onChange="{{typeDays}}" onBlur="{{fixDays}}" style="width: 96px; min-height: 52px; text-align: center; font-size: 26px; font-weight: 800">
+                <span style="font-size: 20px; font-weight: 700">days</span>
+                <button type="button" class="lj-ghost" onClick="{{moreDays}}" aria-label="One more day" style="width: 52px; min-height: 52px; justify-content: center; font-size: 24px">+</button>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap" role="group" aria-label="Common rental lengths">
+                <sc-for list="{{quickDays}}" as="q" hint-placeholder-count="4">
+                  <button type="button" onClick="{{q.pick}}" style="{{q.style}}" aria-pressed="{{q.pressed}}">{{q.label}}</button>
+                </sc-for>
+              </div>
+              <p style="margin: 0; color: #555555">{{daysNote}}</p>
             </div>
+            <div>
+              <h2 style="margin: 0; font-size: 24px">Pick your drop-off day</h2>
+              <p style="margin: 6px 0 12px; color: #555555">These days have a {{sizeYards}}-yard open for all {{days}} days. Pickup is on your last day.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                <sc-for list="{{dates}}" as="d" hint-placeholder-count="12">
+                  <button type="button" onClick="{{d.pick}}" style="{{d.style}}" aria-pressed="{{d.pressed}}" disabled="{{d.off}}" aria-label="{{d.aria}}"><span style="font-size: 13px">{{d.dow}}</span><span style="font-size: 20px; font-weight: 800">{{d.day}}</span><span style="font-size: 12px">{{d.sub}}</span></button>
+                </sc-for>
+              </div>
+              <sc-if value="{{hasDateMsg}}" hint-placeholder-val="{{ false }}">
+                <p style="margin: 12px 0 0; padding: 10px 14px; background: #FFF8EB; border: 1px solid #F2CF7A; border-radius: 10px">{{dateMsg}}</p>
+              </sc-if>
+              <sc-if value="{{hasDate}}" hint-placeholder-val="{{ true }}">
+                <p style="margin: 12px 0 0; font-weight: 600">Drop-off {{dateText}} · Pickup {{pickupText}}</p>
+              </sc-if>
+            </div>
+            <sc-if value="{{hasDate}}" hint-placeholder-val="{{ true }}">
             <div>
               <h2 style="margin: 0 0 10px; font-size: 20px">Drop-off time</h2>
               <div class="lj-grid2">
@@ -171,18 +197,10 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
                 <p style="margin: 10px 0 0; color: #555555">Morning slots are full that day. Pick another date if you need early drop-off.</p>
               </sc-if>
             </div>
-            <div>
-              <h2 style="margin: 0 0 10px; font-size: 20px">How long?</h2>
-              <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap">
-                <button type="button" class="lj-ghost" onClick="{{lessDays}}" aria-label="One less day" style="width: 48px; justify-content: center; font-size: 22px">−</button>
-                <span style="font-size: 26px; font-weight: 800; min-width: 90px; text-align: center">{{days}} days</span>
-                <button type="button" class="lj-ghost" onClick="{{moreDays}}" aria-label="One more day" style="width: 48px; justify-content: center; font-size: 22px">+</button>
-                <span style="color: #555555">{{daysNote}}</span>
-              </div>
-            </div>
+            </sc-if>
             <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
               <button type="button" class="lj-link" onClick="{{toSize}}">Back</button>
-              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toExtras}}">Next: extras</button>
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toExtrasIfDate}}" disabled="{{noDate}}" style="{{nextStyle}}">Next: extras</button>
             </div>
           </div>
         </sc-if>
@@ -391,7 +409,7 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: 0, size: 16, project: "remodel", date: 2, early: false, days: 3, tons: 0, mattress: 0, tire: 0, appliance: 0, type: "home", sheet: false, flash: "" };
+    this.state = { step: 0, size: 16, project: "remodel", date: 2, early: false, days: 3, daysInput: "3", tons: 0, mattress: 0, tire: 0, appliance: 0, type: "home", sheet: false, flash: "" };
   }
   renderVals() {
     var s = this.state;
@@ -420,10 +438,24 @@ class Component extends DCLogic {
     var project = PROJECTS.filter(function (p) { return p.id === s.project; })[0];
     var size = SIZES[s.size];
 
-    // [day, date, morning upgrade slots left]. Sample numbers: the real ones come from the day's early-drop capacity.
-    var DATES = [["Tue", "1", 2], ["Wed", "2", 1], ["Thu", "3", 0], ["Fri", "4", 3], ["Sat", "5", 1], ["Mon", "7", 0]];
-    var slotsLeft = DATES[s.date][2];
-    var dateText = DATES[s.date][0] + ", Dec " + DATES[s.date][1];
+    // Sample calendar, Dec 2026 (no Sunday drop-offs). The only matching dumpster is already
+    // booked Dec 9-15, so a date is open only if the whole rental fits around that booking.
+    // Real build: Fleet availability for the size, the drop-off date and the number of days.
+    var WD = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var BOOKED_FROM = 9, BOOKED_TO = 15;
+    // Morning upgrade slots left per day (sample numbers; real ones come from early-drop capacity).
+    var SLOTS = { 1: 2, 2: 1, 3: 0, 4: 3, 5: 1, 7: 0, 8: 2, 16: 2, 17: 1, 18: 0, 19: 2 };
+    var fmt = function (dayOfDec) { var dt = new Date(2026, 11, dayOfDec); return WD[dt.getDay()] + ", " + MO[dt.getMonth()] + " " + dt.getDate(); };
+    var fits = function (d, n) { var last = d + n - 1; return last < BOOKED_FROM || d > BOOKED_TO; };
+    var DATES = [];
+    for (var dd = 1; dd <= 19; dd++) { if (new Date(2026, 11, dd).getDay() !== 0) DATES.push(dd); }
+    var chosen = s.date >= 0 ? DATES[s.date] : 0;
+    var dateFits = chosen > 0 && fits(chosen, s.days);
+    var slotsLeft = dateFits ? (SLOTS[chosen] === undefined ? 2 : SLOTS[chosen]) : 0;
+    var dateText = dateFits ? fmt(chosen) : "Pick a day";
+    var pickupText = dateFits ? fmt(chosen + s.days - 1) : "";
+    var setDays = function (n) { var v = Math.max(3, Math.min(30, n)); self.setState({ days: v, daysInput: String(v), early: s.early && chosen > 0 && fits(chosen, v) }); };
 
     var extraDays = s.days - 3;
     var ITEMS = [
@@ -477,19 +509,42 @@ class Component extends DCLogic {
       }),
       sizeYards: s.size, sizeName: size.name, sizePhoto: size.photo, sizeAlt: size.alt, includedTons: tonsText(size.tons),
       dates: DATES.map(function (d, i) {
-        return { dow: d[0], day: d[1], mon: "Dec", pressed: i === s.date ? "true" : "false", pick: set({ date: i, early: s.early && d[2] > 0 }), style: "display:flex;flex-direction:column;align-items:center;justify-content:center;width:76px;min-height:76px;border-radius:12px;cursor:pointer;font-family:inherit;" + (i === s.date ? "background:#1E1C19;color:#ffffff;border:1px solid #1E1C19" : "background:#ffffff;color:#1A1A1A;border:1px solid #cfc7bb") };
+        var dt = new Date(2026, 11, d);
+        var ok = fits(d, s.days);
+        var on = ok && i === s.date;
+        var base = "display:flex;flex-direction:column;align-items:center;justify-content:center;width:76px;min-height:76px;border-radius:12px;font-family:inherit;";
+        return { dow: WD[dt.getDay()], day: String(d), sub: ok ? "Dec" : "Booked", off: !ok, aria: fmt(d) + (ok ? "" : ", not open for " + s.days + " days"), pressed: on ? "true" : "false",
+          pick: function () { if (ok) self.setState({ date: i, early: s.early && (SLOTS[d] === undefined ? 2 : SLOTS[d]) > 0 }); },
+          style: base + (!ok ? "background:#EDEAE4;color:#8a8278;border:1px dashed #cfc7bb;cursor:not-allowed" : on ? "background:#1E1C19;color:#ffffff;border:1px solid #1E1C19;cursor:pointer" : "background:#ffffff;color:#1A1A1A;border:1px solid #cfc7bb;cursor:pointer") };
       }),
+      hasDate: dateFits, noDate: !dateFits, pickupText: pickupText,
+      hasDateMsg: chosen > 0 && !dateFits,
+      dateMsg: chosen > 0 && !dateFits ? fmt(chosen) + " doesn't work for " + s.days + " days. That dumpster is booked starting " + fmt(BOOKED_FROM) + ". Pick another day or shorten the rental." : "",
+      toExtrasIfDate: function () { if (dateFits) self.setState({ step: 3 }); },
+      nextStyle: dateFits ? "" : "opacity:.5;cursor:not-allowed",
       dateText: dateText,
       pickStandard: set({ early: false, flash: "" }), pickEarly: function () { if (slotsLeft > 0) self.setState({ early: true, flash: "Added early drop-off" }); },
       earlyOpen: slotsLeft > 0, earlyFull: slotsLeft === 0,
       earlyLeft: slotsLeft === 1 ? "Only 1 morning slot left" : "Limited: " + slotsLeft + " morning slots left",
       standardStyle: card(!s.early), earlyStyle: slotsLeft === 0 ? card(false) + ";opacity:.5;cursor:not-allowed" : card(s.early),
       standardPressed: s.early ? "false" : "true", earlyPressed: s.early ? "true" : "false",
-      windowText: s.early ? "Early drop-off" : "Standard drop-off",
+      windowText: (s.early ? "Early drop-off" : "Standard drop-off") + (dateFits ? " · pickup " + pickupText : ""),
       days: s.days,
-      lessDays: function () { self.setState({ days: Math.max(3, s.days - 1) }); },
-      moreDays: function () { self.setState({ days: Math.min(30, s.days + 1) }); },
-      daysNote: extraDays > 0 ? "3 days included, plus " + extraDays + " at [PRICE] a day. Up to 30 days." : "3 days included. Add up to 27 more.",
+      daysInput: s.daysInput,
+      lessDays: function () { setDays(s.days - 1); },
+      moreDays: function () { setDays(s.days + 1); },
+      typeDays: function (e) {
+        var raw = String(e.target.value).replace(/[^0-9]/g, "").slice(0, 2);
+        var n = parseInt(raw, 10);
+        if (n >= 3 && n <= 30) self.setState({ daysInput: raw, days: n, early: s.early && chosen > 0 && fits(chosen, n) });
+        else self.setState({ daysInput: raw });
+      },
+      fixDays: function () { var n = parseInt(s.daysInput, 10); setDays(isNaN(n) ? s.days : n); },
+      quickDays: [3, 7, 14, 30].map(function (n) {
+        return { label: n === 7 ? "1 week" : n === 14 ? "2 weeks" : n === 30 ? "30 days" : "3 days", pressed: s.days === n ? "true" : "false", pick: function () { setDays(n); },
+          style: "min-height:44px;padding:0 16px;border-radius:999px;cursor:pointer;font:600 15px system-ui,-apple-system,sans-serif;" + (s.days === n ? "background:#1E1C19;color:#ffffff;border:1px solid #1E1C19" : "background:#ffffff;color:#1A1A1A;border:1px solid #cfc7bb") };
+      }),
+      daysNote: extraDays > 0 ? "3 days included, plus " + extraDays + " extra at [PRICE] a day. Type a number or tap − and +." : "3 days included. Type a number or tap − and +.",
       heavyJob: s.project === "roof",
       tonOptions: [0, 1, 2].map(function (t) {
         return { label: t === 0 ? "No thanks" : "+" + tonsText(t), price: t === 0 ? "$99/ton if you go over" : money(79 * t), pressed: s.tons === t ? "true" : "false", style: card(s.tons === t), pick: set({ tons: t, flash: t ? "Added " + tonsText(t) + " of weight +" + money(79 * t) : "" }) };
