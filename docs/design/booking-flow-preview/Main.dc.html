@@ -77,17 +77,17 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
         <img src="/_blob/fb6a52c4fcdd9287b17eb120fdf5c1f3" alt="Little Junkers" style="height: 34px; width: auto; flex: none">
         <span class="lj-word" style="font-weight: 800; font-size: 17px; white-space: nowrap">Little Junkers</span>
         <ol class="lj-steps" style="list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; flex-wrap: nowrap; flex: 1; justify-content: center" aria-label="Booking steps">
-          <sc-for list="{{progress}}" as="p" hint-placeholder-count="5">
+          <sc-for list="{{progress}}" as="p" hint-placeholder-count="4">
             <li><button type="button" onClick="{{p.go}}" disabled="{{p.locked}}" aria-current="{{p.current}}" style="{{p.style}}">{{p.label}}</button></li>
           </sc-for>
         </ol>
         <div class="lj-stepm">
           <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 14px">
             <span style="font-weight: 700; white-space: nowrap">{{stepName}}</span>
-            <span style="color: #B8B0A6; white-space: nowrap">Step {{step}} of 5</span>
+            <span style="color: #B8B0A6; white-space: nowrap">Step {{step}} of 4</span>
           </div>
           <div style="margin-top: 6px; display: flex; gap: 4px" role="group" aria-label="Booking steps">
-            <sc-for list="{{progress}}" as="p" hint-placeholder-count="5">
+            <sc-for list="{{progress}}" as="p" hint-placeholder-count="4">
               <button type="button" onClick="{{p.go}}" disabled="{{p.locked}}" aria-label="{{p.aria}}" style="{{p.barStyle}}"></button>
             </sc-for>
           </div>
@@ -201,6 +201,7 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
                 </sc-for>
               </div>
               <p style="margin: 0; color: #555555">{{daysNote}}</p>
+              <p style="margin: 0; color: #555555; font-size: 15px">Not sure how long? Pick your best guess. Running behind, text us before pickup and add days at [PRICE] a day.</p>
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px">
               <h2 style="margin: 0; font-size: 24px">Drop-off day</h2>
@@ -298,7 +299,7 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
             <section style="{{weightBox}}">
               <div>
                 <h2 style="margin: 0; font-size: 20px">Extra weight <span class="lj-pill">Save $20 a ton</span></h2>
-                <p style="margin: 4px 0 0; color: #555555">Your {{sizeYards}}-yard includes {{includedTons}}. Some things are heavier than they look, like sofa beds, solid wood furniture, tile and plaster. Go over and it's $99 a ton after pickup. Add it now for $79 a ton.</p>
+                <p style="margin: 4px 0 0; color: #555555">Your {{sizeYards}}-yard includes {{includedTons}}. Tile, drywall and plaster are heavier than they look. Go over and it's $99 a ton after pickup. Add it now for $79 a ton.</p>
                 <sc-if value="{{hasRec}}" hint-placeholder-val="{{ false }}">
                   <p style="margin: 10px 0 0; padding: 10px 12px; background: #ffffff; border-radius: 10px; font-weight: 600">{{recText}}</p>
                 </sc-if>
@@ -328,52 +329,16 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
             </section>
             <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
               <button type="button" class="lj-link" onClick="{{toDate}}">Back</button>
-              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toDetails}}">Next: your info</button>
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toCheckout}}">Next: checkout</button>
             </div>
           </div>
         </sc-if>
 
-        <sc-if value="{{isDetails}}" hint-placeholder-val="{{ false }}">
-          <div style="display: flex; flex-direction: column; gap: 18px">
-            <div>
-              <h1 style="margin: 0; font-size: 32px">Your info</h1>
-              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Where it's going and how to reach you.</p>
-            </div>
-            <div>
-              <span class="lj-label">This rental is for</span>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap" role="group" aria-label="This rental is for">
-                <sc-for list="{{types}}" as="ty" hint-placeholder-count="3">
-                  <button type="button" onClick="{{ty.pick}}" style="{{ty.style}}" aria-pressed="{{ty.pressed}}">{{ty.label}}</button>
-                </sc-for>
-              </div>
-            </div>
-            <sc-if value="{{isPro}}" hint-placeholder-val="{{ false }}">
-              <div><label class="lj-label" for="biz">Company name</label><input id="biz" class="lj-input" placeholder="Company name" value="{{company}}" onChange="{{setCompany}}"></div>
-            </sc-if>
-            <div class="lj-grid2" style="gap: 14px">
-              <div><label class="lj-label" for="nm">Name</label><input id="nm" class="lj-input" placeholder="First and last name" autocomplete="name" value="{{name}}" onChange="{{setName}}"></div>
-              <div><label class="lj-label" for="ph">Mobile</label><input id="ph" class="lj-input" placeholder="Mobile number" type="tel" autocomplete="tel" value="{{phone}}" onChange="{{setPhone}}"></div>
-              <div><label class="lj-label" for="em">Email</label><input id="em" class="lj-input" placeholder="Email" type="email" autocomplete="email" value="{{email}}" onChange="{{setEmail}}"></div>
-              <div><label class="lj-label" for="ad">Street address</label><input id="ad" class="lj-input" placeholder="123 Main St" autocomplete="address-line1" value="{{street}}" onChange="{{setStreet}}"><span style="display: block; margin-top: 4px; font-size: 14px; color: #555555">Peachtree City, GA 30269</span></div>
-            </div>
-            <div><label class="lj-label" for="nt">Where should we put it? <span style="font-weight: 400; color: #555555">(optional)</span></label><input id="nt" class="lj-input" placeholder="Left side of the driveway, near the garage" value="{{spot}}" onChange="{{setSpot}}"></div>
-            <div style="display: flex; flex-direction: column; gap: 10px; background: #FAF8F5; border-radius: 12px; padding: 14px">
-              <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c1" checked style="width: 22px; height: 22px; margin: 0"><label for="c1"><strong>Rental texts.</strong> Delivery windows, on-the-way and pickup reminders.</label></div>
-              <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c2" style="width: 22px; height: 22px; margin: 0"><label for="c2"><strong>Deals and news.</strong> Optional.</label></div>
-              <p style="margin: 0; font-size: 14px; color: #555555">Reply STOP to any text to opt out.</p>
-            </div>
-            <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
-              <button type="button" class="lj-link" onClick="{{toExtras}}">Back</button>
-              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toPay}}">Next: review and pay</button>
-            </div>
-          </div>
-        </sc-if>
-
-        <sc-if value="{{isPay}}" hint-placeholder-val="{{ false }}">
-          <div style="display: flex; flex-direction: column; gap: 18px">
+        <sc-if value="{{isCheckout}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 20px">
             <div>
               <h1 style="margin: 0; font-size: 32px">Review and pay</h1>
-              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Check everything below. Tap Edit to change anything.</p>
+              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Check your rental, tell us where it's going, and pay. Tap Edit to change anything.</p>
             </div>
             <div style="border: 1px solid #E5E0D8; border-radius: 14px; overflow: hidden">
               <div style="display: flex; gap: 16px; align-items: center; padding: 16px; background: #FAF8F5; flex-wrap: wrap">
@@ -390,25 +355,61 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
               <sc-if value="{{hasExtras}}" hint-placeholder-val="{{ false }}">
                 <div class="lj-row"><span style="flex: 1"><strong>Extras</strong><br><span style="color: #555555">{{extrasText}}</span></span><button type="button" class="lj-link" onClick="{{toExtras}}">Edit</button></div>
               </sc-if>
-              <div class="lj-row"><span style="flex: 1"><strong>Delivery address</strong><br><span style="color: #555555">{{streetText}}<br>Peachtree City, GA 30269</span><sc-if value="{{hasSpot}}" hint-placeholder-val="{{ false }}"><br><span style="color: #555555">Put it: {{spot}}</span></sc-if><sc-if value="{{boards}}" hint-placeholder-val="{{ true }}"><br><span style="color: #555555">Driveway boards: yes</span></sc-if></span><button type="button" class="lj-link" onClick="{{toDetails}}">Edit</button></div>
-              <div class="lj-row"><span style="flex: 1"><strong>Contact</strong><br><span style="color: #555555">{{nameText}}<sc-if value="{{isPro}}" hint-placeholder-val="{{ false }}">, {{companyText}}</sc-if><br>{{phoneText}}<br>{{emailText}}</span></span><button type="button" class="lj-link" onClick="{{toDetails}}">Edit</button></div>
             </div>
-            <div style="border: 2px dashed #b8b0a6; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px; background: #FAF8F5">
-              <p style="margin: 0; font-weight: 700">Payment</p>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap">
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Card</span>
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Apple Pay</span>
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Google Pay</span>
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Klarna</span>
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Affirm</span>
+
+            <section style="display: flex; flex-direction: column; gap: 14px">
+              <h2 style="margin: 0; font-size: 22px">Where it's going</h2>
+              <div><label class="lj-label" for="ad">Street address</label><input id="ad" class="lj-input" placeholder="Start typing your address" autocomplete="address-line1" value="{{street}}" onChange="{{setStreet}}"><span style="display: block; margin-top: 4px; font-size: 14px; color: #555555">Peachtree City, GA 30269 · from your ZIP</span></div>
+              <div><label class="lj-label" for="nt">Where should we put it? <span style="font-weight: 400; color: #555555">(optional)</span></label><input id="nt" class="lj-input" placeholder="Left side of the driveway, near the garage" value="{{spot}}" onChange="{{setSpot}}"></div>
+            </section>
+
+            <section style="display: flex; flex-direction: column; gap: 14px">
+              <h2 style="margin: 0; font-size: 22px">How to reach you</h2>
+              <div>
+                <span class="lj-label">This rental is for</span>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap" role="group" aria-label="This rental is for">
+                  <sc-for list="{{types}}" as="ty" hint-placeholder-count="3">
+                    <button type="button" onClick="{{ty.pick}}" style="{{ty.style}}" aria-pressed="{{ty.pressed}}">{{ty.label}}</button>
+                  </sc-for>
+                </div>
               </div>
-              <div style="height: 48px; border: 1px solid #cfc7bb; border-radius: 10px; background: #ffffff; display: flex; align-items: center; padding: 0 14px; color: #555555">Card number · MM / YY · CVC</div>
-              <p style="margin: 0; font-size: 14px; color: #555555">Placeholder for the Stripe payment form. It sits right here on our page.</p>
-            </div>
-            <button type="button" class="lj-btn" onClick="{{toDone}}" style="width: 100%; min-height: 56px; font-size: 18px">Pay {{totalText}}</button>
-            <p style="margin: 0; font-size: 14px; color: #555555; text-align: center">Need to change or cancel? Give us 24 hours before delivery.</p>
+              <sc-if value="{{isPro}}" hint-placeholder-val="{{ false }}">
+                <div><label class="lj-label" for="biz">Company name</label><input id="biz" class="lj-input" placeholder="Company name" autocomplete="organization" value="{{company}}" onChange="{{setCompany}}"></div>
+              </sc-if>
+              <div class="lj-grid2" style="gap: 14px">
+                <div><label class="lj-label" for="nm">Name</label><input id="nm" class="lj-input" placeholder="First and last name" autocomplete="name" value="{{name}}" onChange="{{setName}}"></div>
+                <div><label class="lj-label" for="ph">Mobile</label><input id="ph" class="lj-input" placeholder="Mobile number" type="tel" inputmode="tel" autocomplete="tel" value="{{phone}}" onChange="{{setPhone}}"><span style="display: block; margin-top: 4px; font-size: 14px; color: #555555">We text your delivery window here.</span></div>
+              </div>
+              <div><label class="lj-label" for="em">Email</label><input id="em" class="lj-input" placeholder="Email for your receipt" type="email" inputmode="email" autocomplete="email" value="{{email}}" onChange="{{setEmail}}"></div>
+              <div style="display: flex; flex-direction: column; gap: 10px; background: #FAF8F5; border-radius: 12px; padding: 14px">
+                <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c1" checked style="width: 22px; height: 22px; margin: 0"><label for="c1"><strong>Rental texts.</strong> Delivery windows, on-the-way and pickup reminders.</label></div>
+                <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c2" style="width: 22px; height: 22px; margin: 0"><label for="c2"><strong>Deals and news.</strong> Optional.</label></div>
+                <p style="margin: 0; font-size: 14px; color: #555555">Reply STOP to any text to opt out.</p>
+              </div>
+            </section>
+
+            <section style="display: flex; flex-direction: column; gap: 12px">
+              <h2 style="margin: 0; font-size: 22px">Pay</h2>
+              <div class="lj-grid2" style="gap: 10px">
+                <button type="button" onClick="{{toDone}}" style="min-height: 52px; border-radius: 10px; border: 0; background: #000000; color: #ffffff; font: 700 17px system-ui, -apple-system, sans-serif; cursor: pointer">Pay with Apple Pay</button>
+                <button type="button" onClick="{{toDone}}" style="min-height: 52px; border-radius: 10px; border: 1px solid #cfc7bb; background: #ffffff; color: #1A1A1A; font: 700 17px system-ui, -apple-system, sans-serif; cursor: pointer">Pay with Google Pay</button>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; color: #555555; font-size: 14px"><span style="flex: 1; height: 1px; background: #E5E0D8"></span>or pay with a card<span style="flex: 1; height: 1px; background: #E5E0D8"></span></div>
+              <div style="border: 2px dashed #b8b0a6; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #FAF8F5">
+                <div style="height: 48px; border: 1px solid #cfc7bb; border-radius: 10px; background: #ffffff; display: flex; align-items: center; padding: 0 14px; color: #555555">Card number · MM / YY · CVC · ZIP</div>
+                <button type="button" class="lj-link" style="align-self: flex-start">More ways to pay (Klarna, Affirm)</button>
+                <p style="margin: 0; font-size: 13px; color: #555555">Placeholder for Stripe's wallet buttons and card form. Wallets only show on devices that have them. It all stays on our page.</p>
+              </div>
+              <div style="background: #FAF8F5; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; align-items: baseline"><strong>You pay today</strong><strong style="font-size: 24px">{{totalText}}</strong></div>
+                <p style="margin: 0; font-size: 15px; color: #555555">That's everything we know about. The only charges that can come later: $99 a ton if your load goes over {{coveredTons}}, or extra days if you keep it longer.</p>
+              </div>
+              <button type="button" class="lj-btn" onClick="{{toDone}}" style="width: 100%; min-height: 56px; font-size: 18px">Pay {{totalText}}</button>
+              <p style="margin: 0; font-size: 14px; color: #555555; text-align: center">Need to change or cancel? Give us 24 hours before delivery.</p>
+            </section>
           </div>
         </sc-if>
+
       </main>
 
       <aside class="lj-aside" style="flex: 1 1 320px; background: #ffffff; border: 1px solid #E8E3DB; border-radius: 16px; overflow: hidden; position: sticky; top: 76px" aria-label="Your rental">
@@ -511,6 +512,15 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
         </div>
         <div style="text-align: right"><span style="font-size: 13px; color: #555555">Paid</span><br><strong style="font-size: 24px">{{totalText}}</strong></div>
       </section>
+      <section style="background: #FFF5FB; border: 2px solid #FFCEE4; border-radius: 16px; padding: 20px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center">
+        <div style="flex: 1 1 260px">
+          <h2 style="margin: 0; font-size: 20px">Loading something heavy?</h2>
+          <p style="margin: 4px 0 0; color: #555555">{{addTonText}}</p>
+        </div>
+        <sc-if value="{{canAddTon}}" hint-placeholder-val="{{ true }}">
+          <button type="button" class="lj-btn" onClick="{{addTonAfter}}">Add 1 ton, $79</button>
+        </sc-if>
+      </section>
       <div style="display: flex; gap: 12px; flex-wrap: wrap">
         <a class="lj-btn" href="sms:+14707125079">Text us</a>
         <button type="button" class="lj-ghost" onClick="{{goHome}}">Back to home</button>
@@ -525,7 +535,7 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: 0, maxStep: 0, size: 16, project: "remodel", dateOff: -1, dateInput: "", dateNote: "", suggest: -1, calOpen: false, calMonth: 0, early: false, days: 3, daysInput: "3", tons: 0, mattress: 0, tire: 0, appliance: 0, roofNote: false, draft: false, closeReady: false, boards: true, type: "home", name: "", phone: "", email: "", street: "", spot: "", company: "", sheet: false, flash: "", leaving: false, reason: "" };
+    this.state = { step: 0, maxStep: 0, size: 16, project: "remodel", dateOff: -1, dateInput: "", dateNote: "", suggest: -1, calOpen: false, calMonth: 0, early: false, days: 3, daysInput: "3", tons: 0, mattress: 0, tire: 0, appliance: 0, roofNote: false, draft: false, closeReady: false, boards: true, type: "home", name: "", phone: "", email: "", street: "", spot: "", company: "", sheet: false, flash: "", leaving: false, reason: "", addedAfter: false };
   }
   renderVals() {
     var s = this.state;
@@ -627,11 +637,12 @@ class Component extends DCLogic {
       { key: "appliance", label: "Appliances", each: 45 }
     ];
     // Weight suggestion from what the customer already told us. No extra questions.
-    // [ASSUMPTION] rules for Marcus to confirm; the real rules live in one admin-editable table.
+    // Rev 6 rule table (see docs/phase-2/CHECKOUT-AND-RECOMMENDATIONS-RESEARCH-2026-11-27.md):
+    // remodel -> +1 ton (EPA: drywall 467, mixed C&D 484 lb/cu yd vs. household trash 250-300).
+    // Shed/deck and 2+ appliances rules dropped: lumber is 169 lb/cu yd and two appliances add
+    // about 0.2 ton (EPA), so neither supports a +1 ton suggestion. Real rules live in one admin table.
     var recTons = 0, recWhy = "";
-    if (s.project === "remodel") { recTons = 1; recWhy = "Kitchen and bath remodels can run heavy with tile, plaster and old cabinets."; }
-    else if (s.project === "shed") { recTons = 1; recWhy = "Shed and deck lumber gets heavy, especially when it's wet."; }
-    else if (s.appliance >= 2) { recTons = 1; recWhy = "With " + s.appliance + " appliances going in, the weight adds up."; }
+    if (s.project === "remodel") { recTons = 1; recWhy = "Remodel debris like tile, drywall and plaster weighs a lot more than household junk."; }
     var recText = recTons ? recWhy + " We suggest adding " + tonsText(recTons) + ". It's cheaper now than after pickup." : "";
 
     var lines = [{ label: "3-day rental", amount: money(size.price) }, { label: "Delivery and pickup", amount: "Free" }];
@@ -649,9 +660,9 @@ class Component extends DCLogic {
     if (s.boards) lines.push({ label: "Driveway boards", amount: "Free" });
 
     var up = s.size === 11 ? 16 : s.size === 16 ? 21 : 0;
-    var steps = ["Size", "Dates", "Extras", "Your info", "Pay"];
+    var steps = ["Size", "Dates", "Extras", "Checkout"];
     var TYPES = [["home", "Home"], ["business", "Business"], ["contractor", "Contractor"]];
-    var urls = ["littlejunkersllc.com", "littlejunkersllc.com/book/size", "littlejunkersllc.com/book/dates", "littlejunkersllc.com/book/extras", "littlejunkersllc.com/book/details", "littlejunkersllc.com/book/pay", "littlejunkersllc.com/book/confirmed"];
+    var urls = ["littlejunkersllc.com", "littlejunkersllc.com/book/size", "littlejunkersllc.com/book/dates", "littlejunkersllc.com/book/extras", "littlejunkersllc.com/book/checkout", "littlejunkersllc.com/book/confirmed"];
     var go = function (n) { return function () { self.setState({ step: n, maxStep: Math.max(s.maxStep, n), sheet: false }); }; };
     var REASONS = ["Just checking prices", "I need different dates", "Not sure which size", "It costs more than I expected", "I'd rather call or text", "Something else"];
     var field = function (k) { return function (e) { var p = {}; p[k] = e.target.value; self.setState(p); }; };
@@ -660,11 +671,11 @@ class Component extends DCLogic {
     return {
       url: urls[s.step],
       isHome: s.step === 0,
-      isFlow: s.step >= 1 && s.step <= 5,
-      isDone: s.step === 6,
-      isSize: s.step === 1, isDate: s.step === 2, isExtras: s.step === 3, isDetails: s.step === 4, isPay: s.step === 5,
-      step: s.step, stepName: steps[Math.max(0, Math.min(4, s.step - 1))],
-      goHome: go(0), toSize: go(1), toDate: go(2), toExtras: go(3), toDetails: go(4), toPay: go(5), toDone: go(6),
+      isFlow: s.step >= 1 && s.step <= 4,
+      isDone: s.step === 5,
+      isSize: s.step === 1, isDate: s.step === 2, isExtras: s.step === 3, isCheckout: s.step === 4,
+      step: s.step, stepName: steps[Math.max(0, Math.min(3, s.step - 1))],
+      goHome: go(0), toSize: go(1), toDate: go(2), toExtras: go(3), toCheckout: go(4), toDone: go(5),
       progress: steps.map(function (label, i) {
         var n = i + 1;
         var reachable = n <= s.maxStep && n !== s.step;
@@ -765,6 +776,10 @@ class Component extends DCLogic {
       setName: field("name"), setPhone: field("phone"), setEmail: field("email"), setStreet: field("street"), setSpot: field("spot"), setCompany: field("company"),
       nameText: orAdd(s.name, "your name"), phoneText: orAdd(s.phone, "your mobile"), emailText: orAdd(s.email, "your email"), streetText: orAdd(s.street, "your street address"), companyText: orAdd(s.company, "company name"),
       hasSpot: !!s.spot,
+      coveredTons: tonsText(size.tons + s.tons),
+      canAddTon: !s.addedAfter,
+      addTonText: s.addedAfter ? "Added. You're covered for " + tonsText(size.tons + s.tons + 1) + " now. We charged $79 to the card you just used." : "Your load is covered up to " + tonsText(size.tons + s.tons) + ". Add a ton now for $79 instead of $99 after pickup. One tap, same card.",
+      addTonAfter: set({ addedAfter: true }),
       hasExtras: extras.length > 0,
       lines: lines,
       totalText: money(total),
