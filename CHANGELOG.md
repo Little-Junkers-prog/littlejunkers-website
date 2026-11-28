@@ -19,3 +19,21 @@ Base main: `377e57a7c1d1cd4b71721d050badaaa352c4acf9`. Owner direction from Nove
 | CHANGELOG.md | New | Append-only traceability. |
 
 Validation: source charter, archive, ADRs and existing design inspected; this documentation commit has no transaction/data changes. Prototype and source page revisions tracked in subsequent entries. No local build yet. Rollback: revert this commit on review branch; no changes to main or live systems.
+
+
+## 2026-11-28 — Core conversion revisions (review branch)
+
+| File | Change / rationale |
+| --- | --- |
+| app/page.tsx | Outcome-led hero, low-commitment estimate, early authentic reviews link, qualified dates, secondary comparison. |
+| app/[slug]/SizePage.tsx | Canonical three-day price on all three size pages, preserve selected size through fee lookup, explain extra charges. |
+| components/ZipCheck.tsx | Preserve size and location; discard stale request responses and saved estimates when editing; truthful support promise. |
+| app/service-areas/page.tsx | Explain split-city fees; preserve validated product size in server-rendered lookup fallback. |
+| components/ZipContext.tsx | Clear saved area and saved query together on change ZIP. |
+| app/pricing/page.tsx | Shared PlanLink retains location context rather than resetting it. |
+| lib/faqs.ts | Canonical three-day FAQ pricing; no implied calendar/payment capability or automatic extension. |
+| components/PriceTable.tsx | Article rate table uses canonical three-day price rather than presenting legacy tier menu. |
+| scripts/check-experience.mjs | Regressions for canonical pricing, trust proof, stale responses and size handoff. |
+| CHANGELOG.md | Append revision record. |
+
+Validation: source-level changes; CI and browser verification pending; container git clone blocked by DNS. No production rates, reservations, payment, policy, URL or main-branch changes. Revert this commit to undo.

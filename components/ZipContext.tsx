@@ -72,7 +72,7 @@ export function DeliveryLine({ fallback }: { fallback: string }) {
       </strong>{" "}
       <button
         type="button"
-        onClick={() => saveArea(null)}
+        onClick={() => { saveArea(null); saveLocationQuery(null); }}
         style={{ font: "inherit", background: "none", border: 0, padding: 0, textDecoration: "underline", cursor: "pointer", color: "inherit" }}
       >
         Change ZIP
