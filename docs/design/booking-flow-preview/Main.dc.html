@@ -107,9 +107,13 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
           <p style="margin: 0; font-size: 19px; color: #e9e4dc">Type your city or ZIP to see prices and your delivery fee.</p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap; max-width: 520px">
             <label for="home-zip" style="position: absolute; left: -9999px">City or ZIP</label>
-            <input id="home-zip" class="lj-input" value="Peachtree City 30269" style="flex: 1 1 220px">
-            <button type="button" class="lj-btn" onClick="{{toSize}}">Book a dumpster</button>
+            <input id="home-zip" class="lj-input" placeholder="Like Newnan or 30269" autocomplete="postal-code" value="{{areaInput}}" onChange="{{setAreaInput}}" style="flex: 1 1 220px">
+            <button type="button" class="lj-btn" onClick="{{startBooking}}">Book a dumpster</button>
           </div>
+          <p style="margin: 0; font-size: 15px; color: #e9e4dc">Don't know your ZIP? Your city works.</p>
+          <sc-if value="{{hasAreaNote}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; font-size: 15px; color: #FFCEE4" role="alert">{{areaNote}}</p>
+          </sc-if>
           <sc-if value="{{draft}}" hint-placeholder-val="{{ false }}">
             <div style="background: #ffffff; color: #1A1A1A; border-radius: 12px; padding: 12px; display: flex; gap: 12px; align-items: center; max-width: 520px; flex-wrap: wrap">
               <img src="{{sizePhoto}}" alt="" style="width: 64px; height: 48px; object-fit: cover; border-radius: 8px">
@@ -145,7 +149,13 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
         <sc-if value="{{isSize}}" hint-placeholder-val="{{ true }}">
           <div style="display: flex; flex-direction: column; gap: 20px">
             <div>
-              <p style="margin: 0; font-size: 14px; color: #555555">Delivering to <strong style="color: #1A1A1A">Peachtree City 30269</strong> · Free delivery</p>
+              <p style="margin: 0; font-size: 14px; color: #555555">Delivering to <strong style="color: #1A1A1A">{{areaText}}</strong> · {{feeText}} <button type="button" class="lj-link" onClick="{{goHome}}" style="font-size: 14px">Change</button></p>
+              <sc-if value="{{needZip}}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top: 8px; background: #FAF8F5; border-radius: 12px; padding: 12px; display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap">
+                  <div style="flex: 1 1 200px"><label class="lj-label" for="sz-zip">{{splitNote}}</label><input id="sz-zip" class="lj-input" placeholder="ZIP" inputmode="numeric" autocomplete="postal-code" value="{{zipInput}}" onChange="{{setZipInput}}"></div>
+                  <button type="button" class="lj-btn lj-btn-dark" onClick="{{checkZip}}">Check</button>
+                </div>
+              </sc-if>
               <h1 style="margin: 6px 0 0; font-size: 32px">What are you tossing?</h1>
               <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Pick the job and we'll point you to the right size.</p>
             </div>
@@ -359,7 +369,7 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
 
             <section style="display: flex; flex-direction: column; gap: 14px">
               <h2 style="margin: 0; font-size: 22px">Where it's going</h2>
-              <div><label class="lj-label" for="ad">Street address</label><input id="ad" class="lj-input" placeholder="Start typing your address" autocomplete="address-line1" value="{{street}}" onChange="{{setStreet}}"><span style="display: block; margin-top: 4px; font-size: 14px; color: #555555">Peachtree City, GA 30269 · from your ZIP</span></div>
+              <div><label class="lj-label" for="ad">Street address</label><input id="ad" class="lj-input" placeholder="Start typing your address" autocomplete="address-line1" value="{{street}}" onChange="{{setStreet}}"><span style="display: block; margin-top: 4px; font-size: 14px; color: #555555">{{areaText}}, GA</span></div>
               <div><label class="lj-label" for="nt">Where should we put it? <span style="font-weight: 400; color: #555555">(optional)</span></label><input id="nt" class="lj-input" placeholder="Left side of the driveway, near the garage" value="{{spot}}" onChange="{{setSpot}}"></div>
             </section>
 
@@ -397,7 +407,7 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
               <div style="display: flex; align-items: center; gap: 12px; color: #555555; font-size: 14px"><span style="flex: 1; height: 1px; background: #E5E0D8"></span>or pay with a card<span style="flex: 1; height: 1px; background: #E5E0D8"></span></div>
               <div style="border: 2px dashed #b8b0a6; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #FAF8F5">
                 <div style="height: 48px; border: 1px solid #cfc7bb; border-radius: 10px; background: #ffffff; display: flex; align-items: center; padding: 0 14px; color: #555555">Card number · MM / YY · CVC · ZIP</div>
-                <button type="button" class="lj-link" style="align-self: flex-start">More ways to pay (Klarna, Affirm)</button>
+                <button type="button" class="lj-link" style="align-self: flex-start">More ways to pay (Klarna)</button>
                 <p style="margin: 0; font-size: 13px; color: #555555">Placeholder for Stripe's wallet buttons and card form. Wallets only show on devices that have them. It all stays on our page.</p>
               </div>
               <div style="background: #FAF8F5; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
@@ -535,7 +545,7 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: 0, maxStep: 0, size: 16, project: "remodel", dateOff: -1, dateInput: "", dateNote: "", suggest: -1, calOpen: false, calMonth: 0, early: false, days: 3, daysInput: "3", tons: 0, mattress: 0, tire: 0, appliance: 0, roofNote: false, draft: false, closeReady: false, boards: true, type: "home", name: "", phone: "", email: "", street: "", spot: "", company: "", sheet: false, flash: "", leaving: false, reason: "", addedAfter: false };
+    this.state = { step: 0, maxStep: 0, size: 16, project: "remodel", dateOff: -1, dateInput: "", dateNote: "", suggest: -1, calOpen: false, calMonth: 0, early: false, days: 3, daysInput: "3", tons: 0, mattress: 0, tire: 0, appliance: 0, roofNote: false, draft: false, closeReady: false, boards: true, type: "home", name: "", phone: "", email: "", street: "", spot: "", company: "", sheet: false, flash: "", leaving: false, reason: "", addedAfter: false, areaInput: "", areaKey: "ptc", zip: "30269", zipInput: "", areaNote: "" };
   }
   renderVals() {
     var s = this.state;
@@ -645,8 +655,34 @@ class Component extends DCLogic {
     if (s.project === "remodel") { recTons = 1; recWhy = "Remodel debris like tile, drywall and plaster weighs a lot more than household junk."; }
     var recText = recTons ? recWhy + " We suggest adding " + tonsText(recTons) + ". It's cheaper now than after pickup." : "";
 
-    var lines = [{ label: "3-day rental", amount: money(size.price) }, { label: "Delivery and pickup", amount: "Free" }];
-    var total = size.price;
+    // City or ZIP sets the delivery fee (L19). Sample rows copied from Supabase zip_codes + service_areas,
+    // Nov 28, 2026. Real build: one lookup against those tables, never a list typed into the page.
+    var AREAS = {
+      ptc: { label: "Peachtree City", names: ["peachtree city", "ptc"], zips: { "30269": 0 } },
+      fay: { label: "Fayetteville", names: ["fayetteville"], zips: { "30214": 0, "30215": 0 } },
+      new: { label: "Newnan", names: ["newnan"], zips: { "30263": 0, "30265": 0 } },
+      mcd: { label: "McDonough", names: ["mcdonough"], zips: { "30252": 59, "30253": 59 } },
+      atl: { label: "Atlanta", names: ["atlanta", "atl"], zips: { "30303": 99, "30305": 99, "30306": 99, "30308": 99, "30309": 99, "30310": 59, "30311": 59, "30312": 99, "30313": 99, "30314": 59, "30315": 59, "30316": 99, "30317": 99, "30318": 99, "30319": 99, "30324": 99, "30327": 99, "30331": 59, "30336": 59, "30342": 99, "30345": 99, "30354": 59, "30363": 99 } }
+    };
+    var area = AREAS[s.areaKey];
+    var fees = []; for (var zk in area.zips) { if (fees.indexOf(area.zips[zk]) < 0) fees.push(area.zips[zk]); }
+    var feeKnown = s.zip ? area.zips[s.zip] : (fees.length === 1 ? fees[0] : null);
+    var hasFee = feeKnown !== null && feeKnown !== undefined;
+    var feeLabel = function (f) { return f === 0 ? "Free delivery" : money(f) + " delivery"; };
+    var resolveArea = function (raw) {
+      var q = String(raw || "").toLowerCase().replace(/,?\s*ga\b/, "").trim();
+      var zm = q.match(/\b(\d{5})\b/);
+      for (var k in AREAS) {
+        if (zm && AREAS[k].zips[zm[1]] !== undefined) return { key: k, zip: zm[1] };
+      }
+      if (zm) return null;
+      for (var k2 in AREAS) {
+        if (AREAS[k2].names.indexOf(q) >= 0) { var zs = Object.keys(AREAS[k2].zips); return { key: k2, zip: zs.length === 1 ? zs[0] : "" }; }
+      }
+      return null;
+    };
+    var lines = [{ label: "3-day rental", amount: money(size.price) }, { label: "Delivery and pickup", amount: hasFee ? (feeKnown === 0 ? "Free" : money(feeKnown)) : money(Math.min.apply(null, fees)) + " or " + money(Math.max.apply(null, fees)) }];
+    var total = size.price + (hasFee ? feeKnown : 0);
     if (extraDays > 0) lines.push({ label: extraDays + " extra " + (extraDays === 1 ? "day" : "days"), amount: "[PRICE]" });
     if (sameDay) lines.push({ label: "Same-day drop-off", amount: "[PRICE]" });
     else if (s.early) lines.push({ label: "Early drop-off", amount: "[PRICE]" });
@@ -672,6 +708,20 @@ class Component extends DCLogic {
       url: urls[s.step],
       isHome: s.step === 0,
       isFlow: s.step >= 1 && s.step <= 4,
+      areaInput: s.areaInput, setAreaInput: field("areaInput"),
+      hasAreaNote: !!s.areaNote, areaNote: s.areaNote,
+      startBooking: function () {
+        if (!String(s.areaInput).trim()) { self.setState({ step: 1, maxStep: Math.max(s.maxStep, 1), areaNote: "" }); return; }
+        var r = resolveArea(s.areaInput);
+        if (!r) { self.setState({ areaNote: "We couldn't find that one. Try your ZIP, or text us at (470) 712-5079 and we'll check." }); return; }
+        self.setState({ areaKey: r.key, zip: r.zip, zipInput: "", areaNote: "", step: 1, maxStep: Math.max(s.maxStep, 1) });
+      },
+      areaText: area.label + (s.zip ? " " + s.zip : ""),
+      feeText: hasFee ? feeLabel(feeKnown) : "Delivery " + money(Math.min.apply(null, fees)) + " or " + money(Math.max.apply(null, fees)),
+      needZip: !hasFee,
+      splitNote: "Delivery in " + area.label + " is " + money(Math.min.apply(null, fees)) + " or " + money(Math.max.apply(null, fees)) + ", depending on ZIP. Add yours for the exact price.",
+      zipInput: s.zipInput, setZipInput: field("zipInput"),
+      checkZip: function () { var z = String(s.zipInput).replace(/\D/g, "").slice(0, 5); if (area.zips[z] !== undefined) self.setState({ zip: z, flash: "" }); else { var r = resolveArea(z); if (r) self.setState({ areaKey: r.key, zip: r.zip }); } },
       isDone: s.step === 5,
       isSize: s.step === 1, isDate: s.step === 2, isExtras: s.step === 3, isCheckout: s.step === 4,
       step: s.step, stepName: steps[Math.max(0, Math.min(3, s.step - 1))],

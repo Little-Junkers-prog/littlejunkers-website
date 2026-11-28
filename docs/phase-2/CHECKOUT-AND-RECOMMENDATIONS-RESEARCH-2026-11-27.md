@@ -29,6 +29,13 @@ Every number about Little Junkers below comes from Supabase (`fobkdakjawryhzkcdb
 | Dumpsters.com | Location, then "What are you throwing away?" (up to two, including "Heavy Stuff") | After "See Your Price" | Page gives a Peachtree City range of $420 to $879; doesn't state included tons, days or overage |
 | WM | First name, last name, phone, email, customer type, frequency, address, then "Find Service" | Not stated | No weight allowance or included days stated on the page |
 
+**Added Nov 28: 3G Waste (Indianapolis), `3gwaste.com/cart`, on the iCans booking platform.** Walked with a public address (the Indiana Statehouse); stopped before entering contact details.
+1. **Cart page:** delivery address (autocomplete), "What's Going In the Dumpster?" (20+ material types), then a map to pin the exact placement. Prices appear on the size cards right after: 20-yard $450 with 3 tons, 30-yard $525 with 4 tons, both 5 days.
+2. **Reserve** opens "Customize Your Rental": drop-off date or an ASAP box, delivery note, gate code, attach a photo. Running receipt on the right.
+3. **Personal information:** first and last name, phone, email, SMS consent, Continue (payment follows; not seen).
+
+What's good: price, included tons and rental length show on one screen before any personal details; placement is set on a map; the receipt stays in view. What it leaves out: no length choice (fixed 5 days), no upsells or prepaid weight, no overage rate shown before checkout, and a contractor pop-up covers the cart on load. It's three steps largely because there's nothing to choose beyond size and date. Our Extras step is where the ticket gets raised, so cutting to three would mean folding extras into another step, not dropping them.
+
 I stopped at the first form on each site and did not submit contact details, so later steps aren't known. What's clear: none of the three shows a price before asking for something, and none states included weight on the page. Our flow (ZIP → real prices, included tons and delivery fee on the first screen) is already ahead on Baymard's top two abandonment causes.
 
 ## 3. Our own funnel (current booking app, `funnel_events`, Oct 13 – Nov 27)
