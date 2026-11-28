@@ -70,3 +70,7 @@ Automated release checks: existing city/privacy/comparison suites, TypeScript, N
 
 - `feature/sitewide-copy-seo-review-20261120` contains independent editorial and booking-first copy work that is not in main. It must be reconciled separately.
 - Missing Search Console-preservation intent pages remain the next page-construction workstream; not in this visual prototype.
+
+## Conversion and trust standard — November 28, 2026
+
+Apply [Customer Experience and Conversion Standard](docs/CUSTOMER-EXPERIENCE-STANDARD.md). Lead with a useful customer outcome and low-commitment estimate action, use early authentic proof, explain choices and include clear pricing/availability limitations. Optional guided and quick booking paths converge into one in-site transaction. Use context-specific help and upgrades, no mandatory sales detour; preserve one Details screen and embedded review/pay. Keep desktop summary and mobile sticky summary plus continuation, with safe spacing for keyboard, Randy and privacy controls. Real photos and verified facts precede decorative effects. Test actual mobile, keyboard and reduced motion. The [Customer Checkout V1 candidate](docs/design/CUSTOMER-CHECKOUT-V1.md) is design-only, to be reviewed alongside Rev 2/PR #14, not a replacement for prior locked architecture until approved.

@@ -25,7 +25,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
       <div className="container comparison-hero__inner">
         <p className="eyebrow">Local dumpster rental comparison</p>
         <h1 id="comparison-heading">See how we compare.</h1>
-        <p>Our prices next to what other local companies post online. Check the days, the weight and the delivery fee.</p>
+        <p>Our prices next to what other local companies post online. Compare the rental days, included weight and delivery fee. Check the source and date for each published offer, when available.</p>
       </div>
     </section>
     <section className="section comparison-content">

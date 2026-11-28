@@ -94,3 +94,7 @@ Ticket examples at today's prices: 11-yard + 1 ton = $404 · 16-yard + 1 ton = $
 | --- | --- | --- |
 | 1 | Nov 22, 2026 | First clickable preview: home → size → dates → extras → details → pay (placeholder) → confirmed, real photos and Supabase prices. |
 | 2 | Nov 22, 2026 | Phone frame with the bottom running-total bar (L3); desktop summary pinned (L2); benefit-led option copy (L4); limited morning slots with grayed-out full days (L5). |
+
+## November 28 review cross-reference
+
+The owner requested a separate [Customer Checkout V1](CUSTOMER-CHECKOUT-V1.md) conversion-focused candidate. This Rev 2 record and draft PR #14 Rev 3 remain intact. Compare the designs at owner review; no new visual decision supersedes L1–L5 or the locked transaction architecture merely because the alternative exists.

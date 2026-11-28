@@ -1,3 +1,4 @@
+import { threeDayTier } from "@/lib/days-plus";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqList from "@/components/FaqList";
@@ -8,14 +9,14 @@ import { PricingUnavailable, RateList } from "@/components/PriceCards";
 import { PlanLink } from "@/components/PlanLink";
 import ZipCheck from "@/components/ZipCheck";
 import { company, siteUrl, smsHref } from "@/lib/company";
-import { formatTons, formatUsd, getPricing, startingTier } from "@/lib/pricing";
+import { formatTons, formatUsd, getPricing } from "@/lib/pricing";
 import type { SizeContent } from "@/lib/sizes";
 
 // One template for all three product pages (STRATEGY-ARCHIVE §19.3).
 export default async function SizePage({ size }: { size: SizeContent }) {
   const pricing = await getPricing();
   const facts = pricing?.sizes[size.yards] ?? null;
-  const from = pricing ? startingTier(pricing) : null;
+  const from = pricing ? threeDayTier(pricing) : null;
   const title = `${size.yards}-Yard Dumpster`;
 
   return (
@@ -33,7 +34,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
             {pricing && from && facts ? (
               <>
                 <p className="price">
-                  <small>Starting at</small> {formatUsd(from.prices[size.yards])}
+                  <small>3-day base</small> {formatUsd(from.prices[size.yards])}
                 </p>
                 <p className="muted">
                   {from.days} days and {formatTons(facts.includedTons)} of disposal included. A delivery fee may apply outside our
@@ -145,15 +146,15 @@ export default async function SizePage({ size }: { size: SizeContent }) {
 
           <div className="card card--elevated experience-size__price" id="price">
             <h2 style={{ fontSize: "1.4rem" }}>Your price</h2>
-            {pricing && facts ? (
+            {pricing && from && facts ? (
               <>
                 <p className="price" style={{ marginTop: 8 }}>
-                  <small>Starting at</small> {formatUsd(pricing.tiers[0].prices[size.yards])}
+                  <small>3-day base</small> {formatUsd(from.prices[size.yards])}
                 </p>
                 <div style={{ marginTop: 10 }}>
                   <RateList pricing={pricing} yards={size.yards} />
                 </div>
-                <ZipCheck cta="Check My ZIP" label="Delivery fee for your city or ZIP" />
+                <ZipCheck size={size.yards} cta="Check delivery fee" label="Delivery fee for your city or ZIP" />
                 <PlanLink className="btn btn--primary btn--block" size={size.yards}>
                   See my estimate
                 </PlanLink>
@@ -162,7 +163,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
                   <Link href={`/compare?size=${size.yards}`}>See how our {size.yards}-yard compares</Link>.
                 </p>
                 <p className="fine" style={{ marginTop: 10 }}>
-                  Extra days and extra weight only apply if you use them.
+                  Extra days and weight over the included amount cost more. We'll confirm your rental price before you book.
                 </p>
               </>
             ) : (
@@ -209,7 +210,7 @@ export default async function SizePage({ size }: { size: SizeContent }) {
         </div>
       </section>
 
-      {pricing && facts ? (
+      {pricing && from && facts ? (
         <JsonLd
           data={{
             "@context": "https://schema.org",

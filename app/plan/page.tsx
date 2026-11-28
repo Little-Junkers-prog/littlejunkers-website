@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import DaysPlusPlanner from "@/components/DaysPlusPlanner";
 import { getPricing } from "@/lib/pricing";
@@ -5,8 +6,8 @@ import { basePriceSnapshot } from "@/lib/days-plus";
 import type { SizeYards } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Book a Dumpster Online",
-  description: "Choose a Little Junkers Pink Bin, check your delivery area, and select rental dates. Start a dumpster booking online.",
+  title: "Plan Your Dumpster Rental",
+  description: "Choose a Little Junkers Pink Bin, check delivery fees and see a rental estimate.",
   robots: { index: false, follow: false }
 };
 type Params = Record<string, string | string[] | undefined>;
@@ -17,6 +18,7 @@ export default async function PlanPage({searchParams}:{searchParams:Promise<Para
   const rawSize = Number(first(params.size));
   const size: SizeYards | undefined = rawSize === 11 || rawSize === 16 || rawSize === 21 ? rawSize : undefined;
   const rawDays = Number(first(params.days) ?? 3);
+  if (Number.isInteger(rawDays) && rawDays > 30) redirect("/long-term-rental");
   const days = Number.isInteger(rawDays) ? Math.max(3, Math.min(30,rawDays)) : 3;
   const rawZip = first(params.zip) ?? "";
   const zip = /^\d{5}$/.test(rawZip) ? rawZip : undefined;

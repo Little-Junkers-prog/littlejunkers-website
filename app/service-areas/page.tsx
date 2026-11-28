@@ -58,8 +58,10 @@ function zoneGroups(pricing: Pricing) {
     });
 }
 
-export default async function ServiceAreas({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
-  const { q } = await searchParams;
+export default async function ServiceAreas({ searchParams }: { searchParams: Promise<{ q?: string | string[]; size?: string | string[] }> }) {
+  const { q, size: rawSize } = await searchParams;
+  const yards = Number(Array.isArray(rawSize) ? rawSize[0] : rawSize);
+  const size = yards === 11 || yards === 16 || yards === 21 ? yards : undefined;
   const query = (Array.isArray(q) ? q[0] : q)?.trim();
   const pricing = await getPricing();
   const groups = pricing ? zoneGroups(pricing) : [];
@@ -76,16 +78,16 @@ export default async function ServiceAreas({ searchParams }: { searchParams: Pro
           <h1>
             Do we deliver to <span className="accent">you?</span>
           </h1>
-          <p className="lead">Enter your city or ZIP.</p>
+          <p className="lead">Enter your city or ZIP to see your delivery fee. Some cities span more than one delivery area.</p>
           <div style={{ maxWidth: 560 }}>
-            <ZipCheck cta="Check My Area" />
+            <ZipCheck cta="Check delivery fee" size={size} />
             {/* No-script path: the form submits here and the answer renders on the server. */}
-            {query && pricing ? <AreaAnswer result={lookupArea(pricing, query)} /> : null}
+            {query && pricing ? <AreaAnswer result={lookupArea(pricing, query)} size={size} /> : null}
             {query && !pricing ? (
               <div className="zip__result">
                 <h3>We couldn&apos;t check that just now</h3>
                 <p>
-                  Call or text <a href={telHref}>{company.phoneDisplay}</a> and we&apos;ll tell you right away.
+                  Call or text <a href={telHref}>{company.phoneDisplay}</a> and we&apos;ll check for you.
                 </p>
               </div>
             ) : null}

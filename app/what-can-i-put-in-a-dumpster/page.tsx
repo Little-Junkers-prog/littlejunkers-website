@@ -150,7 +150,7 @@ export default function Materials() {
           <FaqList items={faqs} />
           <div className="btn-row" style={{ marginTop: 24 }}>
             <Link className="btn btn--primary" href="/plan">
-              Check Dates &amp; Book
+              See my estimate
             </Link>
             {sizes.map((size) => (
               <Link className="btn btn--secondary" href={`/${size.slug}`} key={size.slug}>

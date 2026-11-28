@@ -89,3 +89,14 @@ assert.ok(css.includes(".menu__layer.is-open"), "desktop backdrop and drawer are
 assert.ok(css.includes(".menu__button-label"), "menu is recognizable on desktop");
 assert.ok(css.includes("@media (prefers-reduced-motion: reduce)"), "drawer motion respects reduced motion");
 console.log("Experience design prototype contract checks passed.");
+
+// CX conversion guardrails, 2026-11-28.
+assert.ok(home.includes("No account or contact details needed"));
+assert.ok(home.includes("company.googleReviewsUrl"));
+for (const file of ["app/[slug]/SizePage.tsx", "lib/faqs.ts", "components/PriceTable.tsx"]) {
+  assert.ok(read(file).includes("threeDayTier(pricing)"), file + " uses canonical 3-day tier");
+  assert.ok(!read(file).includes("pricing.tiers[0]"), file + " must not substitute another tier");
+}
+assert.ok(read("components/ZipCheck.tsx").includes("request !== version.current"));
+assert.ok(read("components/ZipCheck.tsx").includes('params.set("size", String(size))'));
+assert.ok(read("app/service-areas/page.tsx").includes("size={size}"));

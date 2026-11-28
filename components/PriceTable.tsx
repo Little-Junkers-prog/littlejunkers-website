@@ -1,3 +1,4 @@
+import { threeDayTier } from "@/lib/days-plus";
 import { SIZE_YARDS, formatTons, formatUsd, type Pricing } from "@/lib/pricing";
 import { PricingUnavailable } from "@/components/PriceCards";
 
@@ -6,7 +7,8 @@ const NAMES: Record<11 | 16 | 21, string> = { 11: "Little Junker", 16: "Mighty M
 // Full rate table for articles. Every number comes from the booking app's
 // canonical pricing at build/revalidate time; nothing is typed into the post.
 export default function PriceTable({ pricing }: { pricing: Pricing | null }) {
-  if (!pricing) return <PricingUnavailable />;
+  const base = pricing ? threeDayTier(pricing) : null;
+  if (!pricing || !base) return <PricingUnavailable />;
   const zones = Object.values(pricing.zones).sort((a, b) => a.deliveryFee - b.deliveryFee);
   return (
     <div className="price-table">
@@ -15,11 +17,7 @@ export default function PriceTable({ pricing }: { pricing: Pricing | null }) {
           <tr>
             <th scope="col">Dumpster</th>
             <th scope="col">Included weight</th>
-            {pricing.tiers.map((tier) => (
-              <th scope="col" key={tier.tierKey}>
-                {tier.days}-day
-              </th>
-            ))}
+            <th scope="col">3-day base</th>
           </tr>
         </thead>
         <tbody>
@@ -31,9 +29,7 @@ export default function PriceTable({ pricing }: { pricing: Pricing | null }) {
                 <span className="muted">{yards}-yard</span>
               </th>
               <td>{formatTons(pricing.sizes[yards].includedTons)}</td>
-              {pricing.tiers.map((tier) => (
-                <td key={tier.tierKey}>{formatUsd(tier.prices[yards])}</td>
-              ))}
+              <td>{formatUsd(base.prices[yards])}</td>
             </tr>
           ))}
         </tbody>

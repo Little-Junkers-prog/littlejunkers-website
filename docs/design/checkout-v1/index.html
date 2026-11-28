@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'"><title>Little Junkers — Checkout V1 design review</title><link rel="stylesheet" href="styles.css"></head>
+<body><div class="notice"><strong>Design review only.</strong> Sample prices and dates. Nothing is booked or charged. Use fictional details only.</div>
+<header class="header"><div class="header-inner"><div class="brand">Little <b>Junkers</b></div><div class="support">Questions? Call or text for help<br><span>(470) 548-4733</span></div></div></header>
+<div class="wrap"><ol class="steps" id="steps" aria-label="Checkout progress"></ol><div class="layout"><main class="main" id="screen"></main><aside class="summary" id="summary" aria-label="Rental summary"></aside></div></div><div class="mobile" id="mobile" aria-label="Mobile rental summary"></div>
+<script src="model.js"></script><script>
+"use strict";
+const state={step:0,size:null,location:"",days:3,date:"",project:"",guided:false,type:"home",name:"",email:"",phone:"",address:"",city:"",company:"",billingSame:true,billing:"",billingCity:"",billingState:"GA",billingZip:"",placement:"",serviceText:false,marketing:false,terms:false,paid:false};
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money=v=>v===null?"Not yet known":"$"+v.toLocaleString("en-US");
+const dateLabel=d=>d?new Date(d+"T12:00:00Z").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",timeZone:"UTC"}):"Not selected";
+const image=p=>"../../../public/images/jobs/"+p.photo;
+const btn=(label,action,klass="btn")=>'<button type="button" class="'+klass+'" data-action="'+action+'">'+label+'</button>';
+const field=(label,key,type="text",placeholder="")=>'<div class="field"><label for="'+key+'">'+label+'</label><input id="'+key+'" data-field="'+key+'" type="'+type+'" value="'+esc(state[key])+'" placeholder="'+esc(placeholder)+'" autocomplete="off"></div>';
+const check=(label,key)=>'<label class="check"><input type="checkbox" data-field="'+key+'" '+(state[key]?"checked":"")+'><span>'+label+'</span></label>';
+const heading=(n,title,sub)=>'<p class="eyebrow">'+n+'</p><h1 id="heading" tabindex="-1">'+title+'</h1><p class="sub">'+sub+'</p>';
+const note=(title,body)=>'<div class="card tint"><h3>'+title+'</h3><p class="fine">'+body+'</p></div>';
+const error=msg=>{const e=$("message");if(e){e.textContent=msg;e.focus()}};
+const invalidate=()=>{state.terms=false;state.paid=false};
+const changeSize=n=>{state.size=n;state.date="";invalidate()};
+const row=(a,b)=>'<div class="summary-line"><span>'+a+'</span><strong>'+b+'</strong></div>';
+function breakdown(withPhoto=false){
+ const q=Demo.price(state),p=Demo.products[state.size];
+ return (withPhoto&&p?'<img class="photo" src="'+image(p)+'" alt="Little Junkers '+state.size+'-yard dumpster">':'')+
+ row("Dumpster",p?state.size+"-yard":"Choose a size")+
+ row("3-day base",money(q.base))+row("Included disposal",p?p.tons+" ton"+(p.tons===1?"":"s"):"—")+
+ row("Delivery & pickup fee",q.fee===0?"Included":money(q.fee))+
+ row("Rental duration",state.days>30?"Custom quote":state.days+" days")+
+ (state.days>3?row("Extra days","Price to confirm"):"")+
+ row("Delivery",dateLabel(state.date))+
+ '<div class="summary-line total"><span>Sample subtotal</span><strong>'+money(q.total)+'</strong></div><p class="fine">Example only. Final quote must include all applicable charges and verified availability before payment.</p>';
+}
+const nextLabel=()=>["Choose dates","Continue to details","Review my rental","Simulate payment","Start over"][state.step];
+function summaries(){
+ $("summary").innerHTML='<h2>Your rental</h2>'+breakdown(true)+'<div class="proof">Locally owned in Peachtree City. Real people to help with size, placement and pricing.</div>';
+ $("mobile").innerHTML='<details><summary>View price breakdown</summary>'+breakdown()+'</details><div class="row between"><div><div class="fine">Sample subtotal</div><strong>'+money(Demo.price(state).total)+'</strong></div>'+btn(nextLabel(),"next","btn primary")+'</div>';
+}
+function selectSize(){
+ const rec=Demo.recommendation(state.project),q=Demo.locate(state.location);
+ return heading("Step 1 of 3 · Size","Find the right Pink Bin","See what fits your project and what it costs before you share your contact details.")+
+ field("Delivery city or ZIP","location","text","Try 30269 or Newnan")+
+ '<div id="locationStatus" class="fine" aria-live="polite">'+esc(q.zip?q.city+", GA · Delivery included":q.reason)+'</div>'+
+ '<h2>Know what size you need?</h2><div class="chips">'+btn("Choose a dumpster","quick","chip "+(!state.guided?"selected":""))+btn("Help me choose","guided","chip "+(state.guided?"selected":""))+'</div>'+
+ (state.guided?'<h2>What are you working on?</h2><div class="chips">'+[["garage","Garage or small cleanout"],["renovation","Remodel or deck"],["large","Large cleanout"],["heavy","Roofing, tile or heavy debris"]].map(([k,l])=>btn(l,"project:"+k,"chip "+(state.project===k?"selected":""))).join("")+'</div>':'')+
+ (state.guided&&rec?note("A good starting point: "+rec+" yards","Based on your project type. Actual volume and weight matter; choose any size below."):state.guided&&state.project==="heavy"?note("Let's check weight first","Dense debris can reach the safe weight limit before the bin is full. Ask for material and payload guidance; this example does not guess a safe load."):"")+
+ '<h2>Choose your size</h2><div class="cards">'+[11,16,21].map(n=>{const p=Demo.products[n];return '<button type="button" class="product '+(state.size===n?"selected":"")+'" data-action="size:'+n+'" aria-pressed="'+(state.size===n)+'"><img src="'+image(p)+'" alt="'+n+'-yard Little Junkers dumpster"><div>'+(state.guided&&rec===n?'<div class="badge">Suggested starting size</div>':'')+'<div class="big">'+n+' yd³</div><strong>'+p.name+'</strong><small>'+p.fit+'</small><small>12 × 8 ft footprint · '+p.height+' ft sides</small><small>'+p.tons+' ton'+(p.tons===1?"":"s")+' included</small><div class="price">'+money(p.price)+'</div><small>Sample 3-day base</small></div></button>'}).join("")+'</div>'+
+ (state.size===11||state.size===16?'<details class="card"><summary>Need a little more room?</summary><p class="fine">For '+money(Demo.products[state.size+5].price-Demo.products[state.size].price)+' more in this example, get 5 more cubic yards and 0.5 ton more included disposal.</p>'+btn("Compare next size","size:"+(state.size+5),"btn")+' <span class="fine">Or keep your current size.</span></details>':'')+
+ '<p class="fine">Between sizes? Text us a photo of the pile and we can help you choose. Weight and volume are different.</p>';
+}
+function schedule(){
+ const q=Demo.price(state);
+ return heading("Step 2 of 3 · Schedule","When do you need it?","Choose your rental length, then a delivery day that fits. We only confirm a booking after availability and the full price are verified.")+
+ '<h2>How long will you keep it?</h2><div class="chips">'+[3,4,7,14,30,31].map(n=>btn(n===31?"31+ days":n+" days","days:"+n,"chip "+(state.days===n?"selected":""))).join("")+'</div>'+
+ '<div class="field"><label for="days">Or enter total rental days (3–30)</label><input id="days" data-field="days" type="number" min="3" max="30" value="'+state.days+'"></div>'+
+ (q.quoteOnly?note("Longer than 30 days?","This needs a custom quote. The live journey will hand off to the approved assisted-quote process."):state.days!==3?note("Extra-day price needs confirmation","This example has no approved additional-day rate. We won't invent a price or let you proceed to payment."):"")+
+ '<h2>Choose a delivery day</h2><p class="fine">Illustrative calendar — not live Fleet inventory.</p><div class="dates">'+Demo.dates.map(d=>'<button type="button" class="chip date '+(state.date===d?"selected":"")+'" data-action="date:'+d+'" '+(!Demo.available(state.size,Number(state.days),d)?"disabled":"")+'>'+dateLabel(d)+'<small>'+(Demo.available(state.size,Number(state.days),d)?"Example available":"Unavailable / needs quote")+'</small></button>').join("")+'</div>'+
+ '<details class="card"><summary>Delivery timing and placement</summary><p class="fine">Exact delivery windows and pickup date will be confirmed from the approved schedule. No early-delivery fee or slot is assumed here.</p></details>'+
+ '<details class="card"><summary>Need additional weight or have special items?</summary><p>Tell us if you expect heavy debris or have mattresses, tires or appliances. We will verify material eligibility, truck limits and any additional charge first.</p><p class="fine">Optional charges are not selected or priced in this example.</p></details>';
+}
+function details(){
+ return heading("Step 3 of 3 · Checkout","Where are we delivering?","Your contact details are for this rental. No account required.")+
+ '<h2>Who is renting?</h2><div class="chips">'+[["home","Homeowner"],["business","Business"],["contractor","Contractor"]].map(([k,l])=>btn(l,"type:"+k,"chip "+(state.type===k?"selected":""))).join("")+'</div>'+
+ '<div class="card tint"><strong>Design review:</strong> Use fictional data only. '+btn("Fill sample details","sample","link")+'</div>'+
+ (state.type!=="home"?field("Company name","company"):"")+
+ '<h2>Your contact</h2>'+field("Full name","name")+field("Mobile number","phone","tel")+field("Email address","email","email")+
+ '<h2>Jobsite address</h2>'+field("Street address","address")+'<div class="grid2">'+field("City","city")+field("Jobsite ZIP","location")+'</div><p class="fine">Georgia · This ZIP determines the delivery fee. Billing ZIP does not.</p>'+
+ (state.type!=="home"?'<h2>Billing</h2>'+check("Billing address is the same as jobsite","billingSame")+(!state.billingSame?field("Billing street address","billing")+'<div class="grid2">'+field("Billing city","billingCity")+field("Billing state","billingState")+field("Billing ZIP","billingZip")+'</div>':""):"")+
+ '<div class="field"><label for="placement">Placement notes (optional)</label><textarea id="placement" data-field="placement" rows="3">'+esc(state.placement)+'</textarea></div>'+
+ '<h2>Text preferences</h2>'+check("Send me rental-related text updates about delivery and pickup.","serviceText")+check("Optional: send me Little Junkers offers and marketing texts.","marketing")+
+ '<p class="fine">Separate preferences; no marketing is required to rent. No messages are sent in this design review.</p>';
+}
+function review(){
+ const q=Demo.price(state);
+ return heading("Step 3 of 3 · Review & pay","Check your rental before you pay","Edit any detail before payment. The live quote will include all required charges and verified availability.")+
+ '<div class="review-block"><div class="row between"><h3>Your dumpster</h3>'+btn("Edit","go:0","link")+'</div><p>'+state.size+'-yard · '+Demo.products[state.size].name+'</p></div>'+
+ '<div class="review-block"><div class="row between"><h3>Schedule</h3>'+btn("Edit","go:1","link")+'</div><p>'+dateLabel(state.date)+' · '+state.days+' days · Pickup date to confirm</p></div>'+
+ '<div class="review-block"><div class="row between"><h3>Delivery & contact</h3>'+btn("Edit","go:2","link")+'</div><p>'+esc(state.address)+', '+esc(state.city)+', GA '+esc(state.location)+'</p><p>'+esc(state.name)+' · '+esc(state.email)+' · '+esc(state.phone)+'</p></div>'+
+ '<h2>Price breakdown</h2>'+breakdown()+
+ '<h2>Payment</h2><div class="card"><strong>Embedded secure payment element</strong><p class="fine">Reserved space for the existing Stripe Payment Element. No card information is requested here. Eligible methods, final quote, reservation hold and cancellation terms require live validation.</p></div>'+
+ check("I understand this is a simulated payment only. Nothing will be charged or reserved.","terms")+
+ '<p class="fine">Live cancellation, refund and rental terms will be shown before the actual payment button. This is not a legal agreement.</p>';
+}
+function complete(){return heading("Design review complete","This is where you're booked","This is the simulated confirmation screen, not a real reservation.")+'<div class="completion" aria-hidden="true">✓</div><div class="card tint"><strong>Example reference: DEMO-001</strong><p>No payment, receipt, email or text was sent.</p></div><h2>What happens next</h2><ol><li>In live checkout, receive your verified receipt and rental details.</li><li>Prepare an accessible spot for your dumpster.</li><li>Follow the loading and material rules.</li><li>Receive confirmed pickup details and contact us if plans change.</li></ol><p class="fine">The live confirmation appears only after backend verification, not just after pressing the payment button.</p>'}
+function render(focus=false){
+ const active=Math.min(state.step,3),stage=active===0?0:active===1?1:2;
+ $("steps").innerHTML=["Size","Schedule","Checkout"].map((s,i)=>'<li '+(state.step===4||i<stage?'class="done"':i===stage?'aria-current="step"':"")+'>'+(i+1)+'. '+s+'</li>').join("");
+ $("screen").innerHTML=[selectSize,schedule,details,review,complete][state.step]()+ '<p id="message" class="error" role="alert" tabindex="-1"></p><div class="footer-action">'+(state.step>0&&state.step<4?btn("Back","back","link"):'<span class="fine">No obligation · No account</span>')+btn(nextLabel(),"next","btn primary")+'</div>'+(state.step>0&&state.step<4?'<p class="fine mobile-back">'+btn("Back to previous step","back","link")+'</p>':"");
+ summaries();if(focus)$("heading").focus();
+}
+function validDetails(){
+ return state.name.trim()&&/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(state.email)&&state.phone.replace(/\D/g,"").length>=10&&state.address.trim()&&state.city.trim()&&(state.type==="home"||state.company.trim()&&(state.billingSame||state.billing.trim()&&state.billingCity.trim()&&state.billingState.trim()&&/^\d{5}$/.test(state.billingZip)));
+}
+function next(){
+ if(state.step===0){if(!Demo.canSchedule(state))return error("Choose a dumpster and enter an example jobsite ZIP first. Try 30269.");state.step=1}
+ else if(state.step===1){if(!Demo.canReview(state))return error("Choose an available example date for a three-day rental, or request a quote for longer rentals.");state.step=2;state.city=Demo.locate(state.location).city}
+ else if(state.step===2){if(!Demo.canReview(state))return error("Jobsite ZIP or schedule needs rechecking. Go back to Schedule.");if(!validDetails())return error("Fill the required contact, jobsite and applicable company/billing details with fictional information.");state.step=3}
+ else if(state.step===3){if(!Demo.canReview(state)||!validDetails()||!state.terms)return error("Review the sample details and acknowledge this is a simulation.");state.paid=true;state.step=4}
+ else {location.reload();return}
+ render(true);
+}
+document.addEventListener("click",e=>{
+ const el=e.target.closest("[data-action]");if(!el||el.disabled)return;
+ const [action,value]=el.dataset.action.split(":");
+ if(action==="next")return next();
+ if(action==="back"){state.step=Math.max(0,state.step-1);invalidate();render(true);return}
+ if(action==="go"){state.step=Number(value);invalidate();render(true);return}
+ if(action==="quick")state.guided=false;
+ if(action==="guided")state.guided=true;
+ if(action==="project")state.project=value;
+ if(action==="size")changeSize(Number(value));
+ if(action==="days"){state.days=Number(value);state.date="";invalidate()}
+ if(action==="date"&&Demo.available(state.size,Number(state.days),value)){state.date=value;invalidate()}
+ if(action==="type"){state.type=value;invalidate()}
+ if(action==="sample"){Object.assign(state,{name:"Jamie Example",email:"jamie@example.invalid",phone:"555-010-1234",address:"123 Example Lane",company:state.type==="home"?"":"Example Contractor LLC",billing:"456 Example Office",billingCity:"Example City",billingZip:"00000"});invalidate()}
+ render();
+});
+document.addEventListener("input",e=>{
+ const key=e.target.dataset.field;if(!key)return;
+ const value=e.target.type==="checkbox"?e.target.checked:key==="days"?Number(e.target.value):e.target.value;
+ if(key==="location"&&state.location!==value){state.date="";invalidate()}
+ if(key==="days"){state.date="";invalidate()}
+ if(key!=="terms"&&key!=="serviceText"&&key!=="marketing")invalidate();
+ state[key]=value;
+ if(key==="location"&&$("locationStatus")){const q=Demo.locate(value);$("locationStatus").textContent=q.zip?q.city+", GA · Delivery included":q.reason}
+ summaries();
+});
+document.addEventListener("change",e=>{if(["days","billingSame"].includes(e.target.dataset.field))render()});
+render();
+</script></body></html>

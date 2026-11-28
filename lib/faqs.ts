@@ -1,5 +1,6 @@
 import { company } from "./company";
-import { formatTons, formatUsd, startingTier, type Pricing, SIZE_YARDS } from "./pricing";
+import { formatTons, formatUsd, type Pricing, SIZE_YARDS } from "./pricing";
+import { threeDayTier } from "./days-plus";
 
 // FAQ content grouped by customer task (TIER-1 spec §18). Answers that state a
 // price, fee, rental length or included weight are built from the canonical
@@ -15,7 +16,7 @@ function list(items: string[]): string {
 }
 
 export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
-  const tier = pricing ? startingTier(pricing) : null;
+  const tier = pricing ? threeDayTier(pricing) : null;
 
   const cost =
     pricing && tier
@@ -24,10 +25,10 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         )}. Extra days are priced separately. Your exact price shows before you pay.`
       : "It depends on the size, how long you keep it and where you are. Enter your ZIP to see today's price before you book.";
 
-  const included = pricing
+  const included = pricing && tier
     ? `Drop-off, pickup, and disposal up to the included weight: ${list(
         SIZE_YARDS.map((y) => `${formatTons(pricing.sizes[y].includedTons)} with the ${y}-yard`),
-      )}. The starting price covers ${pricing.tiers[0].days} days. Outside our core area a delivery fee is added.`
+      )}. The starting price covers ${tier.days} days. Outside our core area a delivery fee is added.`
     : "Drop-off, pickup, and disposal up to the included weight for your size. The booking page lists the included weight and rental lengths.";
 
   const zones = pricing ? Object.values(pricing.zones).sort((a, b) => a.deliveryFee - b.deliveryFee) : [];
@@ -57,7 +58,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "extra-days",
           q: "Can I keep the dumpster longer?",
-          a: "Yes, up to 30 days in total. Pick your days when you book, or text us before your pickup date and we'll move it on the schedule. We'll confirm the extra-day price first.",
+          a: "You can request more time, up to 30 days in total. Text us before pickup. We'll check our schedule and confirm the extra-day price.",
         },
       ],
     },
@@ -91,7 +92,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "how-soon",
           q: "How soon can I get a dumpster?",
-          a: "The booking calendar shows the delivery days that are open right now. Pick the one that works for you.",
+          a: "Tell us when you need it and for how long. Call or text us to confirm an open delivery date.",
         },
         {
           id: "be-home",
@@ -111,7 +112,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "hours",
           q: "What are your hours?",
-          a: `You can book online any time. We answer calls and texts ${company.hoursDisplay}.`,
+          a: `You can check prices online any time. We answer calls and texts ${company.hoursDisplay}.`,
         },
       ],
     },
@@ -197,7 +198,7 @@ export function buildFaqs(pricing: Pricing | null): FaqGroup[] {
         {
           id: "how-book",
           q: "How do I book?",
-          a: "Online, any time. Pick your size, your dates and where it goes, then pay. It takes a few minutes.",
+          a: "Start with a size, your city or ZIP and your preferred dates. We'll confirm the price and availability before you book.",
           top: true,
         },
         {

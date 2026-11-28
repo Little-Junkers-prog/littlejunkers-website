@@ -1,3 +1,4 @@
+import { PlanLink } from "@/components/PlanLink";
 import type { Metadata } from "next";
 import Link from "next/link";
 import DaysPlusPlanner from "@/components/DaysPlusPlanner";
@@ -24,7 +25,7 @@ export default async function PricingPage() {
           <h2>{size.yards}-yard · {size.name}</h2>
           <p className="cx-money">{formatUsd(base.prices[size.yards])}</p>
           <p>3 days · up to {formatTons(pricing.sizes[size.yards].includedTons)} of weight included</p>
-          <Link href={"/plan?size=" + size.yards}>See my estimate →</Link>
+          <PlanLink size={size.yards}>See my estimate →</PlanLink>
         </article>)}
       </div>
       <div className="cx-note"><h2>Delivery fee</h2><p>{Object.values(pricing.zones).sort((a,b)=>a.deliveryFee-b.deliveryFee).map(z=>z.label+": "+(z.deliveryFee===0?"included":formatUsd(z.deliveryFee))).join(" · ")}. Type your city or ZIP below to see yours.</p></div>

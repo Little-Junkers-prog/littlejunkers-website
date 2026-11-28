@@ -21,12 +21,12 @@ export const metadata = {
 
 const steps = [
   ["Check your city or ZIP", "You'll see your delivery fee. Then pick a size."],
-  ["Pick your dates", "Keep it anywhere from 3 to 30 days."],
+  ["Pick your dates", "Tell us when you need it and for how long. We'll confirm the dates before booking."],
   ["Fill it. We haul it away.", "We set it where you want it and pick it up when your rental ends."],
 ];
 
 const reasons = [
-  ["A smaller truck", "Our hook-lift truck is smaller than a full-size roll-off truck. We look at the spot before we set the dumpster down."],
+  ["Care for your driveway", "Our hook-lift truck is smaller than a full-size roll-off truck. We look at the spot before we set the dumpster down."],
   ["Prices up front", "You can see the 3-day price, the weight that's included and your delivery fee before you book."],
   ["Keep it as long as you need", "Pick 3 to 30 days. Need it longer? Call us and we'll put a quote together."],
   ["Owned right here", "Marcus and Ivy run Little Junkers out of Peachtree City."],
@@ -45,11 +45,12 @@ export default async function Home() {
           <div className="hero__copy">
             <p className="eyebrow experience-hero__eyebrow">Peachtree City, GA · Local Pink Bin rentals</p>
             <h1>
-              <span className="experience-hero__title-first">Need a</span>{" "}
-              <span className="accent experience-hero__title-last">dumpster?</span>
+              <span className="experience-hero__title-first">Big projects.</span>{" "}
+              <span className="accent experience-hero__title-last">Little hassle.</span>
             </h1>
-            <p className="lead">Type your city or ZIP to see prices and your delivery fee.</p>
+            <p className="lead">Dumpster rentals for cleanouts, remodels and more. Enter your city or ZIP to see prices and your delivery fee.</p>
             <ZipCheck />
+            <p className="hero__meta">No account or contact details needed to see your estimate. <a href={company.googleReviewsUrl} rel="noopener noreferrer" target="_blank">Read our Google reviews</a>.</p>
             <p className="hero__meta">
               <span>11-, 16- and 21-yard Pink Bins</span>
               <span>Locally owned in Peachtree City</span>
@@ -97,7 +98,7 @@ export default async function Home() {
 
       <section className="section section--surface experience-compare" id="compare">
         <div className="container cx-overview">
-          <div><p className="eyebrow">Shopping around?</p><h2>See how we compare.</h2><p>Days included, weight included and delivery fees change from one company to the next. We put local companies' published prices side by side so you can check.</p><div className="btn-row"><Link className="btn btn--primary" href="/compare">See how we compare</Link><Link className="btn btn--secondary" href="/pricing">See our pricing details</Link></div></div>
+          <div><p className="eyebrow">Shopping around?</p><h2>See how we compare.</h2><p>Days included, weight included and delivery fees change from one company to the next. We put local companies' published prices side by side so you can check.</p><div className="btn-row"><Link className="btn btn--secondary" href="/compare">See how we compare</Link><Link className="btn btn--secondary" href="/pricing">See our pricing details</Link></div></div>
           <div className="cx-note"><h3>Ask any dumpster company</h3><ol><li>How many rental days are included?</li><li>How much disposal weight is covered?</li><li>What delivery fee applies to my ZIP?</li><li>Is it available for my whole rental?</li></ol></div>
         </div>
       </section>

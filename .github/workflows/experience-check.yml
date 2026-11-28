@@ -10,6 +10,8 @@ on:
       - "components/PriceCards.tsx"
       - "DESIGN.md"
       - "scripts/check-experience.mjs"
+      - "scripts/check-checkout-v1.mjs"
+      - "docs/design/checkout-v1/**"
       - "scripts/check-days-plus.mjs"
       - "scripts/check-content.mjs"
       - "scripts/check-readability.mjs"
@@ -49,6 +51,8 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Experience design contract checks
         run: npm run check:experience
+      - name: Checkout V1 design fixture checks
+        run: node scripts/check-checkout-v1.mjs
       - name: Days Plus pricing and comparison cues
         run: npm run check:days-plus
       - name: Seven city route preservation checks
