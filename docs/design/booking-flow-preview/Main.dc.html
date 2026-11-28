@@ -22,9 +22,12 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
 .lj-label{display:block;font:600 14px system-ui,-apple-system,sans-serif;color:#1A1A1A;margin-bottom:6px}
 .lj-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .lj-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lj-cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
 .lj-bar{display:none}
+.lj-stepm{display:none}
 .lj-pill{display:inline-block;background:#FFCEE4;color:#1A1A1A;border-radius:999px;padding:3px 10px;font:700 13px system-ui,-apple-system,sans-serif}
 .lj-pill-warn{display:inline-block;background:#FFF8EB;border:1px solid #F2CF7A;color:#1A1A1A;border-radius:999px;padding:3px 10px;font:700 13px system-ui,-apple-system,sans-serif}
+.lj-row{display:flex;gap:12px;padding:14px 16px;border-top:1px solid #E5E0D8;align-items:flex-start}
 @media (max-width: 900px){
 .lj-aside{display:none !important}
 .lj-bar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:20}
@@ -32,6 +35,10 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
 .lj-grid3{grid-template-columns:minmax(0,1fr)}
 .lj-grid2{grid-template-columns:minmax(0,1fr)}
 .lj-main{padding:20px !important}
+.lj-steps{display:none !important}
+.lj-stepm{display:block;flex:1;min-width:0}
+.lj-word{display:none}
+.lj-flowphone{display:none}
 }
 </style>
 </helmet>
@@ -43,34 +50,53 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
       <span style="width: 12px; height: 12px; border-radius: 50%; background: #b8b0a6"></span>
       <span style="width: 12px; height: 12px; border-radius: 50%; background: #b8b0a6"></span>
     </div>
-    <div style="flex: 1; max-width: 640px; display: flex; align-items: center; gap: 8px; background: #ffffff; border-radius: 999px; padding: 7px 14px; font-size: 14px; color: #333333">
+    <div style="flex: 1; max-width: 640px; display: flex; align-items: center; gap: 8px; background: #ffffff; border-radius: 999px; padding: 7px 14px; font-size: 14px; color: #333333; min-width: 0">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
-      <span>{{url}}</span>
+      <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{url}}</span>
     </div>
-    <span style="font-size: 13px; color: #555555">Same address the whole way</span>
   </div>
 
-  <header style="background: #1E1C19; color: #ffffff">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap">
-      <button type="button" onClick="{{goHome}}" style="display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 0; min-height: 44px; cursor: pointer; color: #ffffff">
-        <img src="/_blob/fb6a52c4fcdd9287b17eb120fdf5c1f3" alt="" style="height: 40px; width: auto">
-        <span style="font-weight: 800; font-size: 18px">Little Junkers</span>
-      </button>
-      <sc-if value="{{showProgress}}" hint-placeholder-val="{{ false }}">
-        <ol style="list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; flex-wrap: wrap; flex: 1; justify-content: center" aria-label="Booking steps">
-          <sc-for list="{{progress}}" as="p" hint-placeholder-count="5">
-            <li style="{{p.style}}">{{p.label}}</li>
-          </sc-for>
-        </ol>
-      </sc-if>
-      <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+  <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+    <header style="background: #1E1C19; color: #ffffff">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap">
+        <button type="button" onClick="{{goHome}}" style="display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 0; min-height: 44px; cursor: pointer; color: #ffffff">
+          <img src="/_blob/fb6a52c4fcdd9287b17eb120fdf5c1f3" alt="" style="height: 40px; width: auto">
+          <span style="font-weight: 800; font-size: 18px">Little Junkers</span>
+        </button>
         <nav style="display: flex; gap: 18px; flex: 1; justify-content: center; font-size: 15px" aria-label="Main">
           <span>Sizes</span><span>Pricing</span><span>Service areas</span><span>FAQ</span>
         </nav>
-      </sc-if>
-      <a href="tel:+14705484733" style="color: #FFCEE4; font-weight: 700; text-decoration: none; margin-left: auto">(470) 548-4733</a>
-    </div>
-  </header>
+        <a href="tel:+14705484733" style="color: #FFCEE4; font-weight: 700; text-decoration: none; margin-left: auto">(470) 548-4733</a>
+      </div>
+    </header>
+  </sc-if>
+
+  <sc-if value="{{isFlow}}" hint-placeholder-val="{{ false }}">
+    <header style="background: #1E1C19; color: #ffffff; position: sticky; top: 0; z-index: 15">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 8px 16px; display: flex; align-items: center; gap: 14px">
+        <img src="/_blob/fb6a52c4fcdd9287b17eb120fdf5c1f3" alt="Little Junkers" style="height: 34px; width: auto; flex: none">
+        <span class="lj-word" style="font-weight: 800; font-size: 17px; white-space: nowrap">Little Junkers</span>
+        <ol class="lj-steps" style="list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; flex-wrap: nowrap; flex: 1; justify-content: center" aria-label="Booking steps">
+          <sc-for list="{{progress}}" as="p" hint-placeholder-count="4">
+            <li><button type="button" onClick="{{p.go}}" disabled="{{p.locked}}" aria-current="{{p.current}}" style="{{p.style}}">{{p.label}}</button></li>
+          </sc-for>
+        </ol>
+        <div class="lj-stepm">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 14px">
+            <span style="font-weight: 700; white-space: nowrap">{{stepName}}</span>
+            <span style="color: #B8B0A6; white-space: nowrap">Step {{step}} of 4</span>
+          </div>
+          <div style="margin-top: 6px; display: flex; gap: 4px" role="group" aria-label="Booking steps">
+            <sc-for list="{{progress}}" as="p" hint-placeholder-count="4">
+              <button type="button" onClick="{{p.go}}" disabled="{{p.locked}}" aria-label="{{p.aria}}" style="{{p.barStyle}}"></button>
+            </sc-for>
+          </div>
+        </div>
+        <a class="lj-flowphone" href="tel:+14705484733" style="color: #FFCEE4; font-weight: 700; text-decoration: none; white-space: nowrap">(470) 548-4733</a>
+        <button type="button" onClick="{{openLeave}}" aria-label="Leave booking" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #4a453f; background: transparent; color: #ffffff; font-size: 22px; line-height: 1; cursor: pointer">×</button>
+      </div>
+    </header>
+  </sc-if>
 
   <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
     <section style="background: #1E1C19; color: #ffffff; border-radius: 0 0 20px 20px; overflow: hidden">
@@ -81,9 +107,20 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
           <p style="margin: 0; font-size: 19px; color: #e9e4dc">Type your city or ZIP to see prices and your delivery fee.</p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap; max-width: 520px">
             <label for="home-zip" style="position: absolute; left: -9999px">City or ZIP</label>
-            <input id="home-zip" class="lj-input" value="Peachtree City 30269" style="flex: 1 1 220px">
-            <button type="button" class="lj-btn" onClick="{{toSize}}">Book a dumpster</button>
+            <input id="home-zip" class="lj-input" placeholder="Like Newnan or 30269" autocomplete="postal-code" value="{{areaInput}}" onChange="{{setAreaInput}}" style="flex: 1 1 220px">
+            <button type="button" class="lj-btn" onClick="{{startBooking}}">Book a dumpster</button>
           </div>
+          <p style="margin: 0; font-size: 15px; color: #e9e4dc">Don't know your ZIP? Your city works.</p>
+          <sc-if value="{{hasAreaNote}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; font-size: 15px; color: #FFCEE4" role="alert">{{areaNote}}</p>
+          </sc-if>
+          <sc-if value="{{draft}}" hint-placeholder-val="{{ false }}">
+            <div style="background: #ffffff; color: #1A1A1A; border-radius: 12px; padding: 12px; display: flex; gap: 12px; align-items: center; max-width: 520px; flex-wrap: wrap">
+              <img src="{{sizePhoto}}" alt="" style="width: 64px; height: 48px; object-fit: cover; border-radius: 8px">
+              <div style="flex: 1 1 180px"><strong>Pick up where you left off</strong><br><span style="color: #555555; font-size: 15px">{{draftSummary}}</span></div>
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{resume}}">Continue</button>
+            </div>
+          </sc-if>
           <p style="margin: 0; font-size: 15px; color: #B8B0A6">11, 16 and 21-yard Pink Bins · Locally owned · Call or text 8 AM–6 PM, every day</p>
         </div>
         <div style="flex: 1 1 420px; min-height: 360px">
@@ -112,7 +149,13 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
         <sc-if value="{{isSize}}" hint-placeholder-val="{{ true }}">
           <div style="display: flex; flex-direction: column; gap: 20px">
             <div>
-              <p style="margin: 0; font-size: 14px; color: #555555">Delivering to <strong style="color: #1A1A1A">Peachtree City 30269</strong> · Free delivery</p>
+              <p style="margin: 0; font-size: 14px; color: #555555">Delivering to <strong style="color: #1A1A1A">{{areaText}}</strong> · {{feeText}} <button type="button" class="lj-link" onClick="{{goHome}}" style="font-size: 14px">Change</button></p>
+              <sc-if value="{{needZip}}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top: 8px; background: #FAF8F5; border-radius: 12px; padding: 12px; display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap">
+                  <div style="flex: 1 1 200px"><label class="lj-label" for="sz-zip">{{splitNote}}</label><input id="sz-zip" class="lj-input" placeholder="ZIP" inputmode="numeric" autocomplete="postal-code" value="{{zipInput}}" onChange="{{setZipInput}}"></div>
+                  <button type="button" class="lj-btn lj-btn-dark" onClick="{{checkZip}}">Check</button>
+                </div>
+              </sc-if>
               <h1 style="margin: 6px 0 0; font-size: 32px">What are you tossing?</h1>
               <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Pick the job and we'll point you to the right size.</p>
             </div>
@@ -121,6 +164,10 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
                 <button type="button" onClick="{{pj.pick}}" style="{{pj.style}}" aria-pressed="{{pj.pressed}}">{{pj.label}}</button>
               </sc-for>
             </div>
+            <p style="margin: 0"><button type="button" class="lj-link" onClick="{{toRoofing}}">Roofing job? Book through our contractor page →</button></p>
+            <sc-if value="{{roofNote}}" hint-placeholder-val="{{ false }}">
+              <p style="margin: 0; padding: 12px 14px; background: #FAF8F5; border: 1px dashed #b8b0a6; border-radius: 10px; color: #555555">Preview note: this opens the contractor booking flow, where we ask how many squares and price the weight from that. That flow is the next preview.</p>
+            </sc-if>
             <sc-if value="{{hasTip}}" hint-placeholder-val="{{ false }}">
               <p style="margin: 0; padding: 12px 14px; background: #FFF5FB; border-radius: 10px; color: #1A1A1A">{{tip}}</p>
             </sc-if>
@@ -147,16 +194,75 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
         <sc-if value="{{isDate}}" hint-placeholder-val="{{ false }}">
           <div style="display: flex; flex-direction: column; gap: 22px">
             <div>
-              <h1 style="margin: 0; font-size: 32px">When do you need it?</h1>
-              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">These are the days we have a {{sizeYards}}-yard open.</p>
+              <h1 style="margin: 0; font-size: 32px">How long do you need it?</h1>
+              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Every rental includes 3 days. Keep it up to 30.</p>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px">
-              <sc-for list="{{dates}}" as="d" hint-placeholder-count="6">
-                <button type="button" onClick="{{d.pick}}" style="{{d.style}}" aria-pressed="{{d.pressed}}"><span style="font-size: 13px">{{d.dow}}</span><span style="font-size: 20px; font-weight: 800">{{d.day}}</span><span style="font-size: 13px">{{d.mon}}</span></button>
-              </sc-for>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+                <button type="button" class="lj-ghost" onClick="{{lessDays}}" aria-label="One less day" style="width: 52px; min-height: 52px; justify-content: center; font-size: 24px">−</button>
+                <label for="days-input" style="position: absolute; left: -9999px">Number of days</label>
+                <input id="days-input" class="lj-input" type="number" inputmode="numeric" min="3" max="30" value="{{daysInput}}" onChange="{{typeDays}}" onBlur="{{fixDays}}" style="width: 96px; min-height: 52px; text-align: center; font-size: 26px; font-weight: 800">
+                <span style="font-size: 20px; font-weight: 700">days</span>
+                <button type="button" class="lj-ghost" onClick="{{moreDays}}" aria-label="One more day" style="width: 52px; min-height: 52px; justify-content: center; font-size: 24px">+</button>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap" role="group" aria-label="Common rental lengths">
+                <sc-for list="{{quickDays}}" as="q" hint-placeholder-count="4">
+                  <button type="button" onClick="{{q.pick}}" style="{{q.style}}" aria-pressed="{{q.pressed}}">{{q.label}}</button>
+                </sc-for>
+              </div>
+              <p style="margin: 0; color: #555555">{{daysNote}}</p>
+              <p style="margin: 0; color: #555555; font-size: 15px">Not sure how long? Pick your best guess. Running behind, text us before pickup and add days at [PRICE] a day.</p>
             </div>
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <h2 style="margin: 0; font-size: 24px">Drop-off day</h2>
+              <div style="display: flex; gap: 8px; align-items: stretch; max-width: 420px">
+                <label for="date-input" style="position: absolute; left: -9999px">Drop-off date, month and day</label>
+                <input id="date-input" class="lj-input" type="text" inputmode="numeric" placeholder="MM/DD" value="{{dateInput}}" onChange="{{typeDate}}" onBlur="{{checkDate}}" style="flex: 1; font-size: 18px; font-weight: 700">
+                <button type="button" onClick="{{toggleCal}}" aria-expanded="{{calExpanded}}" aria-controls="lj-cal" style="flex: none; display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid #cfc7bb; background: #ffffff; font: 600 15px system-ui, -apple-system, sans-serif; cursor: pointer; color: #1A1A1A">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+                  <span>{{calLabel}}</span>
+                  <span aria-hidden="true" style="font-size: 12px">{{caret}}</span>
+                </button>
+              </div>
+              <sc-if value="{{hasDateNote}}" hint-placeholder-val="{{ false }}">
+                <div style="padding: 10px 14px; background: #FAF8F5; border-radius: 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; max-width: 520px">
+                  <span style="flex: 1 1 220px">{{dateNote}}</span>
+                  <sc-if value="{{hasSuggest}}" hint-placeholder-val="{{ false }}">
+                    <button type="button" class="lj-ghost" onClick="{{pickSuggest}}">Use {{suggestText}}</button>
+                  </sc-if>
+                </div>
+              </sc-if>
+              <sc-if value="{{calOpen}}" hint-placeholder-val="{{ false }}">
+                <div id="lj-cal" style="max-width: 420px; border: 1px solid #E5E0D8; border-radius: 12px; padding: 12px; background: #ffffff">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
+                    <button type="button" class="lj-ghost" onClick="{{prevMonth}}" disabled="{{atFirstMonth}}" aria-label="Previous month" style="{{prevStyle}}">‹</button>
+                    <strong style="font-size: 17px">{{monthLabel}}</strong>
+                    <button type="button" class="lj-ghost" onClick="{{nextMonth}}" disabled="{{atLastMonth}}" aria-label="Next month" style="{{nextMonthStyle}}">›</button>
+                  </div>
+                  <div class="lj-cal" aria-hidden="true" style="margin-bottom: 4px">
+                    <sc-for list="{{weekdays}}" as="w" hint-placeholder-count="7">
+                      <span style="text-align: center; font-size: 12px; font-weight: 700; color: #555555">{{w}}</span>
+                    </sc-for>
+                  </div>
+                  <div class="lj-cal">
+                    <sc-for list="{{calCells}}" as="c" hint-placeholder-count="35">
+                      <button type="button" onClick="{{c.pick}}" disabled="{{c.off}}" aria-label="{{c.aria}}" aria-pressed="{{c.pressed}}" style="{{c.style}}">{{c.label}}</button>
+                    </sc-for>
+                  </div>
+                  <p style="margin: 10px 0 0; font-size: 13px; color: #555555">Gray days aren't open for {{days}} days. You can book up to 90 days out.</p>
+                </div>
+              </sc-if>
+              <sc-if value="{{hasDate}}" hint-placeholder-val="{{ true }}">
+                <p style="margin: 0; font-weight: 600">Drop-off {{dateText}} · Pickup {{pickupText}}</p>
+              </sc-if>
+            </div>
+            <sc-if value="{{hasDate}}" hint-placeholder-val="{{ true }}">
             <div>
               <h2 style="margin: 0 0 10px; font-size: 20px">Drop-off time</h2>
+              <sc-if value="{{sameDay}}" hint-placeholder-val="{{ false }}">
+                <div style="{{sameDayStyle}}"><span class="lj-pill-warn" style="align-self: flex-start">Today only</span><strong>Same-day drop-off</strong><span style="color: #555555">Need it now? We'll get it to you today, before [TIME]. We text you when we're on the way.</span><span style="font-weight: 700">+ [PRICE]</span></div>
+              </sc-if>
+              <sc-if value="{{notSameDay}}" hint-placeholder-val="{{ true }}">
               <div class="lj-grid2">
                 <button type="button" onClick="{{pickStandard}}" style="{{standardStyle}}" aria-pressed="{{standardPressed}}"><strong>Standard</strong><span style="color: #555555">We text you a delivery window the day before.</span><span style="font-weight: 700">Included</span></button>
                 <button type="button" onClick="{{pickEarly}}" style="{{earlyStyle}}" aria-pressed="{{earlyPressed}}" disabled="{{earlyFull}}">
@@ -170,19 +276,12 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
               <sc-if value="{{earlyFull}}" hint-placeholder-val="{{ false }}">
                 <p style="margin: 10px 0 0; color: #555555">Morning slots are full that day. Pick another date if you need early drop-off.</p>
               </sc-if>
+              </sc-if>
             </div>
-            <div>
-              <h2 style="margin: 0 0 10px; font-size: 20px">How long?</h2>
-              <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap">
-                <button type="button" class="lj-ghost" onClick="{{lessDays}}" aria-label="One less day" style="width: 48px; justify-content: center; font-size: 22px">−</button>
-                <span style="font-size: 26px; font-weight: 800; min-width: 90px; text-align: center">{{days}} days</span>
-                <button type="button" class="lj-ghost" onClick="{{moreDays}}" aria-label="One more day" style="width: 48px; justify-content: center; font-size: 22px">+</button>
-                <span style="color: #555555">{{daysNote}}</span>
-              </div>
-            </div>
+            </sc-if>
             <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
               <button type="button" class="lj-link" onClick="{{toSize}}">Back</button>
-              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toExtras}}">Next: extras</button>
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toExtrasIfDate}}" disabled="{{noDate}}" style="{{nextStyle}}">Next: extras</button>
             </div>
           </div>
         </sc-if>
@@ -193,24 +292,10 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
               <h1 style="margin: 0; font-size: 32px">Anything to add?</h1>
               <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Add it now and you'll know the whole price up front.</p>
             </div>
-            <section style="border: 1px solid #E5E0D8; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
-              <div>
-                <h2 style="margin: 0; font-size: 20px">Extra weight <span class="lj-pill">Save $20 a ton</span></h2>
-                <p style="margin: 4px 0 0; color: #555555">Skip the surprise bill. Your {{sizeYards}}-yard includes {{includedTons}}. Go over and the landfill charge is $99 a ton after pickup. Add it now for $79.</p>
-                <sc-if value="{{heavyJob}}" hint-placeholder-val="{{ false }}">
-                  <p style="margin: 8px 0 0; font-weight: 600">Shingles get heavy fast. Not sure? Text us how many squares and layers and we&apos;ll help you pick.</p>
-                </sc-if>
-              </div>
-              <div class="lj-grid3">
-                <sc-for list="{{tonOptions}}" as="t" hint-placeholder-count="3">
-                  <button type="button" onClick="{{t.pick}}" style="{{t.style}}" aria-pressed="{{t.pressed}}"><strong>{{t.label}}</strong><span style="color: #555555">{{t.price}}</span></button>
-                </sc-for>
-              </div>
-            </section>
             <section style="border: 1px solid #E5E0D8; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
               <div>
                 <h2 style="margin: 0; font-size: 20px">Mattresses, tires or appliances?</h2>
-                <p style="margin: 4px 0 0; color: #555555">Toss them in with everything else. Add them here and you'll know the full price now, with nothing new on your bill at pickup.</p>
+                <p style="margin: 4px 0 0; color: #555555">Toss them in with everything else. Add them here so nothing new shows up on your bill at pickup.</p>
               </div>
               <sc-for list="{{items}}" as="it" hint-placeholder-count="3">
                 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
@@ -220,6 +305,23 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
                   <button type="button" class="lj-ghost" onClick="{{it.inc}}" aria-label="{{it.incLabel}}" style="width: 44px; justify-content: center">+</button>
                 </div>
               </sc-for>
+            </section>
+            <section style="{{weightBox}}">
+              <div>
+                <h2 style="margin: 0; font-size: 20px">Extra weight <span class="lj-pill">Save $20 a ton</span></h2>
+                <p style="margin: 4px 0 0; color: #555555">Your {{sizeYards}}-yard includes {{includedTons}}. Tile, drywall and plaster are heavier than they look. Go over and it's $99 a ton after pickup. Add it now for $79 a ton.</p>
+                <sc-if value="{{hasRec}}" hint-placeholder-val="{{ false }}">
+                  <p style="margin: 10px 0 0; padding: 10px 12px; background: #ffffff; border-radius: 10px; font-weight: 600">{{recText}}</p>
+                </sc-if>
+              </div>
+              <div class="lj-grid3">
+                <sc-for list="{{tonOptions}}" as="t" hint-placeholder-count="3">
+                  <button type="button" onClick="{{t.pick}}" style="{{t.style}}" aria-pressed="{{t.pressed}}">
+                    <sc-if value="{{t.rec}}" hint-placeholder-val="{{ false }}"><span class="lj-pill" style="align-self: flex-start">Our pick for your job</span></sc-if>
+                    <strong>{{t.label}}</strong><span style="color: #555555">{{t.price}}</span>
+                  </button>
+                </sc-for>
+              </div>
             </section>
             <sc-if value="{{canSizeUp}}" hint-placeholder-val="{{ false }}">
               <section style="border: 2px solid #FFCEE4; background: #FFF5FB; border-radius: 12px; padding: 18px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
@@ -232,77 +334,95 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
               </section>
             </sc-if>
             <section style="border: 1px solid #E5E0D8; border-radius: 12px; padding: 18px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
-              <input type="checkbox" id="boards" checked style="width: 22px; height: 22px">
+              <input type="checkbox" id="boards" checked="{{boards}}" onChange="{{toggleBoards}}" style="width: 22px; height: 22px">
               <label for="boards" style="flex: 1 1 240px"><strong>Driveway boards</strong> <span style="color: #555555">Extra care for your concrete. We put boards under the dumpster at no charge.</span></label>
             </section>
             <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
               <button type="button" class="lj-link" onClick="{{toDate}}">Back</button>
-              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toDetails}}">Next: your details</button>
+              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toCheckout}}">Next: checkout</button>
             </div>
           </div>
         </sc-if>
 
-        <sc-if value="{{isDetails}}" hint-placeholder-val="{{ false }}">
-          <div style="display: flex; flex-direction: column; gap: 18px">
+        <sc-if value="{{isCheckout}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 20px">
             <div>
-              <h1 style="margin: 0; font-size: 32px">Who's it for?</h1>
-              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">You'll only fill this out once.</p>
+              <h1 style="margin: 0; font-size: 32px">Review and pay</h1>
+              <p style="margin: 6px 0 0; color: #555555; font-size: 17px">Check your rental, tell us where it's going, and pay. Tap Edit to change anything.</p>
             </div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap" role="group" aria-label="Customer type">
-              <sc-for list="{{types}}" as="ty" hint-placeholder-count="3">
-                <button type="button" onClick="{{ty.pick}}" style="{{ty.style}}" aria-pressed="{{ty.pressed}}">{{ty.label}}</button>
-              </sc-for>
+            <div style="border: 1px solid #E5E0D8; border-radius: 14px; overflow: hidden">
+              <div style="display: flex; gap: 16px; align-items: center; padding: 16px; background: #FAF8F5; flex-wrap: wrap">
+                <img src="{{sizePhoto}}" alt="{{sizeAlt}}" style="width: 150px; height: 104px; object-fit: cover; border-radius: 10px">
+                <div style="flex: 1 1 180px">
+                  <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #555555">{{sizeYards}}-yard Pink Bin</p>
+                  <h2 style="margin: 2px 0 0; font-size: 22px">{{sizeName}}</h2>
+                  <p style="margin: 4px 0 0; color: #555555">{{includedTons}} included</p>
+                </div>
+                <button type="button" class="lj-link" onClick="{{toSize}}">Edit</button>
+              </div>
+              <div class="lj-row"><span style="flex: 1"><strong>Drop-off</strong><br><span style="color: #555555">{{dateText}} · {{timeText}}</span></span><button type="button" class="lj-link" onClick="{{toDate}}">Edit</button></div>
+              <div class="lj-row"><span style="flex: 1"><strong>Pickup</strong><br><span style="color: #555555">{{pickupText}} · {{days}}-day rental</span></span><button type="button" class="lj-link" onClick="{{toDate}}">Edit</button></div>
+              <sc-if value="{{hasExtras}}" hint-placeholder-val="{{ false }}">
+                <div class="lj-row"><span style="flex: 1"><strong>Extras</strong><br><span style="color: #555555">{{extrasText}}</span></span><button type="button" class="lj-link" onClick="{{toExtras}}">Edit</button></div>
+              </sc-if>
             </div>
-            <sc-if value="{{isPro}}" hint-placeholder-val="{{ false }}">
-              <div><label class="lj-label" for="biz">Company name</label><input id="biz" class="lj-input" placeholder="Company name"></div>
-            </sc-if>
-            <div class="lj-grid2" style="gap: 14px">
-              <div><label class="lj-label" for="nm">Name</label><input id="nm" class="lj-input" placeholder="First and last name"></div>
-              <div><label class="lj-label" for="ph">Mobile</label><input id="ph" class="lj-input" placeholder="Mobile number" type="tel"></div>
-              <div><label class="lj-label" for="em">Email</label><input id="em" class="lj-input" placeholder="Email" type="email"></div>
-              <div><label class="lj-label" for="ad">Where's it going?</label><input id="ad" class="lj-input" placeholder="Street address, Peachtree City 30269"></div>
-            </div>
-            <div><label class="lj-label" for="nt">Where should we put it? <span style="font-weight: 400; color: #555555">(optional)</span></label><input id="nt" class="lj-input" placeholder="Left side of the driveway, near the garage"></div>
-            <div style="display: flex; flex-direction: column; gap: 10px; background: #FAF8F5; border-radius: 12px; padding: 14px">
-              <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c1" checked style="width: 22px; height: 22px; margin: 0"><label for="c1"><strong>Rental texts.</strong> Delivery windows, on-the-way and pickup reminders.</label></div>
-              <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c2" style="width: 22px; height: 22px; margin: 0"><label for="c2"><strong>Deals and news.</strong> Optional.</label></div>
-              <p style="margin: 0; font-size: 14px; color: #555555">These are separate so you can get rental updates without promos. Reply STOP anytime.</p>
-            </div>
-            <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
-              <button type="button" class="lj-link" onClick="{{toExtras}}">Back</button>
-              <button type="button" class="lj-btn lj-btn-dark" onClick="{{toPay}}">Next: review and pay</button>
-            </div>
+
+            <section style="display: flex; flex-direction: column; gap: 14px">
+              <h2 style="margin: 0; font-size: 22px">Where it's going</h2>
+              <div><label class="lj-label" for="ad">Street address</label><input id="ad" class="lj-input" placeholder="Start typing your address" autocomplete="address-line1" value="{{street}}" onChange="{{setStreet}}"><span style="display: block; margin-top: 4px; font-size: 14px; color: #555555">{{areaText}}, GA</span></div>
+              <div><label class="lj-label" for="nt">Where should we put it? <span style="font-weight: 400; color: #555555">(optional)</span></label><input id="nt" class="lj-input" placeholder="Left side of the driveway, near the garage" value="{{spot}}" onChange="{{setSpot}}"></div>
+            </section>
+
+            <section style="display: flex; flex-direction: column; gap: 14px">
+              <h2 style="margin: 0; font-size: 22px">How to reach you</h2>
+              <div>
+                <span class="lj-label">This rental is for</span>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap" role="group" aria-label="This rental is for">
+                  <sc-for list="{{types}}" as="ty" hint-placeholder-count="3">
+                    <button type="button" onClick="{{ty.pick}}" style="{{ty.style}}" aria-pressed="{{ty.pressed}}">{{ty.label}}</button>
+                  </sc-for>
+                </div>
+              </div>
+              <sc-if value="{{isPro}}" hint-placeholder-val="{{ false }}">
+                <div><label class="lj-label" for="biz">Company name</label><input id="biz" class="lj-input" placeholder="Company name" autocomplete="organization" value="{{company}}" onChange="{{setCompany}}"></div>
+              </sc-if>
+              <div class="lj-grid2" style="gap: 14px">
+                <div><label class="lj-label" for="nm">Name</label><input id="nm" class="lj-input" placeholder="First and last name" autocomplete="name" value="{{name}}" onChange="{{setName}}"></div>
+                <div><label class="lj-label" for="ph">Mobile</label><input id="ph" class="lj-input" placeholder="Mobile number" type="tel" inputmode="tel" autocomplete="tel" value="{{phone}}" onChange="{{setPhone}}"><span style="display: block; margin-top: 4px; font-size: 14px; color: #555555">We text your delivery window here.</span></div>
+              </div>
+              <div><label class="lj-label" for="em">Email</label><input id="em" class="lj-input" placeholder="Email for your receipt" type="email" inputmode="email" autocomplete="email" value="{{email}}" onChange="{{setEmail}}"></div>
+              <div style="display: flex; flex-direction: column; gap: 10px; background: #FAF8F5; border-radius: 12px; padding: 14px">
+                <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c1" checked style="width: 22px; height: 22px; margin: 0"><label for="c1"><strong>Rental texts.</strong> Delivery windows, on-the-way and pickup reminders.</label></div>
+                <div style="display: flex; gap: 10px; align-items: flex-start"><input type="checkbox" id="c2" style="width: 22px; height: 22px; margin: 0"><label for="c2"><strong>Deals and news.</strong> Optional.</label></div>
+                <p style="margin: 0; font-size: 14px; color: #555555">Reply STOP to any text to opt out.</p>
+              </div>
+            </section>
+
+            <section style="display: flex; flex-direction: column; gap: 12px">
+              <h2 style="margin: 0; font-size: 22px">Pay</h2>
+              <div class="lj-grid2" style="gap: 10px">
+                <button type="button" onClick="{{toDone}}" style="min-height: 52px; border-radius: 10px; border: 0; background: #000000; color: #ffffff; font: 700 17px system-ui, -apple-system, sans-serif; cursor: pointer">Pay with Apple Pay</button>
+                <button type="button" onClick="{{toDone}}" style="min-height: 52px; border-radius: 10px; border: 1px solid #cfc7bb; background: #ffffff; color: #1A1A1A; font: 700 17px system-ui, -apple-system, sans-serif; cursor: pointer">Pay with Google Pay</button>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; color: #555555; font-size: 14px"><span style="flex: 1; height: 1px; background: #E5E0D8"></span>or pay with a card<span style="flex: 1; height: 1px; background: #E5E0D8"></span></div>
+              <div style="border: 2px dashed #b8b0a6; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #FAF8F5">
+                <div style="height: 48px; border: 1px solid #cfc7bb; border-radius: 10px; background: #ffffff; display: flex; align-items: center; padding: 0 14px; color: #555555">Card number · MM / YY · CVC · ZIP</div>
+                <button type="button" class="lj-link" style="align-self: flex-start">More ways to pay (Klarna)</button>
+                <p style="margin: 0; font-size: 13px; color: #555555">Placeholder for Stripe's wallet buttons and card form. Wallets only show on devices that have them. It all stays on our page.</p>
+              </div>
+              <div style="background: #FAF8F5; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; align-items: baseline"><strong>You pay today</strong><strong style="font-size: 24px">{{totalText}}</strong></div>
+                <p style="margin: 0; font-size: 15px; color: #555555">That's everything we know about. The only charges that can come later: $99 a ton if your load goes over {{coveredTons}}, or extra days if you keep it longer.</p>
+              </div>
+              <button type="button" class="lj-btn" onClick="{{toDone}}" style="width: 100%; min-height: 56px; font-size: 18px">Pay {{totalText}}</button>
+              <p style="margin: 0; font-size: 14px; color: #555555; text-align: center">Need to change or cancel? Give us 24 hours before delivery.</p>
+            </section>
           </div>
         </sc-if>
 
-        <sc-if value="{{isPay}}" hint-placeholder-val="{{ false }}">
-          <div style="display: flex; flex-direction: column; gap: 18px">
-            <h1 style="margin: 0; font-size: 32px">Review and pay</h1>
-            <div style="display: flex; flex-direction: column; border: 1px solid #E5E0D8; border-radius: 12px">
-              <div style="display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #E5E0D8; align-items: center; flex-wrap: wrap"><span style="flex: 1 1 260px"><strong>Dumpster</strong><br><span style="color: #555555">{{sizeYards}}-yard {{sizeName}}</span></span><button type="button" class="lj-link" onClick="{{toSize}}">Edit</button></div>
-              <div style="display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #E5E0D8; align-items: center; flex-wrap: wrap"><span style="flex: 1 1 260px"><strong>Dates</strong><br><span style="color: #555555">{{dateText}} · {{days}} days · {{windowText}}</span></span><button type="button" class="lj-link" onClick="{{toDate}}">Edit</button></div>
-              <div style="display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #E5E0D8; align-items: center; flex-wrap: wrap"><span style="flex: 1 1 260px"><strong>Extras</strong><br><span style="color: #555555">{{extrasText}}</span></span><button type="button" class="lj-link" onClick="{{toExtras}}">Edit</button></div>
-              <div style="display: flex; gap: 12px; padding: 14px 16px; align-items: center; flex-wrap: wrap"><span style="flex: 1 1 260px"><strong>Delivery</strong><br><span style="color: #555555">Peachtree City 30269 · {{typeLabel}}</span></span><button type="button" class="lj-link" onClick="{{toDetails}}">Edit</button></div>
-            </div>
-            <div style="border: 2px dashed #b8b0a6; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px; background: #FAF8F5">
-              <p style="margin: 0; font-weight: 700">Payment</p>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap">
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Card</span>
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Apple Pay</span>
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Google Pay</span>
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Klarna</span>
-                <span style="border: 1px solid #cfc7bb; border-radius: 8px; padding: 8px 12px; background: #ffffff">Affirm</span>
-              </div>
-              <div style="height: 48px; border: 1px solid #cfc7bb; border-radius: 10px; background: #ffffff; display: flex; align-items: center; padding: 0 14px; color: #555555">Card number · MM / YY · CVC</div>
-              <p style="margin: 0; font-size: 14px; color: #555555">Placeholder for the Stripe payment form. It sits right here on our page.</p>
-            </div>
-            <button type="button" class="lj-btn" onClick="{{toDone}}" style="width: 100%; min-height: 56px; font-size: 18px">Pay {{totalText}}</button>
-            <p style="margin: 0; font-size: 14px; color: #555555; text-align: center">Need to change or cancel? Give us 24 hours before delivery.</p>
-          </div>
-        </sc-if>
       </main>
 
-      <aside class="lj-aside" style="flex: 1 1 320px; background: #ffffff; border: 1px solid #E8E3DB; border-radius: 16px; overflow: hidden; position: sticky; top: 16px" aria-label="Your rental">
+      <aside class="lj-aside" style="flex: 1 1 320px; background: #ffffff; border: 1px solid #E8E3DB; border-radius: 16px; overflow: hidden; position: sticky; top: 76px" aria-label="Your rental">
         <img src="{{sizePhoto}}" alt="{{sizeAlt}}" style="width: 100%; height: 180px; object-fit: cover; display: block">
         <div style="padding: 20px; display: flex; flex-direction: column; gap: 12px">
           <div>
@@ -353,6 +473,31 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
     </div>
   </sc-if>
 
+  <sc-if value="{{leaving}}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 40; background: rgba(30, 28, 25, 0.55); display: flex; align-items: center; justify-content: center; padding: 16px">
+      <div role="dialog" aria-modal="true" aria-labelledby="leave-title" style="background: #ffffff; border-radius: 16px; padding: 24px; width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 14px; max-height: 90vh; overflow: auto">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+          <h2 id="leave-title" style="margin: 0; font-size: 24px">Before you go</h2>
+          <button type="button" onClick="{{confirmLeave}}" aria-label="Close and leave booking" style="{{closeXStyle}}">×</button>
+        </div>
+        <p style="margin: 0; color: #555555">What's holding you back? One tap helps us make this better. It's optional.</p>
+        <div style="display: flex; flex-direction: column; gap: 8px" role="group" aria-label="Reason for leaving">
+          <sc-for list="{{reasons}}" as="r" hint-placeholder-count="6">
+            <button type="button" onClick="{{r.pick}}" aria-pressed="{{r.pressed}}" style="{{r.style}}">{{r.label}}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{reasonOther}}" hint-placeholder-val="{{ false }}">
+          <div><label class="lj-label" for="why">Tell us more <span style="font-weight: 400; color: #555555">(optional)</span></label><input id="why" class="lj-input" placeholder="What would help?"></div>
+        </sc-if>
+        <p style="margin: 0; font-size: 15px">Rather talk it through? Call <a href="tel:+14705484733">(470) 548-4733</a> or <a href="sms:+14707125079">text us</a>.</p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; align-items: center">
+          <sc-if value="{{hasReason}}" hint-placeholder-val="{{ false }}"><button type="button" class="lj-ghost" onClick="{{confirmLeave}}">Send and leave</button></sc-if>
+          <button type="button" class="lj-btn lj-btn-dark" onClick="{{closeLeave}}" style="margin-left: auto">Keep booking</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{isDone}}" hint-placeholder-val="{{ false }}">
     <div style="max-width: 860px; margin: 0 auto; padding: 32px 20px 56px; display: flex; flex-direction: column; gap: 20px">
       <section style="background: #1E1C19; color: #ffffff; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 10px">
@@ -377,6 +522,15 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
         </div>
         <div style="text-align: right"><span style="font-size: 13px; color: #555555">Paid</span><br><strong style="font-size: 24px">{{totalText}}</strong></div>
       </section>
+      <section style="background: #FFF5FB; border: 2px solid #FFCEE4; border-radius: 16px; padding: 20px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center">
+        <div style="flex: 1 1 260px">
+          <h2 style="margin: 0; font-size: 20px">Loading something heavy?</h2>
+          <p style="margin: 4px 0 0; color: #555555">{{addTonText}}</p>
+        </div>
+        <sc-if value="{{canAddTon}}" hint-placeholder-val="{{ true }}">
+          <button type="button" class="lj-btn" onClick="{{addTonAfter}}">Add 1 ton, $79</button>
+        </sc-if>
+      </section>
       <div style="display: flex; gap: 12px; flex-wrap: wrap">
         <a class="lj-btn" href="sms:+14707125079">Text us</a>
         <button type="button" class="lj-ghost" onClick="{{goHome}}">Back to home</button>
@@ -391,7 +545,7 @@ a{color:#a8406a}a:hover{color:#7d2c4d}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: 0, size: 16, project: "remodel", date: 2, early: false, days: 3, tons: 0, mattress: 0, tire: 0, appliance: 0, type: "home", sheet: false, flash: "" };
+    this.state = { step: 0, maxStep: 0, size: 16, project: "remodel", dateOff: -1, dateInput: "", dateNote: "", suggest: -1, calOpen: false, calMonth: 0, early: false, days: 3, daysInput: "3", tons: 0, mattress: 0, tire: 0, appliance: 0, roofNote: false, draft: false, closeReady: false, boards: true, type: "home", name: "", phone: "", email: "", street: "", spot: "", company: "", sheet: false, flash: "", leaving: false, reason: "", addedAfter: false, areaInput: "", areaKey: "ptc", zip: "30269", zipInput: "", areaNote: "" };
   }
   renderVals() {
     var s = this.state;
@@ -407,7 +561,7 @@ class Component extends DCLogic {
     var PROJECTS = [
       { id: "garage", label: "Garage or one room", rec: 11, tip: "" },
       { id: "remodel", label: "Kitchen or bath remodel", rec: 16, tip: "" },
-      { id: "roof", label: "Roof tear-off", rec: 11, tip: "Shingles are heavy. A bigger dumpster won't help, so the 11 or 16 is the right call. You can add weight in the next steps." },
+      { id: "shed", label: "Shed or deck tear-out", rec: 16, tip: "" },
       { id: "house", label: "Whole house or estate", rec: 21, tip: "" },
       { id: "unsure", label: "Not sure", rec: 0, tip: "Text us a photo of the pile and we'll tell you which size. (470) 712-5079" }
     ];
@@ -420,10 +574,71 @@ class Component extends DCLogic {
     var project = PROJECTS.filter(function (p) { return p.id === s.project; })[0];
     var size = SIZES[s.size];
 
-    // [day, date, morning upgrade slots left]. Sample numbers: the real ones come from the day's early-drop capacity.
-    var DATES = [["Tue", "1", 2], ["Wed", "2", 1], ["Thu", "3", 0], ["Fri", "4", 3], ["Sat", "5", 1], ["Mon", "7", 0]];
-    var slotsLeft = DATES[s.date][2];
-    var dateText = DATES[s.date][0] + ", Dec " + DATES[s.date][1];
+    // ---- Dates. "Today" in this preview is Wed, Nov 25, 2026. Days are counted from today.
+    // Window: today (same-day) through 90 days out. Open 7 days. Sample bookings for this size:
+    // Dec 9-15 and Jan 6-12. Real build: the admin app's availability engine decides every open
+    // day (units, on-rent, empty/full, duration, cutoffs), re-checked when the hold is created.
+    var WD = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var WINDOW = 90;
+    var BOOKED = [[14, 20], [42, 48]];
+    var dayAt = function (o) { return new Date(2026, 10, 25 + o); };
+    var fmt = function (o) { var dt = dayAt(o); return (o === 0 ? "Today, " : WD[dt.getDay()] + ", ") + MO[dt.getMonth()] + " " + dt.getDate(); };
+    var offOf = function (dt) { return Math.round((new Date(dt.getFullYear(), dt.getMonth(), dt.getDate()) - new Date(2026, 10, 25)) / 86400000); };
+    var fits = function (o, n) {
+      if (o < 0 || o > WINDOW) return false;
+      var last = o + n - 1;
+      for (var b = 0; b < BOOKED.length; b++) { if (o <= BOOKED[b][1] && last >= BOOKED[b][0]) return false; }
+      return true;
+    };
+    var closest = function (o, n) {
+      for (var k = 1; k <= WINDOW; k++) { if (fits(o + k, n)) return o + k; if (o - k >= 0 && fits(o - k, n)) return o - k; }
+      return -1;
+    };
+    var slotsFor = function (o) { return [2, 1, 0, 3, 1, 2, 2][o % 7]; };
+    var chosen = s.dateOff;
+    var dateFits = chosen >= 0 && fits(chosen, s.days);
+    var sameDay = dateFits && chosen === 0;
+    var slotsLeft = dateFits ? slotsFor(chosen) : 0;
+    var dateText = dateFits ? fmt(chosen) : "Pick a day";
+    var pickupText = dateFits ? fmt(chosen + s.days - 1) : "";
+    var inputFor = function (o) { var dt = dayAt(o); return (dt.getMonth() + 1) + "/" + dt.getDate(); };
+    var monthOf = function (o) { var dt = dayAt(o); return (dt.getFullYear() - 2026) * 12 + dt.getMonth() - 10; };
+    var pickDate = function (o, extra) {
+      var patch = { dateOff: o, dateInput: o === 0 ? "Today" : inputFor(o), dateNote: "", suggest: -1, calOpen: false, calMonth: monthOf(o), early: s.early && slotsFor(o) > 0, flash: "" };
+      for (var k in (extra || {})) patch[k] = extra[k];
+      self.setState(patch);
+    };
+    var setDays = function (n) {
+      var v = Math.max(3, Math.min(30, n));
+      var patch = { days: v, daysInput: String(v) };
+      if (chosen >= 0 && !fits(chosen, v)) { patch.dateOff = -1; patch.dateInput = ""; patch.early = false; patch.calOpen = true; patch.dateNote = "Pick a drop-off day that works for " + v + " days."; patch.suggest = -1; }
+      self.setState(patch);
+    };
+
+    var lastOff = WINDOW;
+    var lastMonth = monthOf(lastOff);
+    var mYear = 2026 + Math.floor((10 + s.calMonth) / 12);
+    var mIdx = (10 + s.calMonth) % 12;
+    var first = new Date(mYear, mIdx, 1);
+    var dim = new Date(mYear, mIdx + 1, 0).getDate();
+    var cells = [];
+    for (var b0 = 0; b0 < first.getDay(); b0++) cells.push({ label: "", off: true, aria: "", pressed: "false", pick: function () {}, style: "visibility:hidden" });
+    for (var dn = 1; dn <= dim; dn++) {
+      (function (dn) {
+        var o = offOf(new Date(mYear, mIdx, dn));
+        var ok = fits(o, s.days);
+        var sel = dateFits && o === chosen;
+        var inRange = dateFits && o > chosen && o <= chosen + s.days - 1;
+        var base = "min-height:44px;padding:0;border-radius:8px;font:600 " + (o === 0 ? "12px" : "16px") + " system-ui,-apple-system,sans-serif;";
+        var st = sel ? "background:#1E1C19;color:#ffffff;border:1px solid #1E1C19;cursor:pointer"
+          : inRange ? "background:#FFE3EF;color:#1A1A1A;border:1px solid #FFE3EF;cursor:" + (ok ? "pointer" : "default")
+          : ok ? "background:#ffffff;color:#1A1A1A;border:1px solid #cfc7bb;cursor:pointer"
+          : "background:transparent;color:#b8b0a6;border:1px solid transparent;cursor:not-allowed";
+        cells.push({ label: o === 0 ? "Today" : String(dn), off: !ok, pressed: sel ? "true" : "false", aria: fmt(o) + (ok ? "" : ", not available"), style: base + st, pick: function () { if (ok) pickDate(o); } });
+      })(dn);
+    }
 
     var extraDays = s.days - 3;
     var ITEMS = [
@@ -431,11 +646,46 @@ class Component extends DCLogic {
       { key: "tire", label: "Tires", each: 35 },
       { key: "appliance", label: "Appliances", each: 45 }
     ];
+    // Weight suggestion from what the customer already told us. No extra questions.
+    // Rev 6 rule table (see docs/phase-2/CHECKOUT-AND-RECOMMENDATIONS-RESEARCH-2026-11-27.md):
+    // remodel -> +1 ton (EPA: drywall 467, mixed C&D 484 lb/cu yd vs. household trash 250-300).
+    // Shed/deck and 2+ appliances rules dropped: lumber is 169 lb/cu yd and two appliances add
+    // about 0.2 ton (EPA), so neither supports a +1 ton suggestion. Real rules live in one admin table.
+    var recTons = 0, recWhy = "";
+    if (s.project === "remodel") { recTons = 1; recWhy = "Remodel debris like tile, drywall and plaster weighs a lot more than household junk."; }
+    var recText = recTons ? recWhy + " We suggest adding " + tonsText(recTons) + ". It's cheaper now than after pickup." : "";
 
-    var lines = [{ label: "3-day rental", amount: money(size.price) }, { label: "Delivery and pickup", amount: "Free" }];
-    var total = size.price;
+    // City or ZIP sets the delivery fee (L19). Sample rows copied from Supabase zip_codes + service_areas,
+    // Nov 28, 2026. Real build: one lookup against those tables, never a list typed into the page.
+    var AREAS = {
+      ptc: { label: "Peachtree City", names: ["peachtree city", "ptc"], zips: { "30269": 0 } },
+      fay: { label: "Fayetteville", names: ["fayetteville"], zips: { "30214": 0, "30215": 0 } },
+      new: { label: "Newnan", names: ["newnan"], zips: { "30263": 0, "30265": 0 } },
+      mcd: { label: "McDonough", names: ["mcdonough"], zips: { "30252": 59, "30253": 59 } },
+      atl: { label: "Atlanta", names: ["atlanta", "atl"], zips: { "30303": 99, "30305": 99, "30306": 99, "30308": 99, "30309": 99, "30310": 59, "30311": 59, "30312": 99, "30313": 99, "30314": 59, "30315": 59, "30316": 99, "30317": 99, "30318": 99, "30319": 99, "30324": 99, "30327": 99, "30331": 59, "30336": 59, "30342": 99, "30345": 99, "30354": 59, "30363": 99 } }
+    };
+    var area = AREAS[s.areaKey];
+    var fees = []; for (var zk in area.zips) { if (fees.indexOf(area.zips[zk]) < 0) fees.push(area.zips[zk]); }
+    var feeKnown = s.zip ? area.zips[s.zip] : (fees.length === 1 ? fees[0] : null);
+    var hasFee = feeKnown !== null && feeKnown !== undefined;
+    var feeLabel = function (f) { return f === 0 ? "Free delivery" : money(f) + " delivery"; };
+    var resolveArea = function (raw) {
+      var q = String(raw || "").toLowerCase().replace(/,?\s*ga\b/, "").trim();
+      var zm = q.match(/\b(\d{5})\b/);
+      for (var k in AREAS) {
+        if (zm && AREAS[k].zips[zm[1]] !== undefined) return { key: k, zip: zm[1] };
+      }
+      if (zm) return null;
+      for (var k2 in AREAS) {
+        if (AREAS[k2].names.indexOf(q) >= 0) { var zs = Object.keys(AREAS[k2].zips); return { key: k2, zip: zs.length === 1 ? zs[0] : "" }; }
+      }
+      return null;
+    };
+    var lines = [{ label: "3-day rental", amount: money(size.price) }, { label: "Delivery and pickup", amount: hasFee ? (feeKnown === 0 ? "Free" : money(feeKnown)) : money(Math.min.apply(null, fees)) + " or " + money(Math.max.apply(null, fees)) }];
+    var total = size.price + (hasFee ? feeKnown : 0);
     if (extraDays > 0) lines.push({ label: extraDays + " extra " + (extraDays === 1 ? "day" : "days"), amount: "[PRICE]" });
-    if (s.early) lines.push({ label: "Early drop-off", amount: "[PRICE]" });
+    if (sameDay) lines.push({ label: "Same-day drop-off", amount: "[PRICE]" });
+    else if (s.early) lines.push({ label: "Early drop-off", amount: "[PRICE]" });
     if (s.tons > 0) { lines.push({ label: "Extra weight, " + tonsText(s.tons), amount: money(79 * s.tons) }); total += 79 * s.tons; }
     var extras = [];
     if (s.tons > 0) extras.push(tonsText(s.tons) + " extra weight");
@@ -443,79 +693,167 @@ class Component extends DCLogic {
       var n = s[it.key];
       if (n > 0) { lines.push({ label: n + " " + it.label.toLowerCase(), amount: money(it.each * n) }); total += it.each * n; extras.push(n + " " + it.label.toLowerCase()); }
     });
-    lines.push({ label: "Driveway boards", amount: "Free" });
-    extras.push("driveway boards");
+    if (s.boards) lines.push({ label: "Driveway boards", amount: "Free" });
 
     var up = s.size === 11 ? 16 : s.size === 16 ? 21 : 0;
-    var steps = ["Size", "Dates", "Extras", "Details", "Pay"];
+    var steps = ["Size", "Dates", "Extras", "Checkout"];
     var TYPES = [["home", "Home"], ["business", "Business"], ["contractor", "Contractor"]];
-    var typeLabel = TYPES.filter(function (t) { return t[0] === s.type; })[0][1];
-    var urls = ["littlejunkersllc.com", "littlejunkersllc.com/book/size", "littlejunkersllc.com/book/dates", "littlejunkersllc.com/book/extras", "littlejunkersllc.com/book/details", "littlejunkersllc.com/book/pay", "littlejunkersllc.com/book/confirmed"];
-    var go = function (n) { return function () { self.setState({ step: n }); }; };
+    var urls = ["littlejunkersllc.com", "littlejunkersllc.com/book/size", "littlejunkersllc.com/book/dates", "littlejunkersllc.com/book/extras", "littlejunkersllc.com/book/checkout", "littlejunkersllc.com/book/confirmed"];
+    var go = function (n) { return function () { self.setState({ step: n, maxStep: Math.max(s.maxStep, n), sheet: false }); }; };
+    var REASONS = ["Just checking prices", "I need different dates", "Not sure which size", "It costs more than I expected", "I'd rather call or text", "Something else"];
+    var field = function (k) { return function (e) { var p = {}; p[k] = e.target.value; self.setState(p); }; };
+    var orAdd = function (v, label) { return v ? v : "Add " + label; };
 
     return {
       url: urls[s.step],
       isHome: s.step === 0,
-      isFlow: s.step >= 1 && s.step <= 5,
-      isDone: s.step === 6,
-      showProgress: s.step >= 1 && s.step <= 5,
-      isSize: s.step === 1, isDate: s.step === 2, isExtras: s.step === 3, isDetails: s.step === 4, isPay: s.step === 5,
-      goHome: go(0), toSize: go(1), toDate: go(2), toExtras: go(3), toDetails: go(4), toPay: go(5), toDone: go(6),
+      isFlow: s.step >= 1 && s.step <= 4,
+      areaInput: s.areaInput, setAreaInput: field("areaInput"),
+      hasAreaNote: !!s.areaNote, areaNote: s.areaNote,
+      startBooking: function () {
+        if (!String(s.areaInput).trim()) { self.setState({ step: 1, maxStep: Math.max(s.maxStep, 1), areaNote: "" }); return; }
+        var r = resolveArea(s.areaInput);
+        if (!r) { self.setState({ areaNote: "We couldn't find that one. Try your ZIP, or text us at (470) 712-5079 and we'll check." }); return; }
+        self.setState({ areaKey: r.key, zip: r.zip, zipInput: "", areaNote: "", step: 1, maxStep: Math.max(s.maxStep, 1) });
+      },
+      areaText: area.label + (s.zip ? " " + s.zip : ""),
+      feeText: hasFee ? feeLabel(feeKnown) : "Delivery " + money(Math.min.apply(null, fees)) + " or " + money(Math.max.apply(null, fees)),
+      needZip: !hasFee,
+      splitNote: "Delivery in " + area.label + " is " + money(Math.min.apply(null, fees)) + " or " + money(Math.max.apply(null, fees)) + ", depending on ZIP. Add yours for the exact price.",
+      zipInput: s.zipInput, setZipInput: field("zipInput"),
+      checkZip: function () { var z = String(s.zipInput).replace(/\D/g, "").slice(0, 5); if (area.zips[z] !== undefined) self.setState({ zip: z, flash: "" }); else { var r = resolveArea(z); if (r) self.setState({ areaKey: r.key, zip: r.zip }); } },
+      isDone: s.step === 5,
+      isSize: s.step === 1, isDate: s.step === 2, isExtras: s.step === 3, isCheckout: s.step === 4,
+      step: s.step, stepName: steps[Math.max(0, Math.min(3, s.step - 1))],
+      goHome: go(0), toSize: go(1), toDate: go(2), toExtras: go(3), toCheckout: go(4), toDone: go(5),
       progress: steps.map(function (label, i) {
         var n = i + 1;
-        var st = "padding:6px 12px;border-radius:999px;font-size:14px;font-weight:700;";
-        st += n === s.step ? "background:#FFCEE4;color:#1A1A1A" : n < s.step ? "background:#3a3631;color:#FFCEE4" : "background:transparent;color:#B8B0A6;border:1px solid #4a453f";
-        return { label: (n < s.step ? "✓ " : n + ". ") + label, style: st };
+        var reachable = n <= s.maxStep && n !== s.step;
+        var st = "padding:6px 12px;border-radius:999px;font:700 14px system-ui,-apple-system,sans-serif;white-space:nowrap;";
+        st += n === s.step ? "background:#FFCEE4;color:#1A1A1A;border:1px solid #FFCEE4" : n <= s.maxStep ? "background:#3a3631;color:#FFCEE4;border:1px solid #3a3631;cursor:pointer" : "background:transparent;color:#B8B0A6;border:1px solid #4a453f";
+        var bar = "flex:1;height:6px;min-height:6px;padding:0;border:0;border-radius:3px;" + (n === s.step ? "background:#FFCEE4" : n <= s.maxStep ? "background:#a8406a;cursor:pointer" : "background:#4a453f");
+        return { label: (n < s.step || (n <= s.maxStep && n !== s.step) ? "✓ " : n + ". ") + label, style: st, barStyle: bar, go: function () { if (reachable) self.setState({ step: n, sheet: false }); }, locked: !reachable, current: n === s.step ? "step" : "false", aria: "Step " + n + ", " + label + (reachable ? "" : n === s.step ? ", current" : ", not yet") };
       }),
       projects: PROJECTS.map(function (p) {
         return { label: p.label, pressed: p.id === s.project ? "true" : "false", style: chip(p.id === s.project), pick: function () { self.setState(p.rec ? { project: p.id, size: p.rec } : { project: p.id }); } };
       }),
       hasTip: !!project.tip, tip: project.tip,
+      roofNote: s.roofNote, toRoofing: function () { self.setState({ roofNote: !s.roofNote }); },
       sizes: [11, 16, 21].map(function (y) {
         var z = SIZES[y];
         return { yards: y, name: z.name, photo: z.photo, alt: z.alt, price: money(z.price), tons: tonsText(z.tons), fit: z.fit, recommended: project.rec === y, pressed: s.size === y ? "true" : "false", cardStyle: card(s.size === y), pick: set({ size: y, flash: "" }) };
       }),
       sizeYards: s.size, sizeName: size.name, sizePhoto: size.photo, sizeAlt: size.alt, includedTons: tonsText(size.tons),
-      dates: DATES.map(function (d, i) {
-        return { dow: d[0], day: d[1], mon: "Dec", pressed: i === s.date ? "true" : "false", pick: set({ date: i, early: s.early && d[2] > 0 }), style: "display:flex;flex-direction:column;align-items:center;justify-content:center;width:76px;min-height:76px;border-radius:12px;cursor:pointer;font-family:inherit;" + (i === s.date ? "background:#1E1C19;color:#ffffff;border:1px solid #1E1C19" : "background:#ffffff;color:#1A1A1A;border:1px solid #cfc7bb") };
-      }),
+
+      dateInput: s.dateInput,
+      typeDate: function (e) { self.setState({ dateInput: String(e.target.value).replace(/[^0-9\/]/g, "").slice(0, 8) }); },
+      sameDay: sameDay, notSameDay: dateFits && !sameDay,
+      checkDate: function () {
+        var m = String(s.dateInput).match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/);
+        if (!m) { if (s.dateInput) self.setState({ dateNote: "Type the date like 12/18, or tap the calendar.", suggest: -1 }); return; }
+        var mo = parseInt(m[1], 10) - 1, dy = parseInt(m[2], 10);
+        var yr = m[3] ? (m[3].length === 2 ? 2000 + parseInt(m[3], 10) : parseInt(m[3], 10)) : (mo >= 10 ? 2026 : 2027);
+        var o = offOf(new Date(yr, mo, dy));
+        if (o < 0 || o > WINDOW) { self.setState({ dateNote: "We book from today through " + fmt(WINDOW) + ".", suggest: -1 }); return; }
+        if (fits(o, s.days)) { pickDate(o); return; }
+        var c = closest(o, s.days);
+        self.setState({ dateOff: -1, dateNote: fmt(o) + " isn't open for " + s.days + " days.", suggest: c, calMonth: monthOf(o) });
+      },
+      hasDateNote: !!s.dateNote, dateNote: s.dateNote,
+      hasSuggest: s.suggest >= 0, suggestText: s.suggest >= 0 ? fmt(s.suggest) : "",
+      pickSuggest: function () { if (s.suggest >= 0) pickDate(s.suggest); },
+      calOpen: s.calOpen, calExpanded: s.calOpen ? "true" : "false",
+      calLabel: s.calOpen ? "Hide calendar" : "Calendar", caret: s.calOpen ? "▲" : "▼",
+      toggleCal: function () { self.setState({ calOpen: !s.calOpen }); },
+      monthLabel: MONTHS[mIdx] + " " + mYear,
+      atFirstMonth: s.calMonth <= 0, atLastMonth: s.calMonth >= lastMonth,
+      prevStyle: "width:44px;justify-content:center;font-size:20px" + (s.calMonth <= 0 ? ";opacity:.35;cursor:not-allowed" : ""),
+      nextMonthStyle: "width:44px;justify-content:center;font-size:20px" + (s.calMonth >= lastMonth ? ";opacity:.35;cursor:not-allowed" : ""),
+      prevMonth: function () { if (s.calMonth > 0) self.setState({ calMonth: s.calMonth - 1 }); },
+      nextMonth: function () { if (s.calMonth < lastMonth) self.setState({ calMonth: s.calMonth + 1 }); },
+      weekdays: ["S", "M", "T", "W", "T", "F", "S"],
+      calCells: cells,
+
+      hasDate: dateFits, noDate: !dateFits, pickupText: pickupText,
+      toExtrasIfDate: function () { if (dateFits) self.setState({ step: 3, maxStep: Math.max(s.maxStep, 3), sheet: false }); },
+      nextStyle: dateFits ? "" : "opacity:.5;cursor:not-allowed",
       dateText: dateText,
       pickStandard: set({ early: false, flash: "" }), pickEarly: function () { if (slotsLeft > 0) self.setState({ early: true, flash: "Added early drop-off" }); },
-      earlyOpen: slotsLeft > 0, earlyFull: slotsLeft === 0,
+      earlyOpen: slotsLeft > 0, earlyFull: dateFits && !sameDay && slotsLeft === 0,
+      sameDayStyle: card(true) + ";cursor:default",
       earlyLeft: slotsLeft === 1 ? "Only 1 morning slot left" : "Limited: " + slotsLeft + " morning slots left",
       standardStyle: card(!s.early), earlyStyle: slotsLeft === 0 ? card(false) + ";opacity:.5;cursor:not-allowed" : card(s.early),
       standardPressed: s.early ? "false" : "true", earlyPressed: s.early ? "true" : "false",
-      windowText: s.early ? "Early drop-off" : "Standard drop-off",
+      timeText: sameDay ? "Same-day drop-off, before [TIME]" : s.early ? "Early drop-off, before [TIME]" : "Standard drop-off, window texted the day before",
+      windowText: (sameDay ? "Same-day drop-off" : s.early ? "Early drop-off" : "Standard drop-off") + (dateFits ? " · pickup " + pickupText : ""),
       days: s.days,
-      lessDays: function () { self.setState({ days: Math.max(3, s.days - 1) }); },
-      moreDays: function () { self.setState({ days: Math.min(30, s.days + 1) }); },
-      daysNote: extraDays > 0 ? "3 days included, plus " + extraDays + " at [PRICE] a day. Up to 30 days." : "3 days included. Add up to 27 more.",
-      heavyJob: s.project === "roof",
-      tonOptions: [0, 1, 2].map(function (t) {
-        return { label: t === 0 ? "No thanks" : "+" + tonsText(t), price: t === 0 ? "$99/ton if you go over" : money(79 * t), pressed: s.tons === t ? "true" : "false", style: card(s.tons === t), pick: set({ tons: t, flash: t ? "Added " + tonsText(t) + " of weight +" + money(79 * t) : "" }) };
+      daysInput: s.daysInput,
+      lessDays: function () { setDays(s.days - 1); },
+      moreDays: function () { setDays(s.days + 1); },
+      typeDays: function (e) {
+        var raw = String(e.target.value).replace(/[^0-9]/g, "").slice(0, 2);
+        var n = parseInt(raw, 10);
+        if (n >= 3 && n <= 30) setDays(n); else self.setState({ daysInput: raw });
+      },
+      fixDays: function () { var n = parseInt(s.daysInput, 10); setDays(isNaN(n) ? s.days : n); },
+      quickDays: [3, 7, 14, 30].map(function (n) {
+        return { label: n === 7 ? "1 week" : n === 14 ? "2 weeks" : n === 30 ? "30 days" : "3 days", pressed: s.days === n ? "true" : "false", pick: function () { setDays(n); },
+          style: "min-height:44px;padding:0 16px;border-radius:999px;cursor:pointer;font:600 15px system-ui,-apple-system,sans-serif;" + (s.days === n ? "background:#1E1C19;color:#ffffff;border:1px solid #1E1C19" : "background:#ffffff;color:#1A1A1A;border:1px solid #cfc7bb") };
       }),
+      daysNote: extraDays > 0 ? "3 days included, plus " + extraDays + " extra at [PRICE] a day." : "3 days included.",
+
       items: ITEMS.map(function (it) {
         var n = s[it.key];
         var inc = { flash: "Added " + it.label.toLowerCase().replace(/s$/, "") + " +" + money(it.each) }; inc[it.key] = Math.min(9, n + 1);
         var dec = { flash: "" }; dec[it.key] = Math.max(0, n - 1);
         return { label: it.label, each: money(it.each), count: n, inc: set(inc), dec: set(dec), incLabel: "Add one " + it.label.toLowerCase().replace(/s$/, ""), decLabel: "Remove one " + it.label.toLowerCase().replace(/s$/, "") };
       }),
+      hasRec: recTons > 0, recText: recText,
+      weightBox: "border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;" + (recTons ? "border:2px solid #FFCEE4;background:#FFF5FB" : "border:1px solid #E5E0D8"),
+      tonOptions: [0, 1, 2].map(function (t) {
+        return { label: t === 0 ? "No thanks" : "+" + tonsText(t), price: t === 0 ? "$99 a ton if you go over" : money(79 * t), rec: recTons > 0 && t === recTons, pressed: s.tons === t ? "true" : "false", style: card(s.tons === t), pick: set({ tons: t, flash: t ? "Added " + tonsText(t) + " of weight +" + money(79 * t) : "" }) };
+      }),
       canSizeUp: up > 0,
       upYards: up, upPhoto: up ? SIZES[up].photo : "", upAlt: up ? SIZES[up].alt : "", upLoads: up ? SIZES[up].loads : "", upTons: up ? tonsText(SIZES[up].tons) : "",
       upDiff: up ? money(SIZES[up].price - size.price) : "",
       sizeUp: function () { if (up) self.setState({ size: up, flash: "Moved up to the " + up + "-yard +" + money(SIZES[up].price - size.price) }); },
       secondCost: money(SIZES[11].price),
+      boards: s.boards, toggleBoards: function () { self.setState({ boards: !s.boards }); },
+
       types: TYPES.map(function (t) { return { label: t[1], pressed: s.type === t[0] ? "true" : "false", style: chip(s.type === t[0]), pick: set({ type: t[0] }) }; }),
       isPro: s.type !== "home",
-      typeLabel: typeLabel,
+      name: s.name, phone: s.phone, email: s.email, street: s.street, spot: s.spot, company: s.company,
+      setName: field("name"), setPhone: field("phone"), setEmail: field("email"), setStreet: field("street"), setSpot: field("spot"), setCompany: field("company"),
+      nameText: orAdd(s.name, "your name"), phoneText: orAdd(s.phone, "your mobile"), emailText: orAdd(s.email, "your email"), streetText: orAdd(s.street, "your street address"), companyText: orAdd(s.company, "company name"),
+      hasSpot: !!s.spot,
+      coveredTons: tonsText(size.tons + s.tons),
+      canAddTon: !s.addedAfter,
+      addTonText: s.addedAfter ? "Added. You're covered for " + tonsText(size.tons + s.tons + 1) + " now. We charged $79 to the card you just used." : "Your load is covered up to " + tonsText(size.tons + s.tons) + ". Add a ton now for $79 instead of $99 after pickup. One tap, same card.",
+      addTonAfter: set({ addedAfter: true }),
+      hasExtras: extras.length > 0,
       lines: lines,
       totalText: money(total),
-      hasPending: extraDays > 0 || s.early,
-      extrasText: extras.join(", "),
+      hasPending: extraDays > 0 || s.early || sameDay,
+      extrasText: extras.length ? extras.join(", ") : "No extras",
       sheetOpen: s.sheet, sheetExpanded: s.sheet ? "true" : "false", sheetLabel: s.sheet ? "Hide" : "View",
       toggleSheet: function () { self.setState({ sheet: !s.sheet }); },
-      barSummary: s.size + "-yard · " + s.days + " days" + (s.tons ? " · +" + tonsText(s.tons) : "") + (s.early ? " · early" : ""),
-      hasFlash: !!s.flash, flash: s.flash
+      barSummary: s.size + "-yard · " + s.days + " days" + (s.tons ? " · +" + tonsText(s.tons) : "") + (sameDay ? " · today" : s.early ? " · early" : ""),
+      hasFlash: !!s.flash, flash: s.flash,
+
+      leaving: s.leaving,
+      draft: s.draft && s.step === 0,
+      draftSummary: s.size + "-yard · " + s.days + " days" + (dateFits ? " · " + fmt(chosen) : "") + " · " + money(total),
+      resume: function () { var back = Math.max(1, s.maxStep); if (back > 2 && !dateFits) back = 2; self.setState({ step: back, draft: false }); },
+      openLeave: function () { self.setState({ leaving: true, reason: "", sheet: false, closeReady: false }); setTimeout(function () { self.setState({ closeReady: true }); }, 1000); },
+      closeLeave: set({ leaving: false }),
+      confirmLeave: function () { if (s.closeReady || s.reason) self.setState({ leaving: false, step: 0, reason: "", draft: true }); },
+      hasReason: !!s.reason,
+      closeXStyle: "flex:none;width:44px;height:44px;border-radius:50%;border:1px solid #cfc7bb;background:#ffffff;color:#1A1A1A;font-size:22px;line-height:1;cursor:pointer;transition:opacity .2s;" + (s.closeReady ? "opacity:1" : "opacity:0;pointer-events:none"),
+      reasonOther: s.reason === "Something else",
+      reasons: REASONS.map(function (r) {
+        var on = s.reason === r;
+        return { label: r, pressed: on ? "true" : "false", pick: set({ reason: on ? "" : r }), style: "min-height:48px;padding:0 14px;text-align:left;border-radius:10px;cursor:pointer;font:600 15px system-ui,-apple-system,sans-serif;" + (on ? "background:#FFF5FB;border:2px solid #C2587A;color:#1A1A1A" : "background:#ffffff;border:1px solid #cfc7bb;color:#1A1A1A") };
+      })
     };
   }
 }
