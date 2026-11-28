@@ -180,7 +180,7 @@ export default function ComparisonTool({
           ? formatUsd(local.perExtraDay) + "/day" : "Rate not yet confirmed"}</dd></div>
         </dl>
         {incompleteDays ? <p className="comparison-card__notice">The other {days - 3} days aren&apos;t in this price yet. Call or text us and we&apos;ll quote them.</p> : null}
-        <Link className="btn btn--primary btn--block" href={planHref}>Start Booking</Link>
+        <Link className="btn btn--primary btn--block" href={planHref}>See my estimate</Link>
         <p className="fine">We confirm your final price and delivery date before you book.</p>
       </article>
       {showCompetitorCue && <div className="comparison-between-cards">

@@ -37,3 +37,25 @@ Validation: source charter, archive, ADRs and existing design inspected; this do
 | CHANGELOG.md | Append revision record. |
 
 Validation: source-level changes; CI and browser verification pending; container git clone blocked by DNS. No production rates, reservations, payment, policy, URL or main-branch changes. Revert this commit to undo.
+
+
+## 2026-11-28 — Remaining conversion surfaces and audit
+
+| File | Change / rationale |
+| --- | --- |
+| components/PriceCards.tsx | Clarify conditional costs. |
+| components/PinkBinExperience.tsx | Set estimate expectations, explain weight vs volume and distinguish excess weight. |
+| app/about-us/page.tsx | Genuine reviews link, human help, no claim of active online booking. |
+| app/faq/page.tsx | Truthful in-site estimate CTA while payment is not enabled. |
+| app/blog/page.tsx | Truthful in-site estimate CTA while payment is not enabled. |
+| app/blog/[slug]/page.tsx | Truthful in-site estimate CTA while payment is not enabled. |
+| app/what-can-i-put-in-a-dumpster/page.tsx | Retain material and safety rules; remove implication of verified dates. |
+| app/compare/page.tsx | Emphasize comparable inclusions and evidence. |
+| components/ComparisonTool.tsx | Optional comparison retains customer selections and estimates. |
+| app/[slug]/CityPage.tsx | Explain inclusions and estimate status across seven city pages; preserve URLs, local proof, schema. |
+| app/plan/page.tsx | Truthful metadata; 31+ days go to existing manual quote lane rather than clamping. |
+| app/not-found.tsx | Clear recovery without unsupported popularity claim. |
+| docs/phase-2/CX-CONVERSION-AUDIT-2026-11-28.md | Route-by-route audit with findings, disposition, deferred work and verification limitations. |
+| CHANGELOG.md | Append revision record. |
+
+Scope: shared templates only; retain seven city URLs, legal text, navigation and transaction contracts. Source-level review; build/CI/browser pending. No production changes. Revert commit to undo.

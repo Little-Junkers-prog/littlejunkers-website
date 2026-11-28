@@ -69,6 +69,7 @@ export default async function CityPage({ city }: { city: CityContent }) {
         <div className="container">
           <div className="section-head">
             <h2>Dumpster prices in {city.city}</h2>
+            <p>See the 3-day base price and included weight below. We confirm your full price and dates before you book.</p>
           </div>
           <PriceCards pricing={pricing} zip={singleZip} location={city.city} deliveryFee={zone?.deliveryFee} />
           <div className="city-comparison">

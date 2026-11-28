@@ -118,7 +118,7 @@ export default function BlogIndex() {
                 See Sizes &amp; Prices
               </Link>
               <Link className="btn btn--primary" href="/plan">
-                Book a Dumpster
+                See my estimate
               </Link>
             </div>
           </div>

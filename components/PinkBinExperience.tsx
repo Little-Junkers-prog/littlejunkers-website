@@ -114,20 +114,20 @@ export default function PinkBinExperience({ pricing }: { pricing: Pricing }) {
             <div><dt>Footprint</dt><dd>{size.box.lengthFt} ft × {size.box.widthFt} ft</dd></div>
             <div><dt>Sidewall height</dt><dd>{size.box.wallFt} ft</dd></div>
             {pricing.overagePerTon != null ? (
-              <div><dt>Extra disposal weight</dt><dd>{formatUsd(pricing.overagePerTon)}/ton</dd></div>
+              <div><dt>Weight over included amount</dt><dd>{formatUsd(pricing.overagePerTon)}/ton</dd></div>
             ) : null}
           </dl>
           <p className="bin-shop__delivery"><DeliveryLine fallback="Enter your city or ZIP to confirm the delivery fee." /></p>
           <div className="bin-shop__actions">
             <PlanLink className="btn btn--primary" size={selected}>
-              Start with the {selected}-yard
+              See my {selected}-yard estimate
             </PlanLink>
             <Link className="btn btn--secondary" href={`/${size.slug}`}>
               See size details
             </Link>
           </div>
           <p className="fine bin-shop__smallprint">
-            Need it longer than 3 days? You&apos;ll pick your days next. We confirm your
+            Weight and space are different. Heavy debris can reach the weight limit before the bin is full. Need it longer than 3 days? You&apos;ll pick your days next. We confirm your
             delivery date and the extra-day price before you book.
           </p>
         </div>

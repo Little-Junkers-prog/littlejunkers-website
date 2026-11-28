@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 const proof = ["Based in Peachtree City", "Started in 2024", "11-, 16- and 21-yard dumpsters", `Call or text ${company.hoursDisplay}`];
 
 const approach = [
-  ["Simple booking", "Pick a size and dates online, any time. No phone tag unless you'd rather talk."],
-  ["Prices you can see", "The price for your ZIP shows before you book. Extra days and extra weight only apply if you use them."],
+  ["See prices first", "Choose your size and see an estimate online. Call or text if you want help."],
+  ["Prices you can see", "The price for your ZIP shows before you book. Extra days and weight over the included amount cost more."],
   ["Careful with your driveway", "Our hook-lift truck is smaller than a full-size roll-off. We look at the spot first, and we'll lay down boards to protect your driveway if you ask."],
 ];
 
@@ -41,7 +41,7 @@ export default function About() {
             </p>
             <div className="btn-row">
               <Link className="btn btn--primary" href="/plan">
-                Rent a Dumpster
+                See my estimate
               </Link>
               <a className="btn btn--secondary" href={telHref}>
                 Call or text {company.phoneDisplay}
@@ -80,6 +80,7 @@ export default function About() {
               . We deliver them to homes and job sites across Fayette and Coweta County.
             </p>
             <p>We&apos;re a dumpster rental company. We drop it off, you fill it, and we haul it away.</p>
+            <p><a href={company.googleReviewsUrl} target="_blank" rel="noopener noreferrer">Read our Google reviews</a>.</p>
           </div>
           <div className="grid grid--2">
             <Photo photo={photos.ivyTruck} sizes="(min-width: 900px) 25vw, 100vw" />

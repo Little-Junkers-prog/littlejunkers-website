@@ -47,7 +47,7 @@ export default function PriceCards({ pricing, zip, location, deliveryFee }: { pr
         ) : (
           `A ${formatUsd(deliveryFee)} delivery fee is added for this area.`
         )}{" "}
-        Extra days and extra weight are added only if you need them.
+        Extra days and weight over the included amount cost more.
       </p>
     </>
   );
