@@ -21,3 +21,7 @@ See [ADR-CX-004](docs/decisions/ADR-CX-004-in-site-booking.md): every booking CT
 ## Current approved shopping architecture
 
 See [ADR-CX-002](docs/decisions/ADR-CX-002-shopping-hub-architecture.md): homepage shopping hub plus **retained dedicated SEO/intent pages**. Concept copy is not final. Days Plus 3–30 total days; 31+ human quote. Phase 1 website branch must not create real holds or charges before pricing/Fleet/CSR/checkout integration is separately approved and verified.
+
+## Mandatory customer experience / conversion gate (November 28, 2026)
+
+After the charter/archive, read [docs/CUSTOMER-EXPERIENCE-STANDARD.md](docs/CUSTOMER-EXPERIENCE-STANDARD.md), [DESIGN.md](DESIGN.md), and the relevant page spec. For checkout work also read [docs/design/CUSTOMER-CHECKOUT-V1.md](docs/design/CUSTOMER-CHECKOUT-V1.md) and the existing booking-flow spec; V1 is a review candidate, not a silent override of prior locks or production authorization. Apply the five principles and page-level acceptance criteria. Use verified data, retain direct/contextual booking and optional guidance, and do not invent reviews, rates, slots, policies or conversion lift. No user-facing developer notes beyond a separate preview indicator. Never create a parallel transaction engine. Preserve all existing checks; add focused checks for changed contracts. Every PR must append an entry to CHANGELOG.md with each changed file, before/after and reason, scope/guardrails, checks run/not run, open questions and rollback/approval gate. Do not merge or cut over without explicit owner approval.
