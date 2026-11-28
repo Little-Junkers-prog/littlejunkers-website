@@ -59,3 +59,18 @@ Validation: source-level changes; CI and browser verification pending; container
 | CHANGELOG.md | Append revision record. |
 
 Scope: shared templates only; retain seven city URLs, legal text, navigation and transaction contracts. Source-level review; build/CI/browser pending. No production changes. Revert commit to undo.
+
+
+## 2026-11-28 — Customer checkout V1 interactive design candidate
+
+| File | Change / rationale |
+| --- | --- |
+| docs/design/checkout-v1/index.html | Interactive, isolated guided/quick size, schedule, details, review/payment simulation and confirmation; responsive sticky summary. |
+| docs/design/checkout-v1/model.js | Explicit example prices/ZIPs/dates, fail-closed missing rates and unverified dates; no network. |
+| docs/design/checkout-v1/styles.css | Brand-led responsive layout, visible focus, reduced motion, desktop/mobile summaries. |
+| docs/design/checkout-v1/README.md | Local review and test instructions; mock data boundary. |
+| scripts/check-checkout-v1.mjs | Model edge cases, script parsing, no network/real submission checks. |
+| .github/workflows/experience-check.yml | Run new fixture checks alongside existing gates. |
+| CHANGELOG.md | Append revision record. |
+
+Verification: Local JavaScript fixture smoke checks and inline script parsing passed; full Node test/CI/browser pending. Owner review required; no live route, backend or payment changes; preserve PR #14. Revert commit to undo.
